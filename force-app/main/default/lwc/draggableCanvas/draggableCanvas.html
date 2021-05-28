@@ -1,0 +1,51 @@
+<template>
+    <lightning-card title={cardTitle}>
+        <div slot="actions">
+            <slot name="actions"></slot>
+        </div>
+        <div class="slds-var-p-around_medium">
+            <div class="slds-text-align_center">
+                <lightning-button
+                    label="New Note"
+                    variant="brand"
+                    onclick={addNote}
+                    class="slds-var-m-right_small"
+                ></lightning-button>
+            </div>
+            <div
+                class="container slds-var-m-top_medium"
+                onmousedown={panStart}
+                onmouseup={panEnd}
+            >
+                <div
+                    class="canvas slds-var-m-top_medium"
+                    onmousedown={dragStart}
+                    onmouseup={dragEnd}
+                    onmousemove={drag}
+                    style={canvasStyle}
+                >
+                    <template if:true={notes}>
+                        <template for:each={notes} for:item="note">
+                            <c-note
+                                description={note.Description__c}
+                                background={note.Color__c}
+                                key={note.Id}
+                                note-id={note.Id}
+                                data-noteid={note.Id}
+                                style={note.style}
+                                ondeletenote={handleNoteDelete}
+                            ></c-note>
+                        </template>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+
+    <template if:true={shouldListenToChanges}>
+        <c-event-listener
+            channel-name="/topic/CardChangeUpdates"
+            onmessage={handleMessageFromListener}
+        ></c-event-listener>
+    </template>
+</template>

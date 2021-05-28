@@ -1,0 +1,64 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Board__c",
+                "referenceId": "BoardRef1"
+            },
+            "Name": "Define Your Problem Statement",
+            "Description__c": "",
+            "Order__c": 1,
+            "Track__c": "@TrackRef1"
+        },
+        {
+            "attributes": {
+                "type": "Board__c",
+                "referenceId": "BoardRef2"
+            },
+            "Name": "Identify Stakeholders",
+            "Description__c": "",
+            "Order__c": 2,
+            "Track__c": "@TrackRef1"
+        },
+        {
+            "attributes": {
+                "type": "Board__c",
+                "referenceId": "BoardRef3"
+            },
+            "Name": "Discover Your Customer's Journey",
+            "Description__c": "",
+            "Order__c": 3,
+            "Track__c": "@TrackRef1"
+        },
+        {
+            "attributes": {
+                "type": "Board__c",
+                "referenceId": "BoardRef4"
+            },
+            "Name": "What Are Your Anchors & Tailwinds?",
+            "Description__c": "",
+            "Order__c": 4,
+            "Track__c": "@TrackRef1"
+        },
+        {
+            "attributes": {
+                "type": "Board__c",
+                "referenceId": "BoardRef5"
+            },
+            "Name": "Prioritize Opportunities",
+            "Description__c": "",
+            "Order__c": 5,
+            "Track__c": "@TrackRef1"
+        },
+        {
+            "attributes": {
+                "type": "Board__c",
+                "referenceId": "BoardRef6"
+            },
+            "Name": "Create Your Vision Statement",
+            "Description__c": "",
+            "Order__c": 6,
+            "Track__c": "@TrackRef1"
+        }
+    ]
+}

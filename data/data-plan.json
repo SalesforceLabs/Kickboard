@@ -1,0 +1,14 @@
+[
+    {
+        "sobject": "Track__c",
+        "saveRefs": true,
+        "resolveRefs": false,
+        "files": ["tracks.json"]
+    },
+    {
+        "sobject": "Board__c",
+        "saveRefs": true,
+        "resolveRefs": true,
+        "files": ["boards.json"]
+    }
+]

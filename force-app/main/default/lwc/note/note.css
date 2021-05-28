@@ -1,0 +1,51 @@
+.note {
+    width: 150px;
+    transform: translate3d(0px, 0px, 0px);
+    cursor: move;
+    box-shadow: 1px 1px 5px #ccc;
+}
+
+.noteContent {
+    height: 100px;
+    background: transparent;
+    border: none;
+    resize: none;
+    width: 100%;
+}
+
+.noteContent:focus {
+    outline: none;
+}
+
+.noteHeader {
+    background: rgba(217, 217, 217, 0.12);
+}
+
+.noteFooter {
+    background: rgba(217, 217, 217, 0.12);
+}
+
+.colorPanel div {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 5px;
+    cursor: pointer;
+    border: 1px solid rgb(169, 169, 169);
+}
+
+.red {
+    background-color: #ffe4e4;
+}
+
+.green {
+    background-color: rgb(190, 250, 190);
+}
+
+.blue {
+    background-color: rgb(212, 212, 255);
+}
+
+.yellow {
+    background-color: #fff58a;
+}

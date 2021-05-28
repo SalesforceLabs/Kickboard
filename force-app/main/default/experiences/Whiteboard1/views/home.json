@@ -1,0 +1,58 @@
+{
+  "appPageId" : "d317d567-8e26-4ec4-869a-007b2c96e237",
+  "componentName" : "community_layout:sldsFlexibleLayout",
+  "id" : "834f4ff9-2673-4bc5-a046-8103f330c8ea",
+  "label" : "Home",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "sectionConfig" : "{\"UUID\":\"4d52d86a-c6c9-4ed8-b7f7-d9e408ec4e67\",\"columns\":[{\"UUID\":\"c253996f-b93f-4bb0-8f38-1e38a6645f0c\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}"
+      },
+      "componentName" : "community_layout:section",
+      "id" : "4d52d86a-c6c9-4ed8-b7f7-d9e408ec4e67",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "richTextValue" : "<div style=\"display: flex; justify-content: center; align-items: center; margin: 50px 0; flex-direction: column; text-align: center;\"><div style=\"background-image: var(--lwc-header-image); background-size: cover; background-position: center; height: 300px; width: 100%; max-width: 600px; min-width: 300px;\"></div><h1 class=\"slds-text-heading_medium slds-p-bottom_x-small\">Start Building Your Page</h1> <div>Drag and drop a component into the content slots.</div></div>"
+          },
+          "componentName" : "community_builder:htmlEditor",
+          "id" : "5f0f21e1-041c-4220-8ee9-7e19ee8c78f5",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "c253996f-b93f-4bb0-8f38-1e38a6645f0c",
+        "regionLabel" : "Column 1",
+        "regionName" : "col1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "42a3ade8-d3cd-4381-ac0d-f41b9ca8a515",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "description" : "",
+        "metaTags" : "",
+        "pageTitle" : "Home",
+        "recordId" : "{!recordId}"
+      },
+      "componentName" : "community_builder:seoAssistant",
+      "id" : "1643f2ac-3a6c-4d78-ae6d-982f8b6af8be",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "e24d5732-79c8-40e6-9460-d40ffe237799",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "home"
+}

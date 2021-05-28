@@ -1,0 +1,25 @@
+<template>
+    <div class={noteClass}>
+        <div
+            class="noteHeader slds-var-p-around_xx-small slds-text-align_right"
+        >
+            <lightning-button-icon
+                icon-name="utility:delete"
+                alternative-text="Delete"
+                title="Delete"
+                onclick={handleDelete}
+            ></lightning-button-icon>
+        </div>
+        <div class="slds-var-p-around_xx-small">
+            <textarea class="noteContent" onkeyup={handleChange}>
+{description}</textarea
+            >
+        </div>
+        <div class="noteFooter colorPanel slds-grid slds-var-p-around_x-small">
+            <div class="red" onclick={changeBg}></div>
+            <div class="green" onclick={changeBg}></div>
+            <div class="blue" onclick={changeBg}></div>
+            <div class="yellow" onclick={changeBg}></div>
+        </div>
+    </div>
+</template>

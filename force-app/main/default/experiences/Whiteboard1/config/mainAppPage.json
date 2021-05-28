@@ -1,0 +1,10 @@
+{
+  "cmsSettings" : { },
+  "currentThemeId" : "aac15f6b-1bcc-4911-833b-e2eaa205fb8c",
+  "headMarkup" : "<meta charset=\"UTF-8\" />\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n<title>Welcome to LWC Communities!</title>\n\n<link rel=\"stylesheet\" href=\"{ basePath }/assets/styles/styles.css?{ versionKey }\" />\n\n\n<!-- webruntime-branding-shared stylesheets -->\n<link rel=\"stylesheet\" href=\"{ basePath }/assets/styles/salesforce-lightning-design-system.min.css?{ versionKey }\" />\n<link rel=\"stylesheet\" href=\"{ basePath }/assets/styles/dxp-site-spacing-styling-hooks.min.css?{ versionKey }\" />\n<!-- webruntime-branding-shared stylesheets -->",
+  "id" : "d317d567-8e26-4ec4-869a-007b2c96e237",
+  "isRelaxedCSPLevel" : false,
+  "label" : "main",
+  "templateName" : "talon-template-byo",
+  "type" : "appPage"
+}
