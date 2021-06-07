@@ -41,6 +41,10 @@ Kickboard is an application that teaches are customers how to swim in the vast d
     ```
     sfdx force:user:permset:assign -n Kickboard_User
     ```
+  
+1. Assign the **Kickboard Guest** permission set to the Whiteboard Site guest user
+
+1. Enable **Allow guest users to access public APIs** for the Whiteboard Community
 
 1. Import sample data:
 
