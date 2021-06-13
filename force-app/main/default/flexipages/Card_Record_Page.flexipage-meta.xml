@@ -29,6 +29,7 @@
                 <componentName>force:highlightsPanel</componentName>
             </componentInstance>
         </itemInstances>
+        <mode>Replace</mode>
         <name>header</name>
         <type>Region</type>
     </flexiPageRegions>
@@ -37,7 +38,7 @@
             <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
-                    <value>required</value>
+                    <value>readonly</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Name</fieldItem>
             </fieldInstance>
@@ -51,7 +52,7 @@
                 <fieldItem>Record.Description__c</fieldItem>
             </fieldInstance>
         </itemInstances>
-        <name>Facet-01a2790b-27c8-40bb-b395-eaa8f82fb5e3</name>
+        <name>Facet-a715d354-72ad-4357-8e9b-78c6eacc2231</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -61,7 +62,7 @@
                     <name>uiBehavior</name>
                     <value>required</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Lane__c</fieldItem>
+                <fieldItem>Record.Board__c</fieldItem>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -70,7 +71,7 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Order__c</fieldItem>
+                <fieldItem>Record.X_Position__c</fieldItem>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -79,10 +80,19 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Background_Image__c</fieldItem>
+                <fieldItem>Record.Y_Position__c</fieldItem>
             </fieldInstance>
         </itemInstances>
-        <name>Facet-d1ba2439-1d5e-402f-8734-420c998bd3ad</name>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Color__c</fieldItem>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-02194096-066d-4203-9a63-560f10886901</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -90,7 +100,7 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>body</name>
-                    <value>Facet-01a2790b-27c8-40bb-b395-eaa8f82fb5e3</value>
+                    <value>Facet-a715d354-72ad-4357-8e9b-78c6eacc2231</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:column</componentName>
             </componentInstance>
@@ -99,16 +109,16 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>body</name>
-                    <value>Facet-d1ba2439-1d5e-402f-8734-420c998bd3ad</value>
+                    <value>Facet-02194096-066d-4203-9a63-560f10886901</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:column</componentName>
             </componentInstance>
         </itemInstances>
-        <name>Facet-c1ce5bb4-47ac-4afb-ade9-d058a589507c</name>
+        <name>Facet-eaadc100-9715-4819-acdc-75cff1021f53</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
-        <name>Facet-b6377496-27e1-4842-8680-9d636070dd18</name>
+        <name>Facet-0defcd5c-9be2-47b7-8041-e714d09e2d9c</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -130,7 +140,7 @@
                 <fieldItem>Record.LastModifiedById</fieldItem>
             </fieldInstance>
         </itemInstances>
-        <name>Facet-5f5eb45a-a9e8-4d66-8b28-2111bd266d4b</name>
+        <name>Facet-f49512be-4a3d-41b7-8c2c-14d4a2d3015c</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -138,7 +148,7 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>body</name>
-                    <value>Facet-b6377496-27e1-4842-8680-9d636070dd18</value>
+                    <value>Facet-0defcd5c-9be2-47b7-8041-e714d09e2d9c</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:column</componentName>
             </componentInstance>
@@ -147,12 +157,12 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>body</name>
-                    <value>Facet-5f5eb45a-a9e8-4d66-8b28-2111bd266d4b</value>
+                    <value>Facet-f49512be-4a3d-41b7-8c2c-14d4a2d3015c</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:column</componentName>
             </componentInstance>
         </itemInstances>
-        <name>Facet-52b63730-20a0-4c75-befd-d61bf448e7e8</name>
+        <name>Facet-4426753e-4e35-436c-a31b-85caa3190e09</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -160,7 +170,7 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>columns</name>
-                    <value>Facet-c1ce5bb4-47ac-4afb-ade9-d058a589507c</value>
+                    <value>Facet-eaadc100-9715-4819-acdc-75cff1021f53</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
@@ -173,7 +183,7 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>columns</name>
-                    <value>Facet-52b63730-20a0-4c75-befd-d61bf448e7e8</value>
+                    <value>Facet-4426753e-4e35-436c-a31b-85caa3190e09</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
@@ -187,28 +197,8 @@
                 <componentName>force:recordDetailPanelMobile</componentName>
             </componentInstance>
         </itemInstances>
+        <mode>Replace</mode>
         <name>detailTabContent</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>parentFieldApiName</name>
-                    <value>Board__c.Id</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>relatedListApiName</name>
-                    <value>Cards__r</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>relatedListComponentOverride</name>
-                    <value>CARD</value>
-                </componentInstanceProperties>
-                <componentName>force:relatedListSingleContainer</componentName>
-            </componentInstance>
-        </itemInstances>
-        <name>relatedTabContent</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -229,19 +219,7 @@
                 <componentName>flexipage:tab</componentName>
             </componentInstance>
         </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>relatedTabContent</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>title</name>
-                    <value>Cards</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:tab</componentName>
-            </componentInstance>
-        </itemInstances>
+        <mode>Replace</mode>
         <name>maintabs</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -255,13 +233,20 @@
                 <componentName>flexipage:tabset</componentName>
             </componentInstance>
         </itemInstances>
+        <mode>Replace</mode>
         <name>main</name>
         <type>Region</type>
     </flexiPageRegions>
-    <masterLabel>Board Record Page</masterLabel>
-    <sobjectType>Board__c</sobjectType>
+    <flexiPageRegions>
+        <mode>Replace</mode>
+        <name>sidebar</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <masterLabel>Card Record Page</masterLabel>
+    <parentFlexiPage>flexipage__default_rec_L</parentFlexiPage>
+    <sobjectType>Card__c</sobjectType>
     <template>
-        <name>flexipage:recordHomeSingleColTemplateDesktop</name>
+        <name>flexipage:recordHomeTemplateDesktop</name>
     </template>
     <type>RecordPage</type>
 </FlexiPage>
