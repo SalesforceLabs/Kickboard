@@ -1,6 +1,6 @@
 public without sharing class StickyNotesWithoutSharingCtrl {
     @AuraEnabled
-    public static void saveNote(
+    public static void saveCard(
         String cardId,
         String description,
         Integer xPos,
@@ -24,7 +24,7 @@ public without sharing class StickyNotesWithoutSharingCtrl {
     }
 
     @AuraEnabled
-    public static void deleteNote(String cardId) {
+    public static void deleteCard(String cardId) {
         try {
             delete ([SELECT Id FROM Card__c WHERE Id = :cardId]);
         } catch (Exception e) {

@@ -2,10 +2,10 @@ import { LightningElement, wire, api } from "lwc";
 import { getRecord, getFieldValue } from "lightning/uiRecordApi";
 import BG_IMG from "@salesforce/schema/Board__c.Background_Image__c";
 import BOARD_NAME from "@salesforce/schema/Board__c.Name";
-import createNewNote from "@salesforce/apex/StickyNotesCtrl.createNewNote";
+import createNewCard from "@salesforce/apex/StickyNotesCtrl.createNewCard";
 import getCards from "@salesforce/apex/StickyNotesCtrl.getCards";
-import deleteNote from "@salesforce/apex/StickyNotesWithoutSharingCtrl.deleteNote";
-import saveNote from "@salesforce/apex/StickyNotesWithoutSharingCtrl.saveNote";
+import deleteCard from "@salesforce/apex/StickyNotesWithoutSharingCtrl.deleteCard";
+import saveCard from "@salesforce/apex/StickyNotesWithoutSharingCtrl.saveCard";
 import ISGUEST from "@salesforce/user/isGuest";
 import USERID from "@salesforce/user/Id";
 
@@ -16,7 +16,7 @@ import { renderer } from "./renderer";
 
 export default class DraggableCanvas extends LightningElement {
     @api recordId;
-    @api trackId;
+    @api laneId;
 
     isGuest = ISGUEST;
     isDragging = false;
@@ -30,8 +30,8 @@ export default class DraggableCanvas extends LightningElement {
     lastOffsetY = 0;
     boundingRect;
 
-    notes;
-    wiredNotes;
+    cards;
+    wiredCards;
 
     intervalId;
     panZoomInstance;
@@ -97,7 +97,7 @@ export default class DraggableCanvas extends LightningElement {
                     });
                 }
             });
-            if (this.isGuest && this.trackId) {
+            if (this.isGuest && this.laneId) {
                 this.startRefresh();
             }
             this.addedPan = true;
@@ -105,10 +105,10 @@ export default class DraggableCanvas extends LightningElement {
     }
 
     @wire(getCards, { boardId: "$recordId" })
-    handleNotes(result) {
-        this.wiredNotes = result;
+    handleCards(result) {
+        this.wiredCards = result;
         if (result.data) {
-            this.notes = result.data.map((record) => {
+            this.cards = result.data.map((record) => {
                 return {
                     ...record,
                     style: `margin-left:${record.X_Position__c}px; margin-top:${record.Y_Position__c}px;`
@@ -134,7 +134,7 @@ export default class DraggableCanvas extends LightningElement {
     startRefresh() {
         // eslint-disable-next-line @lwc/lwc/no-async-operation
         this.intervalId = window.setInterval(() => {
-            refreshApex(this.wiredNotes);
+            refreshApex(this.wiredCards);
         }, 5000);
     }
 
@@ -145,19 +145,19 @@ export default class DraggableCanvas extends LightningElement {
         }
     }
 
-    addNote() {
+    addCard() {
         const xPos = this.panZoomInstance.transformation.translateX * -1;
         const yPos = this.panZoomInstance.transformation.translateY * -1;
-        createNewNote({ boardId: this.recordId, xPos, yPos })
+        createNewCard({ boardId: this.recordId, xPos, yPos })
             .then((result) => {
                 if(result){
-                    refreshApex(this.wiredNotes);
+                    refreshApex(this.wiredCards);
                 }
             })
             .catch((error) => {
                 this.dispatchEvent(
                     new ShowToastEvent({
-                        title: "An error occurred when creating a note",
+                        title: "An error occurred when creating a card",
                         message: error.message,
                         variant: "error"
                     })
@@ -175,7 +175,7 @@ export default class DraggableCanvas extends LightningElement {
     dragStart(e) {
         const container = this.template.querySelector(".canvas");
         this.boundingRect = container.getBoundingClientRect();
-        if (e.target.tagName === "C-NOTE") {
+        if (e.target.tagName === "C-CARD") {
             this.isDragging = true;
             this.dragItem = e.target;
             // this.dragItem.parentNode.append(this.dragItem);
@@ -190,8 +190,8 @@ export default class DraggableCanvas extends LightningElement {
 
     dragEnd() {
         if (this.isDragging && this.currentX && this.currentY) {
-            saveNote({
-                cardId: this.dragItem.dataset.noteid,
+            saveCard({
+                cardId: this.dragItem.dataset.cardid,
                 xPos: this.currentX,
                 yPos: this.currentY
             })
@@ -225,10 +225,10 @@ export default class DraggableCanvas extends LightningElement {
         this.dragItem.style.marginTop = this.currentY + "px";
     }
 
-    handleNoteDelete(event) {
-        deleteNote({ cardId: event.detail.noteId })
+    handleCardDelete(event) {
+        deleteCard({ cardId: event.detail.cardId })
             .then(() => {
-                refreshApex(this.wiredNotes);
+                refreshApex(this.wiredCards);
                 this.dispatchEvent(
                     new ShowToastEvent({
                         title: "Deleted Successfully",
@@ -246,13 +246,13 @@ export default class DraggableCanvas extends LightningElement {
             event.detail.data.sobject.LastModifiedById !== USERID &&
             this.recordId === event.detail.data.sobject.Board__c
         ) {
-            refreshApex(this.wiredNotes);
+            refreshApex(this.wiredCards);
         } else if (event.detail.data.event.type === "deleted") {
-            const currentNoteIndex = this.notes.findIndex(
+            const currentCardIndex = this.cards.findIndex(
                 (x) => x.Id === event.detail.data.sobject.Id
             );
-            if (currentNoteIndex >= 0) {
-                refreshApex(this.wiredNotes);
+            if (currentCardIndex >= 0) {
+                refreshApex(this.wiredCards);
             }
         }
     }

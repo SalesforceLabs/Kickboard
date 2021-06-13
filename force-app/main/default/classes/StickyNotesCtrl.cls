@@ -1,6 +1,6 @@
 public with sharing class StickyNotesCtrl {
     @AuraEnabled
-    public static Card__c createNewNote(
+    public static Card__c createNewCard(
         String boardId,
         Integer xPos,
         Integer yPos
@@ -43,12 +43,12 @@ public with sharing class StickyNotesCtrl {
     }
 
     @AuraEnabled(cacheable=true)
-    public static List<Board__c> getBoards(String trackId) {
+    public static List<Board__c> getBoards(String laneId) {
         try {
             return [
                 SELECT Id
                 FROM Board__c
-                WHERE Track__c = :trackId
+                WHERE Lane__c = :laneId
                 ORDER BY Order__c ASC
             ];
         } catch (Exception e) {

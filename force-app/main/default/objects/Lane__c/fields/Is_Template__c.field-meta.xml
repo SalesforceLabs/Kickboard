@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Background_Image__c</fullName>
+    <fullName>Is_Template__c</fullName>
+    <defaultValue>false</defaultValue>
     <externalId>false</externalId>
-    <label>Background Image</label>
-    <length>255</length>
-    <required>false</required>
+    <label>Is Template</label>
     <trackTrending>false</trackTrending>
-    <type>Text</type>
-    <unique>false</unique>
+    <type>Checkbox</type>
 </CustomField>

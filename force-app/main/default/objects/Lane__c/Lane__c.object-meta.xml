@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>Accept</actionName>
@@ -128,11 +128,14 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>View</actionName>
-        <type>Default</type>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Lane_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
     </actionOverrides>
     <actionOverrides>
         <actionName>View</actionName>
-        <formFactor>Large</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -149,18 +152,17 @@
     <enableHistory>false</enableHistory>
     <enableLicensing>false</enableLicensing>
     <enableReports>false</enableReports>
-    <enableSearch>false</enableSearch>
+    <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <externalSharingModel>ControlledByParent</externalSharingModel>
-    <label>Card</label>
+    <externalSharingModel>Private</externalSharingModel>
+    <label>Lane</label>
     <nameField>
-        <displayFormat>Card-{000}</displayFormat>
-        <label>Card ID</label>
-        <type>AutoNumber</type>
+        <label>Lane Name</label>
+        <type>Text</type>
     </nameField>
-    <pluralLabel>Cards</pluralLabel>
-    <searchLayouts />
-    <sharingModel>ControlledByParent</sharingModel>
+    <pluralLabel>Lanes</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>Private</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

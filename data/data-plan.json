@@ -1,6 +1,6 @@
 [
     {
-        "sobject": "Track__c",
+        "sobject": "Lane__c",
         "saveRefs": true,
         "resolveRefs": false,
         "files": ["tracks.json"]

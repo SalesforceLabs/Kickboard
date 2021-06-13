@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Background_Image__c</fullName>
+    <fullName>Code__c</fullName>
     <externalId>false</externalId>
-    <label>Background Image</label>
-    <length>255</length>
+    <label>Code</label>
+    <length>6</length>
     <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Text</type>

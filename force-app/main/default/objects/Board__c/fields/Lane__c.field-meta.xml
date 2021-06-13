@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Board__c</fullName>
+    <fullName>Lane__c</fullName>
     <externalId>false</externalId>
-    <label>Board</label>
-    <referenceTo>Board__c</referenceTo>
-    <relationshipLabel>Cards</relationshipLabel>
-    <relationshipName>Cards</relationshipName>
+    <label>Lane</label>
+    <referenceTo>Lane__c</referenceTo>
+    <relationshipLabel>Boards</relationshipLabel>
+    <relationshipName>Boards</relationshipName>
     <relationshipOrder>0</relationshipOrder>
     <reparentableMasterDetail>false</reparentableMasterDetail>
     <trackTrending>false</trackTrending>
     <type>MasterDetail</type>
-    <writeRequiresMasterRead>true</writeRequiresMasterRead>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
 </CustomField>

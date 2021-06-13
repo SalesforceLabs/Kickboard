@@ -20,11 +20,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Card__c.Board__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Card__c.Color__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -45,12 +40,22 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Track__c.Current_Board_ID__c</field>
+        <field>Lane__c.Current_Board_ID__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Track__c.Description__c</field>
+        <field>Lane__c.Description__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Lane__c.Is_Public__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Lane__c.Is_Template__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <hasActivationRequired>false</hasActivationRequired>
@@ -79,7 +84,7 @@
         <allowEdit>false</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>false</modifyAllRecords>
-        <object>Track__c</object>
+        <object>Lane__c</object>
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
 </PermissionSet>

@@ -8,7 +8,8 @@
             "Name": "Define Your Problem Statement",
             "Description__c": "",
             "Order__c": 1,
-            "Track__c": "@TrackRef1"
+            "Background_Image__c": "/resource/kickboard_create_a_vision/problem-statement.png",
+            "Lane__c": "@LaneRef1"
         },
         {
             "attributes": {
@@ -18,7 +19,8 @@
             "Name": "Identify Stakeholders",
             "Description__c": "",
             "Order__c": 2,
-            "Track__c": "@TrackRef1"
+            "Background_Image__c": "/resource/kickboard_create_a_vision/stakeholder-map.png",
+            "Lane__c": "@LaneRef1"
         },
         {
             "attributes": {
@@ -28,7 +30,8 @@
             "Name": "Discover Your Customer's Journey",
             "Description__c": "",
             "Order__c": 3,
-            "Track__c": "@TrackRef1"
+            "Background_Image__c": "/resource/kickboard_create_a_vision/customer-journey.png",
+            "Lane__c": "@LaneRef1"
         },
         {
             "attributes": {
@@ -38,7 +41,8 @@
             "Name": "What Are Your Anchors & Tailwinds?",
             "Description__c": "",
             "Order__c": 4,
-            "Track__c": "@TrackRef1"
+            "Background_Image__c": "/resource/kickboard_create_a_vision/anchors-and-tailwinds.png",
+            "Lane__c": "@LaneRef1"
         },
         {
             "attributes": {
@@ -48,7 +52,8 @@
             "Name": "Prioritize Opportunities",
             "Description__c": "",
             "Order__c": 5,
-            "Track__c": "@TrackRef1"
+            "Background_Image__c": "/resource/kickboard_create_a_vision/prioritize-opportunities.png",
+            "Lane__c": "@LaneRef1"
         },
         {
             "attributes": {
@@ -58,7 +63,8 @@
             "Name": "Create Your Vision Statement",
             "Description__c": "",
             "Order__c": 6,
-            "Track__c": "@TrackRef1"
+            "Background_Image__c": "/resource/kickboard_create_a_vision/vision-statement.png",
+            "Lane__c": "@LaneRef1"
         }
     ]
 }

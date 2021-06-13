@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <applicationVisibilities>
         <application>Kickboard</application>
@@ -29,11 +29,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Card__c.Board__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Card__c.Color__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -53,13 +48,28 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Track__c.Current_Board_ID__c</field>
+        <editable>false</editable>
+        <field>Lane__c.Code__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Track__c.Description__c</field>
+        <field>Lane__c.Current_Board_ID__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lane__c.Description__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lane__c.Is_Public__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lane__c.Is_Template__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <hasActivationRequired>false</hasActivationRequired>
@@ -88,11 +98,11 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>false</modifyAllRecords>
-        <object>Track__c</object>
+        <object>Lane__c</object>
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
     <tabSettings>
-        <tab>Track__c</tab>
+        <tab>Lane__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>

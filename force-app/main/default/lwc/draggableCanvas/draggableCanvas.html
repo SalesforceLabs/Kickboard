@@ -6,9 +6,9 @@
         <div class="slds-var-p-around_medium">
             <div class="slds-text-align_center">
                 <lightning-button
-                    label="New Note"
+                    label="New Card"
                     variant="brand"
-                    onclick={addNote}
+                    onclick={addCard}
                     class="slds-var-m-right_small"
                 ></lightning-button>
             </div>
@@ -24,17 +24,17 @@
                     onmousemove={drag}
                     style={canvasStyle}
                 >
-                    <template if:true={notes}>
-                        <template for:each={notes} for:item="note">
-                            <c-note
-                                description={note.Description__c}
-                                background={note.Color__c}
-                                key={note.Id}
-                                note-id={note.Id}
-                                data-noteid={note.Id}
-                                style={note.style}
-                                ondeletenote={handleNoteDelete}
-                            ></c-note>
+                    <template if:true={cards}>
+                        <template for:each={cards} for:item="card">
+                            <c-card
+                                description={card.Description__c}
+                                background={card.Color__c}
+                                key={card.Id}
+                                card-id={card.Id}
+                                data-cardid={card.Id}
+                                style={card.style}
+                                ondeletecard={handleCardDelete}
+                            ></c-card>
                         </template>
                     </template>
                 </div>

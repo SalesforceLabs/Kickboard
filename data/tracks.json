@@ -2,8 +2,8 @@
     "records": [
         {
             "attributes": {
-                "type": "Track__c",
-                "referenceId": "TrackRef1"
+                "type": "Lane__c",
+                "referenceId": "LaneRef1"
             },
             "Name": "Digital Transformation (Create a Vision for Success)",
             "Description__c": "This track helps you create a vision for your Digital Transformation"
