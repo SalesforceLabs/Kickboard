@@ -30,6 +30,14 @@
                 <behavior>Required</behavior>
                 <field>Board__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Created_By_Guest__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Last_Modified_By_Guest__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns />
         <style>TwoColumnsTopToBottom</style>

@@ -1,0 +1,42 @@
+<template>
+    <template if:true={message}>
+        <div class="error">
+            <div class="slds-notify_container slds-is-relative">
+                <div
+                    class="slds-notify slds-notify_toast slds-theme_error"
+                    role="status"
+                >
+                    <span class="slds-assistive-text">error</span>
+                    <div class="slds-notify__content">
+                        <h2 class="slds-text-heading_small">{message}</h2>
+                        <p>{subtext}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <div class="slds-var-p-around_medium slds-text-align_center">
+        <img src={logo} />
+    </div>
+    <div class="slds-grid slds-grid_align-center">
+        <div class="slds-col slds-size_1-of-3">
+            <lightning-input
+                label="Enter your email address"
+                required="true"
+                class="email"
+            ></lightning-input>
+            <lightning-input
+                label="Enter the unique access code"
+                required="true"
+                class="code"
+            ></lightning-input>
+            <div class="slds-text-align_center">
+                <lightning-button
+                    label="Login"
+                    variant="brand"
+                    onclick={handleLogin}
+                ></lightning-button>
+            </div>
+        </div>
+    </div>
+</template>

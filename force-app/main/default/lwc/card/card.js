@@ -6,6 +6,7 @@ const DELAY = 1000;
 export default class Card extends LightningElement {
     @api description;
     @api cardId;
+    @api laneGuestUserId;
 
     @api
     get background() {
@@ -39,7 +40,8 @@ export default class Card extends LightningElement {
         this.delayTimeout = setTimeout(() => {
             saveCard({
                 cardId: this.cardId,
-                description: this.cardDescription
+                description: this.cardDescription,
+                guestUserId: this.laneGuestUserId
             }).catch((error) => {
                 console.log(error);
             });
@@ -48,8 +50,16 @@ export default class Card extends LightningElement {
 
     changeBg(event) {
         this.cardBg = event.target.classList.value;
-        saveCard({ cardId: this.cardId, color: this.cardBg }).catch((error) => {
+        saveCard({
+            cardId: this.cardId,
+            color: this.cardBg,
+            guestUserId: this.laneGuestUserId
+        }).catch((error) => {
             console.log(error);
         });
+    }
+
+    handleTextAreaClick() {
+        this.dispatchEvent(new CustomEvent("textareaselection"));
     }
 }

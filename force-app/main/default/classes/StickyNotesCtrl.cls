@@ -3,7 +3,8 @@ public with sharing class StickyNotesCtrl {
     public static Card__c createNewCard(
         String boardId,
         Integer xPos,
-        Integer yPos
+        Integer yPos,
+        String guestUserId
     ) {
         try {
             Card__c c = new Card__c();
@@ -13,7 +14,15 @@ public with sharing class StickyNotesCtrl {
             if (!String.isBlank(boardId)) {
                 c.Board__c = boardId;
             }
-            insert c;
+            if (!String.isBlank(guestUserId)) {
+                c.Created_By_Guest__c = guestUserId;
+            }
+
+            SObjectAccessDecision securityDecision = Security.stripInaccessible(
+                AccessType.CREATABLE,
+                new List<Card__c>{ c }
+            );
+            insert securityDecision.getRecords();
             return c;
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
@@ -35,7 +44,7 @@ public with sharing class StickyNotesCtrl {
                 query +
                 'where ' +
                 whereClause +
-                '  order by CreatedDate asc'
+                ' WITH SECURITY_ENFORCED order by CreatedDate asc'
             );
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
@@ -49,6 +58,7 @@ public with sharing class StickyNotesCtrl {
                 SELECT Id
                 FROM Board__c
                 WHERE Lane__c = :laneId
+                WITH SECURITY_ENFORCED
                 ORDER BY Order__c ASC
             ];
         } catch (Exception e) {
@@ -63,5 +73,26 @@ public with sharing class StickyNotesCtrl {
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
+    }
+
+    @AuraEnabled
+    public static Id isValidCredentials(
+        String laneId,
+        String email,
+        String code
+    ) {
+        List<Lane__c> lane = [
+            SELECT
+                Id,
+                Code__c,
+                (SELECT Id, Email__c FROM Lane_Users__r WHERE Email__c = :email)
+            FROM Lane__c
+            WHERE Id = :laneId AND Code__c = :code
+            WITH SECURITY_ENFORCED
+        ];
+        if (!lane.isEmpty() && lane[0].Lane_Users__r?.size() > 0) {
+            return lane[0].Lane_Users__r[0]?.Id;
+        }
+        return null;
     }
 }

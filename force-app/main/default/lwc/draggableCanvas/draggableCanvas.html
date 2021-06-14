@@ -3,12 +3,68 @@
         <div slot="actions">
             <slot name="actions"></slot>
         </div>
+        <div class="slds-m-bottom_medium">
+            <ul class="slds-accordion">
+                <li class="slds-accordion__list-item">
+                    <section class="slds-accordion__section">
+                        <div class="slds-accordion__summary">
+                            <h2 class="slds-accordion__summary-heading">
+                                <button
+                                    class="
+                                        slds-button slds-button_reset
+                                        slds-accordion__summary-action
+                                        accordion-bg
+                                    "
+                                    aria-controls="referenceId-45"
+                                    aria-expanded={showDetails}
+                                    title="Additional Information"
+                                    onclick={toggleVisibility}
+                                >
+                                    <lightning-icon
+                                        class="
+                                            slds-accordion__summary-action-icon
+                                            slds-button__icon
+                                            slds-button__icon_left
+                                        "
+                                        icon-name="utility:switch"
+                                        size="x-small"
+                                        title="Expand/Collapse"
+                                    ></lightning-icon>
+                                    <span
+                                        class="slds-accordion__summary-content"
+                                        >Additional Information</span
+                                    >
+                                </button>
+                            </h2>
+                        </div>
+                        <div
+                            class="slds-accordion__content"
+                            id="referenceId-45"
+                        >
+                            <lightning-record-form
+                                mode="readonly"
+                                record-id={recordId}
+                                object-api-name={boardObj}
+                                fields={fields}
+                            >
+                            </lightning-record-form>
+                        </div>
+                    </section>
+                </li>
+            </ul>
+        </div>
         <div class="slds-var-p-around_medium">
             <div class="slds-text-align_center">
                 <lightning-button
                     label="New Card"
                     variant="brand"
                     onclick={addCard}
+                    class="slds-var-m-right_small"
+                ></lightning-button>
+                <lightning-button
+                    label="Refresh"
+                    variant="neutral"
+                    onclick={refreshCards}
                     class="slds-var-m-right_small"
                 ></lightning-button>
             </div>
@@ -33,7 +89,9 @@
                                 card-id={card.Id}
                                 data-cardid={card.Id}
                                 style={card.style}
+                                lane-guest-user-id={laneGuestUserId}
                                 ondeletecard={handleCardDelete}
+                                ontextareaselection={handleTextAreaSelection}
                             ></c-card>
                         </template>
                     </template>

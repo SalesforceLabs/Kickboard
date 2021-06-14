@@ -1,3 +1,7 @@
+/**
+ * This without sharing class deals with updating and deleting cards,
+ * becuase a guest user does not have permissions to edit and delete records.
+ */
 public without sharing class StickyNotesWithoutSharingCtrl {
     @AuraEnabled
     public static void saveCard(
@@ -5,7 +9,8 @@ public without sharing class StickyNotesWithoutSharingCtrl {
         String description,
         Integer xPos,
         Integer yPos,
-        String color
+        String color,
+        String guestUserId
     ) {
         try {
             Card__c c = new Card__c(Id = cardId);
@@ -16,6 +21,10 @@ public without sharing class StickyNotesWithoutSharingCtrl {
                 c.Y_Position__c = yPos;
             } else if (color != null) {
                 c.Color__c = color;
+            }
+
+            if (!String.isBlank(guestUserId)) {
+                c.Last_Modified_By_Guest__c = guestUserId;
             }
             update c;
         } catch (Exception e) {

@@ -19,13 +19,19 @@ export default class LaneBoards extends LightningElement {
     boardsRetrieved = false;
     currentBoardIdRetrieved = false;
 
+    laneGuestUserId;
+
+    get showLogin() {
+        return this.isGuest && !this.laneGuestUserId;
+    }
+
     @wire(getBoards, { laneId: "$recordId" })
     handleGetBoards({ data, error }) {
         if (data) {
             this.boardsList = data;
             this.boardsRetrieved = true;
             this.setCurrentBoardId();
-        } else if(error){
+        } else if (error) {
             console.error(error);
         }
     }
@@ -39,7 +45,7 @@ export default class LaneBoards extends LightningElement {
             }
             this.currentBoardIdRetrieved = true;
             this.setCurrentBoardId();
-        } else if(error){
+        } else if (error) {
             console.error(error);
         }
     }
@@ -52,6 +58,23 @@ export default class LaneBoards extends LightningElement {
                 this.currentBoardId = this.boardsList[0].Id;
             }
             this.paginate();
+        }
+    }
+
+    handleLogin(event) {
+        this.laneGuestUserId = event.detail.laneuserid;
+        localStorage.setItem(
+            this.recordId + "_laneGuestUserId",
+            this.laneGuestUserId
+        );
+    }
+
+    renderedCallback() {
+        const guestUserId = localStorage.getItem(
+            this.recordId + "_laneGuestUserId"
+        );
+        if (guestUserId) {
+            this.laneGuestUserId = guestUserId;
         }
     }
 
@@ -103,14 +126,15 @@ export default class LaneBoards extends LightningElement {
                 this.currentBoardId = this.boardsList[newBoardIndex].Id;
             }
             this.paginate();
-            this.updateCurrentBoard();
+            if (!this.isGuest) {
+                this.updateCurrentBoard();
+            }
             this.resetBoardCoordinates();
         }
     }
 
-    resetBoardCoordinates(){
-        const canvasElement =
-            this.template.querySelector("c-draggable-canvas");
+    resetBoardCoordinates() {
+        const canvasElement = this.template.querySelector("c-draggable-canvas");
         if (canvasElement) {
             canvasElement.resetBoard();
         }
@@ -126,5 +150,4 @@ export default class LaneBoards extends LightningElement {
             console.log(error);
         });
     }
-
 }

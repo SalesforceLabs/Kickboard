@@ -26,9 +26,13 @@
     background: rgba(217, 217, 217, 0.12);
 }
 
+.colorPanel {
+    padding-left: 5px;
+}
+
 .colorPanel div {
-    width: 8px;
-    height: 8px;
+    width: 11px;
+    height: 11px;
     border-radius: 50%;
     margin-right: 5px;
     cursor: pointer;
