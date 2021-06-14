@@ -1,0 +1,94 @@
+{
+    "activeBrandingSetId": "cee159d1-dadf-46b1-a1b4-1a09ebd16a59",
+    "customCSS": "",
+    "developerName": "byo",
+    "id": "f86133ad-f3ef-49db-a1ab-3cfdc9f2dac8",
+    "label": "Build Your Own (LWR)",
+    "layouts": {
+        "Inner": "fc5fe7e0-224c-4ebf-9ea1-0d52c74f557a",
+        "ServiceNotAvailable": "5e5f772a-dbe2-4791-986d-4720d466d910"
+    },
+    "type": "theme",
+    "views": [
+        {
+            "componentAttributes": {},
+            "componentName": "community_byo:scopedHeaderAndFooter",
+            "id": "fc5fe7e0-224c-4ebf-9ea1-0d52c74f557a",
+            "label": "Scoped Header and Footer",
+            "regions": [
+                {
+                    "components": [
+                        {
+                            "componentAttributes": {
+                                "sectionConfig": "{\"UUID\":\"325100fc-0d50-4b63-a102-c99a159825ca\",\"columns\":[{\"UUID\":\"37eb9d80-4aaa-41a8-ab58-124098660619\",\"columnName\":\"Column 1\",\"columnKey\":\"headerSection\",\"columnWidth\":\"12\",\"seedComponents\":null}]}"
+                            },
+                            "componentName": "community_layout:section",
+                            "id": "325100fc-0d50-4b63-a102-c99a159825ca",
+                            "regions": [
+                                {
+                                    "id": "37eb9d80-4aaa-41a8-ab58-124098660619",
+                                    "regionLabel": "Theme Header",
+                                    "regionName": "headerSection",
+                                    "renditionMap": {},
+                                    "type": "region"
+                                }
+                            ],
+                            "renditionMap": {},
+                            "scopedBrandingSetId": null,
+                            "type": "component"
+                        }
+                    ],
+                    "id": "9f28241f-dab8-4e44-8ec1-4728053f4439",
+                    "regionName": "header",
+                    "type": "region"
+                },
+                {
+                    "components": [
+                        {
+                            "componentAttributes": {
+                                "sectionConfig": "{\"UUID\":\"00e4f243-b5da-45cf-821a-06b2243ab2b7\",\"columns\":[{\"UUID\":\"4f74ea3b-70c2-4517-b5f8-0fd32c70a1e4\",\"columnName\":\"Column 1\",\"columnKey\":\"footerSection\",\"columnWidth\":\"12\",\"seedComponents\":null}]}"
+                            },
+                            "componentName": "community_layout:section",
+                            "id": "00e4f243-b5da-45cf-821a-06b2243ab2b7",
+                            "regions": [
+                                {
+                                    "id": "4f74ea3b-70c2-4517-b5f8-0fd32c70a1e4",
+                                    "regionLabel": "Theme Footer",
+                                    "regionName": "footerSection",
+                                    "renditionMap": {},
+                                    "type": "region"
+                                }
+                            ],
+                            "renditionMap": {},
+                            "scopedBrandingSetId": null,
+                            "type": "component"
+                        }
+                    ],
+                    "id": "dff8ed85-9431-42d0-a650-d2003b3625ff",
+                    "regionName": "footer",
+                    "type": "region"
+                }
+            ],
+            "type": "view"
+        },
+        {
+            "componentAttributes": {},
+            "componentName": "community_layout:simpleThemeLayout",
+            "id": "5e5f772a-dbe2-4791-986d-4720d466d910",
+            "label": "Service Not Available Theme Layout",
+            "regions": [
+                {
+                    "id": "4895652f-950a-401e-851c-a283e434bbca",
+                    "regionName": "header",
+                    "type": "region"
+                },
+                {
+                    "id": "13d86b1f-f863-419c-b5ed-caf424887480",
+                    "regionName": "footer",
+                    "type": "region"
+                }
+            ],
+            "type": "view"
+        }
+    ]
+}

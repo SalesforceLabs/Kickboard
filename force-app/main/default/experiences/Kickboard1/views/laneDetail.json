@@ -1,0 +1,70 @@
+{
+    "appPageId": "11562ae2-c473-456b-85ca-553ca60a41fe",
+    "componentName": "community_layout:sldsFlexibleLayout",
+    "id": "d33e90aa-09df-4333-a02a-0ca6b394680d",
+    "label": "Lane Detail",
+    "regions": [
+        {
+            "components": [
+                {
+                    "componentAttributes": {
+                        "sectionConfig": "{\"UUID\":\"5f43c598-e3e7-45f6-97e1-1c2ef81f2ec8\",\"columns\":[{\"UUID\":\"03a626a8-1631-4d3d-95d0-4f1cb9aa9050\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}"
+                    },
+                    "componentName": "community_layout:section",
+                    "id": "5f43c598-e3e7-45f6-97e1-1c2ef81f2ec8",
+                    "regions": [
+                        {
+                            "components": [
+                                {
+                                    "componentAttributes": {
+                                        "recordId": "{!recordId}"
+                                    },
+                                    "componentName": "c:laneBoards",
+                                    "id": "84a037c3-a91a-43d9-85c9-4623f03bc62b",
+                                    "renderPriority": "NEUTRAL",
+                                    "renditionMap": {},
+                                    "type": "component"
+                                }
+                            ],
+                            "id": "03a626a8-1631-4d3d-95d0-4f1cb9aa9050",
+                            "regionLabel": "Column 1",
+                            "regionName": "col1",
+                            "renditionMap": {},
+                            "type": "region"
+                        }
+                    ],
+                    "renderPriority": "NEUTRAL",
+                    "renditionMap": {},
+                    "scopedBrandingSetId": null,
+                    "type": "component"
+                }
+            ],
+            "id": "74e7f978-20db-4ebe-a828-d56678ddf405",
+            "regionName": "content",
+            "type": "region"
+        },
+        {
+            "components": [
+                {
+                    "componentAttributes": {
+                        "customHeadTags": "",
+                        "description": "",
+                        "pageTitle": "{!Record._Object}: {!Record._Title}",
+                        "recordId": "{!recordId}"
+                    },
+                    "componentName": "community_builder:seoAssistant",
+                    "id": "e2a264d7-595e-47fa-b023-c92542124789",
+                    "renderPriority": "NEUTRAL",
+                    "renditionMap": {},
+                    "type": "component"
+                }
+            ],
+            "id": "ffadec2c-c44a-4a13-a2cb-426a203ec510",
+            "regionName": "sfdcHiddenRegion",
+            "type": "region"
+        }
+    ],
+    "themeLayoutType": "Inner",
+    "type": "view",
+    "viewType": "detail-a03"
+}

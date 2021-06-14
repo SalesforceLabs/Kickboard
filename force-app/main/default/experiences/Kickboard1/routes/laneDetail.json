@@ -1,0 +1,11 @@
+{
+    "activeViewId": "d33e90aa-09df-4333-a02a-0ca6b394680d",
+    "appPageId": "11562ae2-c473-456b-85ca-553ca60a41fe",
+    "configurationTags": [],
+    "id": "6e2c2ca1-e4a1-441e-b20d-b786048eaf78",
+    "label": "Lane Detail",
+    "objectApiName": "Lane__c",
+    "routeType": "detail-a03",
+    "type": "route",
+    "urlPrefix": "lane"
+}

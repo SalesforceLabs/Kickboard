@@ -1,0 +1,11 @@
+{
+    "activeViewId": "0d1b6dee-dcba-4899-94c9-2737a27cfa83",
+    "appPageId": "11562ae2-c473-456b-85ca-553ca60a41fe",
+    "configurationTags": [],
+    "id": "a52a90fa-8b1a-4e61-a9f6-8cf4c40943bc",
+    "label": "Lane Related List",
+    "objectApiName": "Lane__c",
+    "routeType": "relatedlist-a03",
+    "type": "route",
+    "urlPrefix": "lane"
+}

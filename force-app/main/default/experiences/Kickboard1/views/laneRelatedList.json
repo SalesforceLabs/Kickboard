@@ -1,0 +1,38 @@
+{
+    "appPageId": "11562ae2-c473-456b-85ca-553ca60a41fe",
+    "componentName": "community_layout:sldsFlexibleLayout",
+    "id": "0d1b6dee-dcba-4899-94c9-2737a27cfa83",
+    "label": "Lane Related List",
+    "regions": [
+        {
+            "components": [
+                {
+                    "componentAttributes": {
+                        "sectionConfig": "{\"UUID\":\"d9d558fb-deca-4a8d-86c9-31cc1590bb5a\",\"columns\":[{\"UUID\":\"2816d421-8dad-4523-af4d-0650ff4a16e9\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}"
+                    },
+                    "componentName": "community_layout:section",
+                    "id": "d9d558fb-deca-4a8d-86c9-31cc1590bb5a",
+                    "regions": [
+                        {
+                            "id": "2816d421-8dad-4523-af4d-0650ff4a16e9",
+                            "regionLabel": "Column 1",
+                            "regionName": "col1",
+                            "renditionMap": {},
+                            "type": "region"
+                        }
+                    ],
+                    "renderPriority": "NEUTRAL",
+                    "renditionMap": {},
+                    "scopedBrandingSetId": null,
+                    "type": "component"
+                }
+            ],
+            "id": "873d3b54-983f-4563-a4df-1612c1d4b11a",
+            "regionName": "content",
+            "type": "region"
+        }
+    ],
+    "themeLayoutType": "Inner",
+    "type": "view",
+    "viewType": "relatedlist-a03"
+}
