@@ -136,6 +136,10 @@
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
     <tabSettings>
+        <tab>Kickboard_Getting_Started</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <tabSettings>
         <tab>Lane__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>

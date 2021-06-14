@@ -10,7 +10,7 @@
                 <componentInstanceProperties>
                     <name>richTextValue</name>
                     <value
-                    >&lt;p&gt;&lt;img src=&quot;/resource/1623619838000/kickboard_overview/kickboard_overview.png&quot; alt=&quot;kickboard_overview.png (960×1080)&quot;&gt;&lt;/p&gt;</value>
+                    >&lt;p style=&quot;text-align: center;&quot;&gt;&lt;img src=&quot;/resource/1623619838000/kickboard_overview/kickboard_overview.png&quot; alt=&quot;kickboard_overview.png (960×1080)&quot;&gt;&lt;/p&gt;</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:richText</componentName>
             </componentInstance>

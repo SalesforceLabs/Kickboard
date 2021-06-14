@@ -44,7 +44,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Card__c.Created_By_Guest__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -59,13 +59,18 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Card__c.X_Position__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Card__c.Y_Position__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Lane__c.Code__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
