@@ -41,10 +41,6 @@ Kickboard is an application that teaches are customers how to swim in the vast d
     ```
     sfdx force:user:permset:assign -n Kickboard_User
     ```
-  
-1. Assign the **Kickboard Guest** permission set to the Whiteboard Site guest user
-
-1. Enable **Allow guest users to access public APIs** for the Whiteboard Community
 
 1. Import sample data:
 
@@ -52,9 +48,22 @@ Kickboard is an application that teaches are customers how to swim in the vast d
     sfdx force:data:tree:import -p ./data/data-plan.json
     ```
 
+1. Create Push Topic:
+
+    ```
+    sfdx force:apex:execute -f scripts/apex/createPushTopic.apex
+    ```
+
+1. Open the scratch org:
+
+    ```
+    sfdx force:org:open
+    ```
+
 1. Publish the community:
 
     Use these manual instructions until deployable with a community
+
     1. Create a new site
     2. Select Build Your Own
     3. Name = Kickboard > Create
@@ -71,22 +80,14 @@ Kickboard is an application that teaches are customers how to swim in the vast d
     11. in community builder, select settings > guest user profile > view users
         a. select user
         b. assign permset > edit assignments > kickboard guest
-    ```
-    sfdx force:community:publish -n Whiteboard
-    ```
-
-
-1. Create Push Topic:
 
     ```
-    sfdx force:apex:execute -f scripts/apex/createPushTopic.apex
+    sfdx force:community:publish -n Kickboard
     ```
 
-1. Open the scratch org:
+1. Assign the **Kickboard Guest** permission set to the Whiteboard Site guest user
 
-    ```
-    sfdx force:org:open
-    ```
+1. Enable **Allow guest users to access public APIs** for the Whiteboard Community
 
 ## Optional Installation Instructions
 
