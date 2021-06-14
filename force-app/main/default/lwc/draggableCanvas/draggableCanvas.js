@@ -2,6 +2,13 @@ import { LightningElement, wire, api } from "lwc";
 import { getRecord, getFieldValue } from "lightning/uiRecordApi";
 import BG_IMG from "@salesforce/schema/Board__c.Background_Image__c";
 import BOARD_NAME from "@salesforce/schema/Board__c.Name";
+
+import BOARD_OBJECT from "@salesforce/schema/Board__c";
+import BOARD_PREREQ from "@salesforce/schema/Board__c.Prerequisites__c";
+import BOARD_DESC from "@salesforce/schema/Board__c.Description__c";
+import BOARD_INSTR from "@salesforce/schema/Board__c.Instructions__c";
+import BOARD_OBJ from "@salesforce/schema/Board__c.Objective__c";
+
 import createNewCard from "@salesforce/apex/StickyNotesCtrl.createNewCard";
 import getCards from "@salesforce/apex/StickyNotesCtrl.getCards";
 import deleteCard from "@salesforce/apex/StickyNotesWithoutSharingCtrl.deleteCard";
@@ -17,11 +24,19 @@ import { renderer } from "./renderer";
 export default class DraggableCanvas extends LightningElement {
     @api recordId;
     @api laneId;
+    @api laneGuestUserId;
 
     isGuest = ISGUEST;
     isDragging = false;
     isPanning = false;
     addedPan = false;
+    isTextSelection = false;
+
+    showDetails = false;
+    iconName = "utility:chevronright";
+
+    fields = [BOARD_DESC, BOARD_OBJ, BOARD_PREREQ, BOARD_INSTR];
+    boardObj = BOARD_OBJECT;
 
     dragItem;
     currentX;
@@ -50,7 +65,7 @@ export default class DraggableCanvas extends LightningElement {
         if (this.boardRecord && this.boardRecord.data) {
             const bgUrl = getFieldValue(this.boardRecord.data, BG_IMG);
             if (bgUrl) {
-                return `background: url(${bgUrl})`;
+                return `background-image: url(${bgUrl})`;
             }
         }
         return "";
@@ -89,6 +104,7 @@ export default class DraggableCanvas extends LightningElement {
                 });
             });
             container.addEventListener("mousemove", (event) => {
+                if (this.isTextSelection) return;
                 if (this.isPanning && !this.isDragging) {
                     event.preventDefault();
                     this.panZoomInstance.panBy({
@@ -131,6 +147,22 @@ export default class DraggableCanvas extends LightningElement {
         }
     }
 
+    toggleVisibility() {
+        if (this.showDetails) {
+            this.showDetails = false;
+            this.iconName = "utility:chevronright";
+            this.template
+                .querySelector(".slds-accordion__section")
+                .classList.remove("slds-is-open");
+        } else {
+            this.showDetails = true;
+            this.iconName = "utility:chevrondown";
+            this.template
+                .querySelector(".slds-accordion__section")
+                .classList.add("slds-is-open");
+        }
+    }
+
     startRefresh() {
         // eslint-disable-next-line @lwc/lwc/no-async-operation
         this.intervalId = window.setInterval(() => {
@@ -145,12 +177,36 @@ export default class DraggableCanvas extends LightningElement {
         }
     }
 
+    refreshCards() {
+        refreshApex(this.wiredCards);
+    }
+
     addCard() {
-        const xPos = this.panZoomInstance.transformation.translateX * -1;
-        const yPos = this.panZoomInstance.transformation.translateY * -1;
-        createNewCard({ boardId: this.recordId, xPos, yPos })
+        let xPos = this.panZoomInstance.transformation.translateX * -1;
+        let yPos = this.panZoomInstance.transformation.translateY * -1;
+
+        let samePos = [];
+
+        do {
+            samePos = this.cards.filter(
+                // eslint-disable-next-line no-loop-func
+                (card) =>
+                    card.X_Position__c === xPos && card.Y_Position__c === yPos
+            );
+            if (samePos.length > 0) {
+                xPos += 15;
+                yPos += 15;
+            }
+        } while (samePos.length > 0);
+
+        createNewCard({
+            boardId: this.recordId,
+            xPos,
+            yPos,
+            guestUserId: this.laneGuestUserId
+        })
             .then((result) => {
-                if(result){
+                if (result) {
                     refreshApex(this.wiredCards);
                 }
             })
@@ -193,7 +249,8 @@ export default class DraggableCanvas extends LightningElement {
             saveCard({
                 cardId: this.dragItem.dataset.cardid,
                 xPos: this.currentX,
-                yPos: this.currentY
+                yPos: this.currentY,
+                guestUserId: this.laneGuestUserId
             })
                 .then(() => {
                     this.currentY = undefined;
@@ -204,15 +261,22 @@ export default class DraggableCanvas extends LightningElement {
                 });
         }
         this.isDragging = false;
+        this.isTextSelection = false;
     }
 
     panEnd() {
         this.isPanning = false;
+        this.isTextSelection = false;
+    }
+
+    handleTextAreaSelection() {
+        this.isTextSelection = true;
     }
 
     drag(e) {
-        e.preventDefault();
+        if (this.isTextSelection) return;
         if (!this.isDragging) return;
+        e.preventDefault();
         this.currentX = Math.round(
             (e.clientX - this.lastOffsetX - this.boundingRect.left) *
                 this.panZoomInstance.transformation.scale

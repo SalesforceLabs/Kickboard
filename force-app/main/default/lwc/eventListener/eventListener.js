@@ -45,7 +45,7 @@ export default class EventListener extends LightningElement {
 
     unsubscribeFromEvent() {
         unsubscribe(this.subscription, (response) => {
-            if(response){
+            if (response) {
                 console.log("Unsubscribed from channel");
                 this.subscription = undefined;
             }
