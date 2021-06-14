@@ -3,6 +3,7 @@
     transform: translate3d(0px, 0px, 0px);
     cursor: move;
     box-shadow: 1px 1px 5px #ccc;
+    border-radius: 4px;
 }
 
 .cardContent {
