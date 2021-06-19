@@ -102,6 +102,11 @@
                 <fieldItem>Record.Background_Image__c</fieldItem>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Design_Stage__c</fieldItem>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-d1ba2439-1d5e-402f-8734-420c998bd3ad</name>
         <type>Facet</type>
     </flexiPageRegions>
