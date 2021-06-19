@@ -49,6 +49,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Card__c.Consensus_Category__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Card__c.Created_By_Guest__c</field>
         <readable>true</readable>
@@ -56,6 +61,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Card__c.Description__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Card__c.Intent_Category__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
