@@ -2,35 +2,91 @@
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>52.0</apiVersion>
     <assignments>
-        <name>BoardsAfter_Assignment</name>
-        <label>BoardsAfter Assignment</label>
-        <locationX>334</locationX>
-        <locationY>778</locationY>
+        <name>BoardNew_Assignment</name>
+        <label>BoardNew Assignment</label>
+        <locationX>180</locationX>
+        <locationY>501</locationY>
         <assignmentItems>
-            <assignToReference>BoardsAfter_Loop.Order__c</assignToReference>
+            <assignToReference>BoardNew.Background_Image__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Board_GetRecord.Background_Image__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BoardNew.Description__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Board_GetRecord.Description__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BoardNew.Design_Stage__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Board_GetRecord.Design_Stage__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BoardNew.Instructions__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Board_GetRecord.Instructions__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BoardNew.Lane__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Board_GetRecord.Lane__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BoardNew.Name</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>BoardName_InputText</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BoardNew.Objective__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Board_GetRecord.Objective__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BoardNew.Order__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Board_GetRecord.Order__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BoardNew.Prerequisites__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Board_GetRecord.Prerequisites__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>IncrementOrder_Assignment</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>IncrementOrder_Assignment</name>
+        <label>IncrementOrder Assignment</label>
+        <locationX>180</locationX>
+        <locationY>650</locationY>
+        <assignmentItems>
+            <assignToReference>BoardNew.Order__c</assignToReference>
             <operator>Add</operator>
             <value>
                 <numberValue>1.0</numberValue>
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>BoardsAfterCollection_Assignment</targetReference>
-        </connector>
-    </assignments>
-    <assignments>
-        <name>BoardsAfterCollection_Assignment</name>
-        <label>BoardsAfterCollection Assignment</label>
-        <locationX>464</locationX>
-        <locationY>843</locationY>
-        <assignmentItems>
-            <assignToReference>BoardsAfter_RecordCollection</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <elementReference>BoardsAfter_Loop</elementReference>
-            </value>
-        </assignmentItems>
-        <connector>
-            <targetReference>BoardsAfter_Loop</targetReference>
+            <targetReference>CategoryMapping_GetRecords</targetReference>
         </connector>
     </assignments>
     <formulas>
@@ -41,20 +97,6 @@
     </formulas>
     <interviewLabel>Clone Board {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Clone Board</label>
-    <loops>
-        <name>BoardsAfter_Loop</name>
-        <label>BoardsAfter Loop</label>
-        <locationX>176</locationX>
-        <locationY>844</locationY>
-        <collectionReference>BoardsAfter_GetRecords</collectionReference>
-        <iterationOrder>Asc</iterationOrder>
-        <nextValueConnector>
-            <targetReference>BoardsAfter_Assignment</targetReference>
-        </nextValueConnector>
-        <noMoreValuesConnector>
-            <targetReference>BoardsAfter_UpdateRecords</targetReference>
-        </noMoreValuesConnector>
-    </loops>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -74,65 +116,6 @@
         </value>
     </processMetadataValues>
     <processType>Flow</processType>
-    <recordCreates>
-        <name>Board_CreateRecord</name>
-        <label>Board CreateRecord</label>
-        <locationX>176</locationX>
-        <locationY>686</locationY>
-        <connector>
-            <targetReference>BoardsAfter_Loop</targetReference>
-        </connector>
-        <inputAssignments>
-            <field>Background_Image__c</field>
-            <value>
-                <elementReference>Board_GetRecord.Background_Image__c</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Description__c</field>
-            <value>
-                <elementReference>Board_GetRecord.Description__c</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Instructions__c</field>
-            <value>
-                <elementReference>Board_GetRecord.Instructions__c</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Lane__c</field>
-            <value>
-                <elementReference>Board_GetRecord.Lane__c</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Name</field>
-            <value>
-                <elementReference>BoardName_DisplayText</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Objective__c</field>
-            <value>
-                <elementReference>Board_GetRecord.Objective__c</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Order__c</field>
-            <value>
-                <elementReference>BoardOrderIncrement_Formula</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Prerequisites__c</field>
-            <value>
-                <elementReference>Board_GetRecord.Prerequisites__c</elementReference>
-            </value>
-        </inputAssignments>
-        <object>Board__c</object>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordCreates>
     <recordLookups>
         <name>Board_GetRecord</name>
         <label>Board GetRecord</label>
@@ -155,40 +138,26 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
-        <name>BoardsAfter_GetRecords</name>
-        <label>BoardsAfter GetRecords</label>
-        <locationX>177</locationX>
-        <locationY>541</locationY>
+        <name>CategoryMapping_GetRecords</name>
+        <label>CategoryMapping GetRecords</label>
+        <locationX>180</locationX>
+        <locationY>952</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Board_CreateRecord</targetReference>
+            <targetReference>AddABoardToSwimLane_Subflow</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
-            <field>Lane__c</field>
+            <field>Board__c</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>Board_GetRecord.Lane__c</elementReference>
-            </value>
-        </filters>
-        <filters>
-            <field>Order__c</field>
-            <operator>GreaterThan</operator>
-            <value>
-                <elementReference>Board_GetRecord.Order__c</elementReference>
+                <elementReference>Board_GetRecord.Id</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>false</getFirstRecordOnly>
-        <object>Board__c</object>
+        <object>Category_Mapping__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
-    <recordUpdates>
-        <name>BoardsAfter_UpdateRecords</name>
-        <label>BoardsAfter UpdateRecords</label>
-        <locationX>175</locationX>
-        <locationY>1002</locationY>
-        <inputReference>BoardsAfter_RecordCollection</inputReference>
-    </recordUpdates>
     <screens>
         <name>BoardName_Screen</name>
         <label>BoardName Screen</label>
@@ -198,17 +167,17 @@
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>BoardsAfter_GetRecords</targetReference>
+            <targetReference>BoardNew_Assignment</targetReference>
         </connector>
         <fields>
-            <name>BoardName_DisplayText</name>
+            <name>BoardName_InputText</name>
             <dataType>String</dataType>
             <defaultValue>
                 <elementReference>Board_GetRecord.Name</elementReference>
             </defaultValue>
             <fieldText>What would you like to name this board?</fieldText>
             <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
@@ -221,6 +190,33 @@
         </connector>
     </start>
     <status>Active</status>
+    <subflows>
+        <name>AddABoardToSwimLane_Subflow</name>
+        <label>AddABoardToSwimLane Subflow</label>
+        <locationX>180</locationX>
+        <locationY>1136</locationY>
+        <flowName>Add_A_Board_to_Swim_Lane</flowName>
+        <inputAssignments>
+            <name>Board</name>
+            <value>
+                <elementReference>BoardNew</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>CategoryMappings</name>
+            <value>
+                <elementReference>CategoryMapping_GetRecords</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <variables>
+        <name>BoardNew</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Board__c</objectType>
+    </variables>
     <variables>
         <name>BoardsAfter_RecordCollection</name>
         <dataType>SObject</dataType>
