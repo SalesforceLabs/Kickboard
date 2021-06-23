@@ -6,7 +6,8 @@
                 "referenceId": "LaneRef1"
             },
             "Name": "Digital Transformation (Create a Vision for Success)",
-            "Description__c": "This track helps you create a vision for your Digital Transformation"
+            "Description__c": "This track helps you create a vision for your Digital Transformation",
+            "Is_Template__c": true
         }
     ]
 }
