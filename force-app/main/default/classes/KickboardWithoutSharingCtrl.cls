@@ -2,7 +2,7 @@
  * This without sharing class deals with updating and deleting cards,
  * becuase a guest user does not have permissions to edit and delete records.
  */
-public without sharing class StickyNotesWithoutSharingCtrl {
+public without sharing class KickboardWithoutSharingCtrl {
     @AuraEnabled
     public static void saveCard(
         String cardId,

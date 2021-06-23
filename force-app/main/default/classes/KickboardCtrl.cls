@@ -1,4 +1,4 @@
-public with sharing class StickyNotesCtrl {
+public with sharing class KickboardCtrl {
     @AuraEnabled
     public static Card__c createNewCard(
         String boardId,

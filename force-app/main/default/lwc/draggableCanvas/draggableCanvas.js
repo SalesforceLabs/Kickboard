@@ -10,10 +10,10 @@ import BOARD_OBJ from "@salesforce/schema/Board__c.Objective__c";
 import BG_IMG from "@salesforce/schema/Board__c.Background_Image__c";
 import BOARD_ORDER from "@salesforce/schema/Board__c.Order__c";
 
-import createNewCard from "@salesforce/apex/StickyNotesCtrl.createNewCard";
-import getCards from "@salesforce/apex/StickyNotesCtrl.getCards";
-import deleteCard from "@salesforce/apex/StickyNotesWithoutSharingCtrl.deleteCard";
-import saveCard from "@salesforce/apex/StickyNotesWithoutSharingCtrl.saveCard";
+import createNewCard from "@salesforce/apex/KickboardCtrl.createNewCard";
+import getCards from "@salesforce/apex/KickboardCtrl.getCards";
+import deleteCard from "@salesforce/apex/KickboardWithoutSharingCtrl.deleteCard";
+import saveCard from "@salesforce/apex/KickboardWithoutSharingCtrl.saveCard";
 
 import ISGUEST from "@salesforce/user/isGuest";
 import USERID from "@salesforce/user/Id";

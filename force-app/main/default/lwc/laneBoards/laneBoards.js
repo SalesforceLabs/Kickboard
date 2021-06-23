@@ -1,5 +1,5 @@
 import { LightningElement, api, wire } from "lwc";
-import getBoards from "@salesforce/apex/StickyNotesCtrl.getBoards";
+import getBoards from "@salesforce/apex/KickboardCtrl.getBoards";
 import { getRecord, updateRecord, getFieldValue } from "lightning/uiRecordApi";
 import CURRENT_BOARD_ID from "@salesforce/schema/Lane__c.Current_Board_ID__c";
 import ISGUEST from "@salesforce/user/isGuest";
