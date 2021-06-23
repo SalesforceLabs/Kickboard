@@ -1,8 +1,14 @@
 import { LightningElement, api, wire } from "lwc";
 import getBoards from "@salesforce/apex/KickboardCtrl.getBoards";
+
 import { getRecord, updateRecord, getFieldValue } from "lightning/uiRecordApi";
+
 import CURRENT_BOARD_ID from "@salesforce/schema/Lane__c.Current_Board_ID__c";
+import LANE_NAME from "@salesforce/schema/Lane__c.Name";
+import IS_TEMPLATE from "@salesforce/schema/Lane__c.Is_Template__c";
 import ISGUEST from "@salesforce/user/isGuest";
+
+import KickboardLogo from "@salesforce/resourceUrl/KickboardLogoSmall";
 
 export default class LaneBoards extends LightningElement {
     @api recordId;
@@ -20,6 +26,10 @@ export default class LaneBoards extends LightningElement {
     currentBoardIdRetrieved = false;
 
     laneGuestUserId;
+    isTemplate = false;
+    laneName = "";
+
+    logo = KickboardLogo;
 
     get showLogin() {
         return this.isGuest && !this.laneGuestUserId;
@@ -36,7 +46,10 @@ export default class LaneBoards extends LightningElement {
         }
     }
 
-    @wire(getRecord, { recordId: "$recordId", fields: [CURRENT_BOARD_ID] })
+    @wire(getRecord, {
+        recordId: "$recordId",
+        fields: [CURRENT_BOARD_ID, IS_TEMPLATE, LANE_NAME]
+    })
     handleGetRecord({ data, error }) {
         if (data) {
             const currentBoardId = getFieldValue(data, CURRENT_BOARD_ID);
@@ -44,6 +57,8 @@ export default class LaneBoards extends LightningElement {
                 this.currentBoardIdFromLaneRecord = currentBoardId;
             }
             this.currentBoardIdRetrieved = true;
+            this.isTemplate = getFieldValue(data, IS_TEMPLATE);
+            this.laneName = getFieldValue(data, LANE_NAME);
             this.setCurrentBoardId();
         } else if (error) {
             console.error(error);
@@ -146,8 +161,10 @@ export default class LaneBoards extends LightningElement {
         fields[CURRENT_BOARD_ID.fieldApiName] = this.currentBoardId;
 
         const recordInput = { fields };
-        updateRecord(recordInput).catch((error) => {
-            console.log(error);
-        });
+        if (!this.isTemplate) {
+            updateRecord(recordInput).catch((error) => {
+                console.log(error);
+            });
+        }
     }
 }
