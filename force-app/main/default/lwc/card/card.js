@@ -1,5 +1,5 @@
 import { LightningElement, api } from "lwc";
-import saveCard from "@salesforce/apex/KickboardWithoutSharingCtrl.saveCard";
+import saveCard from "@salesforce/apex/KickboardCtrl.saveCard";
 
 const DELAY = 1000;
 

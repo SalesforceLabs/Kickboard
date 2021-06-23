@@ -8,10 +8,6 @@
         <apexClass>KickboardCtrl</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>KickboardWithoutSharingCtrl</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
     <customMetadataTypeAccesses>
         <enabled>true</enabled>
         <name>Kickboard_Setting__mdt</name>
@@ -194,10 +190,6 @@
     </tabSettings>
     <tabSettings>
         <tab>Lane__c</tab>
-        <visibility>Visible</visibility>
-    </tabSettings>
-    <tabSettings>
-        <tab>Whiteboard</tab>
         <visibility>Visible</visibility>
     </tabSettings>
 </PermissionSet>

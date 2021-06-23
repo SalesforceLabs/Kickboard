@@ -4,10 +4,6 @@
         <apexClass>KickboardCtrl</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>KickboardWithoutSharingCtrl</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
     <fieldPermissions>
         <editable>false</editable>
         <field>Board__c.Background_Image__c</field>

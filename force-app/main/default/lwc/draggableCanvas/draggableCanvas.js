@@ -12,8 +12,8 @@ import BOARD_ORDER from "@salesforce/schema/Board__c.Order__c";
 
 import createNewCard from "@salesforce/apex/KickboardCtrl.createNewCard";
 import getCards from "@salesforce/apex/KickboardCtrl.getCards";
-import deleteCard from "@salesforce/apex/KickboardWithoutSharingCtrl.deleteCard";
-import saveCard from "@salesforce/apex/KickboardWithoutSharingCtrl.saveCard";
+import deleteCard from "@salesforce/apex/KickboardCtrl.deleteCard";
+import saveCard from "@salesforce/apex/KickboardCtrl.saveCard";
 
 import ISGUEST from "@salesforce/user/isGuest";
 import USERID from "@salesforce/user/Id";

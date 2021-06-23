@@ -14,6 +14,8 @@ public with sharing class KickboardDataInitCtrl {
         String namespace = ac.NamespacePrefix;
         if (!String.isBlank(namespace)) {
             namespace += '__';
+        } else {
+            namespace = '';
         }
 
         List<StaticResource> srList = [
