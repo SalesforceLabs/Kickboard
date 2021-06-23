@@ -29,6 +29,7 @@ export default class DraggableCanvas extends LightningElement {
     @api recordId;
     @api laneId;
     @api laneGuestUserId;
+    @api isTemplate;
 
     isGuest = ISGUEST;
     isDragging = false;
@@ -51,6 +52,7 @@ export default class DraggableCanvas extends LightningElement {
 
     cards;
     wiredCards;
+    offlineCards = [];
 
     intervalId;
     panZoomInstance;
@@ -220,26 +222,38 @@ export default class DraggableCanvas extends LightningElement {
             }
         } while (samePos.length > 0);
 
-        createNewCard({
-            boardId: this.recordId,
-            xPos,
-            yPos,
-            guestUserId: this.laneGuestUserId
-        })
-            .then((result) => {
-                if (result) {
-                    refreshApex(this.wiredCards);
-                }
+        if (!this.isTemplate) {
+            createNewCard({
+                boardId: this.recordId,
+                xPos,
+                yPos,
+                guestUserId: this.laneGuestUserId
             })
-            .catch((error) => {
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: "An error occurred when creating a card",
-                        message: error.message,
-                        variant: "error"
-                    })
-                );
-            });
+                .then((result) => {
+                    if (result) {
+                        refreshApex(this.wiredCards);
+                    }
+                })
+                .catch((error) => {
+                    this.dispatchEvent(
+                        new ShowToastEvent({
+                            title: "An error occurred when creating a card",
+                            message: error.message,
+                            variant: "error"
+                        })
+                    );
+                });
+        } else {
+            let card = {};
+            card[`${this.namespace}X_Position__c`] = xPos;
+            card[`${this.namespace}Y_Position__c`] = yPos;
+            card[`${this.namespace}Color__c`] = "yellow";
+            card[`${this.namespace}Board__c`] = this.recordId;
+            card.Id = Math.floor(Math.random() * 100) + 1;
+            this.offlineCards.push(card);
+            this.cards = null;
+            this.cards = this.offlineCards;
+        }
     }
 
     getCurrentBoardName() {
@@ -272,19 +286,24 @@ export default class DraggableCanvas extends LightningElement {
     dragEnd() {
         if (this.isDragging && this.currentX && this.currentY) {
             this.dragItem.style.zIndex = 0;
-            saveCard({
-                cardId: this.dragItem.dataset.cardid,
-                xPos: this.currentX,
-                yPos: this.currentY,
-                guestUserId: this.laneGuestUserId
-            })
-                .then(() => {
-                    this.currentY = undefined;
-                    this.currentX = undefined;
+            if (!this.isTemplate) {
+                saveCard({
+                    cardId: this.dragItem.dataset.cardid,
+                    xPos: this.currentX,
+                    yPos: this.currentY,
+                    guestUserId: this.laneGuestUserId
                 })
-                .catch((error) => {
-                    console.log(error);
-                });
+                    .then(() => {
+                        this.currentY = undefined;
+                        this.currentX = undefined;
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            } else {
+                this.currentY = undefined;
+                this.currentX = undefined;
+            }
         }
         this.isDragging = false;
         this.isTextSelection = false;
@@ -316,19 +335,27 @@ export default class DraggableCanvas extends LightningElement {
     }
 
     handleCardDelete(event) {
-        deleteCard({ cardId: event.detail.cardId })
-            .then(() => {
-                refreshApex(this.wiredCards);
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: "Deleted Successfully",
-                        variant: "success"
-                    })
-                );
-            })
-            .catch((error) => {
-                console.error(error);
+        if (!this.isTemplate) {
+            deleteCard({ cardId: event.detail.cardId })
+                .then(() => {
+                    refreshApex(this.wiredCards);
+                    this.dispatchEvent(
+                        new ShowToastEvent({
+                            title: "Deleted Successfully",
+                            variant: "success"
+                        })
+                    );
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        } else {
+            this.offlineCards = this.offlineCards.filter(function (obj) {
+                return obj.Id !== event.detail.cardId;
             });
+            this.cards = null;
+            this.cards = this.offlineCards;
+        }
     }
 
     handleMessageFromListener(event) {

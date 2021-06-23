@@ -7,6 +7,7 @@ export default class Card extends LightningElement {
     @api description;
     @api cardId;
     @api laneGuestUserId;
+    @api isTemplate;
 
     @api
     get background() {
@@ -34,29 +35,33 @@ export default class Card extends LightningElement {
     }
 
     handleChange(event) {
-        this.cardDescription = event.target.value;
-        window.clearTimeout(this.delayTimeout);
-        // eslint-disable-next-line @lwc/lwc/no-async-operation
-        this.delayTimeout = setTimeout(() => {
-            saveCard({
-                cardId: this.cardId,
-                description: this.cardDescription,
-                guestUserId: this.laneGuestUserId
-            }).catch((error) => {
-                console.log(error);
-            });
-        }, DELAY);
+        if (!this.isTemplate) {
+            this.cardDescription = event.target.value;
+            window.clearTimeout(this.delayTimeout);
+            // eslint-disable-next-line @lwc/lwc/no-async-operation
+            this.delayTimeout = setTimeout(() => {
+                saveCard({
+                    cardId: this.cardId,
+                    description: this.cardDescription,
+                    guestUserId: this.laneGuestUserId
+                }).catch((error) => {
+                    console.log(error);
+                });
+            }, DELAY);
+        }
     }
 
     changeBg(event) {
         this.cardBg = event.target.classList.value;
-        saveCard({
-            cardId: this.cardId,
-            color: this.cardBg,
-            guestUserId: this.laneGuestUserId
-        }).catch((error) => {
-            console.log(error);
-        });
+        if (!this.isTemplate) {
+            saveCard({
+                cardId: this.cardId,
+                color: this.cardBg,
+                guestUserId: this.laneGuestUserId
+            }).catch((error) => {
+                console.log(error);
+            });
+        }
     }
 
     handleTextAreaClick() {
