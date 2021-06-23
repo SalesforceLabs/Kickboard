@@ -17,7 +17,7 @@
                 "Name" : "Define Your Problem Statement",
                 "__namespace__Description__c" : "",
                 "__namespace__Order__c" : 1,
-                "__namespace__Background_Image__c" : "/resource/kickboard_create_a_vision/problem-statement.png",
+                "__namespace__Background_Image__c" : "/resource/kickboard_assets/problem-statement.png",
                 "__namespace__Lane__c" : "@{reference_id_laneid_1.id}"
             },
             "method" : "POST",
@@ -29,7 +29,7 @@
                 "Name" : "Identify Stakeholders",
                 "__namespace__Description__c" : "",
                 "__namespace__Order__c" : 2,
-                "__namespace__Background_Image__c" : "/resource/kickboard_create_a_vision/stakeholder-map.png",
+                "__namespace__Background_Image__c" : "/resource/kickboard_assets/stakeholder-map.png",
                 "__namespace__Lane__c" : "@{reference_id_laneid_1.id}"
             },
             "method" : "POST",
@@ -41,7 +41,7 @@
                 "Name" : "Discover Your Customer's Journey",
                 "__namespace__Description__c" : "",
                 "__namespace__Order__c" : 3,
-                "__namespace__Background_Image__c" : "/resource/kickboard_create_a_vision/customer-journey.png",
+                "__namespace__Background_Image__c" : "/resource/kickboard_assets/customer-journey.png",
                 "__namespace__Lane__c" : "@{reference_id_laneid_1.id}"
             },
             "method" : "POST",
@@ -53,7 +53,7 @@
                 "Name" : "What Are Your Anchors & Tailwinds?",
                 "__namespace__Description__c" : "",
                 "__namespace__Order__c" : 4,
-                "__namespace__Background_Image__c" : "/resource/kickboard_create_a_vision/anchors-and-tailwinds.png",
+                "__namespace__Background_Image__c" : "/resource/kickboard_assets/anchors-and-tailwinds.png",
                 "__namespace__Lane__c" : "@{reference_id_laneid_1.id}"
             },
             "method" : "POST",
@@ -65,7 +65,7 @@
                 "Name" : "Prioritize Opportunities",
                 "__namespace__Description__c" : "",
                 "__namespace__Order__c" : 5,
-                "__namespace__Background_Image__c" : "/resource/kickboard_create_a_vision/prioritize-opportunities.png",
+                "__namespace__Background_Image__c" : "/resource/kickboard_assets/prioritize-opportunities.png",
                 "__namespace__Lane__c" : "@{reference_id_laneid_1.id}"
             },
             "method" : "POST",
@@ -77,7 +77,7 @@
                 "Name" : "Create Your Vision Statement",
                 "__namespace__Description__c" : "",
                 "__namespace__Order__c" : 6,
-                "__namespace__Background_Image__c" : "/resource/kickboard_create_a_vision/vision-statement.png",
+                "__namespace__Background_Image__c" : "/resource/kickboard_assets/vision-statement.png",
                 "__namespace__Lane__c" : "@{reference_id_laneid_1.id}"
             },
             "method" : "POST",

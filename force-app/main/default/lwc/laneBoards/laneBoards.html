@@ -1,5 +1,5 @@
 <template>
-    <div class="slds-var-p-around_medium">
+    <div class="slds-var-p-around_xx-small">
         <template if:true={showLogin}>
             <c-guest-login
                 onlogin={handleLogin}
@@ -10,19 +10,17 @@
         <template if:false={showLogin}>
             <template if:true={currentBoardId}>
                 <template if:true={isGuest}>
-                    <div
-                        class="slds-text-align_center slds-var-m-bottom_medium"
-                    >
-                        <img src={logo} class="logo" />
-                    </div>
+                        
                     <div
                         class="
-                            slds-text-align_center
-                            slds-text-heading_medium
-                            slds-m-bottom_x-large
+                            slds-text-align_left 
+                            slds-var-m-bottom_xx-small
                         "
                     >
-                        {laneName}
+                        <img src={logo} class="logo" />
+                        <strong>
+                            {laneName}
+                        </strong>
                     </div>
                 </template>
                 <template if:true={isTemplate}>

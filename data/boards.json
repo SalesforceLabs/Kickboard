@@ -8,7 +8,7 @@
             "Name": "Define Your Problem Statement",
             "Description__c": "",
             "Order__c": 1,
-            "Background_Image__c": "/resource/kickboard_create_a_vision/problem-statement.png",
+            "Background_Image__c": "/resource/kickboard_assets/problem-statement.png",
             "Lane__c": "@LaneRef1"
         },
         {
@@ -19,7 +19,7 @@
             "Name": "Identify Stakeholders",
             "Description__c": "",
             "Order__c": 2,
-            "Background_Image__c": "/resource/kickboard_create_a_vision/stakeholder-map.png",
+            "Background_Image__c": "/resource/kickboard_assets/stakeholder-map.png",
             "Lane__c": "@LaneRef1"
         },
         {
@@ -30,7 +30,7 @@
             "Name": "Discover Your Customer's Journey",
             "Description__c": "",
             "Order__c": 3,
-            "Background_Image__c": "/resource/kickboard_create_a_vision/customer-journey.png",
+            "Background_Image__c": "/resource/kickboard_assets/customer-journey.png",
             "Lane__c": "@LaneRef1"
         },
         {
@@ -41,7 +41,7 @@
             "Name": "What Are Your Anchors & Tailwinds?",
             "Description__c": "",
             "Order__c": 4,
-            "Background_Image__c": "/resource/kickboard_create_a_vision/anchors-and-tailwinds.png",
+            "Background_Image__c": "/resource/kickboard_assets/anchors-and-tailwinds.png",
             "Lane__c": "@LaneRef1"
         },
         {
@@ -52,7 +52,7 @@
             "Name": "Prioritize Opportunities",
             "Description__c": "",
             "Order__c": 5,
-            "Background_Image__c": "/resource/kickboard_create_a_vision/prioritize-opportunities.png",
+            "Background_Image__c": "/resource/kickboard_assets/prioritize-opportunities.png",
             "Lane__c": "@LaneRef1"
         },
         {
@@ -63,7 +63,7 @@
             "Name": "Create Your Vision Statement",
             "Description__c": "",
             "Order__c": 6,
-            "Background_Image__c": "/resource/kickboard_create_a_vision/vision-statement.png",
+            "Background_Image__c": "/resource/kickboard_assets/vision-statement.png",
             "Lane__c": "@LaneRef1"
         }
     ]
