@@ -1,18 +1,20 @@
 import { LightningElement, wire, api } from "lwc";
 import { getRecord, getFieldValue } from "lightning/uiRecordApi";
-import BG_IMG from "@salesforce/schema/Board__c.Background_Image__c";
-import BOARD_NAME from "@salesforce/schema/Board__c.Name";
 
 import BOARD_OBJECT from "@salesforce/schema/Board__c";
+import BOARD_NAME from "@salesforce/schema/Board__c.Name";
 import BOARD_PREREQ from "@salesforce/schema/Board__c.Prerequisites__c";
 import BOARD_DESC from "@salesforce/schema/Board__c.Description__c";
 import BOARD_INSTR from "@salesforce/schema/Board__c.Instructions__c";
 import BOARD_OBJ from "@salesforce/schema/Board__c.Objective__c";
+import BG_IMG from "@salesforce/schema/Board__c.Background_Image__c";
+import BOARD_ORDER from "@salesforce/schema/Board__c.Order__c";
 
-import createNewCard from "@salesforce/apex/StickyNotesCtrl.createNewCard";
-import getCards from "@salesforce/apex/StickyNotesCtrl.getCards";
-import deleteCard from "@salesforce/apex/StickyNotesWithoutSharingCtrl.deleteCard";
-import saveCard from "@salesforce/apex/StickyNotesWithoutSharingCtrl.saveCard";
+import createNewCard from "@salesforce/apex/KickboardCtrl.createNewCard";
+import getCards from "@salesforce/apex/KickboardCtrl.getCards";
+import deleteCard from "@salesforce/apex/KickboardCtrl.deleteCard";
+import saveCard from "@salesforce/apex/KickboardCtrl.saveCard";
+
 import ISGUEST from "@salesforce/user/isGuest";
 import USERID from "@salesforce/user/Id";
 
@@ -21,10 +23,13 @@ import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 import { renderer } from "./renderer";
 
+import NAMESPACE from "@salesforce/label/c.Namespace";
+
 export default class DraggableCanvas extends LightningElement {
     @api recordId;
     @api laneId;
     @api laneGuestUserId;
+    @api isTemplate;
 
     isGuest = ISGUEST;
     isDragging = false;
@@ -47,9 +52,14 @@ export default class DraggableCanvas extends LightningElement {
 
     cards;
     wiredCards;
+    offlineCards = [];
 
     intervalId;
     panZoomInstance;
+
+    get namespace() {
+        return NAMESPACE === "default" ? "" : NAMESPACE + "__";
+    }
 
     get cardTitle() {
         return this.recordId
@@ -127,13 +137,22 @@ export default class DraggableCanvas extends LightningElement {
             this.cards = result.data.map((record) => {
                 return {
                     ...record,
-                    style: `margin-left:${record.X_Position__c}px; margin-top:${record.Y_Position__c}px;`
+                    style: `margin-left:${
+                        record[`${this.namespace}X_Position__c`]
+                    }px; margin-top:${
+                        record[`${this.namespace}Y_Position__c`]
+                    }px;`,
+                    description: record[`${this.namespace}Description__c`],
+                    color: record[`${this.namespace}Color__c`]
                 };
             });
         }
     }
 
-    @wire(getRecord, { recordId: "$recordId", fields: [BG_IMG, BOARD_NAME] })
+    @wire(getRecord, {
+        recordId: "$recordId",
+        fields: [BG_IMG, BOARD_NAME, BOARD_ORDER]
+    })
     boardRecord;
 
     @api
@@ -144,6 +163,9 @@ export default class DraggableCanvas extends LightningElement {
                 originY: 0,
                 scale: 1
             });
+        }
+        if (this.wiredCards) {
+            refreshApex(this.wiredCards);
         }
     }
 
@@ -191,7 +213,8 @@ export default class DraggableCanvas extends LightningElement {
             samePos = this.cards.filter(
                 // eslint-disable-next-line no-loop-func
                 (card) =>
-                    card.X_Position__c === xPos && card.Y_Position__c === yPos
+                    card[`${this.namespace}X_Position__c`] === xPos &&
+                    card[`${this.namespace}Y_Position__c`] === yPos
             );
             if (samePos.length > 0) {
                 xPos += 15;
@@ -199,31 +222,47 @@ export default class DraggableCanvas extends LightningElement {
             }
         } while (samePos.length > 0);
 
-        createNewCard({
-            boardId: this.recordId,
-            xPos,
-            yPos,
-            guestUserId: this.laneGuestUserId
-        })
-            .then((result) => {
-                if (result) {
-                    refreshApex(this.wiredCards);
-                }
+        if (!this.isTemplate) {
+            createNewCard({
+                boardId: this.recordId,
+                xPos,
+                yPos,
+                guestUserId: this.laneGuestUserId
             })
-            .catch((error) => {
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: "An error occurred when creating a card",
-                        message: error.message,
-                        variant: "error"
-                    })
-                );
-            });
+                .then((result) => {
+                    if (result) {
+                        refreshApex(this.wiredCards);
+                    }
+                })
+                .catch((error) => {
+                    this.dispatchEvent(
+                        new ShowToastEvent({
+                            title: "An error occurred when creating a card",
+                            message: error.message,
+                            variant: "error"
+                        })
+                    );
+                });
+        } else {
+            let card = {};
+            card[`${this.namespace}X_Position__c`] = xPos;
+            card[`${this.namespace}Y_Position__c`] = yPos;
+            card[`${this.namespace}Color__c`] = "yellow";
+            card[`${this.namespace}Board__c`] = this.recordId;
+            card.Id = Math.floor(Math.random() * 100) + 1;
+            this.offlineCards.push(card);
+            this.cards = null;
+            this.cards = this.offlineCards;
+        }
     }
 
     getCurrentBoardName() {
         if (this.boardRecord && this.boardRecord.data) {
-            return getFieldValue(this.boardRecord.data, BOARD_NAME);
+            return (
+                getFieldValue(this.boardRecord.data, BOARD_ORDER) +
+                ". " +
+                getFieldValue(this.boardRecord.data, BOARD_NAME)
+            );
         }
         return "";
     }
@@ -234,7 +273,7 @@ export default class DraggableCanvas extends LightningElement {
         if (e.target.tagName === "C-CARD") {
             this.isDragging = true;
             this.dragItem = e.target;
-            // this.dragItem.parentNode.append(this.dragItem);
+            this.dragItem.style.zIndex = 1;
             this.lastOffsetX = e.offsetX;
             this.lastOffsetY = e.offsetY;
         }
@@ -246,19 +285,25 @@ export default class DraggableCanvas extends LightningElement {
 
     dragEnd() {
         if (this.isDragging && this.currentX && this.currentY) {
-            saveCard({
-                cardId: this.dragItem.dataset.cardid,
-                xPos: this.currentX,
-                yPos: this.currentY,
-                guestUserId: this.laneGuestUserId
-            })
-                .then(() => {
-                    this.currentY = undefined;
-                    this.currentX = undefined;
+            this.dragItem.style.zIndex = 0;
+            if (!this.isTemplate) {
+                saveCard({
+                    cardId: this.dragItem.dataset.cardid,
+                    xPos: this.currentX,
+                    yPos: this.currentY,
+                    guestUserId: this.laneGuestUserId
                 })
-                .catch((error) => {
-                    console.log(error);
-                });
+                    .then(() => {
+                        this.currentY = undefined;
+                        this.currentX = undefined;
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            } else {
+                this.currentY = undefined;
+                this.currentX = undefined;
+            }
         }
         this.isDragging = false;
         this.isTextSelection = false;
@@ -290,19 +335,27 @@ export default class DraggableCanvas extends LightningElement {
     }
 
     handleCardDelete(event) {
-        deleteCard({ cardId: event.detail.cardId })
-            .then(() => {
-                refreshApex(this.wiredCards);
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: "Deleted Successfully",
-                        variant: "success"
-                    })
-                );
-            })
-            .catch((error) => {
-                console.error(error);
+        if (!this.isTemplate) {
+            deleteCard({ cardId: event.detail.cardId })
+                .then(() => {
+                    refreshApex(this.wiredCards);
+                    this.dispatchEvent(
+                        new ShowToastEvent({
+                            title: "Deleted Successfully",
+                            variant: "success"
+                        })
+                    );
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        } else {
+            this.offlineCards = this.offlineCards.filter(function (obj) {
+                return obj.Id !== event.detail.cardId;
             });
+            this.cards = null;
+            this.cards = this.offlineCards;
+        }
     }
 
     handleMessageFromListener(event) {

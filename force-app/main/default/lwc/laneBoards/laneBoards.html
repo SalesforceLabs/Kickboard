@@ -4,14 +4,50 @@
             <c-guest-login
                 onlogin={handleLogin}
                 lane-id={recordId}
+                logo={logo}
             ></c-guest-login>
         </template>
         <template if:false={showLogin}>
             <template if:true={currentBoardId}>
+                <template if:true={isGuest}>
+                    <div
+                        class="slds-text-align_center slds-var-m-bottom_medium"
+                    >
+                        <img src={logo} class="logo" />
+                    </div>
+                    <div
+                        class="
+                            slds-text-align_center
+                            slds-text-heading_medium
+                            slds-m-bottom_x-large
+                        "
+                    >
+                        {laneName}
+                    </div>
+                </template>
+                <template if:true={isTemplate}>
+                    <div
+                        class="
+                            slds-notify slds-notify_alert
+                            slds-alert_warning
+                            slds-m-bottom_x-large
+                        "
+                        role="alert"
+                    >
+                        <span class="slds-assistive-text">warning</span>
+                        <h2>
+                            You are currently viewing a template. The cards you
+                            add will not be saved, and will be lost once you
+                            navigate away from the board
+                        </h2>
+                    </div>
+                </template>
+
                 <c-draggable-canvas
                     record-id={currentBoardId}
                     lane-id={recordId}
                     lane-guest-user-id={laneGuestUserId}
+                    is-template={isTemplate}
                 >
                     <div slot="actions">
                         <template if:true={hasPrevious}>

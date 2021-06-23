@@ -1,4 +1,4 @@
-public with sharing class StickyNotesCtrl {
+public with sharing class KickboardCtrl {
     @AuraEnabled
     public static Card__c createNewCard(
         String boardId,
@@ -22,8 +22,9 @@ public with sharing class StickyNotesCtrl {
                 AccessType.CREATABLE,
                 new List<Card__c>{ c }
             );
-            insert securityDecision.getRecords();
-            return c;
+            Card__c sanitizedCard = (Card__c) securityDecision.getRecords()[0];
+            insert sanitizedCard;
+            return sanitizedCard;
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
@@ -94,5 +95,47 @@ public with sharing class StickyNotesCtrl {
             return lane[0].Lane_Users__r[0]?.Id;
         }
         return null;
+    }
+
+    /**
+     * Removed FLS checks while updating and deleting cards,
+     * becuase a guest user does not have permissions to edit and delete records.
+     */
+    @AuraEnabled
+    public static void saveCard(
+        String cardId,
+        String description,
+        Integer xPos,
+        Integer yPos,
+        String color,
+        String guestUserId
+    ) {
+        try {
+            Card__c c = new Card__c(Id = cardId);
+            if (description != null) {
+                c.Description__c = description;
+            } else if (xPos != null && yPos != null) {
+                c.X_Position__c = xPos;
+                c.Y_Position__c = yPos;
+            } else if (color != null) {
+                c.Color__c = color;
+            }
+
+            if (!String.isBlank(guestUserId)) {
+                c.Last_Modified_By_Guest__c = guestUserId;
+            }
+            update c;
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
+    @AuraEnabled
+    public static void deleteCard(String cardId) {
+        try {
+            delete ([SELECT Id FROM Card__c WHERE Id = :cardId]);
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
     }
 }

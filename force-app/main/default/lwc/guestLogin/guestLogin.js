@@ -1,5 +1,5 @@
 import { LightningElement, api } from "lwc";
-import isValidCredentials from "@salesforce/apex/StickyNotesCtrl.isValidCredentials";
+import isValidCredentials from "@salesforce/apex/KickboardCtrl.isValidCredentials";
 import KickboardLogo from "@salesforce/resourceUrl/KickboardLogo";
 
 export default class GuestLogin extends LightningElement {
