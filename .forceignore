@@ -128,3 +128,12 @@ package.xml
 **/pages/UnderConstruction.page-meta.xml
 **/staticresources/SiteSamples
 **/staticresources/SiteSamples.resource-meta.xml
+
+# Communities Stuff
+**/sites/**
+**/networks/**
+**/pages/CommunitiesLanding.page
+**/pages/CommunitiesLanding.page-meta.xml
+**/networkBranding/**
+**/navigationMenus/**
+**/experiences/**
