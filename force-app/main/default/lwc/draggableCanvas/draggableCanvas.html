@@ -83,8 +83,8 @@
                     <template if:true={cards}>
                         <template for:each={cards} for:item="card">
                             <c-card
-                                description={card.Description__c}
-                                background={card.Color__c}
+                                description={card.description}
+                                background={card.color}
                                 key={card.Id}
                                 card-id={card.Id}
                                 data-cardid={card.Id}
