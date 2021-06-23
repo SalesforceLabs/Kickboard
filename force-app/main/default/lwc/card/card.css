@@ -1,5 +1,5 @@
 .card {
-    width: 150px;
+    width: 144px;
     transform: translate3d(0px, 0px, 0px);
     cursor: move;
     box-shadow: 1px 1px 5px #ccc;
@@ -7,11 +7,12 @@
 }
 
 .cardContent {
-    height: 100px;
+    height: 84px;
     background: transparent;
     border: none;
     resize: none;
     width: 100%;
+    font-size: 12px;
 }
 
 .cardContent:focus {

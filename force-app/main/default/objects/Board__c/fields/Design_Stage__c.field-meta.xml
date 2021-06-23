@@ -11,19 +11,14 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Understand</fullName>
+                <fullName>Empathize</fullName>
                 <default>false</default>
-                <label>Understand</label>
+                <label>Empathize</label>
             </value>
             <value>
-                <fullName>Observe</fullName>
+                <fullName>Define</fullName>
                 <default>false</default>
-                <label>Observe</label>
-            </value>
-            <value>
-                <fullName>POV</fullName>
-                <default>false</default>
-                <label>POV</label>
+                <label>Define</label>
             </value>
             <value>
                 <fullName>Ideate</fullName>
@@ -31,14 +26,9 @@
                 <label>Ideate</label>
             </value>
             <value>
-                <fullName>Prototype</fullName>
+                <fullName>Prototype_Test</fullName>
                 <default>false</default>
-                <label>Prototype</label>
-            </value>
-            <value>
-                <fullName>Test</fullName>
-                <default>false</default>
-                <label>Test</label>
+                <label>Prototype &amp; Test</label>
             </value>
         </valueSetDefinition>
     </valueSet>
