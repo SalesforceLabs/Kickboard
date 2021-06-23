@@ -1,0 +1,87 @@
+{
+    "graphId" : "1",
+    "compositeRequest" : [
+        {
+            "url" : "/services/data/v50.0/sobjects/__namespace__Lane__c/",
+            "body" : {
+                "name" : "Digital Transformation (Create a Vision for Success)",
+                "__namespace__Description__c" : "This track helps you create a vision for your Digital Transformation",
+                "__namespace__Is_Template__c" : true
+            },
+            "method" : "POST",
+            "referenceId" : "reference_id_laneid_1"
+        },
+        {
+            "url" : "/services/data/v50.0/sobjects/__namespace__Board__c/",
+            "body" : {
+                "Name" : "Define Your Problem Statement",
+                "__namespace__Description__c" : "",
+                "__namespace__Order__c" : 1,
+                "__namespace__Background_Image__c" : "/resource/kickboard_create_a_vision/problem-statement.png",
+                "__namespace__Lane__c" : "@{reference_id_laneid_1.id}"
+            },
+            "method" : "POST",
+            "referenceId" : "reference_id_board_1"
+        },
+        {
+            "url" : "/services/data/v50.0/sobjects/__namespace__Board__c/",
+            "body" : {
+                "Name" : "Identify Stakeholders",
+                "__namespace__Description__c" : "",
+                "__namespace__Order__c" : 2,
+                "__namespace__Background_Image__c" : "/resource/kickboard_create_a_vision/stakeholder-map.png",
+                "__namespace__Lane__c" : "@{reference_id_laneid_1.id}"
+            },
+            "method" : "POST",
+            "referenceId" : "reference_id_board_2"
+        },
+        {
+            "url" : "/services/data/v50.0/sobjects/__namespace__Board__c/",
+            "body" : {
+                "Name" : "Discover Your Customer's Journey",
+                "__namespace__Description__c" : "",
+                "__namespace__Order__c" : 3,
+                "__namespace__Background_Image__c" : "/resource/kickboard_create_a_vision/customer-journey.png",
+                "__namespace__Lane__c" : "@{reference_id_laneid_1.id}"
+            },
+            "method" : "POST",
+            "referenceId" : "reference_id_board_3"
+        },
+        {
+            "url" : "/services/data/v50.0/sobjects/__namespace__Board__c/",
+            "body" : {
+                "Name" : "What Are Your Anchors & Tailwinds?",
+                "__namespace__Description__c" : "",
+                "__namespace__Order__c" : 4,
+                "__namespace__Background_Image__c" : "/resource/kickboard_create_a_vision/anchors-and-tailwinds.png",
+                "__namespace__Lane__c" : "@{reference_id_laneid_1.id}"
+            },
+            "method" : "POST",
+            "referenceId" : "reference_id_board_4"
+        },
+        {
+            "url" : "/services/data/v50.0/sobjects/__namespace__Board__c/",
+            "body" : {
+                "Name" : "Prioritize Opportunities",
+                "__namespace__Description__c" : "",
+                "__namespace__Order__c" : 5,
+                "__namespace__Background_Image__c" : "/resource/kickboard_create_a_vision/prioritize-opportunities.png",
+                "__namespace__Lane__c" : "@{reference_id_laneid_1.id}"
+            },
+            "method" : "POST",
+            "referenceId" : "reference_id_board_5"
+        },
+        {
+            "url" : "/services/data/v50.0/sobjects/__namespace__Board__c/",
+            "body" : {
+                "Name" : "Create Your Vision Statement",
+                "__namespace__Description__c" : "",
+                "__namespace__Order__c" : 6,
+                "__namespace__Background_Image__c" : "/resource/kickboard_create_a_vision/vision-statement.png",
+                "__namespace__Lane__c" : "@{reference_id_laneid_1.id}"
+            },
+            "method" : "POST",
+            "referenceId" : "reference_id_board_6"
+        }
+    ]
+}
