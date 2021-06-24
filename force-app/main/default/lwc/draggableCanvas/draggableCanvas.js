@@ -125,9 +125,10 @@ export default class DraggableCanvas extends LightningElement {
                     });
                 }
             });
-            if (this.laneId) {
+            if (this.laneId && !this.isTemplate) {
                 this.startRefresh();
             }
+
             this.addedPan = true;
         }
     }
@@ -191,6 +192,8 @@ export default class DraggableCanvas extends LightningElement {
     }
 
     startRefresh() {
+        this.stopRefresh();
+
         // eslint-disable-next-line @lwc/lwc/no-async-operation
         this.intervalId = window.setInterval(() => {
             let inactive = false;
@@ -412,7 +415,8 @@ export default class DraggableCanvas extends LightningElement {
         const d = new Date();
         this.activity.lastMouseMoveTimestamp = d.getTime();
         this.activity.nomousemovement = false;
-        if (!this.intervalId) {
+
+        if (!this.intervalId && this.laneId && !this.isTemplate) {
             this.refreshCards();
             this.startRefresh();
         }
