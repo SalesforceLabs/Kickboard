@@ -49,13 +49,15 @@ export default class DraggableCanvas extends LightningElement {
     lastOffsetX = 0;
     lastOffsetY = 0;
     boundingRect;
+    panZoomInstance;
 
     cards;
     wiredCards;
     offlineCards = [];
 
     intervalId;
-    panZoomInstance;
+    activity = {};
+    inactiveMessage;
 
     get namespace() {
         return NAMESPACE === "default" ? "" : NAMESPACE + "__";
@@ -123,7 +125,7 @@ export default class DraggableCanvas extends LightningElement {
                     });
                 }
             });
-            if (this.isGuest && this.laneId) {
+            if (this.laneId) {
                 this.startRefresh();
             }
             this.addedPan = true;
@@ -132,6 +134,9 @@ export default class DraggableCanvas extends LightningElement {
 
     @wire(getCards, { boardId: "$recordId" })
     handleCards(result) {
+        const d = new Date();
+        this.activity.lastDataChangedTimestamp = d.getTime();
+        this.activity.nodata = false;
         this.wiredCards = result;
         if (result.data) {
             this.cards = result.data.map((record) => {
@@ -165,7 +170,7 @@ export default class DraggableCanvas extends LightningElement {
             });
         }
         if (this.wiredCards) {
-            refreshApex(this.wiredCards);
+            this.refreshCards();
         }
     }
 
@@ -188,7 +193,36 @@ export default class DraggableCanvas extends LightningElement {
     startRefresh() {
         // eslint-disable-next-line @lwc/lwc/no-async-operation
         this.intervalId = window.setInterval(() => {
-            refreshApex(this.wiredCards);
+            let inactive = false;
+            const d = new Date();
+            const currentTimeStamp = d.getTime();
+            if (
+                currentTimeStamp - this.activity.lastMouseMoveTimestamp >
+                5 * 60 * 1000
+            ) {
+                inactive = true;
+                this.activity.nomousemovement = true;
+            } else if (
+                currentTimeStamp - this.activity.lastDataChangedTimestamp >
+                5 * 60 * 1000
+            ) {
+                inactive = true;
+                this.activity.nodata = true;
+            }
+            if (!inactive) {
+                this.refreshCards();
+                this.inactiveMessage = "";
+            } else {
+                this.stopRefresh();
+                if (this.activity.nomousemovement) {
+                    this.inactiveMessage =
+                        "Auto-Refresh paused because of inactivity.";
+                }
+                if (this.activity.nodata) {
+                    this.inactiveMessage =
+                        "Auto-Refresh paused because no changes are detected in data.";
+                }
+            }
         }, 5000);
     }
 
@@ -231,7 +265,7 @@ export default class DraggableCanvas extends LightningElement {
             })
                 .then((result) => {
                     if (result) {
-                        refreshApex(this.wiredCards);
+                        this.refreshCards();
                     }
                 })
                 .catch((error) => {
@@ -338,7 +372,7 @@ export default class DraggableCanvas extends LightningElement {
         if (!this.isTemplate) {
             deleteCard({ cardId: event.detail.cardId })
                 .then(() => {
-                    refreshApex(this.wiredCards);
+                    this.refreshCards();
                     this.dispatchEvent(
                         new ShowToastEvent({
                             title: "Deleted Successfully",
@@ -363,14 +397,24 @@ export default class DraggableCanvas extends LightningElement {
             event.detail.data.sobject.LastModifiedById !== USERID &&
             this.recordId === event.detail.data.sobject.Board__c
         ) {
-            refreshApex(this.wiredCards);
+            this.refreshCards();
         } else if (event.detail.data.event.type === "deleted") {
             const currentCardIndex = this.cards.findIndex(
                 (x) => x.Id === event.detail.data.sobject.Id
             );
             if (currentCardIndex >= 0) {
-                refreshApex(this.wiredCards);
+                this.refreshCards();
             }
+        }
+    }
+
+    trackActivity() {
+        const d = new Date();
+        this.activity.lastMouseMoveTimestamp = d.getTime();
+        this.activity.nomousemovement = false;
+        if (!this.intervalId) {
+            this.refreshCards();
+            this.startRefresh();
         }
     }
 }

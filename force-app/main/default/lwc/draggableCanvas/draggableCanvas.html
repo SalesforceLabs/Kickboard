@@ -53,21 +53,40 @@
                 </li>
             </ul>
         </div>
-        <div class="">
-            <div class="slds-text-align_center">
-                <lightning-button
-                    label="New Card"
-                    variant="brand"
-                    onclick={addCard}
-                    class="slds-var-m-right_small"
-                ></lightning-button>
-                <lightning-button
-                    label="Refresh"
-                    variant="neutral"
-                    onclick={refreshCards}
-                    class="slds-var-m-right_small"
-                ></lightning-button>
+        <div onmousemove={trackActivity}>
+            <div class="slds-grid slds-grid_align-spread">
+                <div class="slds-col slds-size_1-of-3"></div>
+                <div class="slds-col slds-size_1-of-3">
+                    <div class="slds-text-align_center">
+                        <lightning-button
+                            label="New Card"
+                            title="New Card"
+                            variant="brand"
+                            onclick={addCard}
+                            class="slds-var-m-right_small"
+                        ></lightning-button>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <div class="slds-text-body_small slds-text-align_right">
+                        <template if:true={intervalId}>
+                            Auto-Refreshing every 5 seconds
+                        </template>
+                        <template if:false={intervalId}>
+                            {inactiveMessage}
+                        </template>
+                        <lightning-button-icon
+                            variant="neutral"
+                            alternative-text="Refresh"
+                            title="Refresh"
+                            icon-name="utility:refresh"
+                            onclick={refreshCards}
+                            class="slds-var-m-left_small"
+                        ></lightning-button-icon>
+                    </div>
+                </div>
             </div>
+
             <div
                 class="container slds-var-m-top_medium"
                 onmousedown={panStart}
@@ -101,10 +120,10 @@
         </div>
     </lightning-card>
 
-    <template if:true={shouldListenToChanges}>
+    <!--<template if:true={shouldListenToChanges}>
         <c-event-listener
             channel-name="/topic/CardChangeUpdates"
             onmessage={handleMessageFromListener}
         ></c-event-listener>
-    </template>
+    </template>-->
 </template>
