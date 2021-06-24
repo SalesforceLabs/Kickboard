@@ -74,6 +74,11 @@
                 <fieldItem>Record.Instructions__c</fieldItem>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Time_to_Complete_in_minutes__c</fieldItem>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-01a2790b-27c8-40bb-b395-eaa8f82fb5e3</name>
         <type>Facet</type>
     </flexiPageRegions>

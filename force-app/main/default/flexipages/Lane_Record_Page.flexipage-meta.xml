@@ -19,6 +19,11 @@
                 <fieldItem>Record.Description__c</fieldItem>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Total_Time_to_Complete_in_minutes__c</fieldItem>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-819c29e2-f976-41e8-b099-a72c5a10ab35</name>
         <type>Facet</type>
     </flexiPageRegions>

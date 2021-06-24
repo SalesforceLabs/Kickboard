@@ -41,6 +41,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Board__c.Time_to_Complete_in_minutes__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Card__c.Color__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -107,6 +112,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Lane__c.Is_Template__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Lane__c.Total_Time_to_Complete_in_minutes__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <hasActivationRequired>false</hasActivationRequired>
