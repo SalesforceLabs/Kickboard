@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Prompt xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Kickboard Swim Lanes</masterLabel>
+    <promptVersions>
+        <body>Before collaborating, pick a swim lane from the templates list view. Then clone the swim lane. It&apos;s that easy to get your own swim lane to start working.</body>
+        <customApplication>Kickboard</customApplication>
+        <delayDays>1</delayDays>
+        <description>Prompt to guide users on how to make their own swim lane.</description>
+        <dismissButtonLabel>Dismiss</dismissButtonLabel>
+        <displayPosition>TopCenter</displayPosition>
+        <displayType>FloatingPanel</displayType>
+        <isPublished>true</isPublished>
+        <masterLabel>Kickboard Swim Lanes</masterLabel>
+        <publishedDate>2021-06-24</publishedDate>
+        <shouldDisplayActionButton>false</shouldDisplayActionButton>
+        <shouldIgnoreGlobalDelay>false</shouldIgnoreGlobalDelay>
+        <startDate>2021-06-24</startDate>
+        <targetPageKey1>Lane__c</targetPageKey1>
+        <targetPageKey2>list</targetPageKey2>
+        <targetPageType>standard__objectPage</targetPageType>
+        <themeColor>Theme1</themeColor>
+        <themeSaturation>Light</themeSaturation>
+        <timesToDisplay>1</timesToDisplay>
+        <title>Check out your Swim Lanes</title>
+        <userAccess>Everyone</userAccess>
+        <userProfileAccess>Everyone</userProfileAccess>
+        <versionNumber>1</versionNumber>
+    </promptVersions>
+</Prompt>
