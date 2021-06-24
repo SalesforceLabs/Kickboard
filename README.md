@@ -48,12 +48,6 @@ Kickboard is an application that teaches are customers how to swim in the vast d
     sfdx force:data:tree:import -p ./data/data-plan.json
     ```
 
-1. Create Push Topic:
-
-    ```
-    sfdx force:apex:execute -f scripts/apex/createPushTopic.apex
-    ```
-
 1. Open the scratch org:
 
     ```
