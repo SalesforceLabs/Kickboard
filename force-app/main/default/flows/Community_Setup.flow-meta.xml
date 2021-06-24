@@ -167,8 +167,8 @@
     <recordLookups>
         <name>GuestPermissionSet_GetRecords</name>
         <label>GuestPermissionSet GetRecords</label>
-        <locationX>345</locationX>
-        <locationY>522</locationY>
+        <locationX>322</locationX>
+        <locationY>523</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>PermissionSetAssignment_CreateRecord</targetReference>
@@ -197,9 +197,42 @@
             <targetReference>GuestPerm_Screen</targetReference>
         </connector>
         <fields>
-            <name>Builder_DisplayText</name>
-            <fieldText>&lt;p&gt;&lt;b&gt;Step 3&lt;/b&gt;&lt;/p&gt;&lt;p&gt;In the builder, create a new page and select object. Search for Swim Lane and select create.&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;https://module-saltedcaramel-1705-dev-ed--c.documentforce.com/sfc/servlet.shepherd/version/download/068170000013UHY?asPdf=false&amp;amp;operationContext=CHATTER&quot;&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Step 4&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Remove any existing components and drag &lt;b&gt;Whiteboard for Lane&lt;/b&gt; custom component into the content section.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Step 5&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Open setting and check &lt;b&gt;Public can access the site&lt;/b&gt;.&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;https://module-saltedcaramel-1705-dev-ed--c.documentforce.com/sfc/servlet.shepherd/version/download/068170000013UHs?asPdf=false&amp;amp;operationContext=CHATTER&quot;&gt;&lt;/p&gt;&lt;p&gt;Publish your community.&lt;/p&gt;</fieldText>
+            <name>Step3_DisplayText</name>
+            <fieldText>&lt;p&gt;&lt;b&gt;Step 3&lt;/b&gt;&lt;/p&gt;&lt;p&gt;In the builder, create a new page and select object. Search for Swim Lane and select create.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Kickboard_Setup_Screen_NewPage</name>
+            <extensionName>flowruntime:image</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>imageName</name>
+                <value>
+                    <stringValue>Kickboard_Setup_Screen_NewPage</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <fields>
+            <name>Builder_DisplayText</name>
+            <fieldText>&lt;p&gt;&lt;b&gt;Step 4&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Remove any existing components and drag &lt;b&gt;Whiteboard for Lane&lt;/b&gt; custom component into the content section.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Step 5&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Open &lt;b&gt;settings&lt;/b&gt; and check &lt;b&gt;Public can access the site&lt;/b&gt; and then publish your community.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Kickboard_Setup_Screen_Settings</name>
+            <extensionName>flowruntime:image</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>imageName</name>
+                <value>
+                    <stringValue>Kickboard_Setup_Screen_Settings</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
@@ -280,7 +313,7 @@
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Sharing_Screen</targetReference>
+            <targetReference>GuestPermissionSet_GetRecords</targetReference>
         </connector>
         <fields>
             <name>GuestPerm_DisplayText</name>
@@ -311,7 +344,7 @@
         </connector>
         <fields>
             <name>Intro_DisplayText</name>
-            <fieldText>&lt;p&gt;You can setup Kickboard so that external people can collaborate by only entering their email and the code assigned to a swim lane. This involves creating a public facing site and does not require many steps. By doing this, you will also learn how to set up a digital experience site.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;Keep in mind, as unlikely as it is, someone that knows a Swim Lane url, an associated email address, and the code can access the contents of a Swim Lane.&lt;/i&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Step 1&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Ensure &lt;b&gt;digital experience&lt;/b&gt; is enabled in your org.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Step 2&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Create a new &lt;a href=&quot;/lightning/setup/SetupNetworks/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Site&lt;/b&gt;&lt;/a&gt; called &lt;b&gt;Kickboard &lt;/b&gt;and then launch the builder.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Clicking next will be guide you through the following steps.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Configuring a public page for Swim Lanes&lt;/li&gt;&lt;li&gt;Make the site public and publishing&lt;/li&gt;&lt;li&gt;Assigning Permissions to the Site&apos;s Guest User&lt;/li&gt;&lt;li&gt;Creating a sharing rule to share public Swim Lanes to the Site&apos;s Guest User&lt;/li&gt;&lt;li&gt;Saving the Site domain into a custom setting so emails to folks invited to a swim lane include a direct link.&lt;/li&gt;&lt;/ul&gt;</fieldText>
+            <fieldText>&lt;p&gt;You can setup Kickboard so that external people can collaborate by only entering their email and the code assigned to a swim lane. This involves creating a public facing site and does not require many steps. By doing this, you will also learn how to set up a digital experience site.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;Keep in mind, as unlikely as it is, someone that knows a Swim Lane url, an associated email address, and the code can access the contents of a Swim Lane.&lt;/i&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Step 1&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Ensure &lt;b&gt;digital experience&lt;/b&gt; is enabled in your org.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Step 2&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Create a new &lt;a href=&quot;/lightning/setup/SetupNetworks/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Site&lt;/b&gt;&lt;/a&gt; called &lt;b&gt;Kickboard&lt;/b&gt;, select build your own and not unauthenticated,&lt;b&gt; &lt;/b&gt;and then launch the builder.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Clicking next will be guide you through the following steps.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Configuring a public page for Swim Lanes&lt;/li&gt;&lt;li&gt;Make the site public and publishing&lt;/li&gt;&lt;li&gt;Assigning Permissions to the Site&apos;s Guest User&lt;/li&gt;&lt;li&gt;Creating a sharing rule to share public Swim Lanes to the Site&apos;s Guest User&lt;/li&gt;&lt;li&gt;Saving the Site domain into a custom setting so emails to folks invited to a swim lane include a direct link.&lt;/li&gt;&lt;/ul&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
