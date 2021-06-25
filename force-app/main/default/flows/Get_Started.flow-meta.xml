@@ -17,14 +17,19 @@
             <stringValue>SITE</stringValue>
         </value>
     </choices>
+    <choices>
+        <name>TipsAndTricks_Choice</name>
+        <choiceText>Learn Tips and Tricks</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Tips and Tricks</stringValue>
+        </value>
+    </choices>
     <decisions>
         <name>Action_Decision</name>
         <label>Action Decision</label>
-        <locationX>168</locationX>
-        <locationY>329</locationY>
-        <defaultConnector>
-            <targetReference>SelectATemplate_Subflow</targetReference>
-        </defaultConnector>
+        <locationX>167</locationX>
+        <locationY>340</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>OutcomeIs_Site</name>
@@ -40,6 +45,36 @@
                 <targetReference>CommunitySetup_Subflow</targetReference>
             </connector>
             <label>OutcomeIs Site</label>
+        </rules>
+        <rules>
+            <name>OutcomeIs_TipsAndTricks</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Action_Picklist</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>TipsAndTricks_Choice</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>TipsAndTricks_Subflow</targetReference>
+            </connector>
+            <label>OutcomeIs TipsAndTricks</label>
+        </rules>
+        <rules>
+            <name>OutcomeIs_LoadTemplate</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Action_Picklist</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>LoadTemplate_Choice</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>SelectATemplate_Subflow</targetReference>
+            </connector>
+            <label>OutcomeIs LoadTemplate</label>
         </rules>
     </decisions>
     <interviewLabel>Get Started {!$Flow.CurrentDateTime}</interviewLabel>
@@ -79,6 +114,7 @@
             <name>Action_Picklist</name>
             <choiceReferences>SetupCommunity_Choice</choiceReferences>
             <choiceReferences>LoadTemplate_Choice</choiceReferences>
+            <choiceReferences>TipsAndTricks_Choice</choiceReferences>
             <dataType>String</dataType>
             <fieldText>What would you like to do?</fieldText>
             <fieldType>DropdownBox</fieldType>
@@ -108,5 +144,12 @@
         <locationX>40</locationX>
         <locationY>429</locationY>
         <flowName>Select_a_Template</flowName>
+    </subflows>
+    <subflows>
+        <name>TipsAndTricks_Subflow</name>
+        <label>TipsAndTricks Subflow</label>
+        <locationX>175</locationX>
+        <locationY>535</locationY>
+        <flowName>Tips_and_Tricks</flowName>
     </subflows>
 </Flow>
