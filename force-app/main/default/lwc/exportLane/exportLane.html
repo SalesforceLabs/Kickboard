@@ -1,0 +1,17 @@
+<template>
+    <template if:true={data}>
+        <div class="data slds-var-p-around_large">{data}</div>
+    </template>
+    <template if:true={error}>
+        <div class="slds-var-p-around_large">
+            <div
+                class="slds-notify slds-notify_alert slds-alert_error"
+                role="alert"
+            >
+                <h2>
+                    An error occurred. Please contact your system administrator.
+                </h2>
+            </div>
+        </div>
+    </template>
+</template>

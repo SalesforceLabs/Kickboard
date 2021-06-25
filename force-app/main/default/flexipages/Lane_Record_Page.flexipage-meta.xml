@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
     <flexiPageRegions>
         <itemInstances>
@@ -21,7 +21,8 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Total_Time_to_Complete_in_minutes__c</fieldItem>
+                <fieldItem
+                >Record.Total_Time_to_Complete_in_minutes__c</fieldItem>
             </fieldInstance>
         </itemInstances>
         <name>Facet-819c29e2-f976-41e8-b099-a72c5a10ab35</name>
@@ -285,7 +286,8 @@
                             <value>Lane__c.Clone_Swim_Lane</value>
                             <visibilityRule>
                                 <criteria>
-                                    <leftValue>{!Record.Is_Template__c}</leftValue>
+                                    <leftValue
+                                    >{!Record.Is_Template__c}</leftValue>
                                     <operator>EQUAL</operator>
                                     <rightValue>true</rightValue>
                                 </criteria>
@@ -295,7 +297,8 @@
                             <value>Lane__c.Add_Board_From_Template</value>
                             <visibilityRule>
                                 <criteria>
-                                    <leftValue>{!Record.Is_Template__c}</leftValue>
+                                    <leftValue
+                                    >{!Record.Is_Template__c}</leftValue>
                                     <operator>EQUAL</operator>
                                     <rightValue>false</rightValue>
                                 </criteria>
@@ -306,6 +309,17 @@
                         </valueListItems>
                         <valueListItems>
                             <value>Share</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Lane__c.Export_Lane_for_Graph_API</value>
+                            <visibilityRule>
+                                <criteria>
+                                    <leftValue
+                                    >{!$Permission.CustomPermission.Export_Lane_for_Graph_API}</leftValue>
+                                    <operator>EQUAL</operator>
+                                    <rightValue>true</rightValue>
+                                </criteria>
+                            </visibilityRule>
                         </valueListItems>
                     </valueList>
                 </componentInstanceProperties>

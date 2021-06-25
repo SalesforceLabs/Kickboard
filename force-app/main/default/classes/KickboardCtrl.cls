@@ -202,4 +202,78 @@ public with sharing class KickboardCtrl {
             }
         }
     }
+
+    @AuraEnabled(cacheable=true)
+    public static String exportLaneJSON(String laneId) {
+        try {
+            Lane__c lane = [
+                SELECT
+                    Id,
+                    Name,
+                    Description__c,
+                    Is_Template__c,
+                    (
+                        SELECT
+                            Id,
+                            Name,
+                            Description__c,
+                            Order__c,
+                            Background_Image__c
+                        FROM Boards__r
+                    )
+                FROM Lane__c
+                WHERE Id = :laneId
+                WITH SECURITY_ENFORCED
+            ];
+            GraphRequest gr = new GraphRequest();
+            gr.graphId = lane.Id;
+
+            List<CompositeRequest> cRequests = new List<CompositeRequest>();
+            CompositeRequest cr = new CompositeRequest();
+            cr.url = '/services/data/v50.0/sobjects/__namespace__Lane__c/';
+            cr.method = 'POST';
+            cr.referenceId = lane.Id;
+            cr.body = new Map<String, Object>();
+            cr.body.put('Name', lane.Name);
+            cr.body.put('__namespace__Description__c', lane.Description__c);
+            cr.body.put('__namespace__Is_Template__c', lane.Is_Template__c);
+            cRequests.add(cr);
+            for (Board__c board : lane.Boards__r) {
+                cr = new CompositeRequest();
+                cr.url = '/services/data/v50.0/sobjects/__namespace__Board__c/';
+                cr.method = 'POST';
+                cr.referenceId = board.Id;
+                cr.body = new Map<String, Object>();
+                cr.body.put('Name', board.Name);
+                cr.body.put(
+                    '__namespace__Description__c',
+                    board.Description__c
+                );
+                cr.body.put('__namespace__Order__c', board.Order__c);
+                cr.body.put(
+                    '__namespace__Background_Image__c',
+                    board.Background_Image__c
+                );
+                cr.body.put('__namespace__Lane__c', '@{' + lane.Id + '.id}');
+
+                cRequests.add(cr);
+            }
+            gr.compositeRequest = cRequests;
+            return JSON.serializePretty(gr);
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
+    class GraphRequest {
+        String graphId;
+        List<CompositeRequest> compositeRequest;
+    }
+
+    class CompositeRequest {
+        String url;
+        Map<String, Object> body;
+        String method;
+        String referenceId;
+    }
 }
