@@ -1,6 +1,13 @@
 <template>
-    <template if:true={data}>
-        <div class="data slds-var-p-around_large">{data}</div>
+    <template if:true={dataUrl}>
+        <div class="slds-var-p-around_large slds-text-align_center">
+            <a href={dataUrl} download={downloadFileName}>
+                <lightning-button
+                    variant="brand"
+                    label="Download JSON"
+                ></lightning-button>
+            </a>
+        </div>
     </template>
     <template if:true={error}>
         <div class="slds-var-p-around_large">
