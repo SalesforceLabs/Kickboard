@@ -86,7 +86,11 @@ public with sharing class KickboardCtrl {
             SELECT
                 Id,
                 Code__c,
-                (SELECT Id, Email__c FROM Lane_Users__r WHERE Email__c = :email)
+                (
+                    SELECT Id, Email__c
+                    FROM Lane_Users__r
+                    WHERE Email__c = :email AND Is_Active__c = TRUE
+                )
             FROM Lane__c
             WHERE Id = :laneId AND Code__c = :code
             WITH SECURITY_ENFORCED
