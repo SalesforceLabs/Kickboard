@@ -301,6 +301,12 @@
                                 </criteria>
                             </visibilityRule>
                         </valueListItems>
+                        <valueListItems>
+                            <value>Lane__c.Add_User_To_Swim_Lane</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Share</value>
+                        </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
                 <componentInstanceProperties>

@@ -2,6 +2,31 @@
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>52.0</apiVersion>
     <decisions>
+        <name>ExternalUserDoesNotExist_Decision</name>
+        <label>ExternalUserDoesNotExist Decision</label>
+        <locationX>497</locationX>
+        <locationY>484</locationY>
+        <defaultConnector>
+            <targetReference>InternalUserExists_Screen</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OutcomeIs_ExternalUserDoesNotExist</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>ExternalLaneUser_GetRecord</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>ExternalLaneUser_CreateRecord</targetReference>
+            </connector>
+            <label>OutcomeIs ExternalUserDoesNotExist</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Internal_Decision</name>
         <label>Internal Decision</label>
         <locationX>168</locationX>
@@ -24,6 +49,31 @@
                 <targetReference>InternalUser_Screen</targetReference>
             </connector>
             <label>OutcomeIs Internal</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>InternalUserDoesNotExist_Decision</name>
+        <label>InternalUserDoesNotExist Decision</label>
+        <locationX>879</locationX>
+        <locationY>338</locationY>
+        <defaultConnector>
+            <targetReference>InternalUserExists_Screen</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OutcomeIs_InternalUserDoesNotExist</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>InternalLaneUser_GetRecord</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>InternalLaneUser_CreateRecords</targetReference>
+            </connector>
+            <label>OutcomeIs InternalUserDoesNotExist</label>
         </rules>
     </decisions>
     <interviewLabel>Add User to Swim Lane {!$Flow.CurrentDateTime}</interviewLabel>
@@ -50,7 +100,7 @@
     <recordCreates>
         <name>ExternalLaneUser_CreateRecord</name>
         <label>ExternalLaneUser CreateRecord</label>
-        <locationX>369</locationX>
+        <locationX>643</locationX>
         <locationY>482</locationY>
         <inputAssignments>
             <field>Email__c</field>
@@ -76,8 +126,8 @@
     <recordCreates>
         <name>InternalLaneUser_CreateRecords</name>
         <label>InternalLaneUser CreateRecords</label>
-        <locationX>512</locationX>
-        <locationY>337</locationY>
+        <locationX>1070</locationX>
+        <locationY>333</locationY>
         <inputAssignments>
             <field>Is_Active__c</field>
             <value>
@@ -99,6 +149,62 @@
         <object>Lane_User__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
+    <recordLookups>
+        <name>ExternalLaneUser_GetRecord</name>
+        <label>ExternalLaneUser GetRecord</label>
+        <locationX>362</locationX>
+        <locationY>483</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>ExternalUserDoesNotExist_Decision</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Email__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>External_Email.value</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Lane__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Lane_User__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>InternalLaneUser_GetRecord</name>
+        <label>InternalLaneUser GetRecord</label>
+        <locationX>751</locationX>
+        <locationY>337</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>InternalUserDoesNotExist_Decision</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>User__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>User_Lookup.recordId</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Lane__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Lane_User__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <screens>
         <name>ExternalEmail_Screen</name>
         <label>ExternalEmail_Screen</label>
@@ -108,7 +214,7 @@
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>ExternalLaneUser_CreateRecord</targetReference>
+            <targetReference>ExternalLaneUser_GetRecord</targetReference>
         </connector>
         <fields>
             <name>External_Email</name>
@@ -201,7 +307,7 @@
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>InternalLaneUser_CreateRecords</targetReference>
+            <targetReference>AssignKickboardUserPermissionSet_Subflow</targetReference>
         </connector>
         <fields>
             <name>User_Lookup</name>
@@ -232,6 +338,41 @@
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
     </screens>
+    <screens>
+        <name>InternalUserExists_Screen</name>
+        <label>InternalUserExists Screen</label>
+        <locationX>891</locationX>
+        <locationY>651</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>InternalUserExists_DisplayText</name>
+            <fieldText>&lt;p&gt;Well, well, well... it looks like this user is already in the swimming in the lane with you.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>pause2</name>
+        <label>pause2</label>
+        <locationX>640</locationX>
+        <locationY>337</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>InternalLaneUser_GetRecord</targetReference>
+        </connector>
+        <fields>
+            <name>AddToSwimLane_DisplayText</name>
+            <fieldText>&lt;p&gt;Ok, we&apos;ve made sure that user has permissions to view Kickboard. Now, we will add the user to this Swim Lane. &lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
     <start>
         <locationX>50</locationX>
         <locationY>50</locationY>
@@ -240,6 +381,22 @@
         </connector>
     </start>
     <status>Active</status>
+    <subflows>
+        <name>AssignKickboardUserPermissionSet_Subflow</name>
+        <label>AssignKickboardUserPermissionSet Subflow</label>
+        <locationX>507</locationX>
+        <locationY>337</locationY>
+        <connector>
+            <targetReference>pause2</targetReference>
+        </connector>
+        <flowName>Assign_Kickboard_User_Permission_Set</flowName>
+        <inputAssignments>
+            <name>assigneeId</name>
+            <value>
+                <elementReference>User_Lookup.recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
     <variables>
         <name>recordId</name>
         <dataType>String</dataType>
