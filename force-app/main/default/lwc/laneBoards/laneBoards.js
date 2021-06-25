@@ -12,6 +12,7 @@ import KickboardLogo from "@salesforce/resourceUrl/KickboardLogoSmall";
 
 export default class LaneBoards extends LightningElement {
     @api recordId;
+    @api laneGuestUserId;
 
     currentBoardId;
     isGuest = ISGUEST;
@@ -25,15 +26,10 @@ export default class LaneBoards extends LightningElement {
     boardsRetrieved = false;
     currentBoardIdRetrieved = false;
 
-    laneGuestUserId;
     isTemplate = false;
     laneName = "";
 
     logo = KickboardLogo;
-
-    get showLogin() {
-        return this.isGuest && !this.laneGuestUserId;
-    }
 
     @wire(getBoards, { laneId: "$recordId" })
     handleGetBoards({ data, error }) {
@@ -73,23 +69,6 @@ export default class LaneBoards extends LightningElement {
                 this.currentBoardId = this.boardsList[0].Id;
             }
             this.paginate();
-        }
-    }
-
-    handleLogin(event) {
-        this.laneGuestUserId = event.detail.laneuserid;
-        localStorage.setItem(
-            this.recordId + "_laneGuestUserId",
-            this.laneGuestUserId
-        );
-    }
-
-    renderedCallback() {
-        const guestUserId = localStorage.getItem(
-            this.recordId + "_laneGuestUserId"
-        );
-        if (guestUserId) {
-            this.laneGuestUserId = guestUserId;
         }
     }
 
