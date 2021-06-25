@@ -4,6 +4,6 @@
     <protected>true</protected>
     <values>
         <field>Value__c</field>
-        <value xsi:type="xsd:string">https://sandbox-module-saltedcaramel-1705-17a021bd44f.cs22.force.com/s/</value>
+        <value xsi:type="xsd:string">YOUR_KICKBOARD_SITE_URL</value>
     </values>
 </CustomMetadata>

@@ -23,6 +23,31 @@
             <label>OutcomeIs CanAccessSite</label>
         </rules>
     </decisions>
+    <decisions>
+        <name>PermissionSetAssignmentGuestExists_Decision</name>
+        <label>PermissionSetAssignmentGuestExists Decision</label>
+        <locationX>671</locationX>
+        <locationY>545</locationY>
+        <defaultConnector>
+            <targetReference>PermissionSetAssignment_CreateRecord</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OutcomeIs_PermissionSetExists</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>PermissionSetAssigneeGuest_GetRecord</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Sharing_Screen</targetReference>
+            </connector>
+            <label>OutcomeIs PermissionSetExists</label>
+        </rules>
+    </decisions>
     <dynamicChoiceSets>
         <name>GuestUser_RecordChoiceSet</name>
         <dataType>String</dataType>
@@ -81,8 +106,8 @@
     <recordCreates>
         <name>PermissionSetAssignment_CreateRecord</name>
         <label>PermissionSetAssignment CreateRecord</label>
-        <locationX>556</locationX>
-        <locationY>531</locationY>
+        <locationX>473</locationX>
+        <locationY>665</locationY>
         <connector>
             <targetReference>Sharing_Screen</targetReference>
         </connector>
@@ -104,8 +129,8 @@
     <recordLookups>
         <name>CustomMetadata_GetRecord</name>
         <label>CustomMetadata_GetRecord</label>
-        <locationX>872</locationX>
-        <locationY>745</locationY>
+        <locationX>905</locationX>
+        <locationY>802</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>CustomSetting_Screen</targetReference>
@@ -171,7 +196,7 @@
         <locationY>523</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>PermissionSetAssignment_CreateRecord</targetReference>
+            <targetReference>PermissionSetAssigneeGuest_GetRecord</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -183,6 +208,34 @@
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>PermissionSet</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>PermissionSetAssigneeGuest_GetRecord</name>
+        <label>PermissionSetAssigneeGuest GetRecord</label>
+        <locationX>473</locationX>
+        <locationY>428</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>PermissionSetAssignmentGuestExists_Decision</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>AssigneeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Guest_Picklist</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>PermissionSetId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>GuestPermissionSet_GetRecords.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>PermissionSetAssignment</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <screens>
@@ -238,10 +291,26 @@
         <showHeader>false</showHeader>
     </screens>
     <screens>
+        <name>CannotAccessSite_Screen</name>
+        <label>CannotAccessSite Screen</label>
+        <locationX>712</locationX>
+        <locationY>963</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>CannotAccessSite_DisplayText</name>
+            <fieldText>&lt;p&gt;Hmm... that&apos;s ok. This will be a couple steps, but it&apos;s not so bad.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;ol&gt;&lt;li&gt;Go to setup &amp;gt; digital experiences &amp;gt; all sites and launch the builder of the Kickboard site. Then open up settings. There you should see the url of your site. Copy it. Also, make sure your site is published.&lt;/li&gt;&lt;li&gt;Then go to &lt;a href=&quot;/lightning/setup/CustomMetadata/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Custom Metadata Types&lt;/b&gt;&lt;/a&gt;. Select manage records for &lt;b&gt;Kickboard Setting&lt;/b&gt;. Edit &lt;b&gt;Guest Url&lt;/b&gt;.&lt;/li&gt;&lt;li&gt;Paste the url into &lt;b&gt;Value&lt;/b&gt; and save.&lt;/li&gt;&lt;/ol&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
         <name>CustomSetting_Screen</name>
         <label>CustomSetting Screen</label>
-        <locationX>999</locationX>
-        <locationY>745</locationY>
+        <locationX>1027</locationX>
+        <locationY>803</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -257,7 +326,7 @@
         <name>Domain_Screen</name>
         <label>Domain Screen</label>
         <locationX>595</locationX>
-        <locationY>809</locationY>
+        <locationY>808</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
