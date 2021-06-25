@@ -6,6 +6,9 @@
         <label>CanAccessSite Decision</label>
         <locationX>697</locationX>
         <locationY>811</locationY>
+        <defaultConnector>
+            <targetReference>CannotAccessSite_Screen</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>OutcomeIs_CanAccessSite</name>
@@ -293,7 +296,7 @@
     <screens>
         <name>CannotAccessSite_Screen</name>
         <label>CannotAccessSite Screen</label>
-        <locationX>712</locationX>
+        <locationX>705</locationX>
         <locationY>963</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
