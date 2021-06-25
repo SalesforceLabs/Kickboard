@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <interviewLabel>Tips and Tricks {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Tips and Tricks</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <screens>
+        <name>TipsAndTricks_Screen</name>
+        <label>TipsAndTricks Screen</label>
+        <locationX>176</locationX>
+        <locationY>219</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>TipsAndTricks_DisplayText</name>
+            <fieldText>&lt;p&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;Create your own board&lt;/b&gt;&lt;/p&gt;&lt;ol&gt;&lt;li&gt;Upload an image to static resources. It can be any size, but we recommend 1280x720 pixels since that will fit nicely in a presentation.&lt;/li&gt;&lt;li&gt;Create a lane then a board and fill in relevant details. for background image, set it to &lt;b&gt;/resource/{STATIC_RESOURCE_NAME}&lt;/b&gt;&lt;/li&gt;&lt;/ol&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>TipsAndTricks_Screen</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+</Flow>
