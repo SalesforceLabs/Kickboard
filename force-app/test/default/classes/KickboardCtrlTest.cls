@@ -108,12 +108,13 @@ public class KickboardCtrlTest {
     }
 
     @IsTest
-    static void checkGuestInvite() {
+    static void checkInactiveGuestInvite() {
         Lane__c lane = [SELECT Id, Code__c FROM Lane__c];
 
         Lane_User__c lu = new Lane_User__c();
         lu.Email__c = 'test@test.com';
         lu.Lane__c = lane.Id;
+        lu.Is_Active__c = false;
         insert lu;
 
         Test.startTest();
@@ -127,13 +128,13 @@ public class KickboardCtrlTest {
         );
         system.assertEquals(null, inviteeId);
 
-        inviteeId = KickboardCtrl.isValidCredentials(lane.Id, null, '12345a');
+        inviteeId = KickboardCtrl.isValidCredentials(lane.Id, null, '12345678');
         system.assertEquals(null, inviteeId);
 
         inviteeId = KickboardCtrl.isValidCredentials(
             lane.Id,
             'test@example.com',
-            '12345a'
+            '12345678'
         );
         system.assertEquals(null, inviteeId);
 
@@ -154,7 +155,76 @@ public class KickboardCtrlTest {
         inviteeId = KickboardCtrl.isValidCredentials(
             lane.Id,
             'test@test.com',
-            '12345a'
+            '12345678'
+        );
+        system.assertEquals(null, inviteeId);
+
+        inviteeId = KickboardCtrl.isValidCredentials(
+            lane.Id,
+            'test@example.com',
+            lane.Code__c
+        );
+        system.assertEquals(null, inviteeId);
+
+        inviteeId = KickboardCtrl.isValidCredentials(
+            lane.Id,
+            'test@test.com',
+            lane.Code__c
+        );
+        system.assertEquals(null, inviteeId);
+
+        Test.stopTest();
+    }
+
+    @IsTest
+    static void checkActiveGuestInvite() {
+        Lane__c lane = [SELECT Id, Code__c FROM Lane__c];
+
+        Lane_User__c lu = new Lane_User__c();
+        lu.Email__c = 'test@test.com';
+        lu.Lane__c = lane.Id;
+        lu.Is_Active__c = true;
+        insert lu;
+
+        Test.startTest();
+        Id inviteeId = KickboardCtrl.isValidCredentials(lane.Id, null, null);
+        system.assertEquals(null, inviteeId);
+
+        inviteeId = KickboardCtrl.isValidCredentials(
+            lane.Id,
+            'test@example.com',
+            null
+        );
+        system.assertEquals(null, inviteeId);
+
+        inviteeId = KickboardCtrl.isValidCredentials(lane.Id, null, '12345678');
+        system.assertEquals(null, inviteeId);
+
+        inviteeId = KickboardCtrl.isValidCredentials(
+            lane.Id,
+            'test@example.com',
+            '12345678'
+        );
+        system.assertEquals(null, inviteeId);
+
+        inviteeId = KickboardCtrl.isValidCredentials(
+            lane.Id,
+            'test@test.com',
+            null
+        );
+        system.assertEquals(null, inviteeId);
+
+        inviteeId = KickboardCtrl.isValidCredentials(
+            lane.Id,
+            null,
+            lane.Code__c
+        );
+        system.assertEquals(null, inviteeId);
+
+        inviteeId = KickboardCtrl.isValidCredentials(
+            lane.Id,
+            'test@test.com',
+            '12345678'
         );
         system.assertEquals(null, inviteeId);
 

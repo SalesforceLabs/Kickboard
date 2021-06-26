@@ -1,69 +1,52 @@
 <template>
     <div class="slds-var-p-around_xx-small">
-        <template if:true={showLogin}>
-            <c-guest-login
-                onlogin={handleLogin}
-                lane-id={recordId}
-                logo={logo}
-            ></c-guest-login>
-        </template>
-        <template if:false={showLogin}>
-            <template if:true={currentBoardId}>
-                <template if:true={isGuest}>
-                        
-                    <div
-                        class="
-                            slds-text-align_left 
-                            slds-var-m-bottom_xx-small
-                        "
-                    >
-                        <img src={logo} class="logo" />
-                        <strong>
-                            {laneName}
-                        </strong>
-                    </div>
-                </template>
-                <template if:true={isTemplate}>
-                    <div
-                        class="
-                            slds-notify slds-notify_alert
-                            slds-alert_warning
-                            slds-m-bottom_x-large
-                        "
-                        role="alert"
-                    >
-                        <span class="slds-assistive-text">warning</span>
-                        <h2>
-                            You are currently viewing a template. The cards you
-                            add will not be saved, and will be lost once you
-                            navigate away from the board
-                        </h2>
-                    </div>
-                </template>
-
-                <c-draggable-canvas
-                    record-id={currentBoardId}
-                    lane-id={recordId}
-                    lane-guest-user-id={laneGuestUserId}
-                    is-template={isTemplate}
-                >
-                    <div slot="actions">
-                        <template if:true={hasPrevious}>
-                            <lightning-button
-                                label="Previous Board"
-                                class="slds-var-m-right_x-small"
-                                onclick={handlePrevious}
-                            ></lightning-button>
-                        </template>
-                        <template if:true={hasNext}>
-                            <lightning-button
-                                label="Next Board"
-                                onclick={handleNext}
-                            ></lightning-button>
-                        </template>
-                    </div>
-                </c-draggable-canvas>
+        <template if:true={currentBoardId}>
+            <template if:true={isGuest}>
+                <div class="slds-text-align_left slds-var-m-bottom_xx-small">
+                    <img src={logo} class="logo" />
+                    <strong> {laneName} </strong>
+                </div>
             </template>
+            <template if:true={isTemplate}>
+                <div
+                    class="
+                        slds-notify slds-notify_alert
+                        slds-alert_warning
+                        slds-m-bottom_x-large
+                    "
+                    role="alert"
+                >
+                    <span class="slds-assistive-text">warning</span>
+                    <h2>
+                        You are currently viewing a template. The cards you add
+                        will not be saved, and will be lost once you navigate
+                        away from the board
+                    </h2>
+                </div>
+            </template>
+
+            <c-draggable-canvas
+                record-id={currentBoardId}
+                lane-id={recordId}
+                lane-guest-user-id={laneGuestUserId}
+                is-template={isTemplate}
+            >
+                <div slot="actions">
+                    <template if:true={hasPrevious}>
+                        <lightning-button
+                            label="Previous Board"
+                            class="slds-var-m-right_x-small"
+                            onclick={handlePrevious}
+                        ></lightning-button>
+                    </template>
+                    <template if:true={hasNext}>
+                        <lightning-button
+                            label="Next Board"
+                            onclick={handleNext}
+                        ></lightning-button>
+                    </template>
+                </div>
+            </c-draggable-canvas>
         </template>
     </div>
 </template>

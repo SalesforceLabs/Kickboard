@@ -1,0 +1,12 @@
+<template>
+    <template if:true={showLogin}>
+        <c-guest-login onlogin={handleLogin} lane-id={recordId}></c-guest-login>
+    </template>
+
+    <template if:false={showLogin}>
+        <c-lane-boards
+            record-id={recordId}
+            lane-guest-user-id={laneGuestUserId}
+        ></c-lane-boards>
+    </template>
+</template>
