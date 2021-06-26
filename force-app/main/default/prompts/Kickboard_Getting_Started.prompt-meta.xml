@@ -2,7 +2,7 @@
 <Prompt xmlns="http://soap.sforce.com/2006/04/metadata">
     <masterLabel>Kickboard Getting Started</masterLabel>
     <promptVersions>
-        <body>&lt;p&gt;Kickboard is simple and a great device to innovate and collaborate with colleagues. &lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;First, though, you will want to set up a couple things. If you want to invite folks that are external, say, a customer, you will need to setup a public site. &lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Second, you will need to load at least 1 template for user to get started. &lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Also, assign the Kickboard_User permission set to any internal folks that will be using Kickboard.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</body>
+        <body>&lt;p&gt;Kickboard is simple and a great device to innovate and collaborate with colleagues.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;First, though, you will want to set up a couple things. If you want to invite folks that are external, say, a customer, you will need to setup a public site.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Second, you will need to load at least 1 template for users to get started.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Third, assign the Kickboard_User permission set to any internal folks that will be using Kickboard. Don&apos;t worry, though, we will try to assign the permission set as internal folks are added to Swim Lanes.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</body>
         <customApplication>Kickboard</customApplication>
         <delayDays>1</delayDays>
         <description>Prompt to guide users on how to get started.</description>
@@ -10,7 +10,7 @@
         <header>Welcome to Kickboard</header>
         <isPublished>true</isPublished>
         <masterLabel>Kickboard Getting Started</masterLabel>
-        <publishedDate>2021-06-24</publishedDate>
+        <publishedDate>2021-06-26</publishedDate>
         <shouldDisplayActionButton>false</shouldDisplayActionButton>
         <shouldIgnoreGlobalDelay>true</shouldIgnoreGlobalDelay>
         <startDate>2021-06-24</startDate>

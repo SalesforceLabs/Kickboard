@@ -2,7 +2,7 @@
 <Prompt xmlns="http://soap.sforce.com/2006/04/metadata">
     <masterLabel>Kickboard Swim Lanes</masterLabel>
     <promptVersions>
-        <body>Before collaborating, pick a swim lane from the templates list view. Then clone the swim lane. It&apos;s that easy to get your own swim lane to start working.</body>
+        <body>Before collaborating, pick a swim lane from the templates list view. Also in the list view, you can see which ones are yours and which ones are shared externally.</body>
         <customApplication>Kickboard</customApplication>
         <delayDays>1</delayDays>
         <description>Prompt to guide users on how to make their own swim lane.</description>
@@ -11,7 +11,7 @@
         <displayType>FloatingPanel</displayType>
         <isPublished>true</isPublished>
         <masterLabel>Kickboard Swim Lanes</masterLabel>
-        <publishedDate>2021-06-24</publishedDate>
+        <publishedDate>2021-06-26</publishedDate>
         <shouldDisplayActionButton>false</shouldDisplayActionButton>
         <shouldIgnoreGlobalDelay>false</shouldIgnoreGlobalDelay>
         <startDate>2021-06-24</startDate>

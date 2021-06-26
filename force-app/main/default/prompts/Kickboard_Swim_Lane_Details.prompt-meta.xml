@@ -2,7 +2,7 @@
 <Prompt xmlns="http://soap.sforce.com/2006/04/metadata">
     <masterLabel>Kickboard Swim Lane Details</masterLabel>
     <promptVersions>
-        <body>Each Swim Lane contains a list of boards (or activities). You can invite users just by entering their email address and they will get an email. And the best part is the Whiteboard is your collaborate space for every board in this Swim Lane.</body>
+        <body>Each Swim Lane contains a list of boards (or activities). If this is a template, simply select &apos;Use This Template&apos; to create your own the &apos;Add Users to Swim Lane&apos; to start collaborating. They&apos;ll get an email to access.</body>
         <customApplication>Kickboard</customApplication>
         <delayDays>1</delayDays>
         <dismissButtonLabel>Dismiss</dismissButtonLabel>
@@ -10,7 +10,7 @@
         <displayType>FloatingPanel</displayType>
         <isPublished>true</isPublished>
         <masterLabel>Kickboard Swim Lane Details</masterLabel>
-        <publishedDate>2021-06-24</publishedDate>
+        <publishedDate>2021-06-26</publishedDate>
         <shouldDisplayActionButton>false</shouldDisplayActionButton>
         <shouldIgnoreGlobalDelay>false</shouldIgnoreGlobalDelay>
         <startDate>2021-06-24</startDate>
