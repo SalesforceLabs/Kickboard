@@ -4,8 +4,8 @@
     <decisions>
         <name>ExternalUserDoesNotExist_Decision</name>
         <label>ExternalUserDoesNotExist Decision</label>
-        <locationX>497</locationX>
-        <locationY>484</locationY>
+        <locationX>608</locationX>
+        <locationY>690</locationY>
         <defaultConnector>
             <targetReference>InternalUserExists_Screen</targetReference>
         </defaultConnector>
@@ -29,8 +29,8 @@
     <decisions>
         <name>Internal_Decision</name>
         <label>Internal Decision</label>
-        <locationX>168</locationX>
-        <locationY>337</locationY>
+        <locationX>279</locationX>
+        <locationY>542</locationY>
         <defaultConnector>
             <targetReference>ExternalEmail_Screen</targetReference>
         </defaultConnector>
@@ -45,17 +45,39 @@
                     <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
+            <conditions>
+                <leftValueReference>Lane_GetRecord.Is_Public__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
             <connector>
                 <targetReference>InternalUser_Screen</targetReference>
             </connector>
             <label>OutcomeIs Internal</label>
         </rules>
+        <rules>
+            <name>OutcomeIs_ExternalButNotPublic</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Internal_Toggle.value</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>SwimLaneNotPublic_Screen</targetReference>
+            </connector>
+            <label>OutcomeIs ExternalButNotPublic</label>
+        </rules>
     </decisions>
     <decisions>
         <name>InternalUserDoesNotExist_Decision</name>
         <label>InternalUserDoesNotExist Decision</label>
-        <locationX>879</locationX>
-        <locationY>338</locationY>
+        <locationX>990</locationX>
+        <locationY>543</locationY>
         <defaultConnector>
             <targetReference>InternalUserExists_Screen</targetReference>
         </defaultConnector>
@@ -100,8 +122,8 @@
     <recordCreates>
         <name>ExternalLaneUser_CreateRecord</name>
         <label>ExternalLaneUser CreateRecord</label>
-        <locationX>643</locationX>
-        <locationY>482</locationY>
+        <locationX>618</locationX>
+        <locationY>885</locationY>
         <inputAssignments>
             <field>Email__c</field>
             <value>
@@ -126,8 +148,8 @@
     <recordCreates>
         <name>InternalLaneUser_CreateRecords</name>
         <label>InternalLaneUser CreateRecords</label>
-        <locationX>1070</locationX>
-        <locationY>333</locationY>
+        <locationX>1181</locationX>
+        <locationY>538</locationY>
         <inputAssignments>
             <field>Is_Active__c</field>
             <value>
@@ -152,8 +174,8 @@
     <recordLookups>
         <name>ExternalLaneUser_GetRecord</name>
         <label>ExternalLaneUser GetRecord</label>
-        <locationX>362</locationX>
-        <locationY>483</locationY>
+        <locationX>473</locationX>
+        <locationY>688</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>ExternalUserDoesNotExist_Decision</targetReference>
@@ -180,8 +202,8 @@
     <recordLookups>
         <name>InternalLaneUser_GetRecord</name>
         <label>InternalLaneUser GetRecord</label>
-        <locationX>751</locationX>
-        <locationY>337</locationY>
+        <locationX>862</locationX>
+        <locationY>542</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>InternalUserDoesNotExist_Decision</targetReference>
@@ -205,11 +227,32 @@
         <object>Lane_User__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <recordLookups>
+        <name>Lane_GetRecord</name>
+        <label>Lane GetRecord</label>
+        <locationX>287</locationX>
+        <locationY>380</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Internal_Decision</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Lane__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <screens>
         <name>ExternalEmail_Screen</name>
         <label>ExternalEmail_Screen</label>
-        <locationX>175</locationX>
-        <locationY>483</locationY>
+        <locationX>286</locationX>
+        <locationY>688</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -230,13 +273,13 @@
     <screens>
         <name>Internal_Screen</name>
         <label>Internal Screen</label>
-        <locationX>176</locationX>
-        <locationY>207</locationY>
+        <locationX>287</locationX>
+        <locationY>225</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Internal_Decision</targetReference>
+            <targetReference>Lane_GetRecord</targetReference>
         </connector>
         <fields>
             <name>Internal_DisplayText</name>
@@ -301,8 +344,8 @@
     <screens>
         <name>InternalUser_Screen</name>
         <label>InternalUser Screen</label>
-        <locationX>368</locationX>
-        <locationY>337</locationY>
+        <locationX>479</locationX>
+        <locationY>542</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -341,8 +384,8 @@
     <screens>
         <name>InternalUserExists_Screen</name>
         <label>InternalUserExists Screen</label>
-        <locationX>891</locationX>
-        <locationY>651</locationY>
+        <locationX>1002</locationX>
+        <locationY>856</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -357,8 +400,8 @@
     <screens>
         <name>pause2</name>
         <label>pause2</label>
-        <locationX>640</locationX>
-        <locationY>337</locationY>
+        <locationX>751</locationX>
+        <locationY>542</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -373,8 +416,24 @@
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
     </screens>
-    <start>
+    <screens>
+        <name>SwimLaneNotPublic_Screen</name>
+        <label>SwimLaneNotPublic Screen</label>
         <locationX>50</locationX>
+        <locationY>543</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>SwimLaneNotPublic_DisplayText</name>
+            <fieldText>&lt;p&gt;Uh oh... this Swim Lane is not marked public. That means an external collaborator will not be able to access. Mark it public and try adding afterwards.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <start>
+        <locationX>161</locationX>
         <locationY>50</locationY>
         <connector>
             <targetReference>Internal_Screen</targetReference>
@@ -384,8 +443,8 @@
     <subflows>
         <name>AssignKickboardUserPermissionSet_Subflow</name>
         <label>AssignKickboardUserPermissionSet Subflow</label>
-        <locationX>507</locationX>
-        <locationY>337</locationY>
+        <locationX>618</locationX>
+        <locationY>542</locationY>
         <connector>
             <targetReference>pause2</targetReference>
         </connector>
