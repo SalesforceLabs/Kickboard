@@ -7,6 +7,9 @@
         <locationY>359</locationY>
         <actionName>KickboardDataInitCtrl</actionName>
         <actionType>apex</actionType>
+        <connector>
+            <targetReference>TemplatesLoaded_Screen</targetReference>
+        </connector>
         <flowTransactionModel>Automatic</flowTransactionModel>
         <inputParameters>
             <name>staticResources</name>
@@ -63,6 +66,22 @@
             <fieldText>Select a template to Load</fieldText>
             <fieldType>DropdownBox</fieldType>
             <isRequired>false</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>TemplatesLoaded_Screen</name>
+        <label>TemplatesLoaded Screen</label>
+        <locationX>176</locationX>
+        <locationY>514</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>TemplateLoaded_DisplayText</name>
+            <fieldText>&lt;p&gt;Your selected template should be loaded now. &lt;a href=&quot;/lightning/o/Lane__c/list&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;View Swim Lanes&lt;/b&gt;&lt;/a&gt; and select Template list view. &lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
