@@ -203,7 +203,7 @@ public with sharing class KickboardCtrl {
         }
     }
 
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
     public static String exportLaneJSON(String laneId) {
         try {
             Lane__c lane = [
