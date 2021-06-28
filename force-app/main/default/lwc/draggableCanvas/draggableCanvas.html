@@ -99,8 +99,8 @@
                     onmousedown={dragStart}
                     onmouseup={dragEnd}
                     onmousemove={drag}
-                    style={canvasStyle}
                 >
+                    <img src={bgImage} class="bg-image" draggable="false" />
                     <template if:true={cards}>
                         <template for:each={cards} for:item="card">
                             <c-card

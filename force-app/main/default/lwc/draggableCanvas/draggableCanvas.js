@@ -59,28 +59,15 @@ export default class DraggableCanvas extends LightningElement {
     activity = {};
     inactiveMessage;
 
+    cardTitle;
+    bgImage;
+
     get namespace() {
         return NAMESPACE === "default" ? "" : NAMESPACE + "__";
     }
 
-    get cardTitle() {
-        return this.recordId
-            ? this.getCurrentBoardName()
-            : "Personal Whiteboard";
-    }
-
     get shouldListenToChanges() {
         return !this.isGuest && this.recordId;
-    }
-
-    get canvasStyle() {
-        if (this.boardRecord && this.boardRecord.data) {
-            const bgUrl = getFieldValue(this.boardRecord.data, BG_IMG);
-            if (bgUrl) {
-                return `background-image: url(${bgUrl})`;
-            }
-        }
-        return "";
     }
 
     disconnectedCallback() {
@@ -159,7 +146,18 @@ export default class DraggableCanvas extends LightningElement {
         recordId: "$recordId",
         fields: [BG_IMG, BOARD_NAME, BOARD_ORDER]
     })
-    boardRecord;
+    boardRecord({ data, error }) {
+        if (data) {
+            this.cardTitle =
+                getFieldValue(data, BOARD_ORDER) +
+                ". " +
+                getFieldValue(data, BOARD_NAME);
+
+            this.bgImage = getFieldValue(data, BG_IMG);
+        } else if (error) {
+            console.error(error);
+        }
+    }
 
     @api
     resetBoard() {
@@ -291,17 +289,6 @@ export default class DraggableCanvas extends LightningElement {
             this.cards = null;
             this.cards = this.offlineCards;
         }
-    }
-
-    getCurrentBoardName() {
-        if (this.boardRecord && this.boardRecord.data) {
-            return (
-                getFieldValue(this.boardRecord.data, BOARD_ORDER) +
-                ". " +
-                getFieldValue(this.boardRecord.data, BOARD_NAME)
-            );
-        }
-        return "";
     }
 
     dragStart(e) {
