@@ -3,8 +3,8 @@
     <actionCalls>
         <name>GuestUser_SendEmail</name>
         <label>GuestUser SendEmail</label>
-        <locationX>61</locationX>
-        <locationY>624</locationY>
+        <locationX>62</locationX>
+        <locationY>703</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -36,8 +36,8 @@
     <actionCalls>
         <name>InternalUser_SendEmail</name>
         <label>InternalUser SendEmail</label>
-        <locationX>289</locationX>
-        <locationY>495</locationY>
+        <locationX>287</locationX>
+        <locationY>558</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -70,10 +70,10 @@
     <decisions>
         <name>InternalUser_Decision</name>
         <label>InternalUser_Decision</label>
-        <locationX>158</locationX>
-        <locationY>334</locationY>
+        <locationX>159</locationX>
+        <locationY>449</locationY>
         <defaultConnector>
-            <targetReference>GuestUrl_GetRecord</targetReference>
+            <targetReference>KickboardSettings_GetRecord</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -100,12 +100,12 @@
     <formulas>
         <name>LaneCode_Formula</name>
         <dataType>String</dataType>
-        <expression>{!$Record.Lane__r.Code__c}</expression>
+        <expression>{!Lane_GetRecord.Code__c}</expression>
     </formulas>
     <formulas>
         <name>LaneRecordId_Formula</name>
         <dataType>String</dataType>
-        <expression>{!$Record.Lane__c}</expression>
+        <expression>{!Lane_GetRecord.Id}</expression>
     </formulas>
     <interviewLabel>Lane User Send Email {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Lane User Send Email</label>
@@ -129,31 +129,52 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <recordLookups>
-        <name>GuestUrl_GetRecord</name>
-        <label>GuestUrl GetRecord</label>
-        <locationX>61</locationX>
-        <locationY>473</locationY>
+        <name>KickboardSettings_GetRecord</name>
+        <label>KickboardSettings GetRecord</label>
+        <locationX>62</locationX>
+        <locationY>550</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>GuestUser_SendEmail</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
-            <field>DeveloperName</field>
+            <field>SetupOwnerId</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Guest_Url</stringValue>
+                <elementReference>$Organization.Id</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
-        <object>Kickboard_Setting__mdt</object>
+        <object>Kickboard_Settings__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Lane_GetRecord</name>
+        <label>Lane GetRecord</label>
+        <locationX>167</locationX>
+        <locationY>310</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>InternalUser_Decision</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Lane__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Lane__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>38</locationX>
-        <locationY>47</locationY>
+        <locationX>37</locationX>
+        <locationY>7</locationY>
         <connector>
-            <targetReference>InternalUser_Decision</targetReference>
+            <targetReference>Lane_GetRecord</targetReference>
         </connector>
         <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
         <filterLogic>and</filterLogic>
@@ -172,7 +193,7 @@
     <textTemplates>
         <name>GuestUser_TextTemplate</name>
         <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text>&lt;p&gt;Hey hey, Guess what? You&apos;ve been invited to collaborate in a swim lane by {!$User.FirstName} &lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;{!$User.LastName}.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;{!GuestUrl_GetRecord.Value__c}/lane/{!LaneRecordId_Formula}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot; style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;&lt;b&gt;{!GuestUrl_GetRecord.Value__c}/lane/{!LaneRecordId_Formula}&lt;/b&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;The super secret code is &lt;/span&gt;&lt;b style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;{!LaneCode_Formula}&lt;/b&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;Do not share these details with anyone else.&lt;/i&gt;&lt;/p&gt;</text>
+        <text>&lt;p&gt;Hey hey, Guess what? You&apos;ve been invited to collaborate in a swim lane by {!$User.FirstName} &lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;{!$User.LastName}.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;{!KickboardSettings_GetRecord.Guest_Url__c}/lane/{!LaneRecordId_Formula}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;{!KickboardSettings_GetRecord.Guest_Url__c}/lane/{!LaneRecordId_Formula}&lt;/b&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;The super secret code is &lt;/span&gt;&lt;b style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;{!LaneCode_Formula}&lt;/b&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;Do not share these details with anyone else.&lt;/i&gt;&lt;/p&gt;</text>
     </textTemplates>
     <textTemplates>
         <name>InternalUser_TextTemplate</name>

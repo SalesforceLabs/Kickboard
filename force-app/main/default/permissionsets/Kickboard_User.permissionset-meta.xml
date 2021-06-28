@@ -12,10 +12,6 @@
         <apexClass>KickboardDataInitCtrl</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <customMetadataTypeAccesses>
-        <enabled>true</enabled>
-        <name>Kickboard_Setting__mdt</name>
-    </customMetadataTypeAccesses>
     <fieldPermissions>
         <editable>true</editable>
         <field>Board__c.Background_Image__c</field>

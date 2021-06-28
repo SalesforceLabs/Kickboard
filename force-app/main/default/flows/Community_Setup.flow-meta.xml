@@ -21,7 +21,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>CustomMetadata_GetRecord</targetReference>
+                <targetReference>KickboardSetting_UpdateRecord</targetReference>
             </connector>
             <label>OutcomeIs CanAccessSite</label>
         </rules>
@@ -130,27 +130,6 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordLookups>
-        <name>CustomMetadata_GetRecord</name>
-        <label>CustomMetadata_GetRecord</label>
-        <locationX>905</locationX>
-        <locationY>802</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>CustomSetting_Screen</targetReference>
-        </connector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>DeveloperName</field>
-            <operator>EqualTo</operator>
-            <value>
-                <stringValue>Guest_Url</stringValue>
-            </value>
-        </filters>
-        <getFirstRecordOnly>true</getFirstRecordOnly>
-        <object>Kickboard_Setting__mdt</object>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
-    <recordLookups>
         <name>Domain_GetRecord</name>
         <label>Domain GetRecord</label>
         <locationX>450</locationX>
@@ -241,6 +220,30 @@
         <object>PermissionSetAssignment</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <recordUpdates>
+        <name>KickboardSetting_UpdateRecord</name>
+        <label>KickboardSetting UpdateRecord</label>
+        <locationX>891</locationX>
+        <locationY>805</locationY>
+        <connector>
+            <targetReference>CustomSetting_Screen</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>SetupOwnerId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Organization.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Guest_Url__c</field>
+            <value>
+                <stringValue>https://{!Domain_GetRecord.Domain}{!SiteUrlPathPrefix}</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Kickboard_Settings__c</object>
+    </recordUpdates>
     <screens>
         <name>Builder_Screen</name>
         <label>Builder Screen</label>
@@ -312,14 +315,14 @@
     <screens>
         <name>CustomSetting_Screen</name>
         <label>CustomSetting Screen</label>
-        <locationX>1027</locationX>
-        <locationY>803</locationY>
+        <locationX>1079</locationX>
+        <locationY>806</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <fields>
             <name>CustomSetting_DisplayText</name>
-            <fieldText>&lt;p&gt;Open up the &lt;a href=&quot;/lightning/setup/CustomMetadata/page?address=%2F{!CustomMetadata_GetRecord.Id}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;custom setting&lt;/b&gt;&lt;/a&gt; for guest url and paste in this url into the &lt;b&gt;Value&lt;/b&gt; field.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;https://{!Domain_GetRecord.Domain}{!SiteUrlPathPrefix}&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;We should have stored this site url&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;https://{!Domain_GetRecord.Domain}{!SiteUrlPathPrefix}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;in Custom Settings. You can confirm by going to &lt;b&gt;Custom Settings&lt;/b&gt;, select &lt;b&gt;Manage&lt;/b&gt; on Kickboard Settings and see the Default Organization Level Values have this url stored.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
