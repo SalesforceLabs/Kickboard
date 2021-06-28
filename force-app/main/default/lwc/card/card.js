@@ -27,6 +27,8 @@ export default class Card extends LightningElement {
     cardDescription;
     cardBg = "yellow";
 
+    moreColors = false;
+
     handleDelete() {
         const event = new CustomEvent("deletecard", {
             detail: { cardId: this.cardId }
@@ -66,5 +68,13 @@ export default class Card extends LightningElement {
 
     handleTextAreaClick() {
         this.dispatchEvent(new CustomEvent("textareaselection"));
+    }
+
+    showMore() {
+        this.moreColors = true;
+    }
+
+    showLess() {
+        this.moreColors = false;
     }
 }

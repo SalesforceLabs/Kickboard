@@ -244,4 +244,11 @@ public class KickboardCtrlTest {
 
         Test.stopTest();
     }
+
+    @IsTest
+    static void checkExportLane() {
+        Lane__c lane = [SELECT Id FROM Lane__c];
+        String output = KickboardCtrl.exportLaneJSON(lane.Id);
+        system.assertNotEquals(null, output);
+    }
 }
