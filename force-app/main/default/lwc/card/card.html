@@ -1,14 +1,13 @@
 <template>
     <div class={cardClass}>
-        <div class="cardHeader slds-grid slds-p-around_xxx-small">
-            <div
-                class="
-                    colorPanel
-                    slds-grid slds-col
-                    slds-size_2-of-3
-                    slds-p-top_xx-small
-                "
-            >
+        <div
+            class="
+                cardHeader
+                slds-grid slds-grid_align-spread
+                slds-p-around_xxx-small
+            "
+        >
+            <div class="colorPanel slds-grid slds-col slds-p-top_xx-small">
                 <template if:false={moreColors}>
                     <div class="red" onclick={changeBg} title="Red"></div>
                     <div class="green" onclick={changeBg} title="Green"></div>
@@ -38,7 +37,7 @@
                     <div class="pink" onclick={changeBg} title="Pink"></div>
                 </template>
             </div>
-            <div class="slds-col slds-size_1-of-3 slds-text-align_right">
+            <div class="slds-col slds-col_bump-left slds-text-align_right">
                 <lightning-button-icon
                     icon-name="utility:delete"
                     alternative-text="Delete"
