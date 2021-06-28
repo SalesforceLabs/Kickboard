@@ -218,7 +218,12 @@ public with sharing class KickboardCtrl {
                             Name,
                             Description__c,
                             Order__c,
-                            Background_Image__c
+                            Background_Image__c,
+                            Instructions__c,
+                            Objective__c,
+                            Prerequisites__c,
+                            Design_Stage__c,
+                            Time_to_Complete_in_minutes__c
                         FROM Boards__r
                     )
                 FROM Lane__c
@@ -255,7 +260,23 @@ public with sharing class KickboardCtrl {
                     board.Background_Image__c
                 );
                 cr.body.put('__namespace__Lane__c', '@{' + lane.Id + '.id}');
-
+                cr.body.put(
+                    '__namespace__Instructions__c',
+                    board.Instructions__c
+                );
+                cr.body.put('__namespace__Objective__c', board.Objective__c);
+                cr.body.put(
+                    '__namespace__Prerequisites__c',
+                    board.Prerequisites__c
+                );
+                cr.body.put(
+                    '__namespace__Design_Stage__c',
+                    board.Design_Stage__c
+                );
+                cr.body.put(
+                    '__namespace__Time_to_Complete_in_minutes__c',
+                    board.Time_to_Complete_in_minutes__c
+                );
                 cRequests.add(cr);
             }
             gr.compositeRequest = cRequests;
