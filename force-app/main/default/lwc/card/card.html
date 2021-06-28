@@ -9,10 +9,34 @@
                     slds-p-top_xx-small
                 "
             >
-                <div class="red" onclick={changeBg} title="Red"></div>
-                <div class="green" onclick={changeBg} title="Green"></div>
-                <div class="blue" onclick={changeBg} title="Blue"></div>
-                <div class="yellow" onclick={changeBg} title="Yellow"></div>
+                <template if:false={moreColors}>
+                    <div class="red" onclick={changeBg} title="Red"></div>
+                    <div class="green" onclick={changeBg} title="Green"></div>
+                    <div class="blue" onclick={changeBg} title="Blue"></div>
+                    <div class="yellow" onclick={changeBg} title="Yellow"></div>
+                    <lightning-button-icon
+                        icon-name="utility:chevronright"
+                        alternative-text="More"
+                        title="More"
+                        size="xx-small"
+                        class="mt-m5"
+                        onclick={showMore}
+                    ></lightning-button-icon>
+                </template>
+                <template if:true={moreColors}>
+                    <lightning-button-icon
+                        icon-name="utility:chevronleft"
+                        alternative-text="More"
+                        title="More"
+                        size="xx-small"
+                        class="mt-m5"
+                        onclick={showLess}
+                    ></lightning-button-icon>
+                    <div class="purple" onclick={changeBg} title="Purple"></div>
+                    <div class="gray" onclick={changeBg} title="Gray"></div>
+                    <div class="white" onclick={changeBg} title="White"></div>
+                    <div class="pink" onclick={changeBg} title="Pink"></div>
+                </template>
             </div>
             <div class="slds-col slds-size_1-of-3 slds-text-align_right">
                 <lightning-button-icon
