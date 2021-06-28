@@ -13,7 +13,8 @@ export default class ExportLane extends LightningElement {
     @wire(exportLaneJSON, { laneId: "$recordId" })
     jsonStr({ data, error }) {
         if (data) {
-            this.dataUrl = `data:application/json,${data}`;
+            const file = new Blob([data], { type: "application/json" });
+            this.dataUrl = URL.createObjectURL(file);
         } else if (error) {
             this.error = error;
         }
