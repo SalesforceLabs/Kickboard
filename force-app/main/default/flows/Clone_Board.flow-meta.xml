@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>52.0</apiVersion>
+    <isTemplate>true</isTemplate>
     <assignments>
         <name>BoardNew_Assignment</name>
         <label>BoardNew Assignment</label>
