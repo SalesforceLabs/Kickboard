@@ -132,6 +132,13 @@
                 <elementReference>recordId</elementReference>
             </value>
         </filters>
+        <filters>
+            <field>Is_Active__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
         <object>Lane_User__c</object>
         <valueField>Id</valueField>
     </dynamicChoiceSets>
@@ -261,6 +268,11 @@
             <fieldText>Select a User</fieldText>
             <fieldType>DropdownBox</fieldType>
             <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>InactiveUser_DisplayText</name>
+            <fieldText>&lt;p&gt;If you don&apos;t see a user in this list, it&apos;s likely they are not active. Activate the user first.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
