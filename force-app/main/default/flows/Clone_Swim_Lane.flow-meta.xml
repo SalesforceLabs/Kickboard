@@ -4,8 +4,8 @@
     <assignments>
         <name>CardNew_Assignment</name>
         <label>CardNew Assignment</label>
-        <locationX>1041</locationX>
-        <locationY>356</locationY>
+        <locationX>1215</locationX>
+        <locationY>354</locationY>
         <assignmentItems>
             <assignToReference>CardNewRecord.Board__c</assignToReference>
             <operator>Assign</operator>
@@ -17,28 +17,28 @@
             <assignToReference>CardNewRecord.Color__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>BoardCard_Loop.Color__c</elementReference>
+                <elementReference>Card_Loop.Color__c</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
             <assignToReference>CardNewRecord.Description__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>BoardCard_Loop.Description__c</elementReference>
+                <elementReference>Card_Loop.Description__c</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
             <assignToReference>CardNewRecord.X_Position__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>BoardCard_Loop.X_Position__c</elementReference>
+                <elementReference>Card_Loop.X_Position__c</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
             <assignToReference>CardNewRecord.Y_Position__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>BoardCard_Loop.Y_Position__c</elementReference>
+                <elementReference>Card_Loop.Y_Position__c</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -48,8 +48,8 @@
     <assignments>
         <name>CardNewCollection_Assignment</name>
         <label>CardNewCollection Assignment</label>
-        <locationX>1165</locationX>
-        <locationY>424</locationY>
+        <locationX>1339</locationX>
+        <locationY>422</locationY>
         <assignmentItems>
             <assignToReference>CardNew_RecordCollection</assignToReference>
             <operator>Add</operator>
@@ -58,23 +58,141 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>BoardCard_Loop</targetReference>
+            <targetReference>Card_Loop</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>CategoryNew_Assignment</name>
+        <label>CategoryNew Assignment</label>
+        <locationX>1228</locationX>
+        <locationY>752</locationY>
+        <assignmentItems>
+            <assignToReference>CategoryMappingNew_Record.Board__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Board_CreateRecord</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CategoryMappingNew_Record.Category__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>CategoryMapping_Loop.Category__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CategoryMappingNew_Record.Color__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>CategoryMapping_Loop.Color__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CategoryMappingNew_Record.Max_X_Position__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>CategoryMapping_Loop.Max_X_Position__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CategoryMappingNew_Record.Max_Y_Position__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>CategoryMapping_Loop.Max_Y_Position__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CategoryMappingNew_Record.Min_X_Position__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>CategoryMapping_Loop.Min_X_Position__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CategoryMappingNew_Record.Min_Y_Position__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>CategoryMapping_Loop.Min_Y_Position__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CategoryMappingNew_Record.Type__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>CategoryMapping_Loop.Type__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>CategoryNewCollection_Assignment</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>CategoryNewCollection_Assignment</name>
+        <label>CategoryNewCollection Assignment</label>
+        <locationX>1347</locationX>
+        <locationY>816</locationY>
+        <assignmentItems>
+            <assignToReference>CategoryMappingNew_RecordCollection</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>CategoryMappingNew_Record</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>CategoryMapping_Loop</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>ResetCollection_Assignment</name>
+        <label>ResetCollection Assignment</label>
+        <locationX>911</locationX>
+        <locationY>426</locationY>
+        <assignmentItems>
+            <assignToReference>CardNew_RecordCollection</assignToReference>
+            <operator>RemoveAll</operator>
+            <value>
+                <elementReference>CardNew_RecordCollection</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CategoryMappingNew_RecordCollection</assignToReference>
+            <operator>RemoveAll</operator>
+            <value>
+                <elementReference>CategoryMappingNew_RecordCollection</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Card_Loop</targetReference>
         </connector>
     </assignments>
     <interviewLabel>Clone Swim Lane {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Clone Swim Lane</label>
     <loops>
-        <name>BoardCard_Loop</name>
-        <label>BoardCard Loop</label>
-        <locationX>905</locationX>
+        <name>Card_Loop</name>
+        <label>Card Loop</label>
+        <locationX>1079</locationX>
         <locationY>426</locationY>
-        <collectionReference>BoardCard_GetRecords</collectionReference>
+        <collectionReference>Card_GetRecords</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
             <targetReference>CardNew_Assignment</targetReference>
         </nextValueConnector>
         <noMoreValuesConnector>
             <targetReference>CardNewCollection_CreateRecords</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>CategoryMapping_Loop</name>
+        <label>CategoryMapping Loop</label>
+        <locationX>1080</locationX>
+        <locationY>820</locationY>
+        <collectionReference>CategoryMapping_GetRecords</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>CategoryNew_Assignment</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>CategoryMappingNewCollection_CreateRecords</targetReference>
         </noMoreValuesConnector>
     </loops>
     <loops>
@@ -116,7 +234,7 @@
         <locationX>610</locationX>
         <locationY>426</locationY>
         <connector>
-            <targetReference>BoardCard_GetRecords</targetReference>
+            <targetReference>Card_GetRecords</targetReference>
         </connector>
         <inputAssignments>
             <field>Background_Image__c</field>
@@ -128,6 +246,12 @@
             <field>Description__c</field>
             <value>
                 <elementReference>LaneBoards_Loop.Description__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Design_Stage__c</field>
+            <value>
+                <elementReference>LaneBoards_Loop.Design_Stage__c</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -166,18 +290,34 @@
                 <elementReference>LaneBoards_Loop.Prerequisites__c</elementReference>
             </value>
         </inputAssignments>
+        <inputAssignments>
+            <field>Time_to_Complete_in_minutes__c</field>
+            <value>
+                <elementReference>LaneBoards_Loop.Time_to_Complete_in_minutes__c</elementReference>
+            </value>
+        </inputAssignments>
         <object>Board__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordCreates>
         <name>CardNewCollection_CreateRecords</name>
         <label>CardNewCollection CreateRecords</label>
-        <locationX>905</locationX>
-        <locationY>658</locationY>
+        <locationX>1079</locationX>
+        <locationY>638</locationY>
+        <connector>
+            <targetReference>CategoryMapping_Loop</targetReference>
+        </connector>
+        <inputReference>CardNew_RecordCollection</inputReference>
+    </recordCreates>
+    <recordCreates>
+        <name>CategoryMappingNewCollection_CreateRecords</name>
+        <label>CategoryMappingNewCollection CreateRecords</label>
+        <locationX>1078</locationX>
+        <locationY>1016</locationY>
         <connector>
             <targetReference>LaneBoards_Loop</targetReference>
         </connector>
-        <inputReference>CardNew_RecordCollection</inputReference>
+        <inputReference>CategoryMappingNew_RecordCollection</inputReference>
     </recordCreates>
     <recordCreates>
         <name>Lane_CreateRecord</name>
@@ -221,13 +361,13 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordLookups>
-        <name>BoardCard_GetRecords</name>
-        <label>BoardCard GetRecords</label>
-        <locationX>772</locationX>
+        <name>Card_GetRecords</name>
+        <label>Card GetRecords</label>
+        <locationX>720</locationX>
         <locationY>426</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>BoardCard_Loop</targetReference>
+            <targetReference>CategoryMapping_GetRecords</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -239,6 +379,27 @@
         </filters>
         <getFirstRecordOnly>false</getFirstRecordOnly>
         <object>Card__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>CategoryMapping_GetRecords</name>
+        <label>CategoryMapping GetRecords</label>
+        <locationX>809</locationX>
+        <locationY>426</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>ResetCollection_Assignment</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Board__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>LaneBoards_Loop.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Category_Mapping__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
@@ -346,6 +507,22 @@
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <objectType>Card__c</objectType>
+    </variables>
+    <variables>
+        <name>CategoryMappingNew_Record</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Category_Mapping__c</objectType>
+    </variables>
+    <variables>
+        <name>CategoryMappingNew_RecordCollection</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Category_Mapping__c</objectType>
     </variables>
     <variables>
         <name>recordId</name>
