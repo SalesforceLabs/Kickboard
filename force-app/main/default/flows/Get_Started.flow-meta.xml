@@ -79,6 +79,7 @@
         </rules>
     </decisions>
     <interviewLabel>Get Started {!$Flow.CurrentDateTime}</interviewLabel>
+    <isTemplate>true</isTemplate>
     <label>Get Started</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -111,6 +112,11 @@
         <connector>
             <targetReference>Action_Decision</targetReference>
         </connector>
+        <fields>
+            <name>GetStarted_DisplayText</name>
+            <fieldText>&lt;p&gt;&lt;b&gt;To get started&lt;/b&gt;&lt;/p&gt;&lt;ol&gt;&lt;li&gt;&lt;b&gt;Load Templates&lt;/b&gt; (there is only one right now)&lt;/li&gt;&lt;li&gt;&lt;b&gt;Setup a Kickboard Site&lt;/b&gt; if you want to invite external collaborators (there&apos;s a few steps but you&apos;ll learn about digital experiences along the way)&lt;/li&gt;&lt;li&gt;&lt;b&gt;Learn Tips and Tricks&lt;/b&gt;.&lt;/li&gt;&lt;/ol&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
         <fields>
             <name>Action_Picklist</name>
             <choiceReferences>SetupCommunity_Choice</choiceReferences>
