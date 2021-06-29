@@ -21,7 +21,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>KickboardSetting_UpdateRecord</targetReference>
+                <targetReference>KickboardSettings_CreateRecord</targetReference>
             </connector>
             <label>OutcomeIs CanAccessSite</label>
         </rules>
@@ -106,6 +106,29 @@
         </value>
     </processMetadataValues>
     <processType>Flow</processType>
+    <recordCreates>
+        <name>KickboardSettings_CreateRecord</name>
+        <label>KickboardSettings CreateRecord</label>
+        <locationX>845</locationX>
+        <locationY>818</locationY>
+        <connector>
+            <targetReference>CustomSetting_Screen</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Guest_Url__c</field>
+            <value>
+                <stringValue>https://{!Domain_GetRecord.Domain}{!SiteUrlPathPrefix}</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>SetupOwnerId</field>
+            <value>
+                <elementReference>$Organization.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Kickboard_Settings__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
     <recordCreates>
         <name>PermissionSetAssignment_CreateRecord</name>
         <label>PermissionSetAssignment CreateRecord</label>
@@ -220,30 +243,6 @@
         <object>PermissionSetAssignment</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
-    <recordUpdates>
-        <name>KickboardSetting_UpdateRecord</name>
-        <label>KickboardSetting UpdateRecord</label>
-        <locationX>891</locationX>
-        <locationY>805</locationY>
-        <connector>
-            <targetReference>CustomSetting_Screen</targetReference>
-        </connector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>SetupOwnerId</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>$Organization.Id</elementReference>
-            </value>
-        </filters>
-        <inputAssignments>
-            <field>Guest_Url__c</field>
-            <value>
-                <stringValue>https://{!Domain_GetRecord.Domain}{!SiteUrlPathPrefix}</stringValue>
-            </value>
-        </inputAssignments>
-        <object>Kickboard_Settings__c</object>
-    </recordUpdates>
     <screens>
         <name>Builder_Screen</name>
         <label>Builder Screen</label>
@@ -276,7 +275,7 @@
         </fields>
         <fields>
             <name>Builder_DisplayText</name>
-            <fieldText>&lt;p&gt;&lt;b&gt;Step 4&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Remove any existing components and drag &lt;b&gt;Whiteboard for Lane&lt;/b&gt; custom component into the content section.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Step 5&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Open &lt;b&gt;settings&lt;/b&gt; and check &lt;b&gt;Public can access the site&lt;/b&gt; and then publish your community.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b&gt;Step 4&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Remove any existing components and drag &lt;b&gt;Whiteboard for Lane&lt;/b&gt; custom component into the content section. Select Swim Lane List and remove any components there as well.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Step 5&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Open &lt;b&gt;settings&lt;/b&gt; and check &lt;b&gt;Public can access the site&lt;/b&gt; and then publish your community.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -315,14 +314,14 @@
     <screens>
         <name>CustomSetting_Screen</name>
         <label>CustomSetting Screen</label>
-        <locationX>1079</locationX>
-        <locationY>806</locationY>
+        <locationX>1178</locationX>
+        <locationY>805</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <fields>
             <name>CustomSetting_DisplayText</name>
-            <fieldText>&lt;p&gt;We should have stored this site url&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;https://{!Domain_GetRecord.Domain}{!SiteUrlPathPrefix}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;in Custom Settings. You can confirm by going to &lt;b&gt;Custom Settings&lt;/b&gt;, select &lt;b&gt;Manage&lt;/b&gt; on Kickboard Settings and see the Default Organization Level Values have this url stored.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;We should have stored this site url&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;https://{!Domain_GetRecord.Domain}{!SiteUrlPathPrefix}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;in Custom Settings. You can confirm by going to &lt;a href=&quot;/lightning/setup/CustomSettings/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Custom Settings&lt;/b&gt;&lt;/a&gt;, select &lt;b&gt;Manage&lt;/b&gt; on Kickboard Settings and see the Default Organization Level Values have this url stored.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -438,7 +437,7 @@
         </connector>
         <fields>
             <name>Sharing_DisplayText</name>
-            <fieldText>&lt;p&gt;&lt;b&gt;Step 7&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Now, a sharing rule needs to be created to share public swim lanes to the guest user. This allows you to have some swim lanes shared externally and some for private user. &lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Go to &lt;a href=&quot;/lightning/setup/SecuritySharing/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Sharing Setting&lt;/b&gt;&lt;/a&gt;. &lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Scroll down to &lt;b&gt;Swim Lane &lt;/b&gt;and create new and enter the following&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Name: &lt;b&gt;Kickboard Guest&lt;/b&gt;&lt;/li&gt;&lt;li&gt;Rule Type: &lt;b&gt;Guest user access, based on criteria&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;b&gt;Criteria&lt;/b&gt;: Is Public = TRUE&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Save.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b&gt;Step 7&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Now, a sharing rule needs to be created to share public swim lanes to the guest user. This allows you to have some swim lanes shared externally and some for private user.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Go to &lt;a href=&quot;/lightning/setup/SecuritySharing/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Sharing Setting&lt;/b&gt;&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Scroll down to &lt;b&gt;Swim Lane &lt;/b&gt;and create new and enter the following&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Name: &lt;b&gt;Kickboard Guest&lt;/b&gt;&lt;/li&gt;&lt;li&gt;Rule Type: &lt;b&gt;Guest user access, based on criteria&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;b&gt;Criteria&lt;/b&gt;: Is Public = TRUE&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Make sure it&apos;s sharing read only to the Kickboard Guest User.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Save.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
