@@ -124,7 +124,7 @@
                 "__namespace__Objective__c" : "<ul><li>Create a shared understanding of the opportunities based on value and effort.</li><li>Decide which opportunities are worth pursuing.</li></ul>",
                 "__namespace__Prerequisites__c" : "<ul><li>A list of unsorted opportunities.</li></ul>",
                 "__namespace__Design_Stage__c" : "Ideate",
-                "__namespace__Time_to_Complete_in_minutes__c" : 25.0,
+                "__namespace__Time_to_Complete_in_minutes__c" : 25,
                 "__namespace__Lane__c" : "@{reference_id_laneid_1.id}"
             },
             "method" : "POST",
@@ -141,7 +141,7 @@
                 "__namespace__Objective__c" : "<ul><li>Create a shared vision statement and measures of success.</li></ul>",
                 "__namespace__Prerequisites__c" : "<ul><li>A selected target customer or persona.</li><li>A selected list of opportunities to pursue.</li></ul>",
                 "__namespace__Design_Stage__c" : "Prototype_Test",
-                "__namespace__Time_to_Complete_in_minutes__c" : 25.0,
+                "__namespace__Time_to_Complete_in_minutes__c" : 25,
                 "__namespace__Lane__c" : "@{reference_id_laneid_1.id}"
             },
             "method" : "POST",
@@ -158,7 +158,7 @@
                 "__namespace__Objective__c" : "<ul><li>Create a agreed upon list of folks who will take which next steps by what date.</li></ul>",
                 "__namespace__Prerequisites__c" : "<ul><li>A shared vision statement and measure of success.</li></ul>",
                 "__namespace__Design_Stage__c" : null,
-                "__namespace__Time_to_Complete_in_minutes__c" : 15.0,
+                "__namespace__Time_to_Complete_in_minutes__c" : 15,
                 "__namespace__Lane__c" : "@{reference_id_laneid_1.id}"
             },
             "method" : "POST",
@@ -181,16 +181,15 @@
             "method" : "POST",
             "referenceId" : "reference_id_board_feedback"
         },
-
         {
             "url" : "/services/data/v50.0/sobjects/__namespace__Category_Mapping__c/",
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_feedback.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 640.0,
-                "__namespace__Max_Y_Position__c" : 360.0,
-                "__namespace__Min_X_Position__c" : 0.0,
-                "__namespace__Min_Y_Position__c" : 0.0,
+                "__namespace__Max_X_Position__c" : 640,
+                "__namespace__Max_Y_Position__c" : 360,
+                "__namespace__Min_X_Position__c" : 0,
+                "__namespace__Min_Y_Position__c" : 0,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Liked"
             },
@@ -202,10 +201,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_feedback.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 1280.0,
-                "__namespace__Max_Y_Position__c" : 360.0,
-                "__namespace__Min_X_Position__c" : 641.0,
-                "__namespace__Min_Y_Position__c" : 0.0,
+                "__namespace__Max_X_Position__c" : 1280,
+                "__namespace__Max_Y_Position__c" : 360,
+                "__namespace__Min_X_Position__c" : 641,
+                "__namespace__Min_Y_Position__c" : 0,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Improvement"
             },
@@ -216,11 +215,11 @@
             "url" : "/services/data/v50.0/sobjects/__namespace__Category_Mapping__c/",
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_feedback.id}",
-                "Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 640.0,
-                "__namespace__Max_Y_Position__c" : 720.0,
-                "__namespace__Min_X_Position__c" : 0.0,
-                "__namespace__Min_Y_Position__c" : 361.0,
+                "__namespace__Type__c" : "Bounding Box",
+                "__namespace__Max_X_Position__c" : 640,
+                "__namespace__Max_Y_Position__c" : 720,
+                "__namespace__Min_X_Position__c" : 0,
+                "__namespace__Min_Y_Position__c" : 361,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Question"
             },
@@ -232,10 +231,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_feedback.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 1280.0,
-                "__namespace__Max_Y_Position__c" : 720.0,
-                "__namespace__Min_X_Position__c" : 641.0,
-                "__namespace__Min_Y_Position__c" : 361.0,
+                "__namespace__Max_X_Position__c" : 1280,
+                "__namespace__Max_Y_Position__c" : 720,
+                "__namespace__Min_X_Position__c" : 641,
+                "__namespace__Min_Y_Position__c" : 361,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Enhancement"
             },
@@ -302,16 +301,15 @@
             "method" : "POST",
             "referenceId" : "reference_id_cat_feedback8"
         },
-
         {
             "url" : "/services/data/v50.0/sobjects/__namespace__Category_Mapping__c/",
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_empathy.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 426.0,
-                "__namespace__Max_Y_Position__c" : 360.0,
-                "__namespace__Min_X_Position__c" : 0.0,
-                "__namespace__Min_Y_Position__c" : 0.0,
+                "__namespace__Max_X_Position__c" : 426,
+                "__namespace__Max_Y_Position__c" : 360,
+                "__namespace__Min_X_Position__c" : 0,
+                "__namespace__Min_Y_Position__c" : 0,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Think & Feel"
             },
@@ -323,10 +321,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_empathy.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 853.0,
-                "__namespace__Max_Y_Position__c" : 360.0,
-                "__namespace__Min_X_Position__c" : 426.0,
-                "__namespace__Min_Y_Position__c" : 0.0,
+                "__namespace__Max_X_Position__c" : 853,
+                "__namespace__Max_Y_Position__c" : 360,
+                "__namespace__Min_X_Position__c" : 426,
+                "__namespace__Min_Y_Position__c" : 0,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "See"
             },
@@ -338,10 +336,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_empathy.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 1280.0,
-                "__namespace__Max_Y_Position__c" : 360.0,
-                "__namespace__Min_X_Position__c" : 854.0,
-                "__namespace__Min_Y_Position__c" : 0.0,
+                "__namespace__Max_X_Position__c" : 1280,
+                "__namespace__Max_Y_Position__c" : 360,
+                "__namespace__Min_X_Position__c" : 854,
+                "__namespace__Min_Y_Position__c" : 0,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Pains"
             },
@@ -353,10 +351,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_empathy.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 426.0,
-                "__namespace__Max_Y_Position__c" : 720.0,
-                "__namespace__Min_X_Position__c" : 0.0,
-                "__namespace__Min_Y_Position__c" : 361.0,
+                "__namespace__Max_X_Position__c" : 426,
+                "__namespace__Max_Y_Position__c" : 720,
+                "__namespace__Min_X_Position__c" : 0,
+                "__namespace__Min_Y_Position__c" : 361,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Hear"
             },
@@ -368,10 +366,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_empathy.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 853.0,
-                "__namespace__Max_Y_Position__c" : 720.0,
-                "__namespace__Min_X_Position__c" : 427.0,
-                "__namespace__Min_Y_Position__c" : 361.0,
+                "__namespace__Max_X_Position__c" : 853,
+                "__namespace__Max_Y_Position__c" : 720,
+                "__namespace__Min_X_Position__c" : 427,
+                "__namespace__Min_Y_Position__c" : 361,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Say & Do"
             },
@@ -383,10 +381,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_empathy.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 1280.0,
-                "__namespace__Max_Y_Position__c" : 720.0,
-                "__namespace__Min_X_Position__c" : 854.0,
-                "__namespace__Min_Y_Position__c" : 361.0,
+                "__namespace__Max_X_Position__c" : 1280,
+                "__namespace__Max_Y_Position__c" : 720,
+                "__namespace__Min_X_Position__c" : 854,
+                "__namespace__Min_Y_Position__c" : 361,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Gains"
             },
@@ -453,16 +451,15 @@
             "method" : "POST",
             "referenceId" : "reference_id_cat_empathy10"
         },
-
         {
             "url" : "/services/data/v50.0/sobjects/__namespace__Category_Mapping__c/",
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_jtbd.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 320.0,
-                "__namespace__Max_Y_Position__c" : 720.0,
-                "__namespace__Min_X_Position__c" : 0.0,
-                "__namespace__Min_Y_Position__c" : 0.0,
+                "__namespace__Max_X_Position__c" : 320,
+                "__namespace__Max_Y_Position__c" : 720,
+                "__namespace__Min_X_Position__c" : 0,
+                "__namespace__Min_Y_Position__c" : 0,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Persona"
             },
@@ -474,10 +471,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_jtbd.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 640.0,
-                "__namespace__Max_Y_Position__c" : 720.0,
-                "__namespace__Min_X_Position__c" : 321.0,
-                "__namespace__Min_Y_Position__c" : 0.0,
+                "__namespace__Max_X_Position__c" : 640,
+                "__namespace__Max_Y_Position__c" : 720,
+                "__namespace__Min_X_Position__c" : 321,
+                "__namespace__Min_Y_Position__c" : 0,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Situation"
             },
@@ -489,10 +486,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_jtbd.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 1280.0,
-                "__namespace__Max_Y_Position__c" : 720.0,
-                "__namespace__Min_X_Position__c" : 961.0,
-                "__namespace__Min_Y_Position__c" : 0.0,
+                "__namespace__Max_X_Position__c" : 1280,
+                "__namespace__Max_Y_Position__c" : 720,
+                "__namespace__Min_X_Position__c" : 961,
+                "__namespace__Min_Y_Position__c" : 0,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Insight"
             },
@@ -504,10 +501,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_jtbd.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 960.0,
-                "__namespace__Max_Y_Position__c" : 720.0,
-                "__namespace__Min_X_Position__c" : 641.0,
-                "__namespace__Min_Y_Position__c" : 0.0,
+                "__namespace__Max_X_Position__c" : 960,
+                "__namespace__Max_Y_Position__c" : 720,
+                "__namespace__Min_X_Position__c" : 641,
+                "__namespace__Min_Y_Position__c" : 0,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Motivation"
             },
@@ -609,10 +606,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_problem.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 640.0,
-                "__namespace__Max_Y_Position__c" : 360.0,
-                "__namespace__Min_X_Position__c" : 0.0,
-                "__namespace__Min_Y_Position__c" : 0.0,
+                "__namespace__Max_X_Position__c" : 640,
+                "__namespace__Max_Y_Position__c" : 360,
+                "__namespace__Min_X_Position__c" : 0,
+                "__namespace__Min_Y_Position__c" : 0,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Business Goal"
             },
@@ -624,10 +621,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_problem.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 1280.0,
-                "__namespace__Max_Y_Position__c" : 360.0,
-                "__namespace__Min_X_Position__c" : 641.0,
-                "__namespace__Min_Y_Position__c" : 0.0,
+                "__namespace__Max_X_Position__c" : 1280,
+                "__namespace__Max_Y_Position__c" : 360,
+                "__namespace__Min_X_Position__c" : 641,
+                "__namespace__Min_Y_Position__c" : 0,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Subject"
             },
@@ -639,10 +636,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_problem.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 1280.0,
-                "__namespace__Max_Y_Position__c" : 720.0,
-                "__namespace__Min_X_Position__c" : 851.0,
-                "__namespace__Min_Y_Position__c" : 361.0,
+                "__namespace__Max_X_Position__c" : 1280,
+                "__namespace__Max_Y_Position__c" : 720,
+                "__namespace__Min_X_Position__c" : 851,
+                "__namespace__Min_Y_Position__c" : 361,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Consideration"
             },
@@ -654,10 +651,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_problem.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 426.0,
-                "__namespace__Max_Y_Position__c" : 720.0,
-                "__namespace__Min_X_Position__c" : 0.0,
-                "__namespace__Min_Y_Position__c" : 361.0,
+                "__namespace__Max_X_Position__c" : 426,
+                "__namespace__Max_Y_Position__c" : 720,
+                "__namespace__Min_X_Position__c" : 0,
+                "__namespace__Min_Y_Position__c" : 361,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Persona"
             },
@@ -669,10 +666,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_problem.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 850.0,
-                "__namespace__Max_Y_Position__c" : 720.0,
-                "__namespace__Min_X_Position__c" : 427.0,
-                "__namespace__Min_Y_Position__c" : 361.0,
+                "__namespace__Max_X_Position__c" : 850,
+                "__namespace__Max_Y_Position__c" : 720,
+                "__namespace__Min_X_Position__c" : 427,
+                "__namespace__Min_Y_Position__c" : 361,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Need"
             },
@@ -709,7 +706,6 @@
             "method" : "POST",
             "referenceId" : "reference_id_cat_problem9"
         },
-
         {
             "url" : "/services/data/v50.0/sobjects/__namespace__Category_Mapping__c/",
             "body" : {
@@ -745,10 +741,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_stakeholders.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 640.0,
-                "__namespace__Max_Y_Position__c" : 360.0,
-                "__namespace__Min_X_Position__c" : 0.0,
-                "__namespace__Min_Y_Position__c" : 0.0,
+                "__namespace__Max_X_Position__c" : 640,
+                "__namespace__Max_Y_Position__c" : 360,
+                "__namespace__Min_X_Position__c" : 0,
+                "__namespace__Min_Y_Position__c" : 0,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "High Influence, Low Interest"
             },
@@ -760,10 +756,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_stakeholders.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 1280.0,
-                "__namespace__Max_Y_Position__c" : 360.0,
-                "__namespace__Min_X_Position__c" : 641.0,
-                "__namespace__Min_Y_Position__c" : 0.0,
+                "__namespace__Max_X_Position__c" : 1280,
+                "__namespace__Max_Y_Position__c" : 360,
+                "__namespace__Min_X_Position__c" : 641,
+                "__namespace__Min_Y_Position__c" : 0,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "High Influence, High Interest"
             },
@@ -775,10 +771,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_stakeholders.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 640.0,
-                "__namespace__Max_Y_Position__c" : 720.0,
-                "__namespace__Min_X_Position__c" : 0.0,
-                "__namespace__Min_Y_Position__c" : 361.0,
+                "__namespace__Max_X_Position__c" : 640,
+                "__namespace__Max_Y_Position__c" : 720,
+                "__namespace__Min_X_Position__c" : 0,
+                "__namespace__Min_Y_Position__c" : 361,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Low Influence, Low Interest"
             },
@@ -790,10 +786,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_stakeholders.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 1280.0,
-                "__namespace__Max_Y_Position__c" : 720.0,
-                "__namespace__Min_X_Position__c" : 641.0,
-                "__namespace__Min_Y_Position__c" : 361.0,
+                "__namespace__Max_X_Position__c" : 1280,
+                "__namespace__Max_Y_Position__c" : 720,
+                "__namespace__Min_X_Position__c" : 641,
+                "__namespace__Min_Y_Position__c" : 361,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Low Influence, High Interest"
             },
@@ -830,16 +826,15 @@
             "method" : "POST",
             "referenceId" : "reference_id_cat_stakeholders8"
         },
-
         {
             "url" : "/services/data/v50.0/sobjects/__namespace__Category_Mapping__c/",
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_journey.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 426.0,
-                "__namespace__Max_Y_Position__c" : 180.0,
-                "__namespace__Min_X_Position__c" : 0.0,
-                "__namespace__Min_Y_Position__c" : 0.0,
+                "__namespace__Max_X_Position__c" : 426,
+                "__namespace__Max_Y_Position__c" : 180,
+                "__namespace__Min_X_Position__c" : 0,
+                "__namespace__Min_Y_Position__c" : 0,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Persona"
             },
@@ -851,10 +846,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_journey.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 1280.0,
-                "__namespace__Max_Y_Position__c" : 720.0,
-                "__namespace__Min_X_Position__c" : 0.0,
-                "__namespace__Min_Y_Position__c" : 541.0,
+                "__namespace__Max_X_Position__c" : 1280,
+                "__namespace__Max_Y_Position__c" : 720,
+                "__namespace__Min_X_Position__c" : 0,
+                "__namespace__Min_Y_Position__c" : 541,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Pains"
             },
@@ -881,10 +876,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_journey.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 853.0,
-                "__namespace__Max_Y_Position__c" : 180.0,
-                "__namespace__Min_X_Position__c" : 427.0,
-                "__namespace__Min_Y_Position__c" : 0.0,
+                "__namespace__Max_X_Position__c" : 853,
+                "__namespace__Max_Y_Position__c" : 180,
+                "__namespace__Min_X_Position__c" : 427,
+                "__namespace__Min_Y_Position__c" : 0,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Goal"
             },
@@ -896,10 +891,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_journey.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 1280.0,
-                "__namespace__Max_Y_Position__c" : 180.0,
-                "__namespace__Min_X_Position__c" : 854.0,
-                "__namespace__Min_Y_Position__c" : 0.0,
+                "__namespace__Max_X_Position__c" : 1280,
+                "__namespace__Max_Y_Position__c" : 180,
+                "__namespace__Min_X_Position__c" : 854,
+                "__namespace__Min_Y_Position__c" : 0,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Expectation"
             },
@@ -911,10 +906,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_journey.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 1280.0,
-                "__namespace__Max_Y_Position__c" : 360.0,
-                "__namespace__Min_X_Position__c" : 0.0,
-                "__namespace__Min_Y_Position__c" : 181.0,
+                "__namespace__Max_X_Position__c" : 1280,
+                "__namespace__Max_Y_Position__c" : 360,
+                "__namespace__Min_X_Position__c" : 0,
+                "__namespace__Min_Y_Position__c" : 181,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Touchpoints"
             },
@@ -926,10 +921,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_journey.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 1280.0,
-                "__namespace__Max_Y_Position__c" : 540.0,
-                "__namespace__Min_X_Position__c" : 0.0,
-                "__namespace__Min_Y_Position__c" : 361.0,
+                "__namespace__Max_X_Position__c" : 1280,
+                "__namespace__Max_Y_Position__c" : 540,
+                "__namespace__Min_X_Position__c" : 0,
+                "__namespace__Min_Y_Position__c" : 361,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Gains"
             },
@@ -981,16 +976,15 @@
             "method" : "POST",
             "referenceId" : "reference_id_cat_journey10"
         },
-
         {
             "url" : "/services/data/v50.0/sobjects/__namespace__Category_Mapping__c/",
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_anchors.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 1280.0,
-                "__namespace__Max_Y_Position__c" : 360.0,
-                "__namespace__Min_X_Position__c" : 0.0,
-                "__namespace__Min_Y_Position__c" : 0.0,
+                "__namespace__Max_X_Position__c" : 1280,
+                "__namespace__Max_Y_Position__c" : 360,
+                "__namespace__Min_X_Position__c" : 0,
+                "__namespace__Min_Y_Position__c" : 0,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Tailwind"
             },
@@ -1002,10 +996,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_anchors.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 1280.0,
-                "__namespace__Max_Y_Position__c" : 720.0,
-                "__namespace__Min_X_Position__c" : 0.0,
-                "__namespace__Min_Y_Position__c" : 361.0,
+                "__namespace__Max_X_Position__c" : 1280,
+                "__namespace__Max_Y_Position__c" : 720,
+                "__namespace__Min_X_Position__c" : 0,
+                "__namespace__Min_Y_Position__c" : 361,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Anchor"
             },
@@ -1072,16 +1066,15 @@
             "method" : "POST",
             "referenceId" : "reference_id_cat_anchors6"
         },
-
         {
             "url" : "/services/data/v50.0/sobjects/__namespace__Category_Mapping__c/",
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_prioritize.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 640.0,
-                "__namespace__Max_Y_Position__c" : 360.0,
-                "__namespace__Min_X_Position__c" : 0.0,
-                "__namespace__Min_Y_Position__c" : 0.0,
+                "__namespace__Max_X_Position__c" : 640,
+                "__namespace__Max_Y_Position__c" : 360,
+                "__namespace__Min_X_Position__c" : 0,
+                "__namespace__Min_Y_Position__c" : 0,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "High Value, High Effort"
             },
@@ -1123,10 +1116,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_prioritize.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 1280.0,
-                "__namespace__Max_Y_Position__c" : 360.0,
-                "__namespace__Min_X_Position__c" : 641.0,
-                "__namespace__Min_Y_Position__c" : 0.0,
+                "__namespace__Max_X_Position__c" : 1280,
+                "__namespace__Max_Y_Position__c" : 360,
+                "__namespace__Min_X_Position__c" : 641,
+                "__namespace__Min_Y_Position__c" : 0,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "High Value, Low Effort"
             },
@@ -1138,10 +1131,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_prioritize.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 640.0,
-                "__namespace__Max_Y_Position__c" : 720.0,
-                "__namespace__Min_X_Position__c" : 0.0,
-                "__namespace__Min_Y_Position__c" : 361.0,
+                "__namespace__Max_X_Position__c" : 640,
+                "__namespace__Max_Y_Position__c" : 720,
+                "__namespace__Min_X_Position__c" : 0,
+                "__namespace__Min_Y_Position__c" : 361,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Low Value, High Effort"
             },
@@ -1168,10 +1161,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_prioritize.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 1280.0,
-                "__namespace__Max_Y_Position__c" : 720.0,
-                "__namespace__Min_X_Position__c" : 641.0,
-                "__namespace__Min_Y_Position__c" : 361.0,
+                "__namespace__Max_X_Position__c" : 1280,
+                "__namespace__Max_Y_Position__c" : 720,
+                "__namespace__Min_X_Position__c" : 641,
+                "__namespace__Min_Y_Position__c" : 361,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Low Value, Low Effort"
             },
@@ -1193,7 +1186,6 @@
             "method" : "POST",
             "referenceId" : "reference_id_cat_prioritize8"
         },
-
         {
             "url" : "/services/data/v50.0/sobjects/__namespace__Category_Mapping__c/",
             "body" : {
@@ -1214,10 +1206,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_vision.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 426.0,
-                "__namespace__Max_Y_Position__c" : 360.0,
-                "__namespace__Min_X_Position__c" : 0.0,
-                "__namespace__Min_Y_Position__c" : 0.0,
+                "__namespace__Max_X_Position__c" : 426,
+                "__namespace__Max_Y_Position__c" : 360,
+                "__namespace__Min_X_Position__c" : 0,
+                "__namespace__Min_Y_Position__c" : 0,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Use Case"
             },
@@ -1229,10 +1221,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_vision.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 852.0,
-                "__namespace__Max_Y_Position__c" : 360.0,
-                "__namespace__Min_X_Position__c" : 427.0,
-                "__namespace__Min_Y_Position__c" : 0.0,
+                "__namespace__Max_X_Position__c" : 852,
+                "__namespace__Max_Y_Position__c" : 360,
+                "__namespace__Min_X_Position__c" : 427,
+                "__namespace__Min_Y_Position__c" : 0,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Persona"
             },
@@ -1244,10 +1236,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_vision.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 1280.0,
-                "__namespace__Max_Y_Position__c" : 360.0,
-                "__namespace__Min_X_Position__c" : 853.0,
-                "__namespace__Min_Y_Position__c" : 0.0,
+                "__namespace__Max_X_Position__c" : 1280,
+                "__namespace__Max_Y_Position__c" : 360,
+                "__namespace__Min_X_Position__c" : 853,
+                "__namespace__Min_Y_Position__c" : 0,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Job To Be Done"
             },
@@ -1259,10 +1251,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_vision.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 426.0,
-                "__namespace__Max_Y_Position__c" : 720.0,
-                "__namespace__Min_X_Position__c" : 0.0,
-                "__namespace__Min_Y_Position__c" : 361.0,
+                "__namespace__Max_X_Position__c" : 426,
+                "__namespace__Max_Y_Position__c" : 720,
+                "__namespace__Min_X_Position__c" : 0,
+                "__namespace__Min_Y_Position__c" : 361,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Gains"
             },
@@ -1274,12 +1266,12 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_vision.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 852.0,
-                "__namespace__Max_Y_Position__c" : 720.0,
-                "__namespace__Min_X_Position__c" : 427.0,
-                "__namespace__Min_Y_Position__c" : 361.0,
+                "__namespace__Max_X_Position__c" : 852,
+                "__namespace__Max_Y_Position__c" : 720,
+                "__namespace__Min_X_Position__c" : 427,
+                "__namespace__Min_Y_Position__c" : 361,
                 "__namespace__Color__c" : null,
-                "C__namespace__ategory__c" : "Pains"
+                "__namespace__Category__c" : "Pains"
             },
             "method" : "POST",
             "referenceId" : "reference_id_cat_vision6"
@@ -1289,10 +1281,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_vision.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 1280.0,
-                "__namespace__Max_Y_Position__c" : 720.0,
-                "__namespace__Min_X_Position__c" : 853.0,
-                "__namespace__Min_Y_Position__c" : 361.0,
+                "__namespace__Max_X_Position__c" : 1280,
+                "__namespace__Max_Y_Position__c" : 720,
+                "__namespace__Min_X_Position__c" : 853,
+                "__namespace__Min_Y_Position__c" : 361,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Measure"
             },
@@ -1344,16 +1336,15 @@
             "method" : "POST",
             "referenceId" : "reference_id_cat_vision10"
         },
-
         {
             "url" : "/services/data/v50.0/sobjects/__namespace__Category_Mapping__c/",
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_whodoeswhat.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 1280.0,
-                "__namespace__Max_Y_Position__c" : 144.0,
-                "__namespace__Min_X_Position__c" : 0.0,
-                "__namespace__Min_Y_Position__c" : 0.0,
+                "__namespace__Max_X_Position__c" : 1280,
+                "__namespace__Max_Y_Position__c" : 144,
+                "__namespace__Min_X_Position__c" : 0,
+                "__namespace__Min_Y_Position__c" : 0,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Person"
             },
@@ -1365,10 +1356,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_whodoeswhat.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 1280.0,
-                "__namespace__Max_Y_Position__c" : 576.0,
-                "__namespace__Min_X_Position__c" : 0.0,
-                "__namespace__Min_Y_Position__c" : 145.0,
+                "__namespace__Max_X_Position__c" : 1280,
+                "__namespace__Max_Y_Position__c" : 576,
+                "__namespace__Min_X_Position__c" : 0,
+                "__namespace__Min_Y_Position__c" : 145,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Task"
             },
@@ -1380,10 +1371,10 @@
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_whodoeswhat.id}",
                 "__namespace__Type__c" : "Bounding Box",
-                "__namespace__Max_X_Position__c" : 1280.0,
-                "__namespace__Max_Y_Position__c" : 720.0,
-                "__namespace__Min_X_Position__c" : 0.0,
-                "__namespace__Min_Y_Position__c" : 577.0,
+                "__namespace__Max_X_Position__c" : 1280,
+                "__namespace__Max_Y_Position__c" : 720,
+                "__namespace__Min_X_Position__c" : 0,
+                "__namespace__Min_Y_Position__c" : 577,
                 "__namespace__Color__c" : null,
                 "__namespace__Category__c" : "Due Date"
             },
