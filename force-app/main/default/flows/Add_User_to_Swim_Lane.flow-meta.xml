@@ -386,7 +386,7 @@
             <inputParameters>
                 <name>fieldApiName</name>
                 <value>
-                    <stringValue>User__c</stringValue>
+                    <stringValue>CreatedById</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -398,7 +398,7 @@
             <inputParameters>
                 <name>objectApiName</name>
                 <value>
-                    <stringValue>Lane_User__c</stringValue>
+                    <stringValue>Account</stringValue>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
