@@ -2,11 +2,19 @@
     "packageDirectories": [
         {
             "path": "force-app",
-            "default": true
+            "default": true,
+            "package": "Kickboard",
+            "versionName": "ver 0.1",
+            "versionNumber": "0.1.0.NEXT"
         }
     ],
     "name": "kickboard",
     "namespace": "kickboard",
     "sfdcLoginUrl": "https://login.salesforce.com",
-    "sourceApiVersion": "52.0"
+    "sourceApiVersion": "52.0",
+    "packageAliases": {
+        "Kickboard": "0Ho5e000000XZZLCA4",
+        "Kickboard@0.1.0-1": "04t5e0000002rKOAAY",
+        "Kickboard@0.1.0-2": "04t5e0000002sPBAAY"
+    }
 }
