@@ -76,8 +76,8 @@
     <decisions>
         <name>InternalUserDoesNotExist_Decision</name>
         <label>InternalUserDoesNotExist Decision</label>
-        <locationX>990</locationX>
-        <locationY>543</locationY>
+        <locationX>1108</locationX>
+        <locationY>545</locationY>
         <defaultConnector>
             <targetReference>InternalUserExists_Screen</targetReference>
         </defaultConnector>
@@ -148,8 +148,14 @@
     <recordCreates>
         <name>InternalLaneUser_CreateRecords</name>
         <label>InternalLaneUser CreateRecords</label>
-        <locationX>1181</locationX>
-        <locationY>538</locationY>
+        <locationX>1301</locationX>
+        <locationY>537</locationY>
+        <inputAssignments>
+            <field>Email__c</field>
+            <value>
+                <elementReference>User_GetRecord.Email</elementReference>
+            </value>
+        </inputAssignments>
         <inputAssignments>
             <field>Is_Active__c</field>
             <value>
@@ -206,7 +212,7 @@
         <locationY>542</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>InternalUserDoesNotExist_Decision</targetReference>
+            <targetReference>ShareLaneToUser_Subflow</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -246,6 +252,27 @@
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>Lane__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>User_GetRecord</name>
+        <label>User GetRecord</label>
+        <locationX>553</locationX>
+        <locationY>543</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>AssignKickboardUserPermissionSet_Subflow</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>User_Lookup.recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>User</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <screens>
@@ -344,13 +371,13 @@
     <screens>
         <name>InternalUser_Screen</name>
         <label>InternalUser Screen</label>
-        <locationX>479</locationX>
-        <locationY>542</locationY>
+        <locationX>440</locationX>
+        <locationY>544</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>AssignKickboardUserPermissionSet_Subflow</targetReference>
+            <targetReference>User_GetRecord</targetReference>
         </connector>
         <fields>
             <name>User_Lookup</name>
@@ -443,8 +470,8 @@
     <subflows>
         <name>AssignKickboardUserPermissionSet_Subflow</name>
         <label>AssignKickboardUserPermissionSet Subflow</label>
-        <locationX>618</locationX>
-        <locationY>542</locationY>
+        <locationX>656</locationX>
+        <locationY>543</locationY>
         <connector>
             <targetReference>pause2</targetReference>
         </connector>
@@ -453,6 +480,28 @@
             <name>assigneeId</name>
             <value>
                 <elementReference>User_Lookup.recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>ShareLaneToUser_Subflow</name>
+        <label>ShareLaneToUser Subflow</label>
+        <locationX>985</locationX>
+        <locationY>542</locationY>
+        <connector>
+            <targetReference>InternalUserDoesNotExist_Decision</targetReference>
+        </connector>
+        <flowName>Share_Lane_to_User</flowName>
+        <inputAssignments>
+            <name>laneId</name>
+            <value>
+                <elementReference>Lane_GetRecord.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>userId</name>
+            <value>
+                <elementReference>User_GetRecord.Id</elementReference>
             </value>
         </inputAssignments>
     </subflows>

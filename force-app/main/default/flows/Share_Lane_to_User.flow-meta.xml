@@ -4,14 +4,14 @@
     <decisions>
         <name>LaneShareDoesNotExist_Decision</name>
         <label>LaneShareDoesNotExist Decision</label>
-        <locationX>169</locationX>
-        <locationY>524</locationY>
+        <locationX>168</locationX>
+        <locationY>397</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>OutcomeIs_LaneShareDoesNotExist</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>LaneUserShare_GetRecord</leftValueReference>
+                <leftValueReference>LaneShare_GetRecord</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
@@ -23,8 +23,8 @@
             <label>OutcomeIs LaneShareDoesNotExist</label>
         </rules>
     </decisions>
-    <interviewLabel>Lane User Share {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Lane User Share</label>
+    <interviewLabel>Share Lane to User {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Share Lane to User</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -47,8 +47,8 @@
     <recordCreates>
         <name>LaneShare_CreateRecord</name>
         <label>LaneShare CreateRecord</label>
-        <locationX>178</locationX>
-        <locationY>692</locationY>
+        <locationX>177</locationX>
+        <locationY>577</locationY>
         <inputAssignments>
             <field>AccessLevel</field>
             <value>
@@ -58,7 +58,7 @@
         <inputAssignments>
             <field>ParentId</field>
             <value>
-                <elementReference>$Record.Lane__r.Id</elementReference>
+                <elementReference>laneId</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -70,34 +70,34 @@
         <inputAssignments>
             <field>UserOrGroupId</field>
             <value>
-                <elementReference>$Record.User__r.Id</elementReference>
+                <elementReference>userId</elementReference>
             </value>
         </inputAssignments>
         <object>Lane__Share</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordLookups>
-        <name>LaneUserShare_GetRecord</name>
-        <label>LaneUserShare GetRecord</label>
+        <name>LaneShare_GetRecord</name>
+        <label>LaneShare GetRecord</label>
         <locationX>176</locationX>
-        <locationY>367</locationY>
+        <locationY>233</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>LaneShareDoesNotExist_Decision</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
-            <field>UserOrGroupId</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>$Record.User__r.Id</elementReference>
-            </value>
-        </filters>
-        <filters>
             <field>ParentId</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>$Record.Lane__r.Id</elementReference>
+                <elementReference>laneId</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>UserOrGroupId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>userId</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -108,19 +108,22 @@
         <locationX>50</locationX>
         <locationY>50</locationY>
         <connector>
-            <targetReference>LaneUserShare_GetRecord</targetReference>
+            <targetReference>LaneShare_GetRecord</targetReference>
         </connector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>User__c</field>
-            <operator>IsNull</operator>
-            <value>
-                <booleanValue>false</booleanValue>
-            </value>
-        </filters>
-        <object>Lane_User__c</object>
-        <recordTriggerType>Create</recordTriggerType>
-        <triggerType>RecordAfterSave</triggerType>
     </start>
     <status>Active</status>
+    <variables>
+        <name>laneId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>userId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
 </Flow>
