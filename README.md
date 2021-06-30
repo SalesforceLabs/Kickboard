@@ -1,6 +1,8 @@
 # Kickboard
 
-Kickboard is an application that teaches are customers how to swim in the vast depths of digital transformation
+[![Packaging](https://github.com/SalesforceLabs/Kickboard/actions/workflows/packaging.yml/badge.svg)](https://github.com/SalesforceLabs/Kickboard/actions/workflows/packaging.yml)
+
+Kickboard is an application that teaches our customers how to swim in the vast depths of digital transformation
 
 ## Installing the app using a Scratch Org
 
