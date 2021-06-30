@@ -9,6 +9,10 @@ public class KickboardCtrlTest {
         board.Order__c = 1;
         board.Lane__c = lane.Id;
         insert board;
+        System.runAs(new User(Id = UserInfo.getUserId())) {
+            PermissionSet ps = [SELECT Id FROM PermissionSet WHERE Name = 'Kickboard_User'];
+            insert new PermissionSetAssignment(AssigneeId = UserInfo.getUserId(), PermissionSetId = ps.Id);
+        }
     }
 
     @IsTest
@@ -24,20 +28,21 @@ public class KickboardCtrlTest {
     static void checkCardCreation() {
         Board__c b = [SELECT Id FROM Board__c];
         Test.startTest();
-        List<Card__c> cards = KickboardCtrl.getCards(b.Id);
-        system.assertEquals(0, cards.size());
+        System.runAs(new User(Id = UserInfo.getUserId())) {
+            List<Card__c> cards = KickboardCtrl.getCards(b.Id);
+            system.assertEquals(0, cards.size());
 
-        Card__c card = KickboardCtrl.createNewCard(b.Id, null, null, null);
-        system.assertEquals(0, card.X_Position__c);
-        system.assertEquals(0, card.Y_Position__c);
+            Card__c card = KickboardCtrl.createNewCard(b.Id, null, null, null);
+            system.assertEquals(0, card.X_Position__c);
+            system.assertEquals(0, card.Y_Position__c);
 
-        card = KickboardCtrl.createNewCard(b.Id, 2, 3, null);
-        system.assertEquals(2, card.X_Position__c);
-        system.assertEquals(3, card.Y_Position__c);
+            card = KickboardCtrl.createNewCard(b.Id, 2, 3, null);
+            system.assertEquals(2, card.X_Position__c);
+            system.assertEquals(3, card.Y_Position__c);
 
-        cards = KickboardCtrl.getCards(b.Id);
-        system.assertEquals(2, cards.size());
-
+            cards = KickboardCtrl.getCards(b.Id);
+            system.assertEquals(2, cards.size());
+        }
         Test.stopTest();
     }
 
@@ -83,19 +88,20 @@ public class KickboardCtrlTest {
         Card__c card2 = KickboardCtrl.createNewCard(b.Id, 2, 3, null);
 
         Test.startTest();
-        List<Card__c> cards = KickboardCtrl.getCards(b.Id);
-        system.assertEquals(2, cards.size());
+        System.runAs(new User(Id = UserInfo.getUserId())) {
+            List<Card__c> cards = KickboardCtrl.getCards(b.Id);
+            system.assertEquals(2, cards.size());
 
-        KickboardCtrl.deleteCard(card1.Id);
+            KickboardCtrl.deleteCard(card1.Id);
 
-        cards = KickboardCtrl.getCards(b.Id);
-        system.assertEquals(1, cards.size());
+            cards = KickboardCtrl.getCards(b.Id);
+            system.assertEquals(1, cards.size());
 
-        KickboardCtrl.deleteCard(card2.Id);
+            KickboardCtrl.deleteCard(card2.Id);
 
-        cards = KickboardCtrl.getCards(b.Id);
-        system.assertEquals(0, cards.size());
-
+            cards = KickboardCtrl.getCards(b.Id);
+            system.assertEquals(0, cards.size());
+        }
         Test.stopTest();
     }
 
@@ -118,61 +124,62 @@ public class KickboardCtrlTest {
         insert lu;
 
         Test.startTest();
-        Id inviteeId = KickboardCtrl.isValidCredentials(lane.Id, null, null);
-        system.assertEquals(null, inviteeId);
+        System.runAs(new User(Id = UserInfo.getUserId())) {
+            Id inviteeId = KickboardCtrl.isValidCredentials(lane.Id, null, null);
+            system.assertEquals(null, inviteeId);
 
-        inviteeId = KickboardCtrl.isValidCredentials(
-            lane.Id,
-            'test@example.com',
-            null
-        );
-        system.assertEquals(null, inviteeId);
+            inviteeId = KickboardCtrl.isValidCredentials(
+                lane.Id,
+                'test@example.com',
+                null
+            );
+            system.assertEquals(null, inviteeId);
 
-        inviteeId = KickboardCtrl.isValidCredentials(lane.Id, null, '12345678');
-        system.assertEquals(null, inviteeId);
+            inviteeId = KickboardCtrl.isValidCredentials(lane.Id, null, '12345678');
+            system.assertEquals(null, inviteeId);
 
-        inviteeId = KickboardCtrl.isValidCredentials(
-            lane.Id,
-            'test@example.com',
-            '12345678'
-        );
-        system.assertEquals(null, inviteeId);
+            inviteeId = KickboardCtrl.isValidCredentials(
+                lane.Id,
+                'test@example.com',
+                '12345678'
+            );
+            system.assertEquals(null, inviteeId);
 
-        inviteeId = KickboardCtrl.isValidCredentials(
-            lane.Id,
-            'test@test.com',
-            null
-        );
-        system.assertEquals(null, inviteeId);
+            inviteeId = KickboardCtrl.isValidCredentials(
+                lane.Id,
+                'test@test.com',
+                null
+            );
+            system.assertEquals(null, inviteeId);
 
-        inviteeId = KickboardCtrl.isValidCredentials(
-            lane.Id,
-            null,
-            lane.Code__c
-        );
-        system.assertEquals(null, inviteeId);
+            inviteeId = KickboardCtrl.isValidCredentials(
+                lane.Id,
+                null,
+                lane.Code__c
+            );
+            system.assertEquals(null, inviteeId);
 
-        inviteeId = KickboardCtrl.isValidCredentials(
-            lane.Id,
-            'test@test.com',
-            '12345678'
-        );
-        system.assertEquals(null, inviteeId);
+            inviteeId = KickboardCtrl.isValidCredentials(
+                lane.Id,
+                'test@test.com',
+                '12345678'
+            );
+            system.assertEquals(null, inviteeId);
 
-        inviteeId = KickboardCtrl.isValidCredentials(
-            lane.Id,
-            'test@example.com',
-            lane.Code__c
-        );
-        system.assertEquals(null, inviteeId);
+            inviteeId = KickboardCtrl.isValidCredentials(
+                lane.Id,
+                'test@example.com',
+                lane.Code__c
+            );
+            system.assertEquals(null, inviteeId);
 
-        inviteeId = KickboardCtrl.isValidCredentials(
-            lane.Id,
-            'test@test.com',
-            lane.Code__c
-        );
-        system.assertEquals(null, inviteeId);
-
+            inviteeId = KickboardCtrl.isValidCredentials(
+                lane.Id,
+                'test@test.com',
+                lane.Code__c
+            );
+            system.assertEquals(null, inviteeId);
+        }
         Test.stopTest();
     }
 
@@ -187,68 +194,73 @@ public class KickboardCtrlTest {
         insert lu;
 
         Test.startTest();
-        Id inviteeId = KickboardCtrl.isValidCredentials(lane.Id, null, null);
-        system.assertEquals(null, inviteeId);
+        System.runAs(new User(Id = UserInfo.getUserId())) {
+            Id inviteeId = KickboardCtrl.isValidCredentials(lane.Id, null, null);
+            system.assertEquals(null, inviteeId);
 
-        inviteeId = KickboardCtrl.isValidCredentials(
-            lane.Id,
-            'test@example.com',
-            null
-        );
-        system.assertEquals(null, inviteeId);
+            inviteeId = KickboardCtrl.isValidCredentials(
+                lane.Id,
+                'test@example.com',
+                null
+            );
+            system.assertEquals(null, inviteeId);
 
-        inviteeId = KickboardCtrl.isValidCredentials(lane.Id, null, '12345678');
-        system.assertEquals(null, inviteeId);
+            inviteeId = KickboardCtrl.isValidCredentials(lane.Id, null, '12345678');
+            system.assertEquals(null, inviteeId);
 
-        inviteeId = KickboardCtrl.isValidCredentials(
-            lane.Id,
-            'test@example.com',
-            '12345678'
-        );
-        system.assertEquals(null, inviteeId);
+            inviteeId = KickboardCtrl.isValidCredentials(
+                lane.Id,
+                'test@example.com',
+                '12345678'
+            );
+            system.assertEquals(null, inviteeId);
 
-        inviteeId = KickboardCtrl.isValidCredentials(
-            lane.Id,
-            'test@test.com',
-            null
-        );
-        system.assertEquals(null, inviteeId);
+            inviteeId = KickboardCtrl.isValidCredentials(
+                lane.Id,
+                'test@test.com',
+                null
+            );
+            system.assertEquals(null, inviteeId);
 
-        inviteeId = KickboardCtrl.isValidCredentials(
-            lane.Id,
-            null,
-            lane.Code__c
-        );
-        system.assertEquals(null, inviteeId);
+            inviteeId = KickboardCtrl.isValidCredentials(
+                lane.Id,
+                null,
+                lane.Code__c
+            );
+            system.assertEquals(null, inviteeId);
 
-        inviteeId = KickboardCtrl.isValidCredentials(
-            lane.Id,
-            'test@test.com',
-            '12345678'
-        );
-        system.assertEquals(null, inviteeId);
+            inviteeId = KickboardCtrl.isValidCredentials(
+                lane.Id,
+                'test@test.com',
+                '12345678'
+            );
+            system.assertEquals(null, inviteeId);
 
-        inviteeId = KickboardCtrl.isValidCredentials(
-            lane.Id,
-            'test@example.com',
-            lane.Code__c
-        );
-        system.assertEquals(null, inviteeId);
+            inviteeId = KickboardCtrl.isValidCredentials(
+                lane.Id,
+                'test@example.com',
+                lane.Code__c
+            );
+            system.assertEquals(null, inviteeId);
 
-        inviteeId = KickboardCtrl.isValidCredentials(
-            lane.Id,
-            'test@test.com',
-            lane.Code__c
-        );
-        system.assertEquals(lu.Id, inviteeId);
-
+            inviteeId = KickboardCtrl.isValidCredentials(
+                lane.Id,
+                'test@test.com',
+                lane.Code__c
+            );
+            system.assertEquals(lu.Id, inviteeId);
+        }
         Test.stopTest();
     }
 
     @IsTest
     static void checkExportLane() {
         Lane__c lane = [SELECT Id FROM Lane__c];
-        String output = KickboardCtrl.exportLaneJSON(lane.Id);
-        system.assertNotEquals(null, output);
+        Test.startTest();
+        System.runAs(new User(Id = UserInfo.getUserId())) {
+            String output = KickboardCtrl.exportLaneJSON(lane.Id);
+            system.assertNotEquals(null, output);
+        }
+        Test.stopTest();
     }
 }
