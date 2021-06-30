@@ -4,21 +4,16 @@
             "path": "force-app",
             "default": true,
             "package": "Kickboard",
-            "versionName": "ver 0.1",
+            "versionName": "Initial Release",
             "versionNumber": "0.1.0.NEXT"
         }
     ],
     "name": "kickboard",
-    "namespace": "kickboard",
+    "namespace": "",
     "sfdcLoginUrl": "https://login.salesforce.com",
     "sourceApiVersion": "52.0",
     "packageAliases": {
         "Kickboard": "0Ho5e000000XZZLCA4",
-        "Kickboard@0.1.0-1": "04t5e0000002rKOAAY",
-        "Kickboard@0.1.0-2": "04t5e0000002sPBAAY",
-        "Kickboard@0.1.0-3": "04t5e0000002sTTAAY",
-        "Kickboard@0.1.0-4": "04t5e0000002sXgAAI",
-        "Kickboard@0.1.0-5": "04t5e0000002sbyAAA",
-        "Kickboard@0.1.0-6": "04t5e0000002scDAAQ"
+        "Kickboard@0.1.0-7": "04t5e0000002tDmAAI"
     }
 }
