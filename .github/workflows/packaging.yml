@@ -57,7 +57,7 @@ jobs:
             # Update namespace in custom label
             - name: Update namespace in Custom Label
               run: |
-                  sed -i 's,default,kickboard,' /force-app/main/default/labels/CustomLabels.labels-meta.xml
+                  sed -i 's,default,kickboard,' ./force-app/main/default/labels/CustomLabels.labels-meta.xml
 
             # Create package version and extract its id
             - name: Create package version
