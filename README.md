@@ -42,46 +42,13 @@ Kickboard is an application that teaches are customers how to swim in the vast d
     sfdx force:user:permset:assign -n Kickboard_User
     ```
 
-1. Import sample data:
-
-    ```
-    sfdx force:data:tree:import -p ./data/data-plan.json
-    ```
-
 1. Open the scratch org:
 
     ```
     sfdx force:org:open
     ```
 
-1. Publish the community:
-
-    Use these manual instructions until deployable with a community
-
-    1. Create a new site
-    2. Select Build Your Own
-    3. Name = Kickboard > Create
-    4. Click Builder
-    5. Home > New Page > Object Pages
-    6. Select Lane > Create
-    7. Remove components
-    8. Add Whiteboard Canvas for Lane
-    9. Settings > Public Can Access Site
-    10. Create sharing with guest users
-        a. Guest user access, based on criteria
-        b. Is_Public = true
-        c. Share with Kickboard Site Guest User
-    11. in community builder, select settings > guest user profile > view users
-        a. select user
-        b. assign permset > edit assignments > kickboard guest
-
-    ```
-    sfdx force:community:publish -n Kickboard
-    ```
-
-1. Assign the **Kickboard Guest** permission set to the Whiteboard Site guest user
-
-1. Enable **Allow guest users to access public APIs** for the Whiteboard Community
+1. Navigate to the **Kickboard** app, and follow the initial setup instructions.
 
 ## Optional Installation Instructions
 
