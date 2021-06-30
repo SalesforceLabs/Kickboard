@@ -89,3 +89,4 @@ jobs:
               uses: stefanzweifel/git-auto-commit-action@v4
               with:
                   commit_message: "Created new package version"
+                  file_pattern: sfdx-project.json
