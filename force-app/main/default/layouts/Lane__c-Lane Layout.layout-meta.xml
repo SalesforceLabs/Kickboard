@@ -59,15 +59,21 @@
     </layoutSections>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Description__c</fields>
         <fields>Order__c</fields>
+        <fields>Time_to_Complete_in_minutes__c</fields>
+        <fields>Description__c</fields>
+        <fields>Number_of_Cards__c</fields>
         <relatedList>Board__c.Lane__c</relatedList>
         <sortField>Order__c</sortField>
         <sortOrder>Asc</sortOrder>
     </relatedLists>
     <relatedLists>
+        <excludeButtons>MassChangeOwner</excludeButtons>
+        <excludeButtons>New</excludeButtons>
         <fields>NAME</fields>
         <fields>Email__c</fields>
+        <fields>Is_Active__c</fields>
+        <fields>User__c</fields>
         <relatedList>Lane_User__c.Lane__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
@@ -76,7 +82,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h17000006zz10</masterLabel>
+        <masterLabel>00h1g000002TuXy</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

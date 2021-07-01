@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <choices>
+        <name>ActivateUserChoice</name>
+        <choiceText>Activate Users</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Activate Users</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>AddUserToSwimLaneChoice</name>
+        <choiceText>Add a User to this Swim Lane</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Add a User to this Swim Lane</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>SendEmailToUserChoice</name>
+        <choiceText>Send Email to Swim Lane User</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Send Email to Swim Lane User</stringValue>
+        </value>
+    </choices>
+    <decisions>
+        <name>Action_Decision</name>
+        <label>Action Decision</label>
+        <locationX>168</locationX>
+        <locationY>363</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OutcomeIs_ActivateSwimLaneUsers</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Action_Picklist</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>ActivateUserChoice</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>ActivateSwimLaneUsers_Subflow</targetReference>
+            </connector>
+            <label>OutcomeIs ActivateSwimLaneUsers</label>
+        </rules>
+        <rules>
+            <name>OutcomeIs_AddAUserToSwimLane</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Action_Picklist</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>AddUserToSwimLaneChoice</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>AddAUserToSwimLane_Subflow</targetReference>
+            </connector>
+            <label>OutcomeIs AddAUserToSwimLane</label>
+        </rules>
+        <rules>
+            <name>OutcomeIs_SendEmailToSwimLaneUser</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Action_Picklist</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>SendEmailToUserChoice</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>SendEmailToLaneUser_Subflow</targetReference>
+            </connector>
+            <label>OutcomeIs SendEmailToSwimLaneUser</label>
+        </rules>
+    </decisions>
+    <interviewLabel>Modify Users {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Modify Users</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <screens>
+        <name>Action_Screen</name>
+        <label>Action Screen</label>
+        <locationX>176</locationX>
+        <locationY>226</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Action_Decision</targetReference>
+        </connector>
+        <fields>
+            <name>Action_Picklist</name>
+            <choiceReferences>ActivateUserChoice</choiceReferences>
+            <choiceReferences>AddUserToSwimLaneChoice</choiceReferences>
+            <choiceReferences>SendEmailToUserChoice</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Select an action</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Action_Screen</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <subflows>
+        <name>ActivateSwimLaneUsers_Subflow</name>
+        <label>ActivateSwimLaneUsers Subflow</label>
+        <locationX>173</locationX>
+        <locationY>534</locationY>
+        <flowName>Activate_Swim_Lane_Users</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>AddAUserToSwimLane_Subflow</name>
+        <label>AddAUserToSwimLane Subflow</label>
+        <locationX>327</locationX>
+        <locationY>544</locationY>
+        <flowName>Add_User_to_Swim_Lane</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>SendEmailToLaneUser_Subflow</name>
+        <label>SendEmailToLaneUser Subflow</label>
+        <locationX>492</locationX>
+        <locationY>354</locationY>
+        <flowName>Send_Email_to_Lane_User</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <variables>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

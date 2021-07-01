@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <choices>
+        <name>AddBoardFromTemplateChoice</name>
+        <choiceText>Add a Board from a Template</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Add a Board from a Template</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>AddCardsFromAnotherBoard_Choice</name>
+        <choiceText>Add Cards from Another Board</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Add Cards from Another Board</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>MoveBoardToAnotherSwimLane_Choice</name>
+        <choiceText>Move a Board to Another Swim Lane</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Move a Board to Another Swim Lane</stringValue>
+        </value>
+    </choices>
+    <decisions>
+        <name>Action_Decision</name>
+        <label>Action Decision</label>
+        <locationX>167</locationX>
+        <locationY>328</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OutcomeIs_AddCardsFromAnotherBoard</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>SelectAction_Picklist</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>AddCardsFromAnotherBoard_Choice</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>AddCardsFromAnotherBoard_Subflow</targetReference>
+            </connector>
+            <label>OutcomeIs AddCardsFromAnotherBoard</label>
+        </rules>
+        <rules>
+            <name>OutcomeIs_AddABoardFromATemplate</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>SelectAction_Picklist</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>AddBoardFromTemplateChoice</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>AddBoardFromTemplate_Subflow</targetReference>
+            </connector>
+            <label>OutcomeIs AddABoardFromATemplate</label>
+        </rules>
+        <rules>
+            <name>OutcomeIs_MoveBoardToAnotherSwimLane</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>SelectAction_Picklist</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>MoveBoardToAnotherSwimLane_Choice</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>MoveBoardToAnotherSwimLane_Flow</targetReference>
+            </connector>
+            <label>OutcomeIs MoveBoardToAnotherSwimLane</label>
+        </rules>
+    </decisions>
+    <interviewLabel>Modify Boards {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Modify Boards</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <screens>
+        <name>Action_Screen</name>
+        <label>Action Screen</label>
+        <locationX>176</locationX>
+        <locationY>197</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Action_Decision</targetReference>
+        </connector>
+        <fields>
+            <name>SelectAction_Picklist</name>
+            <choiceReferences>AddCardsFromAnotherBoard_Choice</choiceReferences>
+            <choiceReferences>AddBoardFromTemplateChoice</choiceReferences>
+            <choiceReferences>MoveBoardToAnotherSwimLane_Choice</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Select an Action</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <start>
+        <locationX>49</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Action_Screen</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <subflows>
+        <name>AddBoardFromTemplate_Subflow</name>
+        <label>AddBoardFromTemplate Subflow</label>
+        <locationX>318</locationX>
+        <locationY>471</locationY>
+        <flowName>Add_Board_From_Template</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>AddCardsFromAnotherBoard_Subflow</name>
+        <label>AddCardsFromAnotherBoard Subflow</label>
+        <locationX>171</locationX>
+        <locationY>471</locationY>
+        <flowName>Add_Cards_From_Another_Board</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>MoveBoardToAnotherSwimLane_Flow</name>
+        <label>MoveBoardToAnotherSwimLane Flow</label>
+        <locationX>541</locationX>
+        <locationY>323</locationY>
+        <flowName>Move_Board_to_Another_Swim_Lane</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <variables>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

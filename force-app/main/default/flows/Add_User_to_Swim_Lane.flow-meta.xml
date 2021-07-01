@@ -1,7 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>52.0</apiVersion>
-    <isTemplate>true</isTemplate>
+    <assignments>
+        <name>NewUserRecordIdExternal_Assignment</name>
+        <label>NewUserRecordIdExternal Assignment</label>
+        <locationX>815</locationX>
+        <locationY>1065</locationY>
+        <assignmentItems>
+            <assignToReference>NewUserRecordId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>ExternalLaneUser_CreateRecord</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>SendEmail_Decision</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>NewUserRecordIdInternal_Assignment</name>
+        <label>NewUserRecordIdInternal Assignment</label>
+        <locationX>1301</locationX>
+        <locationY>868</locationY>
+        <assignmentItems>
+            <assignToReference>NewUserRecordId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>InternalLaneUser_CreateRecord</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>SendEmail_Decision</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>AddAnotherUser_Decision</name>
+        <label>AddAnotherUser Decision</label>
+        <locationX>1549</locationX>
+        <locationY>228</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OutcomeIs_AddAnotherUser</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>AddAnotherUser_Toggle.value</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Internal_Screen</targetReference>
+            </connector>
+            <label>OutcomeIs AddAnotherUser</label>
+        </rules>
+    </decisions>
     <decisions>
         <name>ExternalUserDoesNotExist_Decision</name>
         <label>ExternalUserDoesNotExist Decision</label>
@@ -94,12 +147,38 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>InternalLaneUser_CreateRecords</targetReference>
+                <targetReference>InternalLaneUser_CreateRecord</targetReference>
             </connector>
             <label>OutcomeIs InternalUserDoesNotExist</label>
         </rules>
     </decisions>
+    <decisions>
+        <name>SendEmail_Decision</name>
+        <label>SendEmail Decision</label>
+        <locationX>1082</locationX>
+        <locationY>1068</locationY>
+        <defaultConnector>
+            <targetReference>AddAnotherUser_Screen</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OutcomeIs_SendEmail</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>AutomaticallyActivate_Toggle.value</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>SendEmailToUserAction_Subflow</targetReference>
+            </connector>
+            <label>OutcomeIs SendEmail</label>
+        </rules>
+    </decisions>
     <interviewLabel>Add User to Swim Lane {!$Flow.CurrentDateTime}</interviewLabel>
+    <isTemplate>true</isTemplate>
     <label>Add User to Swim Lane</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -123,8 +202,11 @@
     <recordCreates>
         <name>ExternalLaneUser_CreateRecord</name>
         <label>ExternalLaneUser CreateRecord</label>
-        <locationX>618</locationX>
-        <locationY>885</locationY>
+        <locationX>620</locationX>
+        <locationY>1066</locationY>
+        <connector>
+            <targetReference>NewUserRecordIdExternal_Assignment</targetReference>
+        </connector>
         <inputAssignments>
             <field>Email__c</field>
             <value>
@@ -147,10 +229,13 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordCreates>
-        <name>InternalLaneUser_CreateRecords</name>
-        <label>InternalLaneUser CreateRecords</label>
+        <name>InternalLaneUser_CreateRecord</name>
+        <label>InternalLaneUser CreateRecord</label>
         <locationX>1301</locationX>
         <locationY>537</locationY>
+        <connector>
+            <targetReference>NewUserRecordIdInternal_Assignment</targetReference>
+        </connector>
         <inputAssignments>
             <field>Email__c</field>
             <value>
@@ -277,6 +362,46 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <screens>
+        <name>AddAnotherUser_Screen</name>
+        <label>AddAnotherUser Screen</label>
+        <locationX>1558</locationX>
+        <locationY>1165</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>AddAnotherUser_Decision</targetReference>
+        </connector>
+        <fields>
+            <name>AddAnotherUser_Toggle</name>
+            <extensionName>flowruntime:toggle</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Add Another User to Swim Lane?</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageToggleActive</name>
+                <value>
+                    <stringValue>Yes, please</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageToggleInactive</name>
+                <value>
+                    <stringValue>Nope, I&apos;m done</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
         <name>ExternalEmail_Screen</name>
         <label>ExternalEmail_Screen</label>
         <locationX>286</locationX>
@@ -347,7 +472,7 @@
             <inputParameters>
                 <name>label</name>
                 <value>
-                    <stringValue>Would you like to automatically activate them?</stringValue>
+                    <stringValue>Would you like to automatically activate and send email?</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -365,6 +490,23 @@
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <fields>
+            <name>CustomMessage_InputText</name>
+            <dataType>String</dataType>
+            <fieldText>Add a custom message</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>AutomaticallyActivate_Toggle.value</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
@@ -412,8 +554,8 @@
     <screens>
         <name>InternalUserExists_Screen</name>
         <label>InternalUserExists Screen</label>
-        <locationX>1002</locationX>
-        <locationY>856</locationY>
+        <locationX>1119</locationX>
+        <locationY>886</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -485,6 +627,28 @@
         </inputAssignments>
     </subflows>
     <subflows>
+        <name>SendEmailToUserAction_Subflow</name>
+        <label>SendEmailToUserAction Subflow</label>
+        <locationX>1089</locationX>
+        <locationY>1241</locationY>
+        <connector>
+            <targetReference>AddAnotherUser_Screen</targetReference>
+        </connector>
+        <flowName>Send_Email_to_User_Action</flowName>
+        <inputAssignments>
+            <name>customMessage</name>
+            <value>
+                <elementReference>CustomMessage_InputText</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>NewUserRecordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
         <name>ShareLaneToUser_Subflow</name>
         <label>ShareLaneToUser Subflow</label>
         <locationX>985</locationX>
@@ -506,6 +670,13 @@
             </value>
         </inputAssignments>
     </subflows>
+    <variables>
+        <name>NewUserRecordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
     <variables>
         <name>recordId</name>
         <dataType>String</dataType>

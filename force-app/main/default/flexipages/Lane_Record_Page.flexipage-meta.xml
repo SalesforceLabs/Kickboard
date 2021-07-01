@@ -173,7 +173,15 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListComponentOverride</name>
-                    <value>CARD</value>
+                    <value>ADVGRID</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>rowsToDisplay</name>
+                    <value>10</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showActionBar</name>
+                    <value>false</value>
                 </componentInstanceProperties>
                 <componentName>force:relatedListSingleContainer</componentName>
             </componentInstance>
@@ -194,7 +202,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListComponentOverride</name>
-                    <value>NONE</value>
+                    <value>ADVGRID</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>rowsToDisplay</name>
@@ -202,7 +210,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>showActionBar</name>
-                    <value>true</value>
+                    <value>false</value>
                 </componentInstanceProperties>
                 <componentName>force:relatedListSingleContainer</componentName>
             </componentInstance>
@@ -292,7 +300,7 @@
                             </visibilityRule>
                         </valueListItems>
                         <valueListItems>
-                            <value>Lane__c.Add_User_To_Swim_Lane</value>
+                            <value>Lane__c.Modify_Users</value>
                             <visibilityRule>
                                 <criteria>
                                     <leftValue>{!Record.Is_Template__c}</leftValue>
@@ -302,17 +310,7 @@
                             </visibilityRule>
                         </valueListItems>
                         <valueListItems>
-                            <value>Lane__c.Send_Email_to_Users</value>
-                            <visibilityRule>
-                                <criteria>
-                                    <leftValue>{!Record.Is_Template__c}</leftValue>
-                                    <operator>EQUAL</operator>
-                                    <rightValue>false</rightValue>
-                                </criteria>
-                            </visibilityRule>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>Lane__c.Add_Board_From_Template</value>
+                            <value>Lane__c.Modify_Boards</value>
                             <visibilityRule>
                                 <criteria>
                                     <leftValue>{!Record.Is_Template__c}</leftValue>
