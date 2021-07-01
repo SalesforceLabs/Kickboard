@@ -10,6 +10,8 @@ import ISGUEST from "@salesforce/user/isGuest";
 
 import KickboardLogo from "@salesforce/resourceUrl/KickboardLogoSmall";
 
+import NAMESPACE from "@salesforce/label/c.Namespace";
+
 export default class LaneBoards extends LightningElement {
     @api recordId;
     @api laneGuestUserId;
@@ -19,9 +21,7 @@ export default class LaneBoards extends LightningElement {
 
     boardsList = [];
     currentBoardIdFromLaneRecord;
-
-    hasPrevious = false;
-    hasNext = false;
+    options;
 
     boardsRetrieved = false;
     currentBoardIdRetrieved = false;
@@ -31,10 +31,21 @@ export default class LaneBoards extends LightningElement {
 
     logo = KickboardLogo;
 
+    get namespace() {
+        return NAMESPACE === "default" ? "" : NAMESPACE + "__";
+    }
+
     @wire(getBoards, { laneId: "$recordId" })
     handleGetBoards({ data, error }) {
         if (data) {
             this.boardsList = data;
+            this.options = this.boardsList.map((board) => {
+                return {
+                    label:
+                        board[`${this.namespace}Order__c`] + ". " + board.Name,
+                    value: board.Id
+                };
+            });
             this.boardsRetrieved = true;
             this.setCurrentBoardId();
         } else if (error) {
@@ -68,63 +79,15 @@ export default class LaneBoards extends LightningElement {
             } else if (this.boardsList[0]) {
                 this.currentBoardId = this.boardsList[0].Id;
             }
-            this.paginate();
         }
     }
 
-    paginate() {
-        if (this.boardsList) {
-            const currentBoardIndex = this.boardsList.findIndex(
-                (x) => x.Id === this.currentBoardId
-            );
-            if (currentBoardIndex >= 0) {
-                if (currentBoardIndex === 0) {
-                    this.hasPrevious = false;
-                    this.hasNext = true;
-                } else if (currentBoardIndex === this.boardsList.length - 1) {
-                    this.hasPrevious = true;
-                    this.hasNext = false;
-                } else {
-                    this.hasPrevious = true;
-                    this.hasNext = true;
-                }
-            } else {
-                this.hasPrevious = false;
-                this.hasNext = false;
-            }
-        }
-    }
-
-    handlePrevious() {
-        if (this.boardsList) {
-            const currentBoardIndex = this.boardsList.findIndex(
-                (x) => x.Id === this.currentBoardId
-            );
-            const newBoardIndex = currentBoardIndex - 1;
-            if (newBoardIndex >= 0) {
-                this.currentBoardId = this.boardsList[newBoardIndex].Id;
-            }
-            this.paginate();
+    handleChange(event) {
+        this.currentBoardId = event.detail.value;
+        if (!this.isGuest && !this.isTemplate) {
             this.updateCurrentBoard();
-            this.resetBoardCoordinates();
         }
-    }
-
-    handleNext() {
-        if (this.boardsList) {
-            const currentBoardIndex = this.boardsList.findIndex(
-                (x) => x.Id === this.currentBoardId
-            );
-            const newBoardIndex = currentBoardIndex + 1;
-            if (newBoardIndex <= this.boardsList.length - 1) {
-                this.currentBoardId = this.boardsList[newBoardIndex].Id;
-            }
-            this.paginate();
-            if (!this.isGuest) {
-                this.updateCurrentBoard();
-            }
-            this.resetBoardCoordinates();
-        }
+        this.resetBoardCoordinates();
     }
 
     resetBoardCoordinates() {

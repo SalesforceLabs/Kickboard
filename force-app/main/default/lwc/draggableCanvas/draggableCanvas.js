@@ -23,13 +23,12 @@ import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 import { renderer } from "./renderer";
 
-import NAMESPACE from "@salesforce/label/c.Namespace";
-
 export default class DraggableCanvas extends LightningElement {
     @api recordId;
     @api laneId;
     @api laneGuestUserId;
     @api isTemplate;
+    @api namespace;
 
     isGuest = ISGUEST;
     isDragging = false;
@@ -61,10 +60,6 @@ export default class DraggableCanvas extends LightningElement {
 
     cardTitle;
     bgImage;
-
-    get namespace() {
-        return NAMESPACE === "default" ? "" : NAMESPACE + "__";
-    }
 
     get shouldListenToChanges() {
         return !this.isGuest && this.recordId;

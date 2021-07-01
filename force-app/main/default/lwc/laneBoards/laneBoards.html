@@ -30,21 +30,18 @@
                 lane-id={recordId}
                 lane-guest-user-id={laneGuestUserId}
                 is-template={isTemplate}
+                namespace={namespace}
             >
                 <div slot="actions">
-                    <template if:true={hasPrevious}>
-                        <lightning-button
-                            label="Previous Board"
-                            class="slds-var-m-right_x-small"
-                            onclick={handlePrevious}
-                        ></lightning-button>
-                    </template>
-                    <template if:true={hasNext}>
-                        <lightning-button
-                            label="Next Board"
-                            onclick={handleNext}
-                        ></lightning-button>
-                    </template>
+                    <lightning-combobox
+                        name="boards"
+                        label="Select Board"
+                        value={currentBoardId}
+                        placeholder="Select Board"
+                        options={options}
+                        onchange={handleChange}
+                        class="comboWidth"
+                    ></lightning-combobox>
                 </div>
             </c-draggable-canvas>
         </template>

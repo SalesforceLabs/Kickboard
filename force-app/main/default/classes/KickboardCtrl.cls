@@ -56,7 +56,7 @@ public with sharing class KickboardCtrl {
     public static List<Board__c> getBoards(String laneId) {
         try {
             return [
-                SELECT Id
+                SELECT Id, Name, Order__c
                 FROM Board__c
                 WHERE Lane__c = :laneId
                 WITH SECURITY_ENFORCED
