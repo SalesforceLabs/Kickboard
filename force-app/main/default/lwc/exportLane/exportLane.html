@@ -1,35 +1,38 @@
 <template>
-    <template if:true={dataUrl}>
-        <div class="slds-var-p-around_large slds-text-align_center">
-            <a href={dataUrl} download={downloadFileName}>
-                <lightning-button
-                    variant="brand"
-                    label="Download JSON"
-                ></lightning-button>
-            </a>
-        </div>
-    </template>
-    <template if:true={error}>
-        <div class="slds-var-p-around_large">
-            <div
-                class="slds-notify slds-notify_alert slds-alert_error"
-                role="alert"
-            >
-                <h2>
-                    An error occurred. Please contact your system administrator.
-                </h2>
+    <lightning-quick-action-panel header="Export Swim Lane">
+        <template if:true={dataUrl}>
+            <div class="slds-var-p-around_large slds-text-align_center">
+                <a href={dataUrl} download={downloadFileName}>
+                    <lightning-button
+                        variant="brand"
+                        label="Download JSON"
+                    ></lightning-button>
+                </a>
             </div>
-        </div>
-    </template>
-    <template if:false={hasExportPermission}>
-        <div class="slds-var-p-around_large">
-            <div
-                class="slds-notify slds-notify_alert slds-alert_error"
-                role="alert"
-            >
-                <h2>You do not have the required permission.</h2>
+        </template>
+        <template if:true={error}>
+            <div class="slds-var-p-around_large">
+                <div
+                    class="slds-notify slds-notify_alert slds-alert_error"
+                    role="alert"
+                >
+                    <h2>
+                        An error occurred. Please contact your system
+                        administrator.
+                    </h2>
+                </div>
             </div>
-        </div>
-    </template>
-    <div class="slds-hide">{recordId}</div>
+        </template>
+        <template if:false={hasExportPermission}>
+            <div class="slds-var-p-around_large">
+                <div
+                    class="slds-notify slds-notify_alert slds-alert_error"
+                    role="alert"
+                >
+                    <h2>You do not have the required permission.</h2>
+                </div>
+            </div>
+        </template>
+        <div class="slds-hide">{recordId}</div>
+    </lightning-quick-action-panel>
 </template>

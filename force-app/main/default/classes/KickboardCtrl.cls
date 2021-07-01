@@ -207,25 +207,7 @@ public with sharing class KickboardCtrl {
     public static String exportLaneJSON(String laneId) {
         try {
             Lane__c lane = [
-                SELECT
-                    Id,
-                    Name,
-                    Description__c,
-                    Is_Template__c,
-                    (
-                        SELECT
-                            Id,
-                            Name,
-                            Description__c,
-                            Order__c,
-                            Background_Image__c,
-                            Instructions__c,
-                            Objective__c,
-                            Prerequisites__c,
-                            Design_Stage__c,
-                            Time_to_Complete_in_minutes__c
-                        FROM Boards__r
-                    )
+                SELECT Id, Name, Description__c, Is_Template__c
                 FROM Lane__c
                 WHERE Id = :laneId
                 WITH SECURITY_ENFORCED
@@ -234,6 +216,8 @@ public with sharing class KickboardCtrl {
             gr.graphId = lane.Id;
 
             List<CompositeRequest> cRequests = new List<CompositeRequest>();
+
+            // Lane Object
             CompositeRequest cr = new CompositeRequest();
             cr.url = '/services/data/v50.0/sobjects/__namespace__Lane__c/';
             cr.method = 'POST';
@@ -243,7 +227,46 @@ public with sharing class KickboardCtrl {
             cr.body.put('__namespace__Description__c', lane.Description__c);
             cr.body.put('__namespace__Is_Template__c', lane.Is_Template__c);
             cRequests.add(cr);
-            for (Board__c board : lane.Boards__r) {
+
+            List<Board__c> boards = [
+                SELECT
+                    Id,
+                    Name,
+                    Description__c,
+                    Order__c,
+                    Background_Image__c,
+                    Instructions__c,
+                    Objective__c,
+                    Prerequisites__c,
+                    Design_Stage__c,
+                    Time_to_Complete_in_minutes__c,
+                    (
+                        SELECT
+                            Id,
+                            Category__c,
+                            Color__c,
+                            Max_X_Position__c,
+                            Max_Y_Position__c,
+                            Min_X_Position__c,
+                            Min_Y_Position__c,
+                            Type__c
+                        FROM Category_Mappings__r
+                    ),
+                    (
+                        SELECT
+                            Id,
+                            Color__c,
+                            Description__c,
+                            X_Position__c,
+                            Y_Position__c
+                        FROM Cards__r
+                    )
+                FROM Board__c
+                WHERE Lane__c = :lane.Id
+            ];
+
+            for (Board__c board : boards) {
+                // Board Object
                 cr = new CompositeRequest();
                 cr.url = '/services/data/v50.0/sobjects/__namespace__Board__c/';
                 cr.method = 'POST';
@@ -278,6 +301,74 @@ public with sharing class KickboardCtrl {
                     board.Time_to_Complete_in_minutes__c
                 );
                 cRequests.add(cr);
+
+                // Category Mapping Object
+                if (board.Category_Mappings__r.size() > 0) {
+                    for (Category_Mapping__c cm : board.Category_Mappings__r) {
+                        cr = new CompositeRequest();
+                        cr.url = '/services/data/v50.0/sobjects/__namespace__Category_Mapping__c/';
+                        cr.method = 'POST';
+                        cr.referenceId = cm.Id;
+                        cr.body = new Map<String, Object>();
+                        cr.body.put('__namespace__Category__c', cm.Category__c);
+                        cr.body.put('__namespace__Color__c', cm.Color__c);
+                        cr.body.put(
+                            '__namespace__Max_X_Position__c',
+                            cm.Max_X_Position__c
+                        );
+                        cr.body.put(
+                            '__namespace__Max_Y_Position__c',
+                            cm.Max_Y_Position__c
+                        );
+                        cr.body.put(
+                            '__namespace__Min_X_Position__c',
+                            cm.Min_X_Position__c
+                        );
+                        cr.body.put(
+                            '__namespace__Min_Y_Position__c',
+                            cm.Min_Y_Position__c
+                        );
+                        cr.body.put('__namespace__Type__c', cm.Type__c);
+                        cr.body.put(
+                            '__namespace__Board__c',
+                            '@{' +
+                            board.Id +
+                            '.id}'
+                        );
+                        cRequests.add(cr);
+                    }
+                }
+
+                // Card Object
+                if (board.Cards__r.size() > 0) {
+                    for (Card__c card : board.Cards__r) {
+                        cr = new CompositeRequest();
+                        cr.url = '/services/data/v50.0/sobjects/__namespace__Card__c/';
+                        cr.method = 'POST';
+                        cr.referenceId = card.Id;
+                        cr.body = new Map<String, Object>();
+                        cr.body.put('__namespace__Color__c', card.Color__c);
+                        cr.body.put(
+                            '__namespace__Description__c',
+                            card.Description__c
+                        );
+                        cr.body.put(
+                            '__namespace__X_Position__c',
+                            card.X_Position__c
+                        );
+                        cr.body.put(
+                            '__namespace__Y_Position__c',
+                            card.Y_Position__c
+                        );
+                        cr.body.put(
+                            '__namespace__Board__c',
+                            '@{' +
+                            board.Id +
+                            '.id}'
+                        );
+                        cRequests.add(cr);
+                    }
+                }
             }
             gr.compositeRequest = cRequests;
             return JSON.serializePretty(gr);
