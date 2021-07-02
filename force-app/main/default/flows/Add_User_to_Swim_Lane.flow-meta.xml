@@ -34,6 +34,31 @@
         </connector>
     </assignments>
     <decisions>
+        <name>ActivateUser_Decision</name>
+        <label>ActivateUser Decision</label>
+        <locationX>1293</locationX>
+        <locationY>699</locationY>
+        <defaultConnector>
+            <targetReference>NewUserRecordIdInternal_Assignment</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OutcomeIs_ActivateUser</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>AutomaticallyActivate_Toggle.value</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>ShareLaneToUser_Subflow</targetReference>
+            </connector>
+            <label>OutcomeIs ActivateUser</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>AddAnotherUser_Decision</name>
         <label>AddAnotherUser Decision</label>
         <locationX>1549</locationX>
@@ -131,7 +156,7 @@
         <name>InternalUserDoesNotExist_Decision</name>
         <label>InternalUserDoesNotExist Decision</label>
         <locationX>1108</locationX>
-        <locationY>545</locationY>
+        <locationY>544</locationY>
         <defaultConnector>
             <targetReference>InternalUserExists_Screen</targetReference>
         </defaultConnector>
@@ -234,7 +259,7 @@
         <locationX>1301</locationX>
         <locationY>537</locationY>
         <connector>
-            <targetReference>NewUserRecordIdInternal_Assignment</targetReference>
+            <targetReference>ActivateUser_Decision</targetReference>
         </connector>
         <inputAssignments>
             <field>Email__c</field>
@@ -298,7 +323,7 @@
         <locationY>542</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>ShareLaneToUser_Subflow</targetReference>
+            <targetReference>InternalUserDoesNotExist_Decision</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -651,10 +676,10 @@
     <subflows>
         <name>ShareLaneToUser_Subflow</name>
         <label>ShareLaneToUser Subflow</label>
-        <locationX>985</locationX>
-        <locationY>542</locationY>
+        <locationX>1444</locationX>
+        <locationY>784</locationY>
         <connector>
-            <targetReference>InternalUserDoesNotExist_Decision</targetReference>
+            <targetReference>NewUserRecordIdInternal_Assignment</targetReference>
         </connector>
         <flowName>Share_Lane_to_User</flowName>
         <inputAssignments>

@@ -26,8 +26,8 @@
     <decisions>
         <name>SendEmail_Decision</name>
         <label>SendEmail Decision</label>
-        <locationX>167</locationX>
-        <locationY>503</locationY>
+        <locationX>164</locationX>
+        <locationY>592</locationY>
         <defaultConnector>
             <targetReference>ActivateAnotherUser_Screen</targetReference>
         </defaultConnector>
@@ -46,6 +46,31 @@
                 <targetReference>SendEmailToUserAction_Subflow</targetReference>
             </connector>
             <label>OutcomeIs SendEmail</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>SwimLaneIsInternalUser_Decision</name>
+        <label>SwimLaneIsInternalUser Decision</label>
+        <locationX>23</locationX>
+        <locationY>341</locationY>
+        <defaultConnector>
+            <targetReference>SendEmail_Decision</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OutcomeIs_SwimLaneUserIsInternal</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>SelectedUserId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>ShareLaneToUser_Subflow</targetReference>
+            </connector>
+            <label>OutcomeIs SwimLaneUserIsInternal</label>
         </rules>
     </decisions>
     <dynamicChoiceSets>
@@ -68,6 +93,10 @@
             </value>
         </filters>
         <object>Lane_User__c</object>
+        <outputAssignments>
+            <assignToReference>SelectedUserId</assignToReference>
+            <field>User__c</field>
+        </outputAssignments>
         <valueField>Id</valueField>
     </dynamicChoiceSets>
     <interviewLabel>Activate Users {!$Flow.CurrentDateTime}</interviewLabel>
@@ -94,10 +123,10 @@
     <recordUpdates>
         <name>SwimLaneUser_UpdateRecords</name>
         <label>SwimLaneUser UpdateRecords</label>
-        <locationX>174</locationX>
-        <locationY>356</locationY>
+        <locationX>172</locationX>
+        <locationY>339</locationY>
         <connector>
-            <targetReference>SendEmail_Decision</targetReference>
+            <targetReference>SwimLaneIsInternalUser_Decision</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -118,8 +147,8 @@
     <screens>
         <name>ActivateAnotherUser_Screen</name>
         <label>ActivateAnotherUser Screen</label>
-        <locationX>318</locationX>
-        <locationY>625</locationY>
+        <locationX>463</locationX>
+        <locationY>598</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -158,7 +187,7 @@
     <screens>
         <name>InactiveUser_Screen</name>
         <label>InactiveUser Screen</label>
-        <locationX>171</locationX>
+        <locationX>173</locationX>
         <locationY>212</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
@@ -231,8 +260,8 @@
     <subflows>
         <name>SendEmailToUserAction_Subflow</name>
         <label>SendEmailToUserAction Subflow</label>
-        <locationX>179</locationX>
-        <locationY>625</locationY>
+        <locationX>176</locationX>
+        <locationY>714</locationY>
         <connector>
             <targetReference>ActivateAnotherUser_Screen</targetReference>
         </connector>
@@ -250,11 +279,40 @@
             </value>
         </inputAssignments>
     </subflows>
+    <subflows>
+        <name>ShareLaneToUser_Subflow</name>
+        <label>ShareLaneToUser Subflow</label>
+        <locationX>23</locationX>
+        <locationY>590</locationY>
+        <connector>
+            <targetReference>SendEmail_Decision</targetReference>
+        </connector>
+        <flowName>Share_Lane_to_User</flowName>
+        <inputAssignments>
+            <name>laneId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>userId</name>
+            <value>
+                <elementReference>SelectedUserId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
     <variables>
         <name>recordId</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>SelectedUserId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
         <isOutput>false</isOutput>
     </variables>
 </Flow>

@@ -18,6 +18,14 @@
         </value>
     </choices>
     <choices>
+        <name>RemoveUserFromSwimLane_Choice</name>
+        <choiceText>Remove User from Swim Lane</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Remove User from Swim Lane</stringValue>
+        </value>
+    </choices>
+    <choices>
         <name>SendEmailToUserChoice</name>
         <choiceText>Send Email to Swim Lane User</choiceText>
         <dataType>String</dataType>
@@ -76,6 +84,21 @@
             </connector>
             <label>OutcomeIs SendEmailToSwimLaneUser</label>
         </rules>
+        <rules>
+            <name>OutcomeIs_RemoveUserFromSwimLane</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Action_Picklist</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>RemoveUserFromSwimLane_Choice</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>RemoveUserFromSwimLane_Subflow</targetReference>
+            </connector>
+            <label>OutcomeIs RemoveUserFromSwimLane</label>
+        </rules>
     </decisions>
     <interviewLabel>Modify Users {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Modify Users</label>
@@ -114,6 +137,7 @@
             <choiceReferences>ActivateUserChoice</choiceReferences>
             <choiceReferences>AddUserToSwimLaneChoice</choiceReferences>
             <choiceReferences>SendEmailToUserChoice</choiceReferences>
+            <choiceReferences>RemoveUserFromSwimLane_Choice</choiceReferences>
             <dataType>String</dataType>
             <fieldText>Select an action</fieldText>
             <fieldType>DropdownBox</fieldType>
@@ -133,8 +157,8 @@
     <subflows>
         <name>ActivateSwimLaneUsers_Subflow</name>
         <label>ActivateSwimLaneUsers Subflow</label>
-        <locationX>173</locationX>
-        <locationY>534</locationY>
+        <locationX>2</locationX>
+        <locationY>260</locationY>
         <flowName>Activate_Swim_Lane_Users</flowName>
         <inputAssignments>
             <name>recordId</name>
@@ -146,9 +170,22 @@
     <subflows>
         <name>AddAUserToSwimLane_Subflow</name>
         <label>AddAUserToSwimLane Subflow</label>
-        <locationX>327</locationX>
-        <locationY>544</locationY>
+        <locationX>4</locationX>
+        <locationY>458</locationY>
         <flowName>Add_User_to_Swim_Lane</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>RemoveUserFromSwimLane_Subflow</name>
+        <label>RemoveUserFromSwimLane Subflow</label>
+        <locationX>375</locationX>
+        <locationY>277</locationY>
+        <flowName>Remove_User_from_Swim_Lane</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>
@@ -159,8 +196,8 @@
     <subflows>
         <name>SendEmailToLaneUser_Subflow</name>
         <label>SendEmailToLaneUser Subflow</label>
-        <locationX>492</locationX>
-        <locationY>354</locationY>
+        <locationX>369</locationX>
+        <locationY>467</locationY>
         <flowName>Send_Email_to_Lane_User</flowName>
         <inputAssignments>
             <name>recordId</name>
