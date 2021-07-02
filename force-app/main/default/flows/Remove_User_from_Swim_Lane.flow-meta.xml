@@ -202,7 +202,7 @@
             <dataType>String</dataType>
             <fieldText>Which User would you like to remove?</fieldText>
             <fieldType>DropdownBox</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>

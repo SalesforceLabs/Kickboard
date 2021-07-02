@@ -201,7 +201,7 @@
             <dataType>String</dataType>
             <fieldText>Which Users would you like to activate?</fieldText>
             <fieldType>DropdownBox</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
         </fields>
         <fields>
             <name>SendEmail_Toggle</name>
