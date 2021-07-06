@@ -38,7 +38,7 @@ export default class Card extends LightningElement {
 
     handleChange(event) {
         if (!this.isTemplate) {
-            this.cardDescription = event.target.value;
+            this.cardDescription = encodeURI(event.target.value);
             window.clearTimeout(this.delayTimeout);
             // eslint-disable-next-line @lwc/lwc/no-async-operation
             this.delayTimeout = setTimeout(() => {

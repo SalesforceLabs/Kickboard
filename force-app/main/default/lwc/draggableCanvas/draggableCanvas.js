@@ -130,7 +130,9 @@ export default class DraggableCanvas extends LightningElement {
                     }px; margin-top:${
                         record[`${this.namespace}Y_Position__c`]
                     }px;`,
-                    description: record[`${this.namespace}Description__c`],
+                    description: decodeURI(
+                        record[`${this.namespace}Description__c`]
+                    ),
                     color: record[`${this.namespace}Color__c`]
                 };
             });
