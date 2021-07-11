@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Design_Stage__c</fullName>
+    <description>Boards can be organized into a Design stage.</description>
     <externalId>false</externalId>
+    <inlineHelpText>Boards can be organized into a Design stage.</inlineHelpText>
     <label>Design Stage</label>
     <required>false</required>
     <trackTrending>false</trackTrending>
@@ -29,6 +31,11 @@
                 <fullName>Prototype_Test</fullName>
                 <default>false</default>
                 <label>Prototype &amp; Test</label>
+            </value>
+            <value>
+                <fullName>Reflect</fullName>
+                <default>false</default>
+                <label>Reflect</label>
             </value>
         </valueSetDefinition>
     </valueSet>

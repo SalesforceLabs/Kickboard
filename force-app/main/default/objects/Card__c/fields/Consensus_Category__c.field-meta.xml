@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Consensus_Category__c</fullName>
+    <description>Cards can be categorized by color into what the consensus was about the card. For example, green may mean Accepted and red may mean Rejected. Use Category mappings to set these mappings.</description>
     <externalId>false</externalId>
+    <inlineHelpText>Cards can be categorized by color into what the consensus was about the card. For example, green may mean Accepted and red may mean Rejected. Use Category mappings to set these mappings.</inlineHelpText>
     <label>Consensus Category</label>
     <length>255</length>
     <required>false</required>

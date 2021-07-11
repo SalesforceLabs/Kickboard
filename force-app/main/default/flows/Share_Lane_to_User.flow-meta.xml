@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
-    <isTemplate>true</isTemplate>
     <apiVersion>52.0</apiVersion>
     <decisions>
         <name>LaneShareDoesNotExist_Decision</name>
@@ -25,6 +24,7 @@
         </rules>
     </decisions>
     <interviewLabel>Share Lane to User {!$Flow.CurrentDateTime}</interviewLabel>
+    <isTemplate>true</isTemplate>
     <label>Share Lane to User</label>
     <processMetadataValues>
         <name>BuilderType</name>

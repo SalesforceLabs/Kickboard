@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Type__c</fullName>
+    <description>This indicates the type of mapping to apply. For example, color or bounding box.</description>
     <externalId>false</externalId>
+    <inlineHelpText>This indicates the type of mapping to apply. For example, color or bounding box.</inlineHelpText>
     <label>Type</label>
     <required>true</required>
     <trackTrending>false</trackTrending>

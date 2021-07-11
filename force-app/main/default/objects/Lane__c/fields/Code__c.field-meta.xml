@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Code__c</fullName>
+    <description>This code is used by guest users to gain access to this Swim Lane.</description>
     <externalId>false</externalId>
+    <inlineHelpText>This code is used by guest users to gain access to this Swim Lane.</inlineHelpText>
     <label>Code</label>
     <length>6</length>
     <required>false</required>

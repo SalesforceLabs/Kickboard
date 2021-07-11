@@ -2,7 +2,9 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Is_Active__c</fullName>
     <defaultValue>false</defaultValue>
+    <description>When this is checked, a Swim Lane user can access this Swim Lane.</description>
     <externalId>false</externalId>
+    <inlineHelpText>When this is checked, a Swim Lane user can access this Swim Lane.</inlineHelpText>
     <label>Is Active</label>
     <trackTrending>false</trackTrending>
     <type>Checkbox</type>

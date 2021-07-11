@@ -2,7 +2,9 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Created_By_Guest__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
+    <description>This will be filled in if it was created by a guest user. It links to the Lane User object.</description>
     <externalId>false</externalId>
+    <inlineHelpText>This will be filled in if it was created by a guest user. It links to the Lane User object.</inlineHelpText>
     <label>Created By (Guest)</label>
     <referenceTo>Lane_User__c</referenceTo>
     <relationshipLabel>Cards</relationshipLabel>

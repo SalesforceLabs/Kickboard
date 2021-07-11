@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Intent_Category__c</fullName>
+    <description>Cards can be categorized into what the intent of the card was. For example, a card may be about a Business Goal or Persona. Use category mappings to adjust the intent. Category mappings use x and y coordinates to determine intent.</description>
     <externalId>false</externalId>
+    <inlineHelpText>Cards can be categorized into what the intent of the card was. For example, a card may be about a Business Goal or Persona. Use category mappings to adjust the intent. Category mappings use x and y coordinates to determine intent.</inlineHelpText>
     <label>Intent Category</label>
     <length>255</length>
     <required>false</required>

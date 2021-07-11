@@ -54,6 +54,11 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldItem>Record.Consensus_Category__c</fieldItem>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
                     <value>none</value>

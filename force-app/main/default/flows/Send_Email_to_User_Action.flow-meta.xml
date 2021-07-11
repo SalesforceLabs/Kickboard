@@ -1,10 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <isTemplate>true</isTemplate>
+    <actionCalls>
+        <name>CommunityUser_SendEmail</name>
+        <label>CommunityUser SendEmail</label>
+        <locationX>345</locationX>
+        <locationY>736</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>CommunityUser_TextTemplate</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>SwimLaneUser_GetRecord.Email__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>sendRichBody</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>You&apos;ve been invited to collaborate on Kickboard</stringValue>
+            </value>
+        </inputParameters>
+    </actionCalls>
     <actionCalls>
         <name>ExternalUser_SendEmail</name>
         <label>ExternalUser SendEmail</label>
-        <locationX>23</locationX>
-        <locationY>548</locationY>
+        <locationX>184</locationX>
+        <locationY>729</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -36,8 +70,8 @@
     <actionCalls>
         <name>InternalUser_SendEmail</name>
         <label>InternalUser SendEmail</label>
-        <locationX>377</locationX>
-        <locationY>375</locationY>
+        <locationX>581</locationX>
+        <locationY>372</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -87,9 +121,60 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>InternalUser_SendEmail</targetReference>
+                <targetReference>UserType_Decision</targetReference>
             </connector>
             <label>OutcomeIs UserIsInternal</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>UserType_Decision</name>
+        <label>UserType Decision</label>
+        <locationX>332</locationX>
+        <locationY>380</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OutcomeIs_UserIsStandard</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>SwimLaneUser_GetRecord.User__r.Profile.UserType</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Standard</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>InternalUser_SendEmail</targetReference>
+            </connector>
+            <label>OutcomeIs UserIsStandard</label>
+        </rules>
+        <rules>
+            <name>OutcomeIs_UserIsCommunity</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>SwimLaneUser_GetRecord.User__r.Profile.UserType</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>PowerPartner</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>SwimLaneUser_GetRecord.User__r.Profile.UserType</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>PowerCustomerSuccess</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>SwimLaneUser_GetRecord.User__r.Profile.UserType</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>CustomerSuccess</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>KickboardSettingCommunity_GetRecord</targetReference>
+            </connector>
+            <label>OutcomeIs UserIsCommunity</label>
         </rules>
     </decisions>
     <formulas>
@@ -119,10 +204,31 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <recordLookups>
+        <name>KickboardSettingCommunity_GetRecord</name>
+        <label>KickboardSettingCommunity GetRecord</label>
+        <locationX>344</locationX>
+        <locationY>550</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>CommunityUser_SendEmail</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>SetupOwnerId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Organization.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Kickboard_Settings__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
         <name>KickboardSettings_GetRecord</name>
         <label>KickboardSettings GetRecord</label>
-        <locationX>23</locationX>
-        <locationY>380</locationY>
+        <locationX>183</locationX>
+        <locationY>550</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>ExternalUser_SendEmail</targetReference>
@@ -168,6 +274,11 @@
         </connector>
     </start>
     <status>Active</status>
+    <textTemplates>
+        <name>CommunityUser_TextTemplate</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;Hey hey, Guess what? You&apos;ve been invited to collaborate in a swim lane by {!$User.FirstName} &lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;{!$User.LastName}.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;{!SwimLaneUser_GetRecord.Lane__r.Name}&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;{!KickboardSettingCommunity_GetRecord.Community_Url__c}/lane/{!SwimLaneUser_GetRecord.Lane__c}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;{!KickboardSettingCommunity_GetRecord.Community_Url__c}/lane/{!SwimLaneUser_GetRecord.Lane__c}&lt;/b&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;﻿{!customMessage}&lt;/span&gt;&lt;/p&gt;</text>
+    </textTemplates>
     <textTemplates>
         <name>ExernalUserEmail_TextTemplate</name>
         <isViewedAsPlainText>false</isViewedAsPlainText>

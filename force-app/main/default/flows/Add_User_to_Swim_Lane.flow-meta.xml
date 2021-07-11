@@ -20,8 +20,8 @@
     <assignments>
         <name>NewUserRecordIdInternal_Assignment</name>
         <label>NewUserRecordIdInternal Assignment</label>
-        <locationX>1301</locationX>
-        <locationY>868</locationY>
+        <locationX>1691</locationX>
+        <locationY>871</locationY>
         <assignmentItems>
             <assignToReference>NewUserRecordId</assignToReference>
             <operator>Assign</operator>
@@ -36,8 +36,8 @@
     <decisions>
         <name>ActivateUser_Decision</name>
         <label>ActivateUser Decision</label>
-        <locationX>1293</locationX>
-        <locationY>699</locationY>
+        <locationX>1683</locationX>
+        <locationY>702</locationY>
         <defaultConnector>
             <targetReference>NewUserRecordIdInternal_Assignment</targetReference>
         </defaultConnector>
@@ -61,8 +61,8 @@
     <decisions>
         <name>AddAnotherUser_Decision</name>
         <label>AddAnotherUser Decision</label>
-        <locationX>1549</locationX>
-        <locationY>228</locationY>
+        <locationX>1994</locationX>
+        <locationY>231</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>OutcomeIs_AddAnotherUser</name>
@@ -155,7 +155,7 @@
     <decisions>
         <name>InternalUserDoesNotExist_Decision</name>
         <label>InternalUserDoesNotExist Decision</label>
-        <locationX>1108</locationX>
+        <locationX>1263</locationX>
         <locationY>544</locationY>
         <defaultConnector>
             <targetReference>InternalUserExists_Screen</targetReference>
@@ -200,6 +200,60 @@
                 <targetReference>SendEmailToUserAction_Subflow</targetReference>
             </connector>
             <label>OutcomeIs SendEmail</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>UserType_Decision</name>
+        <label>UserType Decision</label>
+        <locationX>659</locationX>
+        <locationY>546</locationY>
+        <defaultConnector>
+            <targetReference>CantAssignPermissionSet_Screen</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OutcomeIs_UserIsStandard</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>User_GetRecord.Profile.UserType</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Standard</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>AssignKickboardUserPermissionSet_Subflow</targetReference>
+            </connector>
+            <label>OutcomeIs UserIsStandard</label>
+        </rules>
+        <rules>
+            <name>OutcomeIs_UserIsPortal</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>User_GetRecord.Profile.UserType</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>CustomerSuccess</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>User_GetRecord.Profile.UserType</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>PowerCustomerSuccess</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>User_GetRecord.Profile.UserType</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>PowerPartner</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>AssignKickboardGuestPermissionSet_Subflow</targetReference>
+            </connector>
+            <label>OutcomeIs UserIsPortal</label>
         </rules>
     </decisions>
     <interviewLabel>Add User to Swim Lane {!$Flow.CurrentDateTime}</interviewLabel>
@@ -256,8 +310,8 @@
     <recordCreates>
         <name>InternalLaneUser_CreateRecord</name>
         <label>InternalLaneUser CreateRecord</label>
-        <locationX>1301</locationX>
-        <locationY>537</locationY>
+        <locationX>1691</locationX>
+        <locationY>540</locationY>
         <connector>
             <targetReference>ActivateUser_Decision</targetReference>
         </connector>
@@ -319,7 +373,7 @@
     <recordLookups>
         <name>InternalLaneUser_GetRecord</name>
         <label>InternalLaneUser GetRecord</label>
-        <locationX>862</locationX>
+        <locationX>1146</locationX>
         <locationY>542</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -330,7 +384,7 @@
             <field>User__c</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>User_Lookup.recordId</elementReference>
+                <elementReference>User_GetRecord.Id</elementReference>
             </value>
         </filters>
         <filters>
@@ -368,11 +422,11 @@
     <recordLookups>
         <name>User_GetRecord</name>
         <label>User GetRecord</label>
-        <locationX>553</locationX>
-        <locationY>543</locationY>
+        <locationX>554</locationX>
+        <locationY>544</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>AssignKickboardUserPermissionSet_Subflow</targetReference>
+            <targetReference>UserType_Decision</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -389,8 +443,8 @@
     <screens>
         <name>AddAnotherUser_Screen</name>
         <label>AddAnotherUser Screen</label>
-        <locationX>1558</locationX>
-        <locationY>1165</locationY>
+        <locationX>2003</locationX>
+        <locationY>1168</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -422,6 +476,22 @@
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>CantAssignPermissionSet_Screen</name>
+        <label>CantAssignPermissionSet Screen</label>
+        <locationX>665</locationX>
+        <locationY>395</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>CantAssignPermissionSet_DisplayText</name>
+            <fieldText>&lt;p&gt;Hmm... for some reason we can&apos;t assign the right permission set to this user. It may be because they are a type of user that we aren&apos;t sure can access Kickboard correctly.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
@@ -471,7 +541,7 @@
             <inputParameters>
                 <name>label</name>
                 <value>
-                    <stringValue>Is this an internal collaborator?</stringValue>
+                    <stringValue>Are you adding a standard or community user?</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -483,7 +553,13 @@
             <inputParameters>
                 <name>messageToggleInactive</name>
                 <value>
-                    <stringValue>Nope, external.</stringValue>
+                    <stringValue>Nope, a guest.</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>value</name>
+                <value>
+                    <booleanValue>true</booleanValue>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -585,7 +661,7 @@
     <screens>
         <name>InternalUserExists_Screen</name>
         <label>InternalUserExists Screen</label>
-        <locationX>1119</locationX>
+        <locationX>1274</locationX>
         <locationY>886</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
@@ -601,7 +677,7 @@
     <screens>
         <name>pause2</name>
         <label>pause2</label>
-        <locationX>751</locationX>
+        <locationX>1022</locationX>
         <locationY>542</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
@@ -642,10 +718,10 @@
     </start>
     <status>Active</status>
     <subflows>
-        <name>AssignKickboardUserPermissionSet_Subflow</name>
-        <label>AssignKickboardUserPermissionSet Subflow</label>
-        <locationX>656</locationX>
-        <locationY>543</locationY>
+        <name>AssignKickboardGuestPermissionSet_Subflow</name>
+        <label>AssignKickboardGuestPermissionSet Subflow</label>
+        <locationX>839</locationX>
+        <locationY>619</locationY>
         <connector>
             <targetReference>pause2</targetReference>
         </connector>
@@ -653,7 +729,35 @@
         <inputAssignments>
             <name>assigneeId</name>
             <value>
-                <elementReference>User_Lookup.recordId</elementReference>
+                <elementReference>User_GetRecord.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>permissionSetName</name>
+            <value>
+                <stringValue>Kickboard_Guest</stringValue>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>AssignKickboardUserPermissionSet_Subflow</name>
+        <label>AssignKickboardUserPermissionSet Subflow</label>
+        <locationX>839</locationX>
+        <locationY>442</locationY>
+        <connector>
+            <targetReference>pause2</targetReference>
+        </connector>
+        <flowName>Assign_Kickboard_User_Permission_Set</flowName>
+        <inputAssignments>
+            <name>assigneeId</name>
+            <value>
+                <elementReference>User_GetRecord.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>permissionSetName</name>
+            <value>
+                <stringValue>Kickboard_User</stringValue>
             </value>
         </inputAssignments>
     </subflows>
@@ -682,8 +786,8 @@
     <subflows>
         <name>ShareLaneToUser_Subflow</name>
         <label>ShareLaneToUser Subflow</label>
-        <locationX>1444</locationX>
-        <locationY>784</locationY>
+        <locationX>1834</locationX>
+        <locationY>787</locationY>
         <connector>
             <targetReference>NewUserRecordIdInternal_Assignment</targetReference>
         </connector>

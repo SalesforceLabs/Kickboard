@@ -2,7 +2,9 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Time_to_Complete_in_minutes__c</fullName>
     <defaultValue>25</defaultValue>
+    <description>This is the suggested time to complete this activity.</description>
     <externalId>false</externalId>
+    <inlineHelpText>This is the suggested time to complete this activity.</inlineHelpText>
     <label>Time to Complete (in minutes)</label>
     <precision>5</precision>
     <required>false</required>

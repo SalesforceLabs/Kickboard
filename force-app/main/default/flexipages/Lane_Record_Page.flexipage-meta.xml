@@ -35,12 +35,16 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Is_Public__c</fieldItem>
+                <fieldItem>Record.Code__c</fieldItem>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Code__c</fieldItem>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>readonly</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Is_Public__c</fieldItem>
             </fieldInstance>
         </itemInstances>
         <name>Facet-d7218c93-8372-4cf6-a5c7-a312ba4c9a48</name>
@@ -323,6 +327,16 @@
                             <value>Share</value>
                         </valueListItems>
                         <valueListItems>
+                            <value>Lane__c.Make_Public</value>
+                            <visibilityRule>
+                                <criteria>
+                                    <leftValue>{!Record.Is_Template__c}</leftValue>
+                                    <operator>EQUAL</operator>
+                                    <rightValue>false</rightValue>
+                                </criteria>
+                            </visibilityRule>
+                        </valueListItems>
+                        <valueListItems>
                             <value>Lane__c.Export_Lane_for_Graph_API</value>
                             <visibilityRule>
                                 <criteria>
@@ -355,6 +369,26 @@
                     <value>3</value>
                 </componentInstanceProperties>
                 <componentName>force:highlightsPanel</componentName>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>decorate</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>richTextValue</name>
+                    <value>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;color: rgb(0, 0, 0);&quot;&gt;This Swim Lane is Shared Externally&lt;/b&gt;&lt;/p&gt;</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:richText</componentName>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Is_Public__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>true</rightValue>
+                    </criteria>
+                </visibilityRule>
             </componentInstance>
         </itemInstances>
         <itemInstances>

@@ -2,7 +2,9 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Is_Public__c</fullName>
     <defaultValue>false</defaultValue>
+    <description>Making Public will allow guest users to access this Swim Lane. Use the Make Public quick action to make this public. The quick action will automatically reset after a given number of hours.</description>
     <externalId>false</externalId>
+    <inlineHelpText>Making Public will allow guest users to access this Swim Lane. Use the Make Public quick action to make this public. The quick action will automatically reset after a given number of hours.</inlineHelpText>
     <label>Is Public</label>
     <trackTrending>false</trackTrending>
     <type>Checkbox</type>

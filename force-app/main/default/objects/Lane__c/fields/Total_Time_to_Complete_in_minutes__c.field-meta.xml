@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Total_Time_to_Complete_in_minutes__c</fullName>
+    <description>This rolls up all the suggested times of each activity for a total amount of time to expect to complete all activities.</description>
     <externalId>false</externalId>
+    <inlineHelpText>This rolls up all the suggested times of each activity for a total amount of time to expect to complete all activities.</inlineHelpText>
     <label>Total Time to Complete (in minutes)</label>
     <summarizedField>Board__c.Time_to_Complete_in_minutes__c</summarizedField>
     <summaryForeignKey>Board__c.Lane__c</summaryForeignKey>

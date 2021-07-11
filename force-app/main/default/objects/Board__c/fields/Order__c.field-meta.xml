@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Order__c</fullName>
+    <description>This is the sequence this board with appear in a Swim Lane.</description>
     <externalId>false</externalId>
+    <inlineHelpText>This is the sequence this board with appear in a Swim Lane.</inlineHelpText>
     <label>Order</label>
     <precision>2</precision>
     <required>false</required>

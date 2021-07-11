@@ -2,7 +2,9 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Is_Template__c</fullName>
     <defaultValue>false</defaultValue>
+    <description>When this is checked, this Swim Lane is a template that can be cloned. You can interact with a template, but no cards will be saved.</description>
     <externalId>false</externalId>
+    <inlineHelpText>When this is checked, this Swim Lane is a template that can be cloned. You can interact with a template, but no cards will be saved.</inlineHelpText>
     <label>Is Template</label>
     <trackTrending>false</trackTrending>
     <type>Checkbox</type>

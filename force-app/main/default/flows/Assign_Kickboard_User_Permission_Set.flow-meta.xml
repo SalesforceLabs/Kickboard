@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>52.0</apiVersion>
-    <isTemplate>true</isTemplate>
     <decisions>
         <name>PermissionSetDoesNotExist_Decision</name>
         <label>PermissionSetDoesNotExist Decision</label>
@@ -25,6 +24,7 @@
         </rules>
     </decisions>
     <interviewLabel>Assign Kickboard User Permission Set {!$Flow.CurrentDateTime}</interviewLabel>
+    <isTemplate>true</isTemplate>
     <label>Assign Kickboard User Permission Set</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -79,7 +79,7 @@
             <field>Name</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Kickboard_User</stringValue>
+                <elementReference>permissionSetName</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -129,5 +129,15 @@
         <isCollection>false</isCollection>
         <isInput>true</isInput>
         <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>permissionSetName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>Kickboard_User</stringValue>
+        </value>
     </variables>
 </Flow>

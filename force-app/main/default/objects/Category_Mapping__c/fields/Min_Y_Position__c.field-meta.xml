@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Min_Y_Position__c</fullName>
+    <description>If type is intent, this conditions needs to be met in order to set the card intent category to this category.</description>
     <externalId>false</externalId>
+    <inlineHelpText>If type is intent, this conditions needs to be met in order to set the card intent category to this category.</inlineHelpText>
     <label>Min Y Position</label>
     <precision>5</precision>
     <required>false</required>
