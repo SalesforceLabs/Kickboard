@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>52.0</apiVersion>
-    <isTemplate>true</isTemplate>
+    <choices>
+        <name>CommunitySite_Choice</name>
+        <choiceText>Community</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>CommunitySite</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>GuestSite_Choice</name>
+        <choiceText>Guest</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>GuestSite</stringValue>
+        </value>
+    </choices>
     <decisions>
         <name>CanAccessSite_Decision</name>
         <label>CanAccessSite Decision</label>
-        <locationX>697</locationX>
-        <locationY>811</locationY>
+        <locationX>1235</locationX>
+        <locationY>761</locationY>
         <defaultConnector>
             <targetReference>CannotAccessSite_Screen</targetReference>
         </defaultConnector>
@@ -22,7 +37,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>KickboardSettings_CreateRecord</targetReference>
+                <targetReference>SiteTypeSetting_Decision</targetReference>
             </connector>
             <label>OutcomeIs CanAccessSite</label>
         </rules>
@@ -30,8 +45,8 @@
     <decisions>
         <name>PermissionSetAssignmentGuestExists_Decision</name>
         <label>PermissionSetAssignmentGuestExists Decision</label>
-        <locationX>671</locationX>
-        <locationY>545</locationY>
+        <locationX>1209</locationX>
+        <locationY>495</locationY>
         <defaultConnector>
             <targetReference>PermissionSetAssignment_CreateRecord</targetReference>
         </defaultConnector>
@@ -50,6 +65,56 @@
                 <targetReference>Sharing_Screen</targetReference>
             </connector>
             <label>OutcomeIs PermissionSetExists</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>SiteType_Decision</name>
+        <label>SiteType Decision</label>
+        <locationX>276</locationX>
+        <locationY>487</locationY>
+        <defaultConnector>
+            <targetReference>GuestMember_Screen</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OutcomeIs_TypeIsGuest</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>SiteType_Picklist</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>GuestSite_Choice</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>GuestPerm_Screen</targetReference>
+            </connector>
+            <label>OutcomeIs TypeIsGuest</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>SiteTypeSetting_Decision</name>
+        <label>SiteTypeSetting Decision</label>
+        <locationX>1369</locationX>
+        <locationY>763</locationY>
+        <defaultConnector>
+            <targetReference>KickboardSettingsCommunity_CreateRecord</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OutcomeIs_GuestSite</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>SiteType_Picklist</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>GuestSite_Choice</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>KickboardSettings_CreateRecord</targetReference>
+            </connector>
+            <label>OutcomeIs GuestSite</label>
         </rules>
     </decisions>
     <dynamicChoiceSets>
@@ -87,6 +152,7 @@
         <valueField>Id</valueField>
     </dynamicChoiceSets>
     <interviewLabel>Community Setup {!$Flow.CurrentDateTime}</interviewLabel>
+    <isTemplate>true</isTemplate>
     <label>Community Setup</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -110,8 +176,8 @@
     <recordCreates>
         <name>KickboardSettings_CreateRecord</name>
         <label>KickboardSettings CreateRecord</label>
-        <locationX>845</locationX>
-        <locationY>818</locationY>
+        <locationX>1566</locationX>
+        <locationY>768</locationY>
         <connector>
             <targetReference>CustomSetting_Screen</targetReference>
         </connector>
@@ -131,10 +197,33 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordCreates>
+        <name>KickboardSettingsCommunity_CreateRecord</name>
+        <label>KickboardSettingsCommunity CreateRecord</label>
+        <locationX>1567</locationX>
+        <locationY>911</locationY>
+        <connector>
+            <targetReference>CustomSetting_Screen</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Community_Url__c</field>
+            <value>
+                <stringValue>https://{!Domain_GetRecord.Domain}{!SiteUrlPathPrefix}</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>SetupOwnerId</field>
+            <value>
+                <elementReference>$Organization.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Kickboard_Settings__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
         <name>PermissionSetAssignment_CreateRecord</name>
         <label>PermissionSetAssignment CreateRecord</label>
-        <locationX>473</locationX>
-        <locationY>665</locationY>
+        <locationX>1011</locationX>
+        <locationY>622</locationY>
         <connector>
             <targetReference>Sharing_Screen</targetReference>
         </connector>
@@ -156,8 +245,8 @@
     <recordLookups>
         <name>Domain_GetRecord</name>
         <label>Domain GetRecord</label>
-        <locationX>450</locationX>
-        <locationY>808</locationY>
+        <locationX>988</locationX>
+        <locationY>758</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Domain_Screen</targetReference>
@@ -177,8 +266,8 @@
     <recordLookups>
         <name>DomainSite_GetRecord</name>
         <label>DomainSite GetRecord</label>
-        <locationX>305</locationX>
-        <locationY>808</locationY>
+        <locationX>843</locationX>
+        <locationY>758</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Domain_GetRecord</targetReference>
@@ -198,8 +287,8 @@
     <recordLookups>
         <name>GuestPermissionSet_GetRecords</name>
         <label>GuestPermissionSet GetRecords</label>
-        <locationX>322</locationX>
-        <locationY>523</locationY>
+        <locationX>860</locationX>
+        <locationY>474</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>PermissionSetAssigneeGuest_GetRecord</targetReference>
@@ -219,8 +308,8 @@
     <recordLookups>
         <name>PermissionSetAssigneeGuest_GetRecord</name>
         <label>PermissionSetAssigneeGuest GetRecord</label>
-        <locationX>473</locationX>
-        <locationY>428</locationY>
+        <locationX>1011</locationX>
+        <locationY>378</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>PermissionSetAssignmentGuestExists_Decision</targetReference>
@@ -247,17 +336,17 @@
     <screens>
         <name>Builder_Screen</name>
         <label>Builder Screen</label>
-        <locationX>176</locationX>
-        <locationY>365</locationY>
+        <locationX>175</locationX>
+        <locationY>485</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>GuestPerm_Screen</targetReference>
+            <targetReference>SiteType_Decision</targetReference>
         </connector>
         <fields>
             <name>Step3_DisplayText</name>
-            <fieldText>&lt;p&gt;&lt;b&gt;Step 3&lt;/b&gt;&lt;/p&gt;&lt;p&gt;In the builder, create a new page and select object. Search for Swim Lane and select create.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b&gt;Step: Create Swim Lane Pages&lt;/b&gt;&lt;/p&gt;&lt;p&gt;In the builder, create a new page and select object. Search for Swim Lane and select create.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -275,9 +364,24 @@
             <storeOutputAutomatically>true</storeOutputAutomatically>
         </fields>
         <fields>
-            <name>Builder_DisplayText</name>
-            <fieldText>&lt;p&gt;&lt;b&gt;Step 4&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Remove any existing components and drag &lt;b&gt;Whiteboard for Lane&lt;/b&gt; custom component into the content section. Select Swim Lane List and remove any components there as well.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Step 5&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Open &lt;b&gt;settings&lt;/b&gt; and check &lt;b&gt;Public can access the site&lt;/b&gt; and then publish your community.&lt;/p&gt;</fieldText>
+            <name>BuilderComunity_DisplayText</name>
+            <fieldText>&lt;p&gt;&lt;b&gt;Step: Add Whiteboard&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Remove any existing components and drag &lt;b&gt;Whiteboard for Lane&lt;/b&gt; custom component into the content section.&lt;/p&gt;&lt;p&gt;You don&apos;t need to worry about removing components from other pages since this is authenticated user.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Publish your community.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>BuilderGuest_DisplayText</name>
+            <fieldText>&lt;p&gt;&lt;b&gt;Step: Add Whiteboard&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Remove any existing components and drag &lt;b&gt;Whiteboard for Lane&lt;/b&gt; custom component into the content section.&lt;/p&gt;&lt;p&gt;As well, remove any components on Swim Lane List, Swim Lane Related List, and any Generic pages.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Open &lt;b&gt;settings&lt;/b&gt; and check &lt;b&gt;Public can access the site&lt;/b&gt; and then publish your community.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>SiteType_Picklist</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <elementReference>GuestSite_Choice</elementReference>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
         </fields>
         <fields>
             <name>Kickboard_Setup_Screen_Settings</name>
@@ -292,6 +396,21 @@
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>SiteType_Picklist</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <elementReference>GuestSite_Choice</elementReference>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>GuestApi_DisplayText</name>
+            <fieldText>&lt;p&gt;The last step here is to open &lt;b&gt;workspaces &amp;gt; Administration &amp;gt; Preferences &lt;/b&gt; for your &lt;a href=&quot;/lightning/setup/SetupNetworks/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Site&lt;/b&gt;&lt;/a&gt;. &lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Then makes sure &lt;b&gt;Give access to public API requests on Chatter&lt;/b&gt; is checked.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
@@ -299,8 +418,8 @@
     <screens>
         <name>CannotAccessSite_Screen</name>
         <label>CannotAccessSite Screen</label>
-        <locationX>705</locationX>
-        <locationY>963</locationY>
+        <locationX>1243</locationX>
+        <locationY>913</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -315,14 +434,14 @@
     <screens>
         <name>CustomSetting_Screen</name>
         <label>CustomSetting Screen</label>
-        <locationX>1178</locationX>
-        <locationY>805</locationY>
+        <locationX>1756</locationX>
+        <locationY>776</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <fields>
             <name>CustomSetting_DisplayText</name>
-            <fieldText>&lt;p&gt;We should have stored this site url&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;https://{!Domain_GetRecord.Domain}{!SiteUrlPathPrefix}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;in Custom Settings. You can confirm by going to &lt;a href=&quot;/lightning/setup/CustomSettings/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Custom Settings&lt;/b&gt;&lt;/a&gt;, select &lt;b&gt;Manage&lt;/b&gt; on Kickboard Settings and see the Default Organization Level Values have this url stored.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;We should have stored this site url&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;https://{!Domain_GetRecord.Domain}{!SiteUrlPathPrefix}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;in Custom Settings. You can confirm by going to &lt;a href=&quot;/lightning/setup/CustomSettings/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Custom Settings&lt;/b&gt;&lt;/a&gt;, select &lt;b&gt;Manage&lt;/b&gt; on Kickboard Settings and see the Default Organization Level Values have this url stored in Guest Url or Community Url depending on the site you are settings up.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -331,8 +450,8 @@
     <screens>
         <name>Domain_Screen</name>
         <label>Domain Screen</label>
-        <locationX>595</locationX>
-        <locationY>808</locationY>
+        <locationX>1133</locationX>
+        <locationY>758</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -380,10 +499,45 @@
         <showHeader>false</showHeader>
     </screens>
     <screens>
+        <name>Finish_Screen</name>
+        <label>Finish Screen</label>
+        <locationX>1866</locationX>
+        <locationY>777</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>Finish_DisplayText</name>
+            <fieldText>&lt;p&gt;At this point, you are finished setting up a Kickboard Site. &lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;If you setup a Guest site, when you add a user by email only, they will be directed to the site to enter email address and code to access.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;If you setup a Community site, you will need to add Contacts and then enable as a Customer User and then assign Kickboard User permission set so they have access to the site. Add the user to any swim lane to grant them access.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>GuestMember_Screen</name>
+        <label>GuestMember Screen</label>
+        <locationX>283</locationX>
+        <locationY>613</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Sharing_Screen</targetReference>
+        </connector>
+        <fields>
+            <name>StepKickboardMember_DisplayText</name>
+            <fieldText>&lt;p&gt;&lt;b&gt;Step: Add Kickboard Guest as a Member&lt;/b&gt;&lt;/p&gt;&lt;p&gt;We will setup so that when a community user is assigned the &lt;b&gt;Kickboard Guest&lt;/b&gt; permission set, they will automatically added as a member to this site.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Open &lt;b&gt;Workspaces &amp;gt; Administration &amp;gt; Members&lt;/b&gt; again for your &lt;a href=&quot;/lightning/setup/SetupNetworks/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Site&lt;/b&gt;&lt;/a&gt;. Add &lt;b&gt;Kickboard_Guest&lt;/b&gt; Permission Set and click save.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
         <name>GuestPerm_Screen</name>
         <label>GuestPerm Screen</label>
-        <locationX>176</locationX>
-        <locationY>523</locationY>
+        <locationX>706</locationX>
+        <locationY>474</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -392,7 +546,7 @@
         </connector>
         <fields>
             <name>GuestPerm_DisplayText</name>
-            <fieldText>&lt;p&gt;&lt;b&gt;Step 6&lt;/b&gt;&lt;/p&gt;&lt;p&gt;For a public site, a guest user is created. Now, we are going to assign the appropriate permissions to allow a guest user to see Swim Lanes. If there are multiple guest users, select the one that looks like was created for your site. If you named your site Kickboard, the name of the guest will contain Kickboard.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b&gt;Step: Assign Permissions to Guest User&lt;/b&gt;&lt;/p&gt;&lt;p&gt;For a public site, a guest user is created. Now, we are going to assign the appropriate permissions to allow a guest user to see Swim Lanes. If there are multiple guest users, select the one that looks like was created for your site. If you named your site Kickboard, the name of the guest will contain Kickboard.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -409,8 +563,8 @@
     <screens>
         <name>Intro_Screen</name>
         <label>Intro Screen</label>
-        <locationX>176</locationX>
-        <locationY>206</locationY>
+        <locationX>175</locationX>
+        <locationY>337</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -419,7 +573,7 @@
         </connector>
         <fields>
             <name>Intro_DisplayText</name>
-            <fieldText>&lt;p&gt;You can setup Kickboard so that external people can collaborate by only entering their email and the code assigned to a swim lane. This involves creating a public facing site and does not require many steps. By doing this, you will also learn how to set up a digital experience site.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;Keep in mind, as unlikely as it is, someone that knows a Swim Lane url, an associated email address, and the code can access the contents of a Swim Lane.&lt;/i&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Step 1&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Ensure &lt;b&gt;digital experience&lt;/b&gt; is enabled in your org.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Step 2&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Create a new &lt;a href=&quot;/lightning/setup/SetupNetworks/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Site&lt;/b&gt;&lt;/a&gt; called &lt;b&gt;Kickboard&lt;/b&gt;, select build your own and not unauthenticated,&lt;b&gt; &lt;/b&gt;and then launch the builder.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Clicking next will be guide you through the following steps.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Configuring a public page for Swim Lanes&lt;/li&gt;&lt;li&gt;Make the site public and publishing&lt;/li&gt;&lt;li&gt;Assigning Permissions to the Site&apos;s Guest User&lt;/li&gt;&lt;li&gt;Creating a sharing rule to share public Swim Lanes to the Site&apos;s Guest User&lt;/li&gt;&lt;li&gt;Saving the Site domain into a custom setting so emails to folks invited to a swim lane include a direct link.&lt;/li&gt;&lt;/ul&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b&gt;Step: Enabled Digital Experiences&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Ensure &lt;b&gt;digital experience&lt;/b&gt; is enabled in your org.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Step: Create a Kickboard Site&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Create a new &lt;a href=&quot;/lightning/setup/SetupNetworks/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Site&lt;/b&gt;&lt;/a&gt; called &lt;b&gt;Kickboard&lt;/b&gt;, select build your own. Select authenticated if that&apos;s an option,&lt;b&gt; &lt;/b&gt;and then launch the builder.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Clicking next will be guide you through the following steps.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Configuring a page for Swim Lanes and publish&lt;/li&gt;&lt;li&gt;Assigning Permissions to the Site&apos;s Guest User&lt;/li&gt;&lt;li&gt;Create a sharing rules to share public Swim Lanes to the Site&apos;s Guest User&lt;/li&gt;&lt;li&gt;Saving the Site domain into a custom setting so emails to folks invited to a swim lane include a direct link.&lt;/li&gt;&lt;/ul&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -428,8 +582,8 @@
     <screens>
         <name>Sharing_Screen</name>
         <label>Sharing Screen</label>
-        <locationX>174</locationX>
-        <locationY>657</locationY>
+        <locationX>712</locationX>
+        <locationY>613</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -438,8 +592,23 @@
         </connector>
         <fields>
             <name>Sharing_DisplayText</name>
-            <fieldText>&lt;p&gt;&lt;b&gt;Step 7&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Now, a sharing rule needs to be created to share public swim lanes to the guest user. This allows you to have some swim lanes shared externally and some for private user.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Go to &lt;a href=&quot;/lightning/setup/SecuritySharing/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Sharing Setting&lt;/b&gt;&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Scroll down to &lt;b&gt;Swim Lane &lt;/b&gt;and create 2 new rules.&lt;/p&gt;&lt;p&gt;Enter the following:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Name: &lt;b&gt;Kickboard Guest&lt;/b&gt;&lt;/li&gt;&lt;li&gt;Rule Type: &lt;b&gt;Guest user access, based on criteria&lt;/b&gt;&lt;/li&gt;&lt;li&gt;Criteria: &lt;b&gt;Is Public = TRUE&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;Make sure it&apos;s sharing read only to the Kickboard Guest User and save.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Name: &lt;b&gt;Kickboard Template&lt;/b&gt;&lt;/li&gt;&lt;li&gt;Rule Type: &lt;b&gt;Based on Criteria&lt;/b&gt;,&lt;b&gt; &lt;/b&gt;&lt;/li&gt;&lt;li&gt;Criteria: &lt;b&gt;Is Template = TRUE&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Share with public group All Internal Users as Read Only and save.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b&gt;Step: Create Sharing Rules&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Now, a sharing rule needs to be created to share public swim lanes to the guest user. This allows you to have some swim lanes shared externally and some for private user.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Go to &lt;a href=&quot;/lightning/setup/SecuritySharing/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Sharing Setting&lt;/b&gt;&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Scroll down to &lt;b&gt;Swim Lane &lt;/b&gt;to enter sharing rules.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Enter the following to share templates with all internal users.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Name: &lt;b&gt;Kickboard Template&lt;/b&gt;&lt;/li&gt;&lt;li&gt;Rule Type: &lt;b&gt;Based on Criteria&lt;/b&gt;,&lt;b&gt; &lt;/b&gt;&lt;/li&gt;&lt;li&gt;Criteria: &lt;b&gt;Is Template = TRUE&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Share with public group All Internal Users as Read Only and save.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>GuestShare_DisplayText</name>
+            <fieldText>&lt;p&gt;Enter the following to share Swim Lanes marked public with guest user.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Name: &lt;b&gt;Kickboard Guest&lt;/b&gt;&lt;/li&gt;&lt;li&gt;Rule Type: &lt;b&gt;Guest user access, based on criteria&lt;/b&gt;&lt;/li&gt;&lt;li&gt;Criteria: &lt;b&gt;Is Public = TRUE&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Make sure it&apos;s sharing read only to the Kickboard Guest User and save.&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>SiteType_Picklist</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <elementReference>GuestSite_Choice</elementReference>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
@@ -447,8 +616,8 @@
     <screens>
         <name>Site_Screen</name>
         <label>Site Screen</label>
-        <locationX>174</locationX>
-        <locationY>808</locationY>
+        <locationX>712</locationX>
+        <locationY>758</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -457,7 +626,7 @@
         </connector>
         <fields>
             <name>Site_DisplayText</name>
-            <fieldText>&lt;p&gt;&lt;b&gt;Step 8&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Now, we are going to save the community url in settings so when users are added to a Swim Lane, they are directed to the right site. Select the appropriate Site. It should says Kickboard if you named your site Kickboard.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b&gt;Step: Save Community URL In Settings&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Now, we are going to save the community url in settings so when users are added to a Swim Lane, they are directed to the right site. Select the appropriate Site. It should says Kickboard if you named your site Kickboard.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -471,14 +640,47 @@
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
     </screens>
-    <start>
-        <locationX>50</locationX>
-        <locationY>50</locationY>
+    <screens>
+        <name>SiteType_Screen</name>
+        <label>SiteType Screen</label>
+        <locationX>174</locationX>
+        <locationY>204</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
         <connector>
             <targetReference>Intro_Screen</targetReference>
         </connector>
+        <fields>
+            <name>SiteType_DisplayText</name>
+            <fieldText>&lt;p&gt;You can set up 2 types of sites.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Guest&lt;/b&gt;&lt;/p&gt;&lt;p&gt;You can setup Kickboard so that external people can collaborate by only entering their email and the code assigned to a swim lane. Ideal for occasional ad-hoc use. This involves creating a public facing site.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;Keep in mind, as unlikely as it is, someone that knows a Swim Lane url, an associated email address, and the code can access the contents of a Swim Lane.&lt;/i&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Community&lt;/b&gt;&lt;/p&gt;&lt;p&gt;If you have (or plan to have) users with community licenses, they can simply login with their credentials and access Swim Lanes that are shared with them. Perfect for repeat usage and creates better experiences overall. The steps here are for Community Plus licenses. If you want to given access to Community or High-Volume users, you can follow the same steps, but you will also have to&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Create Contact Lookup fields on Swim Lane object.&lt;/li&gt;&lt;li&gt;Create a sharing set to share Swim Lanes with contacts.&lt;/li&gt;&lt;/ul&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>SiteType_Picklist</name>
+            <choiceReferences>CommunitySite_Choice</choiceReferences>
+            <choiceReferences>GuestSite_Choice</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>What type of site would you like to setup?</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>Setup_DisplayText</name>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;With either type, there are a few steps but you will also learn how to set up a digital experience site in process&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <start>
+        <locationX>50</locationX>
+        <locationY>57</locationY>
+        <connector>
+            <targetReference>SiteType_Screen</targetReference>
+        </connector>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <variables>
         <name>SiteUrlPathPrefix</name>
         <dataType>String</dataType>
