@@ -92,8 +92,8 @@ export default class DraggableCanvas extends LightningElement {
                     this.template
                         .querySelector("c-new-card-modal")
                         .createNewCard(
-                            event.clientX - this.boundingRect.left,
-                            event.clientY - this.boundingRect.top
+                            Math.round(event.clientX - this.boundingRect.left),
+                            Math.round(event.clientY - this.boundingRect.top)
                         );
                 }
             });
