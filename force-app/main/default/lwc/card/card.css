@@ -1,3 +1,5 @@
+@import "c/cardStyles";
+
 .card {
     width: 144px;
     transform: translate3d(0px, 0px, 0px);
@@ -13,66 +15,9 @@
     resize: none;
     width: 100%;
     font-size: 12px;
-}
-
-.cardContent:focus {
-    outline: none;
+    overflow: scroll;
 }
 
 .cardHeader {
     background: rgba(255, 255, 255, 0.27);
-}
-
-.cardFooter {
-    background: rgba(217, 217, 217, 0.12);
-}
-
-.colorPanel {
-    padding-left: 5px;
-}
-
-.colorPanel div {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-right: 5px;
-    cursor: pointer;
-    border: 1px solid rgb(169, 169, 169);
-}
-
-.mt-m5 {
-    margin-top: -5px;
-    margin-right: 5px;
-}
-
-.red {
-    background-color: #ffcece;
-}
-
-.green {
-    background-color: rgb(190, 250, 190);
-}
-
-.purple {
-    background-color: rgb(212, 212, 255);
-}
-
-.yellow {
-    background-color: #fff58a;
-}
-
-.gray {
-    background-color: #ececec;
-}
-
-.blue {
-    background-color: #c5fff7;
-}
-
-.white {
-    background-color: white;
-}
-
-.pink {
-    background-color: #ffdaf5;
 }

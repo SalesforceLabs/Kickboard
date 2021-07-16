@@ -58,13 +58,16 @@
                 <div class="slds-col slds-size_1-of-3"></div>
                 <div class="slds-col slds-size_1-of-3">
                     <div class="slds-text-align_center">
-                        <lightning-button
-                            label="New Card"
-                            title="New Card"
-                            variant="brand"
-                            onclick={addCard}
-                            class="slds-var-m-right_small"
-                        ></lightning-button>
+                        <template if:false={isTemplate}>
+                            <lightning-button
+                                label="New Card"
+                                title="New Card"
+                                variant="brand"
+                                onclick={addCard}
+                                class="slds-var-m-right_small"
+                            ></lightning-button>
+                            or double-click anywhere on the canvas
+                        </template>
                     </div>
                 </div>
                 <div class="slds-col slds-size_1-of-3">
@@ -83,6 +86,14 @@
                                 icon-name="utility:refresh"
                                 onclick={refreshCards}
                                 class="slds-var-m-left_small"
+                            ></lightning-button-icon>
+                            <lightning-button-icon
+                                variant="neutral"
+                                alternative-text="Reset board view to original position"
+                                title="Reset board view to original position"
+                                icon-name="utility:contract"
+                                onclick={panToOrigin}
+                                class="slds-var-m-left_x-small"
                             ></lightning-button-icon>
                         </div>
                     </template>
@@ -110,10 +121,8 @@
                                 card-id={card.Id}
                                 data-cardid={card.Id}
                                 style={card.style}
-                                lane-guest-user-id={laneGuestUserId}
-                                is-template={isTemplate}
                                 ondeletecard={handleCardDelete}
-                                ontextareaselection={handleTextAreaSelection}
+                                oneditcard={handleCardEdit}
                             ></c-card>
                         </template>
                     </template>
@@ -122,10 +131,10 @@
         </div>
     </lightning-card>
 
-    <!--<template if:true={shouldListenToChanges}>
-        <c-event-listener
-            channel-name="/topic/CardChangeUpdates"
-            onmessage={handleMessageFromListener}
-        ></c-event-listener>
-    </template>-->
+    <c-new-card-modal
+        board-id={recordId}
+        lane-guest-user-id={laneGuestUserId}
+        is-template={isTemplate}
+        onsavecard={refreshCards}
+    ></c-new-card-modal>
 </template>

@@ -1,0 +1,111 @@
+<template>
+    <template if:true={showModal}>
+        <section
+            role="dialog"
+            tabindex="-1"
+            class="slds-modal slds-fade-in-open slds-modal_medium"
+            aria-labelledby="modal-heading-01"
+            aria-modal="true"
+            aria-describedby="modal-content-id-1"
+        >
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning-button-icon
+                        variant="bare-inverse"
+                        alternative-text="Close"
+                        title="Close"
+                        icon-name="utility:close"
+                        onclick={closeModal}
+                        class="slds-modal__close"
+                        size="large"
+                    ></lightning-button-icon>
+
+                    <h2
+                        id="modal-heading-01"
+                        class="slds-modal__title slds-hyphenate"
+                    >
+                        {cardTitle}
+                    </h2>
+                </header>
+
+                <div class={modalBg} id="modal-content-id-1">
+                    <div class="slds-p-around_medium">
+                        <lightning-input-rich-text value={cardDescription}>
+                        </lightning-input-rich-text>
+                    </div>
+                </div>
+
+                <footer class="slds-modal__footer">
+                    <div class="slds-grid slds-grid_align-spread">
+                        <div class="slds-col">
+                            <div
+                                class="
+                                    colorPanel
+                                    slds-grid slds-col
+                                    slds-p-top_xx-small
+                                "
+                            >
+                                <div
+                                    class="yellow"
+                                    onclick={changeBg}
+                                    title="Yellow"
+                                ></div>
+                                <div
+                                    class="red"
+                                    onclick={changeBg}
+                                    title="Red"
+                                ></div>
+                                <div
+                                    class="green"
+                                    onclick={changeBg}
+                                    title="Green"
+                                ></div>
+                                <div
+                                    class="blue"
+                                    onclick={changeBg}
+                                    title="Blue"
+                                ></div>
+                                <div
+                                    class="purple"
+                                    onclick={changeBg}
+                                    title="Purple"
+                                ></div>
+                                <div
+                                    class="gray"
+                                    onclick={changeBg}
+                                    title="Gray"
+                                ></div>
+                                <div
+                                    class="white"
+                                    onclick={changeBg}
+                                    title="White"
+                                ></div>
+                                <div
+                                    class="pink"
+                                    onclick={changeBg}
+                                    title="Pink"
+                                ></div>
+                            </div>
+                        </div>
+
+                        <div class="slds-col">
+                            <button
+                                class="slds-button slds-button_neutral"
+                                onclick={closeModal}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                class="slds-button slds-button_brand"
+                                onclick={saveCard}
+                            >
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

@@ -7,37 +7,15 @@
                 slds-p-around_xxx-small
             "
         >
-            <div class="colorPanel slds-grid slds-col slds-p-top_xx-small">
-                <template if:false={moreColors}>
-                    <div class="red" onclick={changeBg} title="Red"></div>
-                    <div class="green" onclick={changeBg} title="Green"></div>
-                    <div class="blue" onclick={changeBg} title="Blue"></div>
-                    <div class="yellow" onclick={changeBg} title="Yellow"></div>
-                    <lightning-button-icon
-                        icon-name="utility:chevronright"
-                        alternative-text="More"
-                        title="More"
-                        size="xx-small"
-                        class="mt-m5"
-                        onclick={showMore}
-                    ></lightning-button-icon>
-                </template>
-                <template if:true={moreColors}>
-                    <lightning-button-icon
-                        icon-name="utility:chevronleft"
-                        alternative-text="More"
-                        title="More"
-                        size="xx-small"
-                        class="mt-m5"
-                        onclick={showLess}
-                    ></lightning-button-icon>
-                    <div class="purple" onclick={changeBg} title="Purple"></div>
-                    <div class="gray" onclick={changeBg} title="Gray"></div>
-                    <div class="white" onclick={changeBg} title="White"></div>
-                    <div class="pink" onclick={changeBg} title="Pink"></div>
-                </template>
-            </div>
             <div class="slds-col slds-col_bump-left slds-text-align_right">
+                <lightning-button-icon
+                    icon-name="utility:edit"
+                    alternative-text="Edit"
+                    title="Edit"
+                    onclick={handleEdit}
+                    size="x-small"
+                    class="slds-m-right_xx-small"
+                ></lightning-button-icon>
                 <lightning-button-icon
                     icon-name="utility:delete"
                     alternative-text="Delete"
@@ -47,14 +25,10 @@
                 ></lightning-button-icon>
             </div>
         </div>
-        <div class="slds-var-p-around_xx-small">
-            <textarea
-                class="cardContent"
-                onkeyup={handleChange}
-                onmousedown={handleTextAreaClick}
-            >
-{description}</textarea
-            >
+        <div class="slds-var-p-around_xx-small cardContent">
+            <lightning-formatted-rich-text
+                value={description}
+            ></lightning-formatted-rich-text>
         </div>
     </div>
 </template>

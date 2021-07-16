@@ -10,13 +10,11 @@ import BOARD_OBJ from "@salesforce/schema/Board__c.Objective__c";
 import BG_IMG from "@salesforce/schema/Board__c.Background_Image__c";
 import BOARD_ORDER from "@salesforce/schema/Board__c.Order__c";
 
-import createNewCard from "@salesforce/apex/KickboardCtrl.createNewCard";
 import getCards from "@salesforce/apex/KickboardCtrl.getCards";
 import deleteCard from "@salesforce/apex/KickboardCtrl.deleteCard";
 import saveCard from "@salesforce/apex/KickboardCtrl.saveCard";
 
 import ISGUEST from "@salesforce/user/isGuest";
-import USERID from "@salesforce/user/Id";
 
 import { refreshApex } from "@salesforce/apex";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
@@ -83,19 +81,21 @@ export default class DraggableCanvas extends LightningElement {
                     return;
                 }
                 event.preventDefault();
-                console.log('in wheel');
                 this.panZoomInstance.zoom({
                     deltaScale: Math.sign(event.deltaY) > 0 ? -1 : 1,
                     x: event.pageX,
                     y: event.pageY
                 });
             });*/
-            container.addEventListener("dblclick", () => {
-                this.panZoomInstance.panTo({
-                    originX: 0,
-                    originY: 0,
-                    scale: 1
-                });
+            container.addEventListener("dblclick", (event) => {
+                if (!this.isTemplate) {
+                    this.template
+                        .querySelector("c-new-card-modal")
+                        .createNewCard(
+                            event.clientX - this.boundingRect.left,
+                            event.clientY - this.boundingRect.top
+                        );
+                }
             });
             container.addEventListener("mousemove", (event) => {
                 if (this.isTextSelection) return;
@@ -130,9 +130,7 @@ export default class DraggableCanvas extends LightningElement {
                     }px; margin-top:${
                         record[`${this.namespace}Y_Position__c`]
                     }px;`,
-                    description: decodeURI(
-                        record[`${this.namespace}Description__c`]
-                    ),
+                    description: record[`${this.namespace}Description__c`],
                     color: record[`${this.namespace}Color__c`]
                 };
             });
@@ -167,6 +165,16 @@ export default class DraggableCanvas extends LightningElement {
         }
         if (this.wiredCards) {
             this.refreshCards();
+        }
+    }
+
+    panToOrigin() {
+        if (this.panZoomInstance) {
+            this.panZoomInstance.panTo({
+                originX: 0,
+                originY: 0,
+                scale: 1
+            });
         }
     }
 
@@ -254,27 +262,11 @@ export default class DraggableCanvas extends LightningElement {
             }
         } while (samePos.length > 0);
 
-        if (!this.isTemplate) {
-            createNewCard({
-                boardId: this.recordId,
-                xPos,
-                yPos,
-                guestUserId: this.laneGuestUserId
-            })
-                .then((result) => {
-                    if (result) {
-                        this.refreshCards();
-                    }
-                })
-                .catch((error) => {
-                    this.dispatchEvent(
-                        new ShowToastEvent({
-                            title: "An error occurred when creating a card",
-                            message: error.message,
-                            variant: "error"
-                        })
-                    );
-                });
+        this.template
+            .querySelector("c-new-card-modal")
+            .createNewCard(xPos, yPos);
+
+        /*if (!this.isTemplate) {
         } else {
             let card = {};
             card[`${this.namespace}X_Position__c`] = xPos;
@@ -285,7 +277,7 @@ export default class DraggableCanvas extends LightningElement {
             this.offlineCards.push(card);
             this.cards = null;
             this.cards = this.offlineCards;
-        }
+        }*/
     }
 
     dragStart(e) {
@@ -319,7 +311,7 @@ export default class DraggableCanvas extends LightningElement {
                         this.currentX = undefined;
                     })
                     .catch((error) => {
-                        console.log(error);
+                        console.error(error);
                     });
             } else {
                 this.currentY = undefined;
@@ -379,20 +371,10 @@ export default class DraggableCanvas extends LightningElement {
         }
     }
 
-    handleMessageFromListener(event) {
-        if (
-            event.detail.data.sobject.LastModifiedById !== USERID &&
-            this.recordId === event.detail.data.sobject.Board__c
-        ) {
-            this.refreshCards();
-        } else if (event.detail.data.event.type === "deleted") {
-            const currentCardIndex = this.cards.findIndex(
-                (x) => x.Id === event.detail.data.sobject.Id
-            );
-            if (currentCardIndex >= 0) {
-                this.refreshCards();
-            }
-        }
+    handleCardEdit(event) {
+        this.template
+            .querySelector("c-new-card-modal")
+            .editCard(event.detail.cardId);
     }
 
     trackActivity() {
