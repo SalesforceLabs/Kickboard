@@ -10,8 +10,24 @@ public class KickboardCtrlTest {
         board.Lane__c = lane.Id;
         insert board;
         System.runAs(new User(Id = UserInfo.getUserId())) {
-            PermissionSet ps = [SELECT Id FROM PermissionSet WHERE Name = 'Kickboard_User'];
-            insert new PermissionSetAssignment(AssigneeId = UserInfo.getUserId(), PermissionSetId = ps.Id);
+            PermissionSet ps = [
+                SELECT Id
+                FROM PermissionSet
+                WHERE Name = 'Kickboard_User'
+            ];
+            List<PermissionSetAssignment> pas = [
+                SELECT Id
+                FROM PermissionSetAssignment
+                WHERE
+                    AssigneeId = :UserInfo.getUserId()
+                    AND PermissionSetId = :ps.Id
+            ];
+            if (pas.size() == 0) {
+                insert new PermissionSetAssignment(
+                    AssigneeId = UserInfo.getUserId(),
+                    PermissionSetId = ps.Id
+                );
+            }
         }
     }
 
@@ -32,16 +48,91 @@ public class KickboardCtrlTest {
             List<Card__c> cards = KickboardCtrl.getCards(b.Id);
             system.assertEquals(0, cards.size());
 
-            Card__c card = KickboardCtrl.createNewCard(b.Id, null, null, null);
+            Id cardId = KickboardCtrl.saveCard(
+                b.Id,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            );
+            Card__c card = [
+                SELECT
+                    Id,
+                    Description__c,
+                    X_Position__c,
+                    Y_Position__c,
+                    Color__c
+                FROM Card__c
+                WHERE Id = :cardId
+            ];
             system.assertEquals(0, card.X_Position__c);
             system.assertEquals(0, card.Y_Position__c);
 
-            card = KickboardCtrl.createNewCard(b.Id, 2, 3, null);
+            cardId = KickboardCtrl.saveCard(b.Id, null, null, 2, 3, null, null);
+            card = [
+                SELECT
+                    Id,
+                    Description__c,
+                    X_Position__c,
+                    Y_Position__c,
+                    Color__c
+                FROM Card__c
+                WHERE Id = :cardId
+            ];
             system.assertEquals(2, card.X_Position__c);
             system.assertEquals(3, card.Y_Position__c);
 
+            cardId = KickboardCtrl.saveCard(
+                b.Id,
+                null,
+                'Test',
+                2,
+                3,
+                null,
+                null
+            );
+            card = [
+                SELECT
+                    Id,
+                    Description__c,
+                    X_Position__c,
+                    Y_Position__c,
+                    Color__c
+                FROM Card__c
+                WHERE Id = :cardId
+            ];
+            system.assertEquals(2, card.X_Position__c);
+            system.assertEquals(3, card.Y_Position__c);
+            system.assertEquals('Test', card.Description__c);
+
+            cardId = KickboardCtrl.saveCard(
+                b.Id,
+                null,
+                'Test',
+                2,
+                3,
+                'white',
+                null
+            );
+            card = [
+                SELECT
+                    Id,
+                    Description__c,
+                    X_Position__c,
+                    Y_Position__c,
+                    Color__c
+                FROM Card__c
+                WHERE Id = :cardId
+            ];
+            system.assertEquals(2, card.X_Position__c);
+            system.assertEquals(3, card.Y_Position__c);
+            system.assertEquals('Test', card.Description__c);
+            system.assertEquals('white', card.Color__c);
+
             cards = KickboardCtrl.getCards(b.Id);
-            system.assertEquals(2, cards.size());
+            system.assertEquals(4, cards.size());
         }
         Test.stopTest();
     }
@@ -49,19 +140,27 @@ public class KickboardCtrlTest {
     @IsTest
     static void checkCardUpdates() {
         Board__c b = [SELECT Id FROM Board__c];
-        Card__c card = KickboardCtrl.createNewCard(b.Id, null, null, null);
+        Id cardId = KickboardCtrl.saveCard(
+            b.Id,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        );
         Test.startTest();
 
-        KickboardCtrl.saveCard(card.Id, 'demo', null, null, null, null);
-        card = [
+        KickboardCtrl.saveCard(null, cardId, 'demo', null, null, null, null);
+        Card__c card = [
             SELECT Id, X_Position__c, Y_Position__c, Description__c, Color__c
             FROM Card__c
-            WHERE Id = :card.Id
+            WHERE Id = :cardId
         ];
         system.assertEquals('demo', card.Description__c);
         system.assertEquals('yellow', card.Color__c);
 
-        KickboardCtrl.saveCard(card.Id, null, 2, 3, null, null);
+        KickboardCtrl.saveCard(null, cardId, null, 2, 3, null, null);
         card = [
             SELECT Id, X_Position__c, Y_Position__c, Description__c, Color__c
             FROM Card__c
@@ -70,7 +169,7 @@ public class KickboardCtrlTest {
         system.assertEquals(2, card.X_Position__c);
         system.assertEquals(3, card.Y_Position__c);
 
-        KickboardCtrl.saveCard(card.Id, null, null, null, 'blue', null);
+        KickboardCtrl.saveCard(null, cardId, null, null, null, 'blue', null);
         card = [
             SELECT Id, X_Position__c, Y_Position__c, Description__c, Color__c
             FROM Card__c
@@ -82,22 +181,155 @@ public class KickboardCtrlTest {
     }
 
     @IsTest
+    static void checkGuestCardChanges() {
+        Lane__c lane = [SELECT Id, Code__c FROM Lane__c];
+
+        Lane_User__c lu = new Lane_User__c();
+        lu.Email__c = 'test@test.com';
+        lu.Lane__c = lane.Id;
+        lu.Is_Active__c = false;
+        insert lu;
+
+        Board__c b = [SELECT Id FROM Board__c];
+        Test.startTest();
+        System.runAs(new User(Id = UserInfo.getUserId())) {
+            List<Card__c> cards = KickboardCtrl.getCards(b.Id);
+            system.assertEquals(0, cards.size());
+
+            Id cardId = KickboardCtrl.saveCard(
+                b.Id,
+                null,
+                null,
+                null,
+                null,
+                null,
+                lu.Id
+            );
+            Card__c card = [
+                SELECT
+                    Id,
+                    Description__c,
+                    X_Position__c,
+                    Y_Position__c,
+                    Color__c,
+                    Created_By_Guest__c,
+                    Last_Modified_By_Guest__c
+                FROM Card__c
+                WHERE Id = :cardId
+            ];
+            system.assertEquals(lu.Id, card.Created_By_Guest__c);
+            system.assertEquals(null, card.Last_Modified_By_Guest__c);
+
+            cardId = KickboardCtrl.saveCard(
+                b.Id,
+                null,
+                null,
+                2,
+                3,
+                null,
+                lu.Id
+            );
+            card = [
+                SELECT
+                    Id,
+                    Description__c,
+                    X_Position__c,
+                    Y_Position__c,
+                    Color__c,
+                    Created_By_Guest__c,
+                    Last_Modified_By_Guest__c
+                FROM Card__c
+                WHERE Id = :cardId
+            ];
+            system.assertEquals(lu.Id, card.Created_By_Guest__c);
+            system.assertEquals(null, card.Last_Modified_By_Guest__c);
+
+            cardId = KickboardCtrl.saveCard(
+                b.Id,
+                null,
+                'Test',
+                2,
+                3,
+                null,
+                lu.Id
+            );
+            card = [
+                SELECT
+                    Id,
+                    Description__c,
+                    X_Position__c,
+                    Y_Position__c,
+                    Color__c,
+                    Created_By_Guest__c,
+                    Last_Modified_By_Guest__c
+                FROM Card__c
+                WHERE Id = :cardId
+            ];
+            system.assertEquals(2, card.X_Position__c);
+            system.assertEquals(3, card.Y_Position__c);
+            system.assertEquals('Test', card.Description__c);
+            system.assertEquals(lu.Id, card.Created_By_Guest__c);
+            system.assertEquals(null, card.Last_Modified_By_Guest__c);
+
+            cardId = KickboardCtrl.saveCard(
+                null,
+                card.Id,
+                'Testing',
+                5,
+                7,
+                'blue',
+                lu.Id
+            );
+            card = [
+                SELECT
+                    Id,
+                    Description__c,
+                    X_Position__c,
+                    Y_Position__c,
+                    Color__c,
+                    Created_By_Guest__c,
+                    Last_Modified_By_Guest__c
+                FROM Card__c
+                WHERE Id = :cardId
+            ];
+            system.assertEquals(5, card.X_Position__c);
+            system.assertEquals(7, card.Y_Position__c);
+            system.assertEquals('Testing', card.Description__c);
+            system.assertEquals('blue', card.Color__c);
+            system.assertEquals(lu.Id, card.Created_By_Guest__c);
+            system.assertEquals(lu.Id, card.Last_Modified_By_Guest__c);
+
+            cards = KickboardCtrl.getCards(b.Id);
+            system.assertEquals(3, cards.size());
+        }
+        Test.stopTest();
+    }
+
+    @IsTest
     static void checkCardDelete() {
         Board__c b = [SELECT Id FROM Board__c];
-        Card__c card1 = KickboardCtrl.createNewCard(b.Id, null, null, null);
-        Card__c card2 = KickboardCtrl.createNewCard(b.Id, 2, 3, null);
+        Id card1 = KickboardCtrl.saveCard(
+            b.Id,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        );
+        Id card2 = KickboardCtrl.saveCard(b.Id, null, null, 2, 3, null, null);
 
         Test.startTest();
         System.runAs(new User(Id = UserInfo.getUserId())) {
             List<Card__c> cards = KickboardCtrl.getCards(b.Id);
             system.assertEquals(2, cards.size());
 
-            KickboardCtrl.deleteCard(card1.Id);
+            KickboardCtrl.deleteCard(card1);
 
             cards = KickboardCtrl.getCards(b.Id);
             system.assertEquals(1, cards.size());
 
-            KickboardCtrl.deleteCard(card2.Id);
+            KickboardCtrl.deleteCard(card2);
 
             cards = KickboardCtrl.getCards(b.Id);
             system.assertEquals(0, cards.size());
@@ -125,7 +357,11 @@ public class KickboardCtrlTest {
 
         Test.startTest();
         System.runAs(new User(Id = UserInfo.getUserId())) {
-            Id inviteeId = KickboardCtrl.isValidCredentials(lane.Id, null, null);
+            Id inviteeId = KickboardCtrl.isValidCredentials(
+                lane.Id,
+                null,
+                null
+            );
             system.assertEquals(null, inviteeId);
 
             inviteeId = KickboardCtrl.isValidCredentials(
@@ -135,7 +371,11 @@ public class KickboardCtrlTest {
             );
             system.assertEquals(null, inviteeId);
 
-            inviteeId = KickboardCtrl.isValidCredentials(lane.Id, null, '12345678');
+            inviteeId = KickboardCtrl.isValidCredentials(
+                lane.Id,
+                null,
+                '12345678'
+            );
             system.assertEquals(null, inviteeId);
 
             inviteeId = KickboardCtrl.isValidCredentials(
@@ -195,7 +435,11 @@ public class KickboardCtrlTest {
 
         Test.startTest();
         System.runAs(new User(Id = UserInfo.getUserId())) {
-            Id inviteeId = KickboardCtrl.isValidCredentials(lane.Id, null, null);
+            Id inviteeId = KickboardCtrl.isValidCredentials(
+                lane.Id,
+                null,
+                null
+            );
             system.assertEquals(null, inviteeId);
 
             inviteeId = KickboardCtrl.isValidCredentials(
@@ -205,7 +449,11 @@ public class KickboardCtrlTest {
             );
             system.assertEquals(null, inviteeId);
 
-            inviteeId = KickboardCtrl.isValidCredentials(lane.Id, null, '12345678');
+            inviteeId = KickboardCtrl.isValidCredentials(
+                lane.Id,
+                null,
+                '12345678'
+            );
             system.assertEquals(null, inviteeId);
 
             inviteeId = KickboardCtrl.isValidCredentials(
@@ -256,6 +504,22 @@ public class KickboardCtrlTest {
     @IsTest
     static void checkExportLane() {
         Lane__c lane = [SELECT Id FROM Lane__c];
+        Board__c b = [SELECT Id FROM Board__c];
+        Id cardId = KickboardCtrl.saveCard(
+            b.Id,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        );
+        Category_Mapping__c cm = new Category_Mapping__c();
+        cm.Category__c = 'Test';
+        cm.Color__c = 'blue';
+        cm.Board__c = b.Id;
+        cm.Type__c = 'Color';
+        insert cm;
         Test.startTest();
         System.runAs(new User(Id = UserInfo.getUserId())) {
             String output = KickboardCtrl.exportLaneJSON(lane.Id);

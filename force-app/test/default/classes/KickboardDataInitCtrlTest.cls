@@ -3,9 +3,17 @@ public class KickboardDataInitCtrlTest {
     @isTest
     static void testDataInsert() {
         Test.setMock(HttpCalloutMock.class, new SalesforceAPICalloutMock());
-        KickboardDataInitCtrl.initData(
-            new List<String>{ 'Kickboard_data_create_a_vision' }
-        );
+        Test.startTest();
+        Boolean isSuccessful = true;
+        try {
+            KickboardDataInitCtrl.initData(
+                new List<String>{ 'Kickboard_data_create_a_vision' }
+            );
+        } catch (Exception e) {
+            isSuccessful = false;
+        }
+        System.assert(isSuccessful);
+        Test.stopTest();
     }
 
     public class SalesforceAPICalloutMock implements HttpCalloutMock {
@@ -15,7 +23,6 @@ public class KickboardDataInitCtrlTest {
                 GraphRequest.class
             );
             system.assertEquals(1, graphRequest.graphs.size());
-
             HttpResponse res = new HttpResponse();
             res.setHeader('Content-Type', 'application/json');
             res.setStatusCode(200);
