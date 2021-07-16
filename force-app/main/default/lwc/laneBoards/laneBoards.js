@@ -105,7 +105,7 @@ export default class LaneBoards extends LightningElement {
         const recordInput = { fields };
         if (!this.isTemplate) {
             updateRecord(recordInput).catch((error) => {
-                console.log(error);
+                console.error(error);
             });
         }
     }
