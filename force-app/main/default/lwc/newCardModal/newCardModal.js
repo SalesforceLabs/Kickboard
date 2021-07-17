@@ -1,4 +1,5 @@
 import { LightningElement, api, wire } from "lwc";
+import { refreshApex } from '@salesforce/apex';
 
 import { getRecord, getFieldValue } from "lightning/uiRecordApi";
 
@@ -20,20 +21,21 @@ export default class NewCardModal extends LightningElement {
     yPos;
     cardBg;
     cardDescription = "";
+    wiredCard;
 
     get cardTitle() {
         return this.cardId ? "Edit Card" : "New Card";
     }
 
     get modalBg() {
-        return `slds-modal__content ${this.cardBg}`;
+        return `slds-modal__content ${this.bgcolor}`;
     }
 
     @api
     createNewCard(xPos, yPos) {
         this.xPos = xPos;
         this.yPos = yPos;
-        this.cardBg = "yellow";
+        this.bgcolor = "yellow";
         this.showModal = true;
     }
 
@@ -41,8 +43,10 @@ export default class NewCardModal extends LightningElement {
     editCard(cardId) {
         this.cardId = cardId;
         this.showModal = true;
+        
     }
 
+    /*
     @wire(getRecord, {
         recordId: "$cardId",
         fields: [CARD_DESCRIPTION, CARD_COLOR]
@@ -53,14 +57,46 @@ export default class NewCardModal extends LightningElement {
             this.cardDescription = getFieldValue(data, CARD_DESCRIPTION);
         }
     }
+    */
+    @wire(getRecord, {
+        recordId: "$cardId",
+        fields: [CARD_DESCRIPTION, CARD_COLOR]
+    })
+    wiredRecord( response ) {
+        
+        this.wiredCard = response;
+        refreshApex( this.wiredCard );
+        this.description = getFieldValue(this.wiredCard.data, CARD_DESCRIPTION);
+        this.bgcolor = getFieldValue(this.wiredCard.data, CARD_COLOR);
+    }
+
+    get description(){
+        
+        return this.cardDescription;
+    }
+
+    set description(value) {
+        this.cardDescription = value;
+    }
+
+    get bgcolor(){
+        return this.cardBg;
+    }
+
+    set bgcolor(value) {
+        this.cardBg = value;
+    }
+
+
 
     closeModal() {
         this.showModal = false;
         this.cardId = undefined;
         this.xPos = undefined;
         this.yPos = undefined;
-        this.cardBg = undefined;
-        this.cardDescription = "";
+        this.bgcolor = undefined;
+        this.description = "";
+        this.wiredCard = {};
     }
 
     saveCard() {
@@ -71,6 +107,7 @@ export default class NewCardModal extends LightningElement {
                     cardId: this.cardId,
                     xPos: this.xPos,
                     yPos: this.yPos,
+                    color: this.bgcolor,
                     guestUserId: this.laneGuestUserId,
                     description: this.template.querySelector(
                         "lightning-input-rich-text"
@@ -95,7 +132,7 @@ export default class NewCardModal extends LightningElement {
                     description: this.template.querySelector(
                         "lightning-input-rich-text"
                     ).value,
-                    color: this.cardBg,
+                    color: this.bgcolor,
                     guestUserId: this.laneGuestUserId
                 })
                     .then(() => {
@@ -112,6 +149,6 @@ export default class NewCardModal extends LightningElement {
     }
 
     changeBg(event) {
-        this.cardBg = event.target.classList.value;
+        this.bgcolor = event.target.classList.value;
     }
 }

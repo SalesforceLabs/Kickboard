@@ -12,3 +12,7 @@
     cursor: pointer;
     border: 1px solid rgb(169, 169, 169);
 }
+
+:host {
+    --sds-c-textarea-sizing-min-height: 200px;
+}

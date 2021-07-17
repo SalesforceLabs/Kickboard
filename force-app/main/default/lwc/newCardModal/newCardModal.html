@@ -27,13 +27,14 @@
                         {cardTitle}
                     </h2>
                 </header>
-
+                <template if:true={wiredCard}>
                 <div class={modalBg} id="modal-content-id-1">
                     <div class="slds-p-around_medium">
-                        <lightning-input-rich-text value={cardDescription}>
+                        <lightning-input-rich-text value={description}>
                         </lightning-input-rich-text>
                     </div>
                 </div>
+            </template>
 
                 <footer class="slds-modal__footer">
                     <div class="slds-grid slds-grid_align-spread">
