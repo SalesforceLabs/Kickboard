@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>52.0</apiVersion>
-    <isTemplate>true</isTemplate>
     <decisions>
         <name>ActivateAnother_Decision</name>
         <label>ActivateAnother Decision</label>
-        <locationX>455</locationX>
-        <locationY>338</locationY>
+        <locationX>801</locationX>
+        <locationY>448</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>OutcomeIs_ActivateAnotherUser</name>
@@ -25,10 +24,85 @@
         </rules>
     </decisions>
     <decisions>
+        <name>CanActivate_Decision</name>
+        <label>CanActivate Decision</label>
+        <locationX>168</locationX>
+        <locationY>214</locationY>
+        <defaultConnector>
+            <targetReference>SwimLaneUser_UpdateRecords</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OutcomeIs_CommunityUserButNoCommunity</name>
+            <conditionLogic>1 AND (2 OR 3 OR 4) AND 5</conditionLogic>
+            <conditions>
+                <leftValueReference>User_GetRecord</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>User_GetRecord.Profile.UserType</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>PowerCustomerSuccess</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>User_GetRecord.Profile.UserType</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>CustomerSuccess</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>User_GetRecord.Profile.UserType</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>PowerPartner</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>KickboardSettings_GetRecord.Community_Url__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>CannotActivate_Screen</targetReference>
+            </connector>
+            <label>OutcomeIs CommunityUserButNoCommunity</label>
+        </rules>
+        <rules>
+            <name>OutcomeIs_ExternalButNoCommunity</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>User_GetRecord</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>KickboardSettings_GetRecord.Guest_Url__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>CannotActivate_Screen</targetReference>
+            </connector>
+            <label>OutcomeIs ExternalButNoCommunity</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>SendEmail_Decision</name>
         <label>SendEmail Decision</label>
-        <locationX>164</locationX>
-        <locationY>592</locationY>
+        <locationX>510</locationX>
+        <locationY>702</locationY>
         <defaultConnector>
             <targetReference>ActivateAnotherUser_Screen</targetReference>
         </defaultConnector>
@@ -50,19 +124,19 @@
         </rules>
     </decisions>
     <decisions>
-        <name>SwimLaneIsInternalUser_Decision</name>
-        <label>SwimLaneIsInternalUser Decision</label>
-        <locationX>23</locationX>
-        <locationY>341</locationY>
+        <name>SwimLaneIsAUser_Decision</name>
+        <label>SwimLaneIsAUser Decision</label>
+        <locationX>167</locationX>
+        <locationY>556</locationY>
         <defaultConnector>
             <targetReference>SendEmail_Decision</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
-            <name>OutcomeIs_SwimLaneUserIsInternal</name>
+            <name>OutcomeIs_SwimLaneUserIsAUser</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>SelectedUserId</leftValueReference>
+                <leftValueReference>User_GetRecord</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
@@ -71,7 +145,7 @@
             <connector>
                 <targetReference>ShareLaneToUser_Subflow</targetReference>
             </connector>
-            <label>OutcomeIs SwimLaneUserIsInternal</label>
+            <label>OutcomeIs SwimLaneUserIsAUser</label>
         </rules>
     </decisions>
     <dynamicChoiceSets>
@@ -101,6 +175,7 @@
         <valueField>Id</valueField>
     </dynamicChoiceSets>
     <interviewLabel>Activate Users {!$Flow.CurrentDateTime}</interviewLabel>
+    <isTemplate>true</isTemplate>
     <label>Activate Swim Lane Users</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -121,13 +196,55 @@
         </value>
     </processMetadataValues>
     <processType>Flow</processType>
+    <recordLookups>
+        <name>KickboardSettings_GetRecord</name>
+        <label>KickboardSettings GetRecord</label>
+        <locationX>291</locationX>
+        <locationY>212</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>CanActivate_Decision</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>SetupOwnerId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Organization.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Kickboard_Settings__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>User_GetRecord</name>
+        <label>User GetRecord</label>
+        <locationX>395</locationX>
+        <locationY>212</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>KickboardSettings_GetRecord</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>InactiveUserPicklist</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>User</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <recordUpdates>
         <name>SwimLaneUser_UpdateRecords</name>
         <label>SwimLaneUser UpdateRecords</label>
-        <locationX>172</locationX>
-        <locationY>339</locationY>
+        <locationX>175</locationX>
+        <locationY>452</locationY>
         <connector>
-            <targetReference>SwimLaneIsInternalUser_Decision</targetReference>
+            <targetReference>SwimLaneIsAUser_Decision</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -148,8 +265,8 @@
     <screens>
         <name>ActivateAnotherUser_Screen</name>
         <label>ActivateAnotherUser Screen</label>
-        <locationX>463</locationX>
-        <locationY>598</locationY>
+        <locationX>809</locationX>
+        <locationY>708</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -186,15 +303,31 @@
         <showHeader>false</showHeader>
     </screens>
     <screens>
+        <name>CannotActivate_Screen</name>
+        <label>CannotActivate Screen</label>
+        <locationX>50</locationX>
+        <locationY>215</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>CannotActivate_DisplayText</name>
+            <fieldText>&lt;p&gt;Well... it looks like a community has not been setup for this type of user. Ask your Kickboard Admin if a community can be setup.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
         <name>InactiveUser_Screen</name>
         <label>InactiveUser Screen</label>
-        <locationX>173</locationX>
+        <locationX>519</locationX>
         <locationY>212</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>SwimLaneUser_UpdateRecords</targetReference>
+            <targetReference>User_GetRecord</targetReference>
         </connector>
         <fields>
             <name>InactiveUserPicklist</name>
@@ -251,7 +384,7 @@
         <showHeader>false</showHeader>
     </screens>
     <start>
-        <locationX>47</locationX>
+        <locationX>393</locationX>
         <locationY>63</locationY>
         <connector>
             <targetReference>InactiveUser_Screen</targetReference>
@@ -261,8 +394,8 @@
     <subflows>
         <name>SendEmailToUserAction_Subflow</name>
         <label>SendEmailToUserAction Subflow</label>
-        <locationX>176</locationX>
-        <locationY>714</locationY>
+        <locationX>522</locationX>
+        <locationY>824</locationY>
         <connector>
             <targetReference>ActivateAnotherUser_Screen</targetReference>
         </connector>
@@ -283,8 +416,8 @@
     <subflows>
         <name>ShareLaneToUser_Subflow</name>
         <label>ShareLaneToUser Subflow</label>
-        <locationX>23</locationX>
-        <locationY>590</locationY>
+        <locationX>177</locationX>
+        <locationY>707</locationY>
         <connector>
             <targetReference>SendEmail_Decision</targetReference>
         </connector>

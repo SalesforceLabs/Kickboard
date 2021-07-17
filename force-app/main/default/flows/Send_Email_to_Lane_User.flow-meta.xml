@@ -2,6 +2,81 @@
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>52.0</apiVersion>
     <decisions>
+        <name>CanSendEmail_Decision</name>
+        <label>CanSendEmail Decision</label>
+        <locationX>169</locationX>
+        <locationY>662</locationY>
+        <defaultConnector>
+            <targetReference>SendEmailToUserAction_Subflow</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OutcomeIs_ExternalUserButNoCommunity</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>User_GetRecord</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>KickboardSetting_GetRecord.Guest_Url__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>CannotActivate_Screen</targetReference>
+            </connector>
+            <label>OutcomeIs ExternalUserButNoCommunity</label>
+        </rules>
+        <rules>
+            <name>OutcomeIs_CommunityUserButNoCommunity</name>
+            <conditionLogic>1 AND (2 OR 3 OR 4) AND 5</conditionLogic>
+            <conditions>
+                <leftValueReference>User_GetRecord</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>User_GetRecord.Profile.UserType</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>PowerPartner</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>User_GetRecord.Profile.UserType</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>PowerCustomerSuccess</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>User_GetRecord.Profile.UserType</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>CustomerSuccess</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>KickboardSetting_GetRecord.Community_Url__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>CannotActivate_Screen</targetReference>
+            </connector>
+            <label>OutcomeIs CommunityUserButNoCommunity</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>SendAnotherEmail_Decision</name>
         <label>SendAnotherEmail Decision</label>
         <locationX>453</locationX>
@@ -43,6 +118,10 @@
             </value>
         </filters>
         <object>Lane_User__c</object>
+        <outputAssignments>
+            <assignToReference>SelectedUserId</assignToReference>
+            <field>User__c</field>
+        </outputAssignments>
         <valueField>Id</valueField>
     </dynamicChoiceSets>
     <interviewLabel>Send Email to Lane User {!$Flow.CurrentDateTime}</interviewLabel>
@@ -67,6 +146,64 @@
         </value>
     </processMetadataValues>
     <processType>Flow</processType>
+    <recordLookups>
+        <name>KickboardSetting_GetRecord</name>
+        <label>KickboardSetting GetRecord</label>
+        <locationX>179</locationX>
+        <locationY>485</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>CanSendEmail_Decision</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>SetupOwnerId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Organization.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Kickboard_Settings__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>User_GetRecord</name>
+        <label>User GetRecord</label>
+        <locationX>177</locationX>
+        <locationY>353</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>KickboardSetting_GetRecord</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>SelectedUserId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>User</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <screens>
+        <name>CannotActivate_Screen</name>
+        <label>CannotActivate Screen</label>
+        <locationX>52</locationX>
+        <locationY>764</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>CannotActivate_DisplayText</name>
+            <fieldText>&lt;p&gt;Well... we can&apos;t activate this type of user because a community is not setup. Ask your Kickboard Admin if a community can be setup.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
     <screens>
         <name>SendAnotherEmail_Screen</name>
         <label>SendAnotherEmail Screen</label>
@@ -116,7 +253,7 @@
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>SendEmailToUserAction_Subflow</targetReference>
+            <targetReference>User_GetRecord</targetReference>
         </connector>
         <fields>
             <name>SwimLaneUser_Picklist</name>
@@ -152,8 +289,8 @@
     <subflows>
         <name>SendEmailToUserAction_Subflow</name>
         <label>SendEmailToUserAction Subflow</label>
-        <locationX>178</locationX>
-        <locationY>355</locationY>
+        <locationX>462</locationX>
+        <locationY>510</locationY>
         <connector>
             <targetReference>SendAnotherEmail_Screen</targetReference>
         </connector>
@@ -176,6 +313,13 @@
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>SelectedUserId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
         <isOutput>false</isOutput>
     </variables>
 </Flow>

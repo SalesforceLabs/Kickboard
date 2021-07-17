@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
-    <isTemplate>true</isTemplate>
     <actionCalls>
         <name>CommunityUser_SendEmail</name>
         <label>CommunityUser SendEmail</label>
         <locationX>345</locationX>
-        <locationY>736</locationY>
+        <locationY>848</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -37,8 +36,8 @@
     <actionCalls>
         <name>ExternalUser_SendEmail</name>
         <label>ExternalUser SendEmail</label>
-        <locationX>184</locationX>
-        <locationY>729</locationY>
+        <locationX>180</locationX>
+        <locationY>841</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -70,8 +69,8 @@
     <actionCalls>
         <name>InternalUser_SendEmail</name>
         <label>InternalUser SendEmail</label>
-        <locationX>581</locationX>
-        <locationY>372</locationY>
+        <locationX>587</locationX>
+        <locationY>551</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -102,12 +101,56 @@
     </actionCalls>
     <apiVersion>52.0</apiVersion>
     <decisions>
+        <name>CommunityIsSetupForCommunityUsers_Decision</name>
+        <label>CommunityIsSetupForCommunityUsers Decision</label>
+        <locationX>335</locationX>
+        <locationY>679</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OutcomeIs_CommunityIsSetupForCommunityUsers</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>KickboardSettings_GetRecord.Community_Url__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>CommunityUser_SendEmail</targetReference>
+            </connector>
+            <label>OutcomeIs CommunityIsSetupForCommunityUsers</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>CommunitySetupForExternalUsers_Decision</name>
+        <label>CommunitySetupForExternalUsers Decision</label>
+        <locationX>170</locationX>
+        <locationY>684</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OutcomeIs_CommunityIsSetupForExternalUsers</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>KickboardSettings_GetRecord.Guest_Url__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>ExternalUser_SendEmail</targetReference>
+            </connector>
+            <label>OutcomeIs CommunityIsSetupForExternalUsers</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>UserIsInternal_Decision</name>
         <label>UserIsInternal Decision</label>
-        <locationX>171</locationX>
-        <locationY>376</locationY>
+        <locationX>167</locationX>
+        <locationY>549</locationY>
         <defaultConnector>
-            <targetReference>KickboardSettings_GetRecord</targetReference>
+            <targetReference>CommunitySetupForExternalUsers_Decision</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -130,7 +173,7 @@
         <name>UserType_Decision</name>
         <label>UserType Decision</label>
         <locationX>332</locationX>
-        <locationY>380</locationY>
+        <locationY>553</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>OutcomeIs_UserIsStandard</name>
@@ -172,7 +215,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>KickboardSettingCommunity_GetRecord</targetReference>
+                <targetReference>CommunityIsSetupForCommunityUsers_Decision</targetReference>
             </connector>
             <label>OutcomeIs UserIsCommunity</label>
         </rules>
@@ -183,6 +226,7 @@
         <expression>LEFT({!$Api.Enterprise_Server_URL_520}, FIND(&quot;.com/&quot;,{!$Api.Partner_Server_URL_140})+3)</expression>
     </formulas>
     <interviewLabel>Send Email to User Action {!$Flow.CurrentDateTime}</interviewLabel>
+    <isTemplate>true</isTemplate>
     <label>Send Email to User Action</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -204,34 +248,13 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <recordLookups>
-        <name>KickboardSettingCommunity_GetRecord</name>
-        <label>KickboardSettingCommunity GetRecord</label>
-        <locationX>344</locationX>
-        <locationY>550</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>CommunityUser_SendEmail</targetReference>
-        </connector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>SetupOwnerId</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>$Organization.Id</elementReference>
-            </value>
-        </filters>
-        <getFirstRecordOnly>true</getFirstRecordOnly>
-        <object>Kickboard_Settings__c</object>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
-    <recordLookups>
         <name>KickboardSettings_GetRecord</name>
         <label>KickboardSettings GetRecord</label>
-        <locationX>183</locationX>
-        <locationY>550</locationY>
+        <locationX>175</locationX>
+        <locationY>382</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>ExternalUser_SendEmail</targetReference>
+            <targetReference>UserIsInternal_Decision</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -249,10 +272,10 @@
         <name>SwimLaneUser_GetRecord</name>
         <label>SwimLaneUser GetRecord</label>
         <locationX>177</locationX>
-        <locationY>197</locationY>
+        <locationY>251</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>UserIsInternal_Decision</targetReference>
+            <targetReference>KickboardSettings_GetRecord</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -267,7 +290,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>50</locationX>
+        <locationX>49</locationX>
         <locationY>50</locationY>
         <connector>
             <targetReference>SwimLaneUser_GetRecord</targetReference>
@@ -277,7 +300,7 @@
     <textTemplates>
         <name>CommunityUser_TextTemplate</name>
         <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text>&lt;p&gt;Hey hey, Guess what? You&apos;ve been invited to collaborate in a swim lane by {!$User.FirstName} &lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;{!$User.LastName}.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;{!SwimLaneUser_GetRecord.Lane__r.Name}&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;{!KickboardSettingCommunity_GetRecord.Community_Url__c}/lane/{!SwimLaneUser_GetRecord.Lane__c}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;{!KickboardSettingCommunity_GetRecord.Community_Url__c}/lane/{!SwimLaneUser_GetRecord.Lane__c}&lt;/b&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;﻿{!customMessage}&lt;/span&gt;&lt;/p&gt;</text>
+        <text>&lt;p&gt;Hey hey, Guess what? You&apos;ve been invited to collaborate in a swim lane by {!$User.FirstName} &lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;{!$User.LastName}.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;{!SwimLaneUser_GetRecord.Lane__r.Name}&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;{!KickboardSettings_GetRecord.Community_Url__c}/lane/{!SwimLaneUser_GetRecord.Lane__c}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;{!KickboardSettings_GetRecord.Community_Url__c}/lane/{!SwimLaneUser_GetRecord.Lane__c}&lt;/b&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;﻿{!customMessage}&lt;/span&gt;&lt;/p&gt;</text>
     </textTemplates>
     <textTemplates>
         <name>ExernalUserEmail_TextTemplate</name>

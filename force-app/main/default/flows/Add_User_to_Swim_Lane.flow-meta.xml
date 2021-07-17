@@ -2,6 +2,22 @@
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>52.0</apiVersion>
     <assignments>
+        <name>AutomaticallyActivate_Assignment</name>
+        <label>AutomaticallyActivate Assignment</label>
+        <locationX>52</locationX>
+        <locationY>689</locationY>
+        <assignmentItems>
+            <assignToReference>AutomaticallyActivate_Toggle.value</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>ExternalEmail_Screen</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>NewUserRecordIdExternal_Assignment</name>
         <label>NewUserRecordIdExternal Assignment</label>
         <locationX>815</locationX>
@@ -499,7 +515,7 @@
     <screens>
         <name>ExternalEmail_Screen</name>
         <label>ExternalEmail_Screen</label>
-        <locationX>286</locationX>
+        <locationX>285</locationX>
         <locationY>688</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
@@ -701,9 +717,12 @@
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
+        <connector>
+            <targetReference>AutomaticallyActivate_Assignment</targetReference>
+        </connector>
         <fields>
             <name>SwimLaneNotPublic_DisplayText</name>
-            <fieldText>&lt;p&gt;Uh oh... this Swim Lane is not marked public. That means an external collaborator will not be able to access. Mark it public and try adding afterwards.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Ok... Swim Lane is not marked public. That means an external collaborator will not be able to access until it&apos;s marked as public.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;We can add the user as inactive right now and will not send an email. If that&apos;s ok, click next. Later, mark this swim lane as public, activate this user, and send an email.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
