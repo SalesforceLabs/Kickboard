@@ -29,8 +29,11 @@
                 </header>
                 <template if:true={wiredCard}>
                 <div class={modalBg} id="modal-content-id-1">
-                    <div class="slds-p-around_medium">
-                        <lightning-input-rich-text value={description}>
+                    <div class="slds-p-around_small">
+                        <lightning-input-rich-text 
+                            value={description}
+                            formats={formats}
+                        >
                         </lightning-input-rich-text>
                     </div>
                 </div>

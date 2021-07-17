@@ -8,6 +8,8 @@ import CARD_COLOR from "@salesforce/schema/Card__c.Color__c";
 
 import saveCard from "@salesforce/apex/KickboardCtrl.saveCard";
 
+import ISGUEST from "@salesforce/user/isGuest";
+
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 export default class NewCardModal extends LightningElement {
@@ -22,6 +24,16 @@ export default class NewCardModal extends LightningElement {
     cardBg;
     cardDescription = "";
     wiredCard;
+    isGuest = ISGUEST;
+
+
+
+    get formats() {
+        return this.isGuest ? 
+        "font, bold, italic, underline, strike, list, indent, align, link, clean, color" :
+        "font, bold, italic, underline, strike, list, indent, align, link, clean, color, image"
+        ;
+    }
 
     get cardTitle() {
         return this.cardId ? "Edit Card" : "New Card";
