@@ -9,6 +9,7 @@ import BOARD_INSTR from "@salesforce/schema/Board__c.Instructions__c";
 import BOARD_OBJ from "@salesforce/schema/Board__c.Objective__c";
 import BG_IMG from "@salesforce/schema/Board__c.Background_Image__c";
 import BOARD_ORDER from "@salesforce/schema/Board__c.Order__c";
+import BOARD_TIMETOCOMPLETE from "@salesforce/schema/Board__c.Time_to_Complete_in_minutes__c";
 
 import getCards from "@salesforce/apex/KickboardCtrl.getCards";
 import deleteCard from "@salesforce/apex/KickboardCtrl.deleteCard";
@@ -37,7 +38,7 @@ export default class DraggableCanvas extends LightningElement {
     showDetails = false;
     iconName = "utility:chevronright";
 
-    fields = [BOARD_DESC, BOARD_OBJ, BOARD_PREREQ, BOARD_INSTR];
+    fields = [BOARD_DESC, BOARD_OBJ, BOARD_PREREQ, BOARD_INSTR, BOARD_TIMETOCOMPLETE];
     boardObj = BOARD_OBJECT;
 
     dragItem;

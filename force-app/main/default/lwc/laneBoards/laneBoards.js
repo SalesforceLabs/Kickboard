@@ -85,7 +85,7 @@ export default class LaneBoards extends LightningElement {
     handleChange(event) {
         this.currentBoardId = event.detail.value;
         if (!this.isGuest && !this.isTemplate) {
-            this.updateCurrentBoard();
+            //this.updateCurrentBoard();
         }
         this.resetBoardCoordinates();
     }
