@@ -1,0 +1,61 @@
+{
+    "graphId" : "1",
+    "compositeRequest" : [ {
+      "url" : "/services/data/v50.0/sobjects/__namespace__Lane__c/",
+      "referenceId" : "reference_id_lane_v2mom",
+      "method" : "POST",
+      "body" : {
+        "__namespace__Is_Template__c" : true,
+        "__namespace__Description__c" : "<p>Use this swim lane to create a V2MOM for your digital transformation initiative. </p><p><br></p><p>Each board is roughly 25m and is ideal for a collaborative group of 6 to 8 people.</p>",
+        "Name" : "Create a V2MOM TEMPLATE v1.0"
+      }
+    }, {
+      "url" : "/services/data/v50.0/sobjects/__namespace__Board__c/",
+      "referenceId" : "reference_id_board_vision",
+      "method" : "POST",
+      "body" : {
+        "__namespace__Time_to_Complete_in_minutes__c" : 25,
+        "__namespace__Design_Stage__c" : "Define",
+        "__namespace__Prerequisites__c" : "<p>No Prerequisites.</p>",
+        "__namespace__Objective__c" : "<ul><li>Create a shared understanding of the vision.</li></ul>",
+        "__namespace__Instructions__c" : "<ol><li>For 15m, write down any thoughts that are in or out of scope for the vision.</li><li>For 10m, discuss what the final vision statement should be. Write the final vision in the center and mark in green. Mark cards rejected in red, and ones that need revision in blue.</li></ol>",
+        "__namespace__Lane__c" : "@{reference_id_lane_v2mom.id}",
+        "__namespace__Background_Image__c" : "/resource/__namespace__Kickboard_Assets/v2mom-vision.png",
+        "__namespace__Order__c" : 1,
+        "__namespace__Description__c" : "<p>Use this board to define your vision for project or initiative.</p>",
+        "Name" : "Define Your Vision"
+      }
+    }, {
+      "url" : "/services/data/v50.0/sobjects/__namespace__Board__c/",
+      "referenceId" : "reference_id_board_values",
+      "method" : "POST",
+      "body" : {
+        "__namespace__Time_to_Complete_in_minutes__c" : 25,
+        "__namespace__Design_Stage__c" : "Define",
+        "__namespace__Prerequisites__c" : "<ul><li>A defined vision.</li></ul>",
+        "__namespace__Objective__c" : "<ul><li>Create a shared understanding of the values to guide your project or initiative.</li></ul>",
+        "__namespace__Instructions__c" : "<ol><li>For 15m, write down any values that you think represent your project or initiative.</li><li>For 10m, discuss and agree upon 3-5 values and mark those values in green. Mark cards <span style=\"background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);\">rejected in red, and ones that need revision in blue.</span></li></ol>",
+        "__namespace__Lane__c" : "@{reference_id_lane_v2mom.id}",
+        "__namespace__Background_Image__c" : "/resource/__namespace__Kickboard_Assets/v2mom-values.png",
+        "__namespace__Order__c" : 2,
+        "__namespace__Description__c" : "<p>Use this board to brainstorm and align on values for your project or initiative.</p>",
+        "Name" : "Discover Your Values"
+      }
+    }, {
+      "url" : "/services/data/v50.0/sobjects/__namespace__Board__c/",
+      "referenceId" : "reference_id_board_mom",
+      "method" : "POST",
+      "body" : {
+        "__namespace__Time_to_Complete_in_minutes__c" : 25,
+        "__namespace__Design_Stage__c" : "Define",
+        "__namespace__Prerequisites__c" : "<ul><li>A defined vision.</li></ul>",
+        "__namespace__Objective__c" : "<ul><li>Create a shared understanding of a method.</li><li>Define what ways your will measure success and what might get in the way.</li></ul>",
+        "__namespace__Instructions__c" : "<ol><li>For 15m, write down a method and then write down any ways to measure success and what obstacles might get in the way.</li><li>For 10m, discuss and agree upon measures and obstacles and mark those cards in green. Mark cards rejected in red, and ones that need revision in blue.</li></ol>",
+        "__namespace__Lane__c" : "@{reference_id_lane_v2mom.id}",
+        "__namespace__Background_Image__c" : "/resource/__namespace__Kickboard_Assets/v2mom-method-obstacles-measures.png",
+        "__namespace__Order__c" : 3,
+        "__namespace__Description__c" : "<p>Use this board to define a method, obstacles, and measures for your project or initiative. Clone this board for each method.</p>",
+        "Name" : "Define Your Methods, Obstacles, and Measures"
+      }
+    } ]
+  }
