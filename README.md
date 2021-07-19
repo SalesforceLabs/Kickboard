@@ -44,6 +44,16 @@ Kickboard is an application that teaches our customers how to swim in the vast d
     sfdx force:user:permset:assign -n Kickboard_User
     ```
 
+1. Assign the below permission sets to the admin user:
+
+    ```
+    sfdx force:user:permset:assign -n Kickboard_Admin
+    ```
+
+    ```
+    sfdx force:user:permset:assign -n Kickboard_Export_Lane
+    ```
+
 1. Open the scratch org:
 
     ```
