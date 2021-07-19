@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <isTemplate>true</isTemplate>
     <apiVersion>52.0</apiVersion>
@@ -33,7 +33,8 @@
         <allowPause>true</allowPause>
         <fields>
             <name>TipsAndTricks_DisplayText</name>
-            <fieldText>&lt;p&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;Create your own board&lt;/b&gt;&lt;/p&gt;&lt;ol&gt;&lt;li&gt;Upload an image to static resources. It can be any size, but we recommend 1280x720 pixels since that will fit nicely in a presentation.&lt;/li&gt;&lt;li&gt;Create a lane then a board and fill in relevant details. for background image, set it to &lt;b&gt;/resource/{STATIC_RESOURCE_NAME}&lt;/b&gt;&lt;/li&gt;&lt;/ol&gt;</fieldText>
+            <fieldText
+            >&lt;p&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;Create your own board&lt;/b&gt;&lt;/p&gt;&lt;ol&gt;&lt;li&gt;Upload an image to static resources. It can be any size, but we recommend 1280x720 pixels since that will fit nicely in a presentation.&lt;/li&gt;&lt;li&gt;Create a lane, then a board and fill in relevant details. For background image, set it to &lt;b&gt;/resource/{STATIC_RESOURCE_NAME}&lt;/b&gt;&lt;/li&gt;&lt;/ol&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>

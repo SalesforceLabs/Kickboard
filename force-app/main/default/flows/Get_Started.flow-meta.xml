@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>52.0</apiVersion>
     <choices>
@@ -113,7 +113,8 @@
         </connector>
         <fields>
             <name>GetStarted_DisplayText</name>
-            <fieldText>&lt;p&gt;&lt;b&gt;To get started&lt;/b&gt;&lt;/p&gt;&lt;ol&gt;&lt;li&gt;&lt;b&gt;Load Templates&lt;/b&gt; (there is only one right now)&lt;/li&gt;&lt;li&gt;&lt;b&gt;Setup a Kickboard Site&lt;/b&gt; if you want to invite external collaborators (there&apos;s a few steps but you&apos;ll learn about digital experiences along the way)&lt;/li&gt;&lt;li&gt;&lt;b&gt;Learn Tips and Tricks&lt;/b&gt;.&lt;/li&gt;&lt;/ol&gt;</fieldText>
+            <fieldText
+            >&lt;p&gt;&lt;b&gt;To get started&lt;/b&gt;&lt;/p&gt;&lt;ol&gt;&lt;li&gt;&lt;b&gt;Load Templates&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;b&gt;Setup a Kickboard Site&lt;/b&gt; if you want to invite external collaborators (there&apos;s a few steps but you&apos;ll learn about digital experiences along the way)&lt;/li&gt;&lt;li&gt;&lt;b&gt;Learn Tips and Tricks&lt;/b&gt;.&lt;/li&gt;&lt;/ol&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
