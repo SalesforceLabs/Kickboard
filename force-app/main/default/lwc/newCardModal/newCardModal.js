@@ -1,38 +1,33 @@
-import { LightningElement, api, wire } from "lwc";
-import { refreshApex } from '@salesforce/apex';
-
-import { getRecord, getFieldValue } from "lightning/uiRecordApi";
-
-import CARD_DESCRIPTION from "@salesforce/schema/Card__c.Description__c";
-import CARD_COLOR from "@salesforce/schema/Card__c.Color__c";
-
-import saveCard from "@salesforce/apex/KickboardCtrl.saveCard";
-
-import ISGUEST from "@salesforce/user/isGuest";
+import { LightningElement, api } from "lwc";
 
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
+
+import saveCard from "@salesforce/apex/KickboardCtrl.saveCard";
+import getCardDetails from "@salesforce/apex/KickboardCtrl.getCardDetails";
+
+import ISGUEST from "@salesforce/user/isGuest";
 
 export default class NewCardModal extends LightningElement {
     @api boardId;
     @api laneGuestUserId;
     @api isTemplate;
+    @api namespace;
 
     showModal = false;
     cardId;
     xPos;
     yPos;
-    cardBg;
-    cardDescription = "";
-    wiredCard;
+    bgcolor = "yellow";
+    description = "";
+    loaded = false;
+    setFocus = false;
+
     isGuest = ISGUEST;
 
-
-
     get formats() {
-        return this.isGuest ? 
-        "font, bold, italic, underline, strike, list, indent, align, link, clean, color" :
-        "font, bold, italic, underline, strike, list, indent, align, link, clean, color, image"
-        ;
+        return this.isGuest
+            ? "font, bold, italic, underline, strike, list, indent, align, link, clean, color"
+            : "font, bold, italic, underline, strike, list, indent, align, link, clean, color, image";
     }
 
     get cardTitle() {
@@ -43,63 +38,42 @@ export default class NewCardModal extends LightningElement {
         return `slds-modal__content ${this.bgcolor}`;
     }
 
+    get showEntryForm() {
+        return (this.cardId && this.loaded) || !this.cardId;
+    }
+
     @api
     createNewCard(xPos, yPos) {
         this.xPos = xPos;
         this.yPos = yPos;
-        this.bgcolor = "yellow";
         this.showModal = true;
+        this.bgcolor = "yellow";
     }
 
     @api
     editCard(cardId) {
         this.cardId = cardId;
+        getCardDetails({ cardId: this.cardId })
+            .then((result) => {
+                this.description = result[`${this.namespace}Description__c`];
+                this.bgcolor = result[`${this.namespace}Color__c`];
+                this.loaded = true;
+            })
+            .catch(() => {
+                this.loaded = false;
+            });
         this.showModal = true;
-        
     }
 
-    /*
-    @wire(getRecord, {
-        recordId: "$cardId",
-        fields: [CARD_DESCRIPTION, CARD_COLOR]
-    })
-    wiredRecord({ data }) {
-        if (data) {
-            this.cardBg = getFieldValue(data, CARD_COLOR);
-            this.cardDescription = getFieldValue(data, CARD_DESCRIPTION);
+    renderedCallback() {
+        if (
+            !this.setFocus &&
+            this.template.querySelector("lightning-input-rich-text")
+        ) {
+            this.template.querySelector("lightning-input-rich-text").focus();
+            this.setFocus = true;
         }
     }
-    */
-    @wire(getRecord, {
-        recordId: "$cardId",
-        fields: [CARD_DESCRIPTION, CARD_COLOR]
-    })
-    wiredRecord( response ) {
-        
-        this.wiredCard = response;
-        refreshApex( this.wiredCard );
-        this.description = getFieldValue(this.wiredCard.data, CARD_DESCRIPTION);
-        this.bgcolor = getFieldValue(this.wiredCard.data, CARD_COLOR);
-    }
-
-    get description(){
-        
-        return this.cardDescription;
-    }
-
-    set description(value) {
-        this.cardDescription = value;
-    }
-
-    get bgcolor(){
-        return this.cardBg;
-    }
-
-    set bgcolor(value) {
-        this.cardBg = value;
-    }
-
-
 
     closeModal() {
         this.showModal = false;
@@ -108,7 +82,8 @@ export default class NewCardModal extends LightningElement {
         this.yPos = undefined;
         this.bgcolor = undefined;
         this.description = "";
-        this.wiredCard = {};
+        this.loaded = false;
+        this.setFocus = false;
     }
 
     saveCard() {

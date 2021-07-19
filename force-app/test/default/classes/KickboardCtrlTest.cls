@@ -527,4 +527,25 @@ public class KickboardCtrlTest {
         }
         Test.stopTest();
     }
+
+    @IsTest
+    static void checkCardDetails() {
+        Lane__c lane = [SELECT Id FROM Lane__c];
+        Board__c b = [SELECT Id FROM Board__c];
+        Id cardId = KickboardCtrl.saveCard(
+            b.Id,
+            null,
+            'test',
+            null,
+            null,
+            null,
+            null
+        );
+        Test.startTest();
+        System.runAs(new User(Id = UserInfo.getUserId())) {
+            Card__c card = KickboardCtrl.getCardDetails(cardId);
+            system.assertEquals('test', card.Description__c);
+        }
+        Test.stopTest();
+    }
 }

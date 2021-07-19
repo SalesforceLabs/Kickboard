@@ -124,7 +124,25 @@ public with sharing class KickboardCtrl {
     @AuraEnabled
     public static void deleteCard(String cardId) {
         try {
-            delete ([SELECT Id FROM Card__c WHERE Id = :cardId]);
+            if (cardId != null) {
+                delete ([SELECT Id FROM Card__c WHERE Id = :cardId]);
+            }
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
+    @AuraEnabled
+    public static Card__c getCardDetails(String cardId) {
+        try {
+            if (cardId != null) {
+                return [
+                    SELECT Id, Description__c, Color__c
+                    FROM Card__c
+                    WHERE Id = :cardId
+                ];
+            }
+            return null;
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
