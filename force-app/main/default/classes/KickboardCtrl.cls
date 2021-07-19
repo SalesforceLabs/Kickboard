@@ -140,6 +140,7 @@ public with sharing class KickboardCtrl {
                     SELECT Id, Description__c, Color__c
                     FROM Card__c
                     WHERE Id = :cardId
+                    WITH SECURITY_ENFORCED
                 ];
             }
             return null;
