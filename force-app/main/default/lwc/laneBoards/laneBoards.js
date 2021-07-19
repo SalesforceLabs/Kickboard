@@ -85,7 +85,8 @@ export default class LaneBoards extends LightningElement {
     handleChange(event) {
         this.currentBoardId = event.detail.value;
         if (!this.isGuest && !this.isTemplate) {
-            //this.updateCurrentBoard();
+            // The below method gets triggered if multiple internal users are using. In future, saving last board id on swim user should be better
+            // this.updateCurrentBoard();
         }
         this.resetBoardCoordinates();
     }
