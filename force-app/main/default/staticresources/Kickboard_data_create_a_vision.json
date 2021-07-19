@@ -200,6 +200,21 @@
         },
         {
             "url" : "/services/data/v50.0/sobjects/__namespace__Category_Mapping__c/",
+            "method" : "POST",
+            "referenceId" : "reference_id_cat_introduction1",
+            "body" : {
+              "__namespace__Board__c" : "@{reference_id_introduction.id}",
+              "__namespace__Type__c" : "Bounding Box",
+              "__namespace__Min_Y_Position__c" : 0,
+              "__namespace__Min_X_Position__c" : 0,
+              "__namespace__Max_Y_Position__c" : 720,
+              "__namespace__Max_X_Position__c" : 1280,
+              "__namespace__Color__c" : null,
+              "__namespace__Category__c" : "Participant"
+            }
+        },
+        {
+            "url" : "/services/data/v50.0/sobjects/__namespace__Category_Mapping__c/",
             "body" : {
                 "__namespace__Board__c" : "@{reference_id_board_feedback.id}",
                 "__namespace__Type__c" : "Bounding Box",
