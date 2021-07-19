@@ -407,11 +407,6 @@
                 </conditions>
             </visibilityRule>
         </fields>
-        <fields>
-            <name>GuestApi_DisplayText</name>
-            <fieldText>&lt;p&gt;The last step here is to open &lt;b&gt;workspaces &amp;gt; Administration &amp;gt; Preferences &lt;/b&gt; for your &lt;a href=&quot;/lightning/setup/SetupNetworks/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Site&lt;/b&gt;&lt;/a&gt;. &lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Then makes sure &lt;b&gt;Give access to public API requests on Chatter&lt;/b&gt; is checked.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
     </screens>
@@ -425,7 +420,7 @@
         <allowPause>true</allowPause>
         <fields>
             <name>CannotAccessSite_DisplayText</name>
-            <fieldText>&lt;p&gt;Hmm... that&apos;s ok. This will be a couple steps, but it&apos;s not so bad.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;ol&gt;&lt;li&gt;Go to setup &amp;gt; digital experiences &amp;gt; all sites and launch the builder of the Kickboard site. Then open up settings. There you should see the url of your site. Copy it. Also, make sure your site is published.&lt;/li&gt;&lt;li&gt;Then go to &lt;a href=&quot;/lightning/setup/CustomMetadata/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Custom Metadata Types&lt;/b&gt;&lt;/a&gt;. Select manage records for &lt;b&gt;Kickboard Setting&lt;/b&gt;. Edit &lt;b&gt;Guest Url&lt;/b&gt;.&lt;/li&gt;&lt;li&gt;Paste the url into &lt;b&gt;Value&lt;/b&gt; and save.&lt;/li&gt;&lt;/ol&gt;</fieldText>
+            <fieldText>&lt;p&gt;Hmm... that&apos;s ok. This will be a couple steps, but it&apos;s not so bad.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;ol&gt;&lt;li&gt;Go to setup &amp;gt; digital experiences &amp;gt; all sites and launch the builder of the Kickboard site. Then open up settings. There you should see the url of your site. Copy it. Also, make sure your site is published.&lt;/li&gt;&lt;li&gt;Then go to &lt;a href=&quot;/lightning/setup/CustomMetadata/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Custom Metadata Types&lt;/b&gt;&lt;/a&gt;. Select manage records for &lt;b&gt;Kickboard Setting&lt;/b&gt;. Edit &lt;b&gt;Guest Url &lt;/b&gt;or&lt;b&gt; Community Url &lt;/b&gt;depending on the type of site you are creating.&lt;/li&gt;&lt;li&gt;Paste the url into &lt;b&gt;Value&lt;/b&gt; and save.&lt;/li&gt;&lt;/ol&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -441,7 +436,7 @@
         <allowPause>true</allowPause>
         <fields>
             <name>CustomSetting_DisplayText</name>
-            <fieldText>&lt;p&gt;We should have stored this site url&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;https://{!Domain_GetRecord.Domain}{!SiteUrlPathPrefix}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;in Custom Settings. You can confirm by going to &lt;a href=&quot;/lightning/setup/CustomSettings/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Custom Settings&lt;/b&gt;&lt;/a&gt;, select &lt;b&gt;Manage&lt;/b&gt; on Kickboard Settings and see the Default Organization Level Values have this url stored in Guest Url or Community Url depending on the site you are settings up.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;We should have stored this site url&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;https://{!Domain_GetRecord.Domain}/{!SiteUrlPathPrefix}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;in Custom Settings. You can confirm by going to &lt;a href=&quot;/lightning/setup/CustomSettings/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Custom Settings&lt;/b&gt;&lt;/a&gt;, select &lt;b&gt;Manage&lt;/b&gt; on Kickboard Settings and see the Default Organization Level Values have this url stored in Guest Url or Community Url depending on the site you are settings up.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -460,7 +455,7 @@
         </connector>
         <fields>
             <name>Domain_DisplayText</name>
-            <fieldText>&lt;p&gt;Click the link and test that you can access the Site. You&apos;ll go to the homepage and should say &apos;Getting Started&apos;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://{!Domain_GetRecord.Domain}{!SiteUrlPathPrefix}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;https://{!Domain_GetRecord.Domain}{!SiteUrlPathPrefix}&lt;/a&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Click the link and test that you can access the Site. You&apos;ll go to the homepage and should say &apos;Getting Started&apos;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://{!Domain_GetRecord.Domain}/{!SiteUrlPathPrefix}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;https://{!Domain_GetRecord.Domain}/{!SiteUrlPathPrefix}&lt;/a&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -499,22 +494,6 @@
         <showHeader>false</showHeader>
     </screens>
     <screens>
-        <name>Finish_Screen</name>
-        <label>Finish Screen</label>
-        <locationX>1866</locationX>
-        <locationY>777</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
-        <fields>
-            <name>Finish_DisplayText</name>
-            <fieldText>&lt;p&gt;At this point, you are finished setting up a Kickboard Site. &lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;If you setup a Guest site, when you add a user by email only, they will be directed to the site to enter email address and code to access.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;If you setup a Community site, you will need to add Contacts and then enable as a Customer User and then assign Kickboard User permission set so they have access to the site. Add the user to any swim lane to grant them access.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>false</showHeader>
-    </screens>
-    <screens>
         <name>GuestMember_Screen</name>
         <label>GuestMember Screen</label>
         <locationX>283</locationX>
@@ -527,7 +506,7 @@
         </connector>
         <fields>
             <name>StepKickboardMember_DisplayText</name>
-            <fieldText>&lt;p&gt;&lt;b&gt;Step: Add Kickboard Guest as a Member&lt;/b&gt;&lt;/p&gt;&lt;p&gt;We will setup so that when a community user is assigned the &lt;b&gt;Kickboard Guest&lt;/b&gt; permission set, they will automatically added as a member to this site.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Open &lt;b&gt;Workspaces &amp;gt; Administration &amp;gt; Members&lt;/b&gt; again for your &lt;a href=&quot;/lightning/setup/SetupNetworks/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Site&lt;/b&gt;&lt;/a&gt;. Add &lt;b&gt;Kickboard_Guest&lt;/b&gt; Permission Set and click save.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b&gt;Step: Add Kickboard Guest as a Member&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Let&apos;s set it up so that when a community user is assigned the &lt;b&gt;Kickboard Guest&lt;/b&gt; permission set, they will automatically added as a member to this site.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Open workspace for you &lt;a href=&quot;/lightning/setup/SetupNetworks/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;site&lt;/b&gt;&lt;/a&gt;. Then open Administration &amp;gt; Members and add the Kickboard_Guest permission set. &lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -536,7 +515,7 @@
     <screens>
         <name>GuestPerm_Screen</name>
         <label>GuestPerm Screen</label>
-        <locationX>706</locationX>
+        <locationX>409</locationX>
         <locationY>474</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
@@ -573,7 +552,7 @@
         </connector>
         <fields>
             <name>Intro_DisplayText</name>
-            <fieldText>&lt;p&gt;&lt;b&gt;Step: Enabled Digital Experiences&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Ensure &lt;b&gt;digital experience&lt;/b&gt; is enabled in your org.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Step: Create a Kickboard Site&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Create a new &lt;a href=&quot;/lightning/setup/SetupNetworks/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Site&lt;/b&gt;&lt;/a&gt; called &lt;b&gt;Kickboard&lt;/b&gt;, select build your own. Select authenticated if that&apos;s an option,&lt;b&gt; &lt;/b&gt;and then launch the builder.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Clicking next will be guide you through the following steps.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Configuring a page for Swim Lanes and publish&lt;/li&gt;&lt;li&gt;Assigning Permissions to the Site&apos;s Guest User&lt;/li&gt;&lt;li&gt;Create a sharing rules to share public Swim Lanes to the Site&apos;s Guest User&lt;/li&gt;&lt;li&gt;Saving the Site domain into a custom setting so emails to folks invited to a swim lane include a direct link.&lt;/li&gt;&lt;/ul&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b&gt;Step: Enabled Digital Experiences&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Ensure &lt;b&gt;digital experience&lt;/b&gt; is enabled in your org.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Step: Create a Kickboard Site&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Create a new &lt;a href=&quot;/lightning/setup/SetupNetworks/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Site&lt;/b&gt;&lt;/a&gt; called &lt;b&gt;Kickboard&lt;/b&gt;, select build your own. Select authenticated if that&apos;s an option,&lt;b&gt; &lt;/b&gt;and then launch the builder.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Clicking next will be guide you through the following steps.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Configuring a page for Swim Lanes&lt;/li&gt;&lt;li&gt;Make the site public and publish&lt;/li&gt;&lt;li&gt;Assigning Permissions to the Site&apos;s Guest User&lt;/li&gt;&lt;li&gt;Create a sharing rule to share public Swim Lanes to the Site&apos;s Guest User&lt;/li&gt;&lt;li&gt;Saving the Site domain into a custom setting so emails to folks invited to a swim lane include a direct link.&lt;/li&gt;&lt;/ul&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -653,7 +632,7 @@
         </connector>
         <fields>
             <name>SiteType_DisplayText</name>
-            <fieldText>&lt;p&gt;You can set up 2 types of sites.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Guest&lt;/b&gt;&lt;/p&gt;&lt;p&gt;You can setup Kickboard so that external people can collaborate by only entering their email and the code assigned to a swim lane. Ideal for occasional ad-hoc use. This involves creating a public facing site.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;Keep in mind, as unlikely as it is, someone that knows a Swim Lane url, an associated email address, and the code can access the contents of a Swim Lane.&lt;/i&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Community&lt;/b&gt;&lt;/p&gt;&lt;p&gt;If you have (or plan to have) users with community licenses, they can simply login with their credentials and access Swim Lanes that are shared with them. Perfect for repeat usage and creates better experiences overall. The steps here are for Community Plus licenses. If you want to given access to Community or High-Volume users, you can follow the same steps, but you will also have to&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Create Contact Lookup fields on Swim Lane object.&lt;/li&gt;&lt;li&gt;Create a sharing set to share Swim Lanes with contacts.&lt;/li&gt;&lt;/ul&gt;</fieldText>
+            <fieldText>&lt;p&gt;You can set up 2 types of sites.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Guest&lt;/b&gt;&lt;/p&gt;&lt;p&gt;You can setup Kickboard so that external people can collaborate by only entering their email and the code assigned to a swim lane. &lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;Ideal for occasional ad-hoc use. This involves creating a public facing site&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;Keep in mind, as unlikely as it is, someone that knows a Swim Lane url, an associated email address, and the code can access the contents of a Swim Lane.&lt;/i&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Community&lt;/b&gt;&lt;/p&gt;&lt;p&gt;If you have users with community licenses, they login with their credentials and access Swim Lanes that are shared with them. Perfect for repeat usage and better experiences overall. The steps here are for Community Plus licenses. If you want to given access to Community or High-Volume users, you can follow the same steps, but then will have to&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Create Contact Lookup fields on Swim Lane object.&lt;/li&gt;&lt;li&gt;Create a sharing set to share with contacts.&lt;/li&gt;&lt;/ul&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
