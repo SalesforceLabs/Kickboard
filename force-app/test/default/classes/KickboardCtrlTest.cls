@@ -35,8 +35,10 @@ public class KickboardCtrlTest {
     static void checkBoardRetrieval() {
         Lane__c l = [SELECT Id FROM Lane__c];
         Test.startTest();
-        List<Board__c> boards = KickboardCtrl.getBoards(l.Id);
-        system.assertEquals(1, boards.size());
+        System.runAs(new User(Id = UserInfo.getUserId())) {
+            List<Board__c> boards = KickboardCtrl.getBoards(l.Id);
+            system.assertEquals(1, boards.size());
+        }
         Test.stopTest();
     }
 
