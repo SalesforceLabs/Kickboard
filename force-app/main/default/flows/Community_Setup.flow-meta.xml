@@ -1,6 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>52.0</apiVersion>
+    <assignments>
+        <name>KickboardSeettingCommunity_Assignment</name>
+        <label>KickboardSeettingCommunity Assignment</label>
+        <locationX>1660</locationX>
+        <locationY>1050</locationY>
+        <assignmentItems>
+            <assignToReference>KickboardSettings_GetRecord.Community_Url__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>https://{!Domain_GetRecord.Domain}{!SiteUrlPathPrefix}</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>KickboardSettingGuest_UpdateRecord</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>KickboardSettingGuest_Assignment</name>
+        <label>KickboardSettingGuest Assignment</label>
+        <locationX>1653</locationX>
+        <locationY>469</locationY>
+        <assignmentItems>
+            <assignToReference>KickboardSettings_GetRecord.Guest_Url__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>https://{!Domain_GetRecord.Domain}{!SiteUrlPathPrefix}</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>KickboardSettingGuest_UpdateRecord</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>SiteUrlPrefixAddSlash_Assignment</name>
+        <label>SiteUrlPrefixAddSlash Assignment</label>
+        <locationX>781</locationX>
+        <locationY>962</locationY>
+        <assignmentItems>
+            <assignToReference>SiteUrlPathPrefix</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>/{!SiteUrlPathPrefix}</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>DomainSite_GetRecord</targetReference>
+        </connector>
+    </assignments>
     <choices>
         <name>CommunitySite_Choice</name>
         <choiceText>Community</choiceText>
@@ -37,9 +85,59 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>SiteTypeSetting_Decision</targetReference>
+                <targetReference>KickboardSettings_GetRecord</targetReference>
             </connector>
             <label>OutcomeIs CanAccessSite</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>KickboardSettingCommunity_Decision</name>
+        <label>KickboardSettingCommunity Decision</label>
+        <locationX>1650</locationX>
+        <locationY>854</locationY>
+        <defaultConnector>
+            <targetReference>KickboardSeettingCommunity_Assignment</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OutcomeIs_KickboardSettingCommunityIsNull</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>KickboardSettings_GetRecord</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>KickboardSettingsCommunity_CreateRecord</targetReference>
+            </connector>
+            <label>OutcomeIs KickboardSettingCommunityIsNull</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>KickboardSettingGuest_Decision</name>
+        <label>KickboardSettingGuest Decision</label>
+        <locationX>1644</locationX>
+        <locationY>619</locationY>
+        <defaultConnector>
+            <targetReference>KickboardSettingGuest_Assignment</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OutcomeIs_KickboardSettingIsNull</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>KickboardSettings_GetRecord</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>KickboardSettings_CreateRecord</targetReference>
+            </connector>
+            <label>OutcomeIs KickboardSettingIsNull</label>
         </rules>
     </decisions>
     <decisions>
@@ -95,10 +193,10 @@
     <decisions>
         <name>SiteTypeSetting_Decision</name>
         <label>SiteTypeSetting Decision</label>
-        <locationX>1369</locationX>
+        <locationX>1525</locationX>
         <locationY>763</locationY>
         <defaultConnector>
-            <targetReference>KickboardSettingsCommunity_CreateRecord</targetReference>
+            <targetReference>KickboardSettingCommunity_Decision</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -112,9 +210,34 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>KickboardSettings_CreateRecord</targetReference>
+                <targetReference>KickboardSettingGuest_Decision</targetReference>
             </connector>
             <label>OutcomeIs GuestSite</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>UrlPrefix_Decision</name>
+        <label>UrlPrefix Decision</label>
+        <locationX>692</locationX>
+        <locationY>800</locationY>
+        <defaultConnector>
+            <targetReference>SiteUrlPrefixAddSlash_Assignment</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OutcomeIs_SitePrefixStartsWithSlash</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>SiteUrlPathPrefix</leftValueReference>
+                <operator>StartsWith</operator>
+                <rightValue>
+                    <stringValue>/</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>DomainSite_GetRecord</targetReference>
+            </connector>
+            <label>OutcomeIs SitePrefixStartsWithSlash</label>
         </rules>
     </decisions>
     <dynamicChoiceSets>
@@ -176,8 +299,8 @@
     <recordCreates>
         <name>KickboardSettings_CreateRecord</name>
         <label>KickboardSettings CreateRecord</label>
-        <locationX>1566</locationX>
-        <locationY>768</locationY>
+        <locationX>1858</locationX>
+        <locationY>616</locationY>
         <connector>
             <targetReference>CustomSetting_Screen</targetReference>
         </connector>
@@ -199,8 +322,8 @@
     <recordCreates>
         <name>KickboardSettingsCommunity_CreateRecord</name>
         <label>KickboardSettingsCommunity CreateRecord</label>
-        <locationX>1567</locationX>
-        <locationY>911</locationY>
+        <locationX>1859</locationX>
+        <locationY>864</locationY>
         <connector>
             <targetReference>CustomSetting_Screen</targetReference>
         </connector>
@@ -266,8 +389,8 @@
     <recordLookups>
         <name>DomainSite_GetRecord</name>
         <label>DomainSite GetRecord</label>
-        <locationX>843</locationX>
-        <locationY>758</locationY>
+        <locationX>864</locationX>
+        <locationY>795</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Domain_GetRecord</targetReference>
@@ -306,6 +429,27 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
+        <name>KickboardSettings_GetRecord</name>
+        <label>KickboardSettings GetRecord</label>
+        <locationX>1368</locationX>
+        <locationY>761</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>SiteTypeSetting_Decision</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>SetupOwnerId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Organization.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Kickboard_Settings__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
         <name>PermissionSetAssigneeGuest_GetRecord</name>
         <label>PermissionSetAssigneeGuest GetRecord</label>
         <locationX>1011</locationX>
@@ -333,6 +477,16 @@
         <object>PermissionSetAssignment</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <recordUpdates>
+        <name>KickboardSettingGuest_UpdateRecord</name>
+        <label>KickboardSettingGuest UpdateRecord</label>
+        <locationX>2364</locationX>
+        <locationY>683</locationY>
+        <connector>
+            <targetReference>CustomSetting_Screen</targetReference>
+        </connector>
+        <inputReference>KickboardSettings_GetRecord</inputReference>
+    </recordUpdates>
     <screens>
         <name>Builder_Screen</name>
         <label>Builder Screen</label>
@@ -429,14 +583,14 @@
     <screens>
         <name>CustomSetting_Screen</name>
         <label>CustomSetting Screen</label>
-        <locationX>1756</locationX>
-        <locationY>776</locationY>
+        <locationX>2108</locationX>
+        <locationY>773</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <fields>
             <name>CustomSetting_DisplayText</name>
-            <fieldText>&lt;p&gt;We should have stored this site url&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;https://{!Domain_GetRecord.Domain}/{!SiteUrlPathPrefix}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;in Custom Settings. You can confirm by going to &lt;a href=&quot;/lightning/setup/CustomSettings/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Custom Settings&lt;/b&gt;&lt;/a&gt;, select &lt;b&gt;Manage&lt;/b&gt; on Kickboard Settings and see the Default Organization Level Values have this url stored in Guest Url or Community Url depending on the site you are settings up.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;We should have stored this site url&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;https://{!Domain_GetRecord.Domain}{!SiteUrlPathPrefix}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;in Custom Settings. You can confirm by going to &lt;a href=&quot;/lightning/setup/CustomSettings/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Custom Settings&lt;/b&gt;&lt;/a&gt;, select &lt;b&gt;Manage&lt;/b&gt; on Kickboard Settings and see the Default Organization Level Values have this url stored in Guest Url or Community Url depending on the site you are settings up.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -446,7 +600,7 @@
         <name>Domain_Screen</name>
         <label>Domain Screen</label>
         <locationX>1133</locationX>
-        <locationY>758</locationY>
+        <locationY>759</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -455,7 +609,7 @@
         </connector>
         <fields>
             <name>Domain_DisplayText</name>
-            <fieldText>&lt;p&gt;Click the link and test that you can access the Site. You&apos;ll go to the homepage and should say &apos;Getting Started&apos;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://{!Domain_GetRecord.Domain}/{!SiteUrlPathPrefix}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;https://{!Domain_GetRecord.Domain}/{!SiteUrlPathPrefix}&lt;/a&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Click the link and test that you can access the Site. You&apos;ll go to the homepage and should say &apos;Getting Started&apos;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://{!Domain_GetRecord.Domain}{!SiteUrlPathPrefix}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;https://{!Domain_GetRecord.Domain}{!SiteUrlPathPrefix}&lt;/a&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -561,7 +715,7 @@
     <screens>
         <name>Sharing_Screen</name>
         <label>Sharing Screen</label>
-        <locationX>712</locationX>
+        <locationX>555</locationX>
         <locationY>613</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
@@ -595,13 +749,13 @@
     <screens>
         <name>Site_Screen</name>
         <label>Site Screen</label>
-        <locationX>712</locationX>
-        <locationY>758</locationY>
+        <locationX>556</locationX>
+        <locationY>799</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>DomainSite_GetRecord</targetReference>
+            <targetReference>UrlPrefix_Decision</targetReference>
         </connector>
         <fields>
             <name>Site_DisplayText</name>
@@ -653,13 +807,13 @@
         <showHeader>false</showHeader>
     </screens>
     <start>
-        <locationX>50</locationX>
+        <locationX>48</locationX>
         <locationY>57</locationY>
         <connector>
             <targetReference>SiteType_Screen</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <name>SiteUrlPathPrefix</name>
         <dataType>String</dataType>
