@@ -4,8 +4,8 @@
             "path": "force-app",
             "default": true,
             "package": "Kickboard",
-            "versionName": "Version 1.0.0",
-            "versionNumber": "1.0.0.NEXT"
+            "versionName": "",
+            "versionNumber": "1.1.0.NEXT"
         }
     ],
     "name": "kickboard",
@@ -14,6 +14,6 @@
     "sourceApiVersion": "52.0",
     "packageAliases": {
         "Kickboard": "0Ho5e000000XZZLCA4",
-        "Kickboard@1.0.0-1": "04t5e0000003VcuAAE"
+        "Kickboard@1.1.0-1": "04t5e0000003WWCAA2"
     }
 }
