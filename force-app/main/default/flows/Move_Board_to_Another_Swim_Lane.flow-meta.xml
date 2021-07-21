@@ -85,7 +85,7 @@
             <inputParameters>
                 <name>fieldApiName</name>
                 <value>
-                    <stringValue>Lane__c</stringValue>
+                    <stringValue>kickboard__Lane__c</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -97,7 +97,7 @@
             <inputParameters>
                 <name>objectApiName</name>
                 <value>
-                    <stringValue>Board__c</stringValue>
+                    <stringValue>kickboard__Board__c</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>

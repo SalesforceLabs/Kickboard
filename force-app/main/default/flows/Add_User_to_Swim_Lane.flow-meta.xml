@@ -646,7 +646,7 @@
             <inputParameters>
                 <name>fieldApiName</name>
                 <value>
-                    <stringValue>CreatedById</stringValue>
+                    <stringValue>kickboard__User__c</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -658,7 +658,7 @@
             <inputParameters>
                 <name>objectApiName</name>
                 <value>
-                    <stringValue>Account</stringValue>
+                    <stringValue>kickboard__Lane_User__c</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
