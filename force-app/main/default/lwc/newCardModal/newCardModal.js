@@ -127,7 +127,13 @@ export default class NewCardModal extends LightningElement {
                         this.dispatchEvent(new CustomEvent("savecard"));
                     })
                     .catch((error) => {
-                        console.error(error);
+                        this.dispatchEvent(
+                            new ShowToastEvent({
+                                title: "An error occurred when saving the card",
+                                message: error.message,
+                                variant: "error"
+                            })
+                        );
                     });
             }
         } else {

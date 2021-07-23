@@ -38,7 +38,13 @@ export default class DraggableCanvas extends LightningElement {
     showDetails = false;
     iconName = "utility:chevronright";
 
-    fields = [BOARD_DESC, BOARD_OBJ, BOARD_PREREQ, BOARD_INSTR, BOARD_TIMETOCOMPLETE];
+    fields = [
+        BOARD_DESC,
+        BOARD_OBJ,
+        BOARD_PREREQ,
+        BOARD_INSTR,
+        BOARD_TIMETOCOMPLETE
+    ];
     boardObj = BOARD_OBJECT;
 
     dragItem;
@@ -312,7 +318,13 @@ export default class DraggableCanvas extends LightningElement {
                         this.currentX = undefined;
                     })
                     .catch((error) => {
-                        console.error(error);
+                        this.dispatchEvent(
+                            new ShowToastEvent({
+                                title: "An error occurred when saving the card",
+                                message: error.message,
+                                variant: "error"
+                            })
+                        );
                     });
             } else {
                 this.currentY = undefined;
@@ -361,7 +373,13 @@ export default class DraggableCanvas extends LightningElement {
                     );
                 })
                 .catch((error) => {
-                    console.error(error);
+                    this.dispatchEvent(
+                        new ShowToastEvent({
+                            title: "An error occurred when deleting the card",
+                            message: error.message,
+                            variant: "error"
+                        })
+                    );
                 });
         } else {
             this.offlineCards = this.offlineCards.filter(function (obj) {
