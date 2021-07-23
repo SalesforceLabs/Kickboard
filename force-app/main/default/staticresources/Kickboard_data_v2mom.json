@@ -483,7 +483,18 @@
       "__namespace__Description__c" : "<p>Use this board to keep momentum with your shared vision by defining who does what next.</p>",
       "Name" : "Define Who Does What When"
     }
-  }, {
+  },{
+    "url" : "/services/data/v50.0/sobjects/__namespace__Card__c/",
+    "body": {
+        "Board__c" : "@{a001g00000CfK0CAAV.id}",
+        "Color__c" : "yellow",
+        "Description__c" : "<p><b>Navigate Your Journey to Customer 360 Success</b></p><p><a href=\"https://trailhead.salesforce.com/guides\" target=\"_blank\"><b>Get Started with Your First Guide</b></a></p>",
+        "X_Position__c" : 71.0,
+        "Y_Position__c" : 158.0
+    },
+    "method" : "POST",
+    "referenceId" : "reference_id_card_guides"
+  },{
     "url" : "/services/data/v50.0/sobjects/__namespace__Category_Mapping__c/",
     "referenceId" : "a021g000004mfNmAAI",
     "method" : "POST",

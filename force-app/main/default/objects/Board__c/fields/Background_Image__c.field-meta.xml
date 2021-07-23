@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Background_Image__c</fullName>
-    <defaultValue>&quot;/kickboard__Kickboard_Assets/general.png&quot;</defaultValue>
+    <defaultValue>&quot;/resource/kickboard__Kickboard_Assets/general.png&quot;</defaultValue>
     <description>A Swim Lane can have a background image as a guide. Commonly, these images will be uploaded in static resources and referenced as /resource/STATIC_RESOURCE/IMAGE.png
 
 Images can be any size, but, we recommed 1280x720 which fit well into presentations.</description>
