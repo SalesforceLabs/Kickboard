@@ -70,7 +70,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>richTextValue</name>
-                    <value>&lt;p&gt;&lt;span style=&quot;color: rgb(107, 109, 112);&quot;&gt;More relevant content coming soon!&lt;/span&gt;&lt;/p&gt;</value>
+                    <value>&lt;p&gt;&lt;b style=&quot;font-size: 14px;&quot;&gt;Navigate Your Journey to Customer 360 Success&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Introducing Customer 360 Guides.&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://trailhead.salesforce.com/guides&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Get Started with Your First Guide&lt;/b&gt;&lt;/a&gt;.&lt;/p&gt;</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:richText</componentName>
             </componentInstance>
