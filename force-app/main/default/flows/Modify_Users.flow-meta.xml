@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>52.0</apiVersion>
-    <isTemplate>true</isTemplate>
     <choices>
         <name>ActivateUserChoice</name>
         <choiceText>Activate Users</choiceText>
@@ -16,6 +15,14 @@
         <dataType>String</dataType>
         <value>
             <stringValue>Add a User to this Swim Lane</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>GetSwimLaneAccessDetails_Choice</name>
+        <choiceText>Get Swim Lane Access Details</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Get Swim Lane Access Details</stringValue>
         </value>
     </choices>
     <choices>
@@ -100,8 +107,24 @@
             </connector>
             <label>OutcomeIs RemoveUserFromSwimLane</label>
         </rules>
+        <rules>
+            <name>OutcomeIs_GetSwimLaneAccessDetails</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Action_Picklist</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>GetSwimLaneAccessDetails_Choice</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>GetSwimLaneAccessDetails_Subflow</targetReference>
+            </connector>
+            <label>OutcomeIs GetSwimLaneAccessDetails</label>
+        </rules>
     </decisions>
     <interviewLabel>Modify Users {!$Flow.CurrentDateTime}</interviewLabel>
+    <isTemplate>true</isTemplate>
     <label>Modify Users</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -139,6 +162,7 @@
             <choiceReferences>AddUserToSwimLaneChoice</choiceReferences>
             <choiceReferences>SendEmailToUserChoice</choiceReferences>
             <choiceReferences>RemoveUserFromSwimLane_Choice</choiceReferences>
+            <choiceReferences>GetSwimLaneAccessDetails_Choice</choiceReferences>
             <dataType>String</dataType>
             <fieldText>Select an action</fieldText>
             <fieldType>DropdownBox</fieldType>
@@ -174,6 +198,19 @@
         <locationX>4</locationX>
         <locationY>458</locationY>
         <flowName>Add_User_to_Swim_Lane</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>GetSwimLaneAccessDetails_Subflow</name>
+        <label>GetSwimLaneAccessDetails Subflow</label>
+        <locationX>169</locationX>
+        <locationY>532</locationY>
+        <flowName>Get_Swim_Lane_Access_Details</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>

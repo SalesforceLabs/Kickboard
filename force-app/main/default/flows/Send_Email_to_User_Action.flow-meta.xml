@@ -223,7 +223,7 @@
     <formulas>
         <name>BaseUrl_Formula</name>
         <dataType>String</dataType>
-        <expression>LEFT({!$Api.Enterprise_Server_URL_520}, FIND(&quot;.com/&quot;,{!$Api.Partner_Server_URL_140})+3)</expression>
+        <expression>LEFT({!$Api.Enterprise_Server_URL_520}, FIND(&quot;.com/&quot;,{!$Api.Enterprise_Server_URL_520})+3)</expression>
     </formulas>
     <interviewLabel>Send Email to User Action {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
