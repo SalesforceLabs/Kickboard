@@ -90,7 +90,7 @@
         <allowPause>true</allowPause>
         <fields>
             <name>TemplateLoaded_DisplayText</name>
-            <fieldText>&lt;p&gt;Your selected template should be loaded now. &lt;a href=&quot;/lightning/o/Lane__c/list&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;View Swim Lanes&lt;/b&gt;&lt;/a&gt; and select Template list view. &lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Your selected template should be loaded now. &lt;a href=&quot;/lightning/o/kickboard__Lane__c/list&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;View Swim Lanes&lt;/b&gt;&lt;/a&gt; and select Template list view.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>

@@ -184,11 +184,11 @@
         {
             "url" : "/services/data/v50.0/sobjects/__namespace__Card__c/",
             "body": {
-                "Board__c" : "@{reference_id_board_whodoeswhat.id}",
-                "Color__c" : "yellow",
-                "Description__c" : "<p><b>Navigate Your Journey to Customer 360 Success</b></p><p><a href=\"https://trailhead.salesforce.com/guides\" target=\"_blank\"><b>Get Started with Your First Guide</b></a></p>",
-                "X_Position__c" : 71.0,
-                "Y_Position__c" : 158.0
+                "__namespace__Board__c" : "@{reference_id_board_whodoeswhat.id}",
+                "__namespace__Color__c" : "yellow",
+                "__namespace__Description__c" : "<p><b>Navigate Your Journey to Customer 360 Success</b></p><p><a href=\"https://trailhead.salesforce.com/guides\" target=\"_blank\"><b>Get Started with Your First Guide</b></a></p>",
+                "__namespace__X_Position__c" : 71.0,
+                "__namespace__Y_Position__c" : 158.0
             },
             "method" : "POST",
             "referenceId" : "reference_id_card_guides"
