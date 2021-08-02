@@ -8,10 +8,20 @@ import getCardDetails from "@salesforce/apex/KickboardCtrl.getCardDetails";
 import ISGUEST from "@salesforce/user/isGuest";
 
 export default class NewCardModal extends LightningElement {
-    @api boardId;
     @api laneGuestUserId;
     @api isTemplate;
     @api namespace;
+    @api boardsList;
+
+    @api
+    set boardId(val) {
+        this.originalBoardId = val;
+        this.selectedBoardId = val;
+    }
+
+    get boardId() {
+        return this.selectedBoardId;
+    }
 
     showModal = false;
     cardId;
@@ -21,6 +31,8 @@ export default class NewCardModal extends LightningElement {
     description = "";
     loaded = false;
     setFocus = false;
+    selectedBoardId;
+    originalBoardId;
 
     isGuest = ISGUEST;
 
@@ -40,6 +52,19 @@ export default class NewCardModal extends LightningElement {
 
     get showEntryForm() {
         return (this.cardId && this.loaded) || !this.cardId;
+    }
+
+    get options() {
+        if (this.boardsList) {
+            return this.boardsList.map((board) => {
+                return {
+                    ...board,
+                    selected:
+                        board.value === this.selectedBoardId ? true : false
+                };
+            });
+        }
+        return [];
     }
 
     @api
@@ -84,6 +109,7 @@ export default class NewCardModal extends LightningElement {
         this.description = "";
         this.loaded = false;
         this.setFocus = false;
+        this.selectedBoardId = this.originalBoardId;
     }
 
     saveCard() {
@@ -115,6 +141,7 @@ export default class NewCardModal extends LightningElement {
                     });
             } else {
                 saveCard({
+                    boardId: this.boardId,
                     cardId: this.cardId,
                     description: this.template.querySelector(
                         "lightning-input-rich-text"
@@ -143,5 +170,9 @@ export default class NewCardModal extends LightningElement {
 
     changeBg(event) {
         this.bgcolor = event.target.classList.value;
+    }
+
+    handleChange(event) {
+        this.selectedBoardId = event.target.value;
     }
 }

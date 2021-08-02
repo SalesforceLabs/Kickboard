@@ -14,5 +14,10 @@
 }
 
 :host {
-    --sds-c-textarea-sizing-min-height: 200px;
+    --sds-c-textarea-sizing-min-height: 180px;
+}
+
+.comboWidth {
+    width: 300px;
+    margin-top: 10px;
 }

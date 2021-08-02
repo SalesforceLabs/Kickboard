@@ -28,6 +28,7 @@ export default class DraggableCanvas extends LightningElement {
     @api laneGuestUserId;
     @api isTemplate;
     @api namespace;
+    @api boardsList;
 
     isGuest = ISGUEST;
     isDragging = false;
