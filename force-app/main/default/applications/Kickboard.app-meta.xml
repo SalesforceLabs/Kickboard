@@ -4,8 +4,9 @@
         <headerColor>#0070D2</headerColor>
         <logo>kickboardlogo</logo>
         <logoVersion>1</logoVersion>
-        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+        <shouldOverrideOrgTheme>true</shouldOverrideOrgTheme>
     </brand>
+    <description>Collaborative customer-centric design thinking activities sequenced to achieve objectives such as creating a vision statement and then define next steps to make it a reality.</description>
     <formFactors>Small</formFactors>
     <formFactors>Large</formFactors>
     <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
