@@ -231,11 +231,11 @@ export default class DraggableCanvas extends LightningElement {
                 this.stopRefresh();
                 if (this.activity.nomousemovement) {
                     this.inactiveMessage =
-                        "Auto-Refresh paused because of inactivity.";
+                        "Auto-Refresh paused due to inactivity.";
                 }
                 if (this.activity.nodata) {
                     this.inactiveMessage =
-                        "Auto-Refresh paused because no changes are detected in data.";
+                        "Auto-Refresh paused due to no data changes detected.";
                 }
             }
         }, 5000);
