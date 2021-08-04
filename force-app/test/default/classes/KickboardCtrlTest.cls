@@ -340,6 +340,47 @@ public class KickboardCtrlTest {
     }
 
     @IsTest
+    static void checkCardClone() {
+        Board__c b = [SELECT Id FROM Board__c];
+        Test.startTest();
+        System.runAs(new User(Id = UserInfo.getUserId())) {
+            Id cardId = KickboardCtrl.saveCard(
+                b.Id,
+                null,
+                'Test',
+                2,
+                3,
+                'white',
+                null
+            );
+            List<Card__c> cards = KickboardCtrl.getCards(b.Id);
+            system.assertEquals(1, cards.size());
+
+            Id newCardId = KickboardCtrl.cloneCard(cardId, null, 8, 10);
+            system.assertNotEquals(null, newCardId);
+
+            cards = KickboardCtrl.getCards(b.Id);
+            system.assertEquals(2, cards.size());
+
+            Card__c card = [
+                SELECT
+                    Id,
+                    Description__c,
+                    X_Position__c,
+                    Y_Position__c,
+                    Color__c
+                FROM Card__c
+                WHERE Id = :newCardId
+            ];
+            system.assertEquals(8, card.X_Position__c);
+            system.assertEquals(10, card.Y_Position__c);
+            system.assertEquals('Test', card.Description__c);
+            system.assertEquals('white', card.Color__c);
+        }
+        Test.stopTest();
+    }
+
+    @IsTest
     static void checkSessionId() {
         Test.startTest();
         String sessionId = KickboardCtrl.getSessionId();

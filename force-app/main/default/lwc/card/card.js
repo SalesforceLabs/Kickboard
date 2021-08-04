@@ -43,4 +43,11 @@ export default class Card extends LightningElement {
         });
         this.dispatchEvent(event);
     }
+
+    handleClone() {
+        const event = new CustomEvent("clonecard", {
+            detail: { cardId: this.cardId }
+        });
+        this.dispatchEvent(event);
+    }
 }

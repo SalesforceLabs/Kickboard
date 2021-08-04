@@ -14,6 +14,7 @@ import BOARD_TIMETOCOMPLETE from "@salesforce/schema/Board__c.Time_to_Complete_i
 import getCards from "@salesforce/apex/KickboardCtrl.getCards";
 import deleteCard from "@salesforce/apex/KickboardCtrl.deleteCard";
 import saveCard from "@salesforce/apex/KickboardCtrl.saveCard";
+import cloneCard from "@salesforce/apex/KickboardCtrl.cloneCard";
 
 import ISGUEST from "@salesforce/user/isGuest";
 
@@ -305,8 +306,10 @@ export default class DraggableCanvas extends LightningElement {
     }
 
     dragEnd() {
-        if (this.isDragging && this.currentX && this.currentY) {
+        if (this.dragItem) {
             this.dragItem.style.zIndex = 0;
+        }
+        if (this.isDragging && this.currentX && this.currentY) {
             if (!this.isTemplate) {
                 saveCard({
                     cardId: this.dragItem.dataset.cardid,
@@ -406,5 +409,46 @@ export default class DraggableCanvas extends LightningElement {
             this.refreshCards();
             this.startRefresh();
         }
+    }
+
+    handleCardClone(event) {
+        const cardId = event.detail.cardId;
+
+        const cardObj = this.cards.filter(
+            // eslint-disable-next-line no-loop-func
+            (card) => card.Id === cardId
+        );
+
+        let xPos = cardObj[0][`${this.namespace}X_Position__c`];
+        let yPos = cardObj[0][`${this.namespace}Y_Position__c`];
+
+        let samePos = [];
+
+        do {
+            samePos = this.cards.filter(
+                // eslint-disable-next-line no-loop-func
+                (card) =>
+                    card[`${this.namespace}X_Position__c`] === xPos &&
+                    card[`${this.namespace}Y_Position__c`] === yPos
+            );
+            if (samePos.length > 0) {
+                xPos += 15;
+                yPos += 15;
+            }
+        } while (samePos.length > 0);
+
+        cloneCard({ cardId, guestUserId: this.laneGuestUserId, xPos, yPos })
+            .then(() => {
+                this.refreshCards();
+            })
+            .catch((error) => {
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: "An error occurred when cloning the card",
+                        message: error.message,
+                        variant: "error"
+                    })
+                );
+            });
     }
 }

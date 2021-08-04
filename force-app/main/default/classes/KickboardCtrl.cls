@@ -133,11 +133,44 @@ public with sharing class KickboardCtrl {
     }
 
     @AuraEnabled
+    public static Id cloneCard(
+        String cardId,
+        String guestUserId,
+        Integer xPos,
+        Integer yPos
+    ) {
+        try {
+            if (cardId != null) {
+                Card__c card = getCardDetails(cardId);
+                Card__c newCard = card.clone(false, true);
+                newCard.X_Position__c = xPos;
+                newCard.Y_Position__c = yPos;
+
+                if (!String.isBlank(guestUserId)) {
+                    newCard.Created_By_Guest__c = guestUserId;
+                }
+
+                insert newCard;
+                return newCard.Id;
+            }
+            return null;
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
+    @AuraEnabled
     public static Card__c getCardDetails(String cardId) {
         try {
             if (cardId != null) {
                 return [
-                    SELECT Id, Description__c, Color__c
+                    SELECT
+                        Id,
+                        Description__c,
+                        Color__c,
+                        Board__c,
+                        X_Position__c,
+                        Y_Position__c
                     FROM Card__c
                     WHERE Id = :cardId
                     WITH SECURITY_ENFORCED
