@@ -4,7 +4,7 @@
     <decisions>
         <name>ActivateAnother_Decision</name>
         <label>ActivateAnother Decision</label>
-        <locationX>801</locationX>
+        <locationX>887</locationX>
         <locationY>448</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -26,7 +26,7 @@
     <decisions>
         <name>CanActivate_Decision</name>
         <label>CanActivate Decision</label>
-        <locationX>168</locationX>
+        <locationX>254</locationX>
         <locationY>214</locationY>
         <defaultConnector>
             <targetReference>SwimLaneUser_UpdateRecords</targetReference>
@@ -101,7 +101,7 @@
     <decisions>
         <name>SendEmail_Decision</name>
         <label>SendEmail Decision</label>
-        <locationX>510</locationX>
+        <locationX>596</locationX>
         <locationY>702</locationY>
         <defaultConnector>
             <targetReference>ActivateAnotherUser_Screen</targetReference>
@@ -126,7 +126,7 @@
     <decisions>
         <name>SwimLaneIsAUser_Decision</name>
         <label>SwimLaneIsAUser Decision</label>
-        <locationX>167</locationX>
+        <locationX>253</locationX>
         <locationY>556</locationY>
         <defaultConnector>
             <targetReference>SendEmail_Decision</targetReference>
@@ -199,7 +199,7 @@
     <recordLookups>
         <name>KickboardSettings_GetRecord</name>
         <label>KickboardSettings GetRecord</label>
-        <locationX>291</locationX>
+        <locationX>377</locationX>
         <locationY>212</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -220,7 +220,7 @@
     <recordLookups>
         <name>User_GetRecord</name>
         <label>User GetRecord</label>
-        <locationX>395</locationX>
+        <locationX>481</locationX>
         <locationY>212</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -231,7 +231,7 @@
             <field>Id</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>InactiveUserPicklist</elementReference>
+                <elementReference>SelectedUserId</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -241,7 +241,7 @@
     <recordUpdates>
         <name>SwimLaneUser_UpdateRecords</name>
         <label>SwimLaneUser UpdateRecords</label>
-        <locationX>175</locationX>
+        <locationX>261</locationX>
         <locationY>452</locationY>
         <connector>
             <targetReference>SwimLaneIsAUser_Decision</targetReference>
@@ -265,7 +265,7 @@
     <screens>
         <name>ActivateAnotherUser_Screen</name>
         <label>ActivateAnotherUser Screen</label>
-        <locationX>809</locationX>
+        <locationX>895</locationX>
         <locationY>708</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
@@ -321,7 +321,7 @@
     <screens>
         <name>InactiveUser_Screen</name>
         <label>InactiveUser Screen</label>
-        <locationX>519</locationX>
+        <locationX>605</locationX>
         <locationY>212</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
@@ -384,7 +384,7 @@
         <showHeader>false</showHeader>
     </screens>
     <start>
-        <locationX>393</locationX>
+        <locationX>479</locationX>
         <locationY>63</locationY>
         <connector>
             <targetReference>InactiveUser_Screen</targetReference>
@@ -394,7 +394,7 @@
     <subflows>
         <name>SendEmailToUserAction_Subflow</name>
         <label>SendEmailToUserAction Subflow</label>
-        <locationX>522</locationX>
+        <locationX>608</locationX>
         <locationY>824</locationY>
         <connector>
             <targetReference>ActivateAnotherUser_Screen</targetReference>
@@ -416,7 +416,7 @@
     <subflows>
         <name>ShareLaneToUser_Subflow</name>
         <label>ShareLaneToUser Subflow</label>
-        <locationX>177</locationX>
+        <locationX>263</locationX>
         <locationY>707</locationY>
         <connector>
             <targetReference>SendEmail_Decision</targetReference>
