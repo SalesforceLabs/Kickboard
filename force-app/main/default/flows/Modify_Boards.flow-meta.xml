@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>52.0</apiVersion>
-    <isTemplate>true</isTemplate>
     <choices>
         <name>AddBoardFromTemplateChoice</name>
         <choiceText>Add a Board from a Template</choiceText>
@@ -26,10 +25,18 @@
             <stringValue>Move a Board to Another Swim Lane</stringValue>
         </value>
     </choices>
+    <choices>
+        <name>ReorderBoardsChoice</name>
+        <choiceText>Reorder Boards</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Reorder Boards</stringValue>
+        </value>
+    </choices>
     <decisions>
         <name>Action_Decision</name>
         <label>Action Decision</label>
-        <locationX>167</locationX>
+        <locationX>314</locationX>
         <locationY>328</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -77,8 +84,24 @@
             </connector>
             <label>OutcomeIs MoveBoardToAnotherSwimLane</label>
         </rules>
+        <rules>
+            <name>OutcomeIs_ReorderBoards</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>SelectAction_Picklist</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>ReorderBoardsChoice</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>ReorderBoards_Subflow</targetReference>
+            </connector>
+            <label>OutcomeIs ReorderBoards</label>
+        </rules>
     </decisions>
     <interviewLabel>Modify Boards {!$Flow.CurrentDateTime}</interviewLabel>
+    <isTemplate>true</isTemplate>
     <label>Modify Boards</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -102,7 +125,7 @@
     <screens>
         <name>Action_Screen</name>
         <label>Action Screen</label>
-        <locationX>176</locationX>
+        <locationX>323</locationX>
         <locationY>197</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
@@ -115,6 +138,7 @@
             <choiceReferences>AddCardsFromAnotherBoard_Choice</choiceReferences>
             <choiceReferences>AddBoardFromTemplateChoice</choiceReferences>
             <choiceReferences>MoveBoardToAnotherSwimLane_Choice</choiceReferences>
+            <choiceReferences>ReorderBoardsChoice</choiceReferences>
             <dataType>String</dataType>
             <fieldText>Select an Action</fieldText>
             <fieldType>DropdownBox</fieldType>
@@ -124,7 +148,7 @@
         <showHeader>false</showHeader>
     </screens>
     <start>
-        <locationX>49</locationX>
+        <locationX>197</locationX>
         <locationY>50</locationY>
         <connector>
             <targetReference>Action_Screen</targetReference>
@@ -134,8 +158,8 @@
     <subflows>
         <name>AddBoardFromTemplate_Subflow</name>
         <label>AddBoardFromTemplate Subflow</label>
-        <locationX>318</locationX>
-        <locationY>471</locationY>
+        <locationX>189</locationX>
+        <locationY>529</locationY>
         <flowName>Add_Board_From_Template</flowName>
         <inputAssignments>
             <name>recordId</name>
@@ -147,8 +171,8 @@
     <subflows>
         <name>AddCardsFromAnotherBoard_Subflow</name>
         <label>AddCardsFromAnotherBoard Subflow</label>
-        <locationX>171</locationX>
-        <locationY>471</locationY>
+        <locationX>50</locationX>
+        <locationY>325</locationY>
         <flowName>Add_Cards_From_Another_Board</flowName>
         <inputAssignments>
             <name>recordId</name>
@@ -160,9 +184,22 @@
     <subflows>
         <name>MoveBoardToAnotherSwimLane_Flow</name>
         <label>MoveBoardToAnotherSwimLane Flow</label>
-        <locationX>541</locationX>
+        <locationX>688</locationX>
         <locationY>323</locationY>
         <flowName>Move_Board_to_Another_Swim_Lane</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>ReorderBoards_Subflow</name>
+        <label>ReorderBoards Subflow</label>
+        <locationX>468</locationX>
+        <locationY>538</locationY>
+        <flowName>Reorder_Boards</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>
