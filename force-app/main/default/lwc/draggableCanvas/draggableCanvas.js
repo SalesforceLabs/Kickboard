@@ -158,6 +158,11 @@ export default class DraggableCanvas extends LightningElement {
                 getFieldValue(data, BOARD_NAME);
 
             this.bgImage = getFieldValue(data, BG_IMG);
+
+            if( this.bgImage && this.bgImage.startsWith('/') && window.location.pathname.includes('/s/') ){
+                this.bgImage = window.location.pathname.substring(0,window.location.pathname.indexOf('/s')) + this.bgImage;
+            }
+
         } else if (error) {
             console.error(error);
         }
