@@ -33,6 +33,14 @@
             <stringValue>Reorder Boards</stringValue>
         </value>
     </choices>
+    <choices>
+        <name>UploadImage_Choice</name>
+        <choiceText>Upload Your Own Image to a Board</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Upload Your Own Image to a Board</stringValue>
+        </value>
+    </choices>
     <decisions>
         <name>Action_Decision</name>
         <label>Action Decision</label>
@@ -99,6 +107,21 @@
             </connector>
             <label>OutcomeIs ReorderBoards</label>
         </rules>
+        <rules>
+            <name>OutcomeIs_UploadYourOwnImage</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>SelectAction_Picklist</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>UploadImage_Choice</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>UploadImage_Subflow</targetReference>
+            </connector>
+            <label>OutcomeIs UploadYourOwnImage</label>
+        </rules>
     </decisions>
     <interviewLabel>Modify Boards {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
@@ -139,6 +162,7 @@
             <choiceReferences>AddBoardFromTemplateChoice</choiceReferences>
             <choiceReferences>MoveBoardToAnotherSwimLane_Choice</choiceReferences>
             <choiceReferences>ReorderBoardsChoice</choiceReferences>
+            <choiceReferences>UploadImage_Choice</choiceReferences>
             <dataType>String</dataType>
             <fieldText>Select an Action</fieldText>
             <fieldType>DropdownBox</fieldType>
@@ -200,6 +224,19 @@
         <locationX>468</locationX>
         <locationY>538</locationY>
         <flowName>Reorder_Boards</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>UploadImage_Subflow</name>
+        <label>UploadImage Subflow</label>
+        <locationX>334</locationX>
+        <locationY>533</locationY>
+        <flowName>Upload_Image</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>
