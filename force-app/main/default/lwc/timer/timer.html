@@ -1,0 +1,36 @@
+<template>
+    <div class={theme}>
+        <lightning-layout vertical-align="end">
+            <lightning-layout-item size="8" flexibility="auto">
+                <div class="slds-text-heading_x-large slds-p-bottom_medium">
+                    <template if:true={showStartBtn}>
+                        <lightning-input type="number" name="inputMinutes" value={amount} onchange={handleAmountChange} ></lightning-input>
+                    </template>
+                    <template if:false={showStartBtn}>
+                        <lightning-input type="text" name="inputMinutesDisplay" value={timeVal} ></lightning-input>
+                    </template>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="4" flexibility="auto">  
+                <div class="slds-text-heading_x-large slds-p-bottom_medium">          
+                    <template if:true={showStartBtn}>
+                        <lightning-button label="Start" onclick={start}></lightning-button>
+                    </template>
+                    <template if:false={showStartBtn}>
+                        <lightning-button label="Stop" onclick={stop}></lightning-button>
+                    </template>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+    <!--
+    <div class="slds-p-horizontal_small slds-box slds-theme_shade slds-grid">
+        <div class="slds-col">
+            
+        </div>
+        <div class="slds-col slds-p-top_medium">
+            
+        </div>
+    </div>
+    -->
+</template>
