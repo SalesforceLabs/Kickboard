@@ -1,64 +1,72 @@
-import { LightningElement, track } from 'lwc';
+import { LightningElement } from "lwc";
 
-export default class Stopwatch extends LightningElement {
-    @track showStartBtn = true;
-    @track timeVal = '25:00';
+export default class Timer extends LightningElement {
+    showStartBtn = true;
     timeIntervalInstance;
-    totalMilliseconds = 0;
-    theme = 'slds-theme_shade slds-box slds-p-around_x-small slds-m-around_x-small';
 
-    amount = 25;
+    timeInSeconds = 1500;
+    secondsPassed = 0;
+    secondsLeft;
 
     handleAmountChange(e) {
-        this.amount = parseInt(e.detail.value);
-
-        this.timeVal = this.amount<10?'0':'';
-        this.timeVal += (this.amount+':00');
+        this.timeInSeconds = e.detail.value * 60;
     }
 
-    start(event) {
+    get timeLeft() {
+        return this.formatTime(this.secondsLeft);
+    }
+
+    get timeInMinutes() {
+        return Math.floor(this.timeInSeconds / 60);
+    }
+
+    formatTime(timeInSeconds) {
+        let minutes = Math.floor(timeInSeconds / 60);
+        if (minutes < 10) {
+            minutes = `0${minutes}`;
+        }
+
+        let seconds = timeInSeconds % 60;
+        if (seconds < 10) {
+            seconds = `0${seconds}`;
+        }
+
+        return `${minutes}:${seconds}`;
+    }
+
+    start() {
         this.showStartBtn = false;
-        var parentThis = this;
-
-        // Run timer code in every 100 milliseconds
-        this.timeIntervalInstance = setInterval(function() {
-
-            parentThis.totalMilliseconds -= 1000;
-
-            // Time calculations for hours, minutes, seconds and milliseconds
-            var minutes = parentThis.amount + Math.floor((parentThis.totalMilliseconds % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = 60 + Math.floor((parentThis.totalMilliseconds % (1000 * 60)) / 1000);
-            
-            if( seconds == 60 ){
-                seconds = 0;
-            }
-
-            if( minutes === 0 && seconds === 0 ){
-                parentThis.theme = 'slds-theme_warning slds-box slds-p-around_x-small slds-m-around_x-small';
-                parentThis.timeVal = '00:00';
-                clearInterval(parentThis.timeIntervalInstance);
-            }else{
-
-                
-                if( seconds < 10 ){
-                    seconds = '0'+seconds;
+        this.secondsLeft = this.timeInSeconds;
+        this.secondsPassed = 0;
+        if (!this.timeIntervalInstance) {
+            // eslint-disable-next-line @lwc/lwc/no-async-operation
+            this.timeIntervalInstance = setInterval(() => {
+                this.secondsPassed = this.secondsPassed + 1;
+                this.secondsLeft = this.timeInSeconds - this.secondsPassed;
+                if (this.secondsLeft <= 0) {
+                    this.secondsLeft = 0;
+                    clearInterval(this.timeIntervalInstance);
+                    this.timeIntervalInstance = undefined;
                 }
-                if( minutes < 10 ){
-                    minutes = '0'+minutes;
-                }
-
-                // Output the result in the timeVal variable
-                parentThis.timeVal = minutes + ":" + seconds;
-            }
-            
-        }, 1000);
+            }, 1000);
+        }
     }
 
-    stop(event) {
+    stop() {
         this.showStartBtn = true;
-        this.timeVal = this.amount+':00';
-        this.totalMilliseconds = 0;
-        this.theme = 'slds-theme_shade slds-box slds-p-around_x-small slds-m-around_x-small';
+        this.secondsLeft = this.timeInSeconds;
+        this.secondsPassed = 0;
         clearInterval(this.timeIntervalInstance);
+        this.timeIntervalInstance = undefined;
+    }
+
+    getColor(percent) {
+        const hue = ((1 - percent) * 120).toString(10);
+        return `hsl(${hue}, 100%, 85%)`;
+    }
+
+    get remainingPathColor() {
+        const progressPercent = this.secondsPassed / this.timeInSeconds;
+        return `background: ${this.getColor(progressPercent)}`;
     }
 }
