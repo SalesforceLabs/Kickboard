@@ -66,7 +66,10 @@ export default class Timer extends LightningElement {
     }
 
     get remainingPathColor() {
-        const progressPercent = this.secondsPassed / this.timeInSeconds;
-        return `background: ${this.getColor(progressPercent)}`;
+        if (!this.showStartBtn) {
+            const progressPercent = this.secondsPassed / this.timeInSeconds;
+            return `background: ${this.getColor(progressPercent)}`;
+        }
+        return "";
     }
 }
