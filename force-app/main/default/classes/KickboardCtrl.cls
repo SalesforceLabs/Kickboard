@@ -242,6 +242,7 @@ public with sharing class KickboardCtrl {
                     )
                 FROM Board__c
                 WHERE Lane__c = :lane.Id
+                WITH SECURITY_ENFORCED
             ];
 
             for (Board__c board : boards) {
