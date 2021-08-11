@@ -5,7 +5,8 @@
             "default": true,
             "package": "Kickboard",
             "versionName": "Version 1.7.0",
-            "versionNumber": "1.7.0.NEXT"
+            "versionNumber": "1.7.0.NEXT",
+            "ancestorVersion": "1.6.0.1"
         }
     ],
     "name": "kickboard",
