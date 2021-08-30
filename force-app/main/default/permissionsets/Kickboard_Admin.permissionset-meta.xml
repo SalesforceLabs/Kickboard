@@ -16,6 +16,10 @@
         <enabled>true</enabled>
         <name>Kickboard_Admin</name>
     </customPermissions>
+    <customSettingAccesses>
+        <enabled>true</enabled>
+        <name>Kickboard_Settings__c</name>
+    </customSettingAccesses>
     <fieldPermissions>
         <editable>true</editable>
         <field>Board__c.Background_Image__c</field>

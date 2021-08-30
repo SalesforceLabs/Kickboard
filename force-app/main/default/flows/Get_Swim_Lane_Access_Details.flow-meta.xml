@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
-    <isTemplate>true</isTemplate>
     <apiVersion>52.0</apiVersion>
     <formulas>
         <name>BaseUrl_Formula</name>
@@ -8,6 +7,7 @@
         <expression>LEFT({!$Api.Enterprise_Server_URL_520}, FIND(&quot;.com/&quot;,{!$Api.Enterprise_Server_URL_520})+3)</expression>
     </formulas>
     <interviewLabel>Get Swim Lane Access Details {!$Flow.CurrentDateTime}</interviewLabel>
+    <isTemplate>true</isTemplate>
     <label>Get Swim Lane Access Details</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -100,7 +100,7 @@
         </fields>
         <fields>
             <name>Guest_DisplayText</name>
-            <fieldText>&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;font-size: 14px;&quot;&gt;Guest Users&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;i style=&quot;font-size: 12px;&quot;&gt;Make sure the board is marked &lt;/i&gt;&lt;b style=&quot;font-size: 12px;&quot;&gt;&lt;i&gt;public&lt;/i&gt;&lt;/b&gt;&lt;i style=&quot;font-size: 12px;&quot;&gt; before sending these details.&lt;/i&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;{!SwimLane_GetRecord.Name}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;{!KickboardSetting_GetRecord.Guest_Url__c}/lane/{!SwimLane_GetRecord.Id}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot; style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;&lt;b&gt;{!KickboardSetting_GetRecord.Guest_Url__c}/lane/{!SwimLane_GetRecord.Id}&lt;/b&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;The super secret code is&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;{!SwimLane_GetRecord.Code__c}&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Do not share these details with anyone else.&lt;/i&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;font-size: 14px;&quot;&gt;Guest Users&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 12px; background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;﻿&lt;/span&gt;&lt;i style=&quot;font-size: 12px; background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;Make sure you&apos;ve added these users before sharing details. &lt;/i&gt;&lt;i style=&quot;font-size: 12px;&quot;&gt;Make sure the board is marked &lt;/i&gt;&lt;b style=&quot;font-size: 12px;&quot;&gt;&lt;i&gt;public&lt;/i&gt;&lt;/b&gt;&lt;i style=&quot;font-size: 12px;&quot;&gt; before sending these details.&lt;/i&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;{!SwimLane_GetRecord.Name}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;{!KickboardSetting_GetRecord.Guest_Url__c}/lane/{!SwimLane_GetRecord.Id}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot; style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;&lt;b&gt;{!KickboardSetting_GetRecord.Guest_Url__c}/lane/{!SwimLane_GetRecord.Id}&lt;/b&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;The super secret code is&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;{!SwimLane_GetRecord.Code__c}&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Do not share these details with anyone else.&lt;/i&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>

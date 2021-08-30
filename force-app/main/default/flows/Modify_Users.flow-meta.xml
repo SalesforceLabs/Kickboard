@@ -168,6 +168,11 @@
             <fieldType>DropdownBox</fieldType>
             <isRequired>false</isRequired>
         </fields>
+        <fields>
+            <name>ModfyUserNote_DisplayText</name>
+            <fieldText>&lt;p&gt;Please note when sharing to an internal user (i.e. not a guest), only the owner of the record can share the record.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
     </screens>
