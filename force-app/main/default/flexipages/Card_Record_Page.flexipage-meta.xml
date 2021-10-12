@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
     <flexiPageRegions>
         <itemInstances>
@@ -27,6 +27,7 @@
                     <value>3</value>
                 </componentInstanceProperties>
                 <componentName>force:highlightsPanel</componentName>
+                <identifier>force_highlightsPanel</identifier>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>
@@ -41,6 +42,7 @@
                     <value>readonly</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Name</fieldItem>
+                <identifier>RecordNameField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -50,11 +52,13 @@
                     <value>none</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Description__c</fieldItem>
+                <identifier>RecordDescription__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
                 <fieldItem>Record.Consensus_Category__c</fieldItem>
+                <identifier>RecordConsensus_Category__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -64,6 +68,7 @@
                     <value>none</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Intent_Category__c</fieldItem>
+                <identifier>RecordIntent_Category__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-b07e066c-d3aa-47ea-9588-c22995eb9ac4</name>
@@ -77,6 +82,7 @@
                     <value>required</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Board__c</fieldItem>
+                <identifier>RecordBoard__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -86,6 +92,7 @@
                     <value>none</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.X_Position__c</fieldItem>
+                <identifier>RecordX_Position__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -95,6 +102,7 @@
                     <value>none</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Y_Position__c</fieldItem>
+                <identifier>RecordY_Position__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -104,6 +112,7 @@
                     <value>none</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Color__c</fieldItem>
+                <identifier>RecordColor__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-35b9190f-56b8-4471-b57c-4c213ca8d9e6</name>
@@ -117,6 +126,7 @@
                     <value>Facet-b07e066c-d3aa-47ea-9588-c22995eb9ac4</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
@@ -126,6 +136,7 @@
                     <value>Facet-35b9190f-56b8-4471-b57c-4c213ca8d9e6</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column2</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-b2c854c2-c75a-456f-9e4d-ec1be9e3d3cb</name>
@@ -143,6 +154,7 @@
                     <value>Information</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
+                <identifier>flexipage_fieldSection</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-11e47cae-cd8c-44ee-9781-d47bbfe1e4d7</name>
@@ -156,6 +168,7 @@
                     <value>readonly</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.CreatedById</fieldItem>
+                <identifier>RecordCreatedByIdField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -165,6 +178,7 @@
                     <value>none</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Created_By_Guest__c</fieldItem>
+                <identifier>RecordCreated_By_Guest__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-0252da47-9828-44c7-b41a-02a7136539e7</name>
@@ -178,6 +192,7 @@
                     <value>readonly</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.LastModifiedById</fieldItem>
+                <identifier>RecordLastModifiedByIdField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -187,6 +202,7 @@
                     <value>none</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Last_Modified_By_Guest__c</fieldItem>
+                <identifier>RecordLast_Modified_By_Guest__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-5e73d324-50e8-424c-8722-336c23828647</name>
@@ -200,6 +216,7 @@
                     <value>Facet-0252da47-9828-44c7-b41a-02a7136539e7</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column3</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
@@ -209,6 +226,7 @@
                     <value>Facet-5e73d324-50e8-424c-8722-336c23828647</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column4</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-bc324c23-179c-4139-9e8e-0627610c431a</name>
@@ -226,6 +244,7 @@
                     <value>System Information</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
+                <identifier>flexipage_fieldSection2</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-cc52622a-7871-494a-b313-ffa266286662</name>
@@ -247,6 +266,7 @@
                     <value>accordionSection1</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:accordionSection</componentName>
+                <identifier>fieldsSection</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
@@ -264,6 +284,7 @@
                     <value>accordionSection2</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:accordionSection</componentName>
+                <identifier>additionalFieldsSection</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-06bf7d5e-5843-4d0e-8c36-723349e23f87</name>
@@ -281,11 +302,13 @@
                     <value>accordionSection1</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:accordion</componentName>
+                <identifier>flexipage_accordion</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
             <componentInstance>
                 <componentName>force:recordDetailPanelMobile</componentName>
+                <identifier>force_recordDetailPanelMobile</identifier>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>

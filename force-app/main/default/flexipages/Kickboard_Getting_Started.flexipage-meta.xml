@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
     <flexiPageRegions>
         <name>region1</name>
@@ -13,9 +13,11 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>richTextValue</name>
-                    <value>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;img src=&quot;/resource/kickboard__Kickboard_Overview&quot; alt=&quot;Kickboard Overview&quot;&gt;&lt;/p&gt;</value>
+                    <value
+                    >&lt;p style=&quot;text-align: center;&quot;&gt;&lt;img src=&quot;/resource/kickboard__Kickboard_Overview&quot; alt=&quot;Kickboard Overview&quot;&gt;&lt;/p&gt;</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:richText</componentName>
+                <identifier>flexipage_richText</identifier>
             </componentInstance>
         </itemInstances>
         <name>region2</name>
@@ -33,9 +35,11 @@
                     <value>Get_Started</value>
                 </componentInstanceProperties>
                 <componentName>flowruntime:interview</componentName>
+                <identifier>flowruntime_interview</identifier>
                 <visibilityRule>
                     <criteria>
-                        <leftValue>{!$Permission.CustomPermission.Kickboard_Admin}</leftValue>
+                        <leftValue
+                        >{!$Permission.CustomPermission.Kickboard_Admin}</leftValue>
                         <operator>EQUAL</operator>
                         <rightValue>true</rightValue>
                     </criteria>
@@ -50,12 +54,15 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>richTextValue</name>
-                    <value>&lt;p&gt;&lt;a href=&quot;https://sfdc.co/kickboard-guide&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Customization Guide&lt;/b&gt;&lt;/a&gt;&lt;/p&gt;</value>
+                    <value
+                    >&lt;p&gt;&lt;a href=&quot;https://sfdc.co/kickboard-guide&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Customization Guide&lt;/b&gt;&lt;/a&gt;&lt;/p&gt;</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:richText</componentName>
+                <identifier>flexipage_richText2</identifier>
                 <visibilityRule>
                     <criteria>
-                        <leftValue>{!$Permission.CustomPermission.Kickboard_Admin}</leftValue>
+                        <leftValue
+                        >{!$Permission.CustomPermission.Kickboard_Admin}</leftValue>
                         <operator>EQUAL</operator>
                         <rightValue>true</rightValue>
                     </criteria>
@@ -70,9 +77,11 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>richTextValue</name>
-                    <value>&lt;p&gt;&lt;a href=&quot;https://sfdc.co/kickboard-survey&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot; style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;&lt;b&gt;Tell us what you think by taking a 2 question survey&lt;/b&gt;&lt;/a&gt;&lt;/p&gt;</value>
+                    <value
+                    >&lt;p&gt;&lt;a href=&quot;https://sfdc.co/kickboard-survey&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot; style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;&lt;b&gt;Tell us what you think by taking a 2 question survey&lt;/b&gt;&lt;/a&gt;&lt;/p&gt;</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:richText</componentName>
+                <identifier>flexipage_richText3</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
@@ -83,9 +92,11 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>richTextValue</name>
-                    <value>&lt;p&gt;&lt;b style=&quot;font-size: 14px;&quot;&gt;Navigate Your Journey to Customer 360 Success&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Introducing Customer 360 Guides.&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://trailhead.salesforce.com/guides&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Get Started with Your First Guide&lt;/b&gt;&lt;/a&gt;.&lt;/p&gt;</value>
+                    <value
+                    >&lt;p&gt;&lt;b style=&quot;font-size: 14px;&quot;&gt;Navigate Your Journey to Customer 360 Success&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Introducing Customer 360 Guides.&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://trailhead.salesforce.com/guides&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;b&gt;Get Started with Your First Guide&lt;/b&gt;&lt;/a&gt;.&lt;/p&gt;</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:richText</componentName>
+                <identifier>flexipage_richText4</identifier>
             </componentInstance>
         </itemInstances>
         <name>region3</name>

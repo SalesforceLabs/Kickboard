@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
     <flexiPageRegions>
         <itemInstances>
@@ -27,6 +27,7 @@
                     <value>3</value>
                 </componentInstanceProperties>
                 <componentName>force:highlightsPanel</componentName>
+                <identifier>force_highlightsPanel</identifier>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>
@@ -37,16 +38,19 @@
         <itemInstances>
             <fieldInstance>
                 <fieldItem>Record.User__c</fieldItem>
+                <identifier>RecordUser__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
                 <fieldItem>Record.Email__c</fieldItem>
+                <identifier>RecordEmail__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
                 <fieldItem>Record.Is_Active__c</fieldItem>
+                <identifier>RecordIs_Active__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-e8856903-76d7-476e-875a-f2e35a786b6a</name>
@@ -56,6 +60,7 @@
         <itemInstances>
             <fieldInstance>
                 <fieldItem>Record.Lane__c</fieldItem>
+                <identifier>RecordLane__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-c1c1507a-6d77-4ae8-b0a9-3c9631108318</name>
@@ -69,6 +74,7 @@
                     <value>Facet-e8856903-76d7-476e-875a-f2e35a786b6a</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
@@ -78,6 +84,7 @@
                     <value>Facet-c1c1507a-6d77-4ae8-b0a9-3c9631108318</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column2</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-5ccd7773-becc-4965-b91a-98442df89dac</name>
@@ -95,6 +102,7 @@
                     <value>Section</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
+                <identifier>flexipage_fieldSection</identifier>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>
