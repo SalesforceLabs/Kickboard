@@ -15,6 +15,7 @@ import NAMESPACE from "@salesforce/label/c.Namespace";
 export default class LaneBoards extends LightningElement {
     @api recordId;
     @api laneGuestUserId;
+    @api communityPath;
 
     currentBoardId;
     isGuest = ISGUEST;

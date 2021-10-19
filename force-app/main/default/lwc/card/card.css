@@ -8,7 +8,9 @@
     border-radius: 4px;
 }
 
-.hidden { display : none; }
+.hidden {
+    display: none;
+}
 
 .cardContent {
     height: 84px;

@@ -30,6 +30,7 @@ export default class DraggableCanvas extends LightningElement {
     @api isTemplate;
     @api namespace;
     @api boardsList;
+    @api communityPath;
 
     isGuest = ISGUEST;
     isDragging = false;
@@ -159,10 +160,14 @@ export default class DraggableCanvas extends LightningElement {
 
             this.bgImage = getFieldValue(data, BG_IMG);
 
-            if( this.bgImage && this.bgImage.startsWith('/') && window.location.pathname.includes('/s/') ){
-                this.bgImage = window.location.pathname.substring(0,window.location.pathname.indexOf('/s')) + this.bgImage;
+            if (
+                this.bgImage &&
+                this.bgImage.startsWith("/") &&
+                this.communityPath &&
+                this.communityPath.endsWith("/s")
+            ) {
+                this.bgImage = this.communityPath.slice(0, -2) + this.bgImage;
             }
-
         } else if (error) {
             console.error(error);
         }
