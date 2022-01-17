@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
+        <name>CreateSwimLaneCustomTemplate_Action</name>
+        <label>CreateSwimLaneCustomTemplate Action</label>
+        <locationX>314</locationX>
+        <locationY>398</locationY>
+        <actionName>KickboardDataInitCtrl</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>TemplatesLoaded_Screen</targetReference>
+        </connector>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>staticResources</name>
+            <value>
+                <elementReference>CustomTemplate_Text</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
         <name>CreateSwimLaneTemplate_Action</name>
         <label>CreateSwimLaneTemplate Action</label>
-        <locationX>176</locationX>
-        <locationY>359</locationY>
+        <locationX>50</locationX>
+        <locationY>398</locationY>
         <actionName>KickboardDataInitCtrl</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -35,6 +53,31 @@
             <stringValue>Kickboard_data_create_a_vision</stringValue>
         </value>
     </choices>
+    <decisions>
+        <name>CustomTemplate_Decision</name>
+        <label>CustomTemplate Decision</label>
+        <locationX>182</locationX>
+        <locationY>278</locationY>
+        <defaultConnector>
+            <targetReference>CreateSwimLaneCustomTemplate_Action</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OutcomeIsNot_CustomTemplate</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>CustomTemplate_Text</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue></stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>CreateSwimLaneTemplate_Action</targetReference>
+            </connector>
+            <label>OutcomeIsNot CustomTemplate</label>
+        </rules>
+    </decisions>
     <interviewLabel>Select a Template {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
     <label>Select a Template</label>
@@ -47,7 +90,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -60,22 +103,61 @@
     <screens>
         <name>SelectTemplate_Screen</name>
         <label>SelectTemplate Screen</label>
-        <locationX>176</locationX>
-        <locationY>199</locationY>
+        <locationX>182</locationX>
+        <locationY>158</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>CreateSwimLaneTemplate_Action</targetReference>
+            <targetReference>CustomTemplate_Decision</targetReference>
         </connector>
         <fields>
-            <name>Template_Picklist</name>
-            <choiceReferences>LoadTemplateVisionForSuccess_Choice</choiceReferences>
-            <choiceReferences>LoadTemplateV2MOM_Choice</choiceReferences>
-            <dataType>String</dataType>
-            <fieldText>Select a template to Load</fieldText>
-            <fieldType>DropdownBox</fieldType>
-            <isRequired>true</isRequired>
+            <name>Instructions_DisplayText</name>
+            <fieldText>&lt;p&gt;Select an existing template from this package or write in the name of a static resource for a custom template.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>SelectTemplate_Screen_Section1</name>
+            <fieldType>RegionContainer</fieldType>
+            <fields>
+                <name>SelectTemplate_Screen_Section1_Column1</name>
+                <fieldType>Region</fieldType>
+                <fields>
+                    <name>Template_Picklist</name>
+                    <choiceReferences>LoadTemplateVisionForSuccess_Choice</choiceReferences>
+                    <choiceReferences>LoadTemplateV2MOM_Choice</choiceReferences>
+                    <dataType>String</dataType>
+                    <fieldText>Select a template to Load</fieldText>
+                    <fieldType>DropdownBox</fieldType>
+                    <isRequired>false</isRequired>
+                </fields>
+                <inputParameters>
+                    <name>width</name>
+                    <value>
+                        <stringValue>6</stringValue>
+                    </value>
+                </inputParameters>
+                <isRequired>false</isRequired>
+            </fields>
+            <fields>
+                <name>SelectTemplate_Screen_Section1_Column2</name>
+                <fieldType>Region</fieldType>
+                <fields>
+                    <name>CustomTemplate_Text</name>
+                    <dataType>String</dataType>
+                    <fieldText>Custom Template</fieldText>
+                    <fieldType>InputField</fieldType>
+                    <isRequired>false</isRequired>
+                </fields>
+                <inputParameters>
+                    <name>width</name>
+                    <value>
+                        <stringValue>6</stringValue>
+                    </value>
+                </inputParameters>
+                <isRequired>false</isRequired>
+            </fields>
+            <isRequired>false</isRequired>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
@@ -83,8 +165,8 @@
     <screens>
         <name>TemplatesLoaded_Screen</name>
         <label>TemplatesLoaded Screen</label>
-        <locationX>176</locationX>
-        <locationY>514</locationY>
+        <locationX>182</locationX>
+        <locationY>614</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -97,8 +179,8 @@
         <showHeader>false</showHeader>
     </screens>
     <start>
-        <locationX>50</locationX>
-        <locationY>50</locationY>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>SelectTemplate_Screen</targetReference>
         </connector>

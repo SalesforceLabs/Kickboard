@@ -18,11 +18,27 @@
         </value>
     </choices>
     <choices>
+        <name>CloneBoard_Choice</name>
+        <choiceText>Clone a Board</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Clone a Board</stringValue>
+        </value>
+    </choices>
+    <choices>
         <name>MoveBoardToAnotherSwimLane_Choice</name>
         <choiceText>Move a Board to Another Swim Lane</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>Move a Board to Another Swim Lane</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NewBoard_Choice</name>
+        <choiceText>New Board</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>New Board</stringValue>
         </value>
     </choices>
     <choices>
@@ -44,8 +60,8 @@
     <decisions>
         <name>Action_Decision</name>
         <label>Action Decision</label>
-        <locationX>314</locationX>
-        <locationY>328</locationY>
+        <locationX>974</locationX>
+        <locationY>278</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>OutcomeIs_AddCardsFromAnotherBoard</name>
@@ -122,6 +138,36 @@
             </connector>
             <label>OutcomeIs UploadYourOwnImage</label>
         </rules>
+        <rules>
+            <name>OutcomeIs_CloneBoard</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>SelectAction_Picklist</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>CloneBoard_Choice</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>CloneBoardFromSwimLane_Subflow</targetReference>
+            </connector>
+            <label>OutcomeIs CloneBoard</label>
+        </rules>
+        <rules>
+            <name>OutcomeIs_NewBoard</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>SelectAction_Picklist</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>NewBoard_Choice</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NewBoard_Subflow</targetReference>
+            </connector>
+            <label>OutcomeIs NewBoard</label>
+        </rules>
     </decisions>
     <interviewLabel>Modify Boards {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
@@ -135,7 +181,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -148,8 +194,8 @@
     <screens>
         <name>Action_Screen</name>
         <label>Action Screen</label>
-        <locationX>323</locationX>
-        <locationY>197</locationY>
+        <locationX>974</locationX>
+        <locationY>158</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -163,6 +209,8 @@
             <choiceReferences>MoveBoardToAnotherSwimLane_Choice</choiceReferences>
             <choiceReferences>ReorderBoardsChoice</choiceReferences>
             <choiceReferences>UploadImage_Choice</choiceReferences>
+            <choiceReferences>CloneBoard_Choice</choiceReferences>
+            <choiceReferences>NewBoard_Choice</choiceReferences>
             <dataType>String</dataType>
             <fieldText>Select an Action</fieldText>
             <fieldType>DropdownBox</fieldType>
@@ -172,8 +220,8 @@
         <showHeader>false</showHeader>
     </screens>
     <start>
-        <locationX>197</locationX>
-        <locationY>50</locationY>
+        <locationX>848</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Action_Screen</targetReference>
         </connector>
@@ -182,8 +230,8 @@
     <subflows>
         <name>AddBoardFromTemplate_Subflow</name>
         <label>AddBoardFromTemplate Subflow</label>
-        <locationX>189</locationX>
-        <locationY>529</locationY>
+        <locationX>314</locationX>
+        <locationY>398</locationY>
         <flowName>Add_Board_From_Template</flowName>
         <inputAssignments>
             <name>recordId</name>
@@ -196,8 +244,21 @@
         <name>AddCardsFromAnotherBoard_Subflow</name>
         <label>AddCardsFromAnotherBoard Subflow</label>
         <locationX>50</locationX>
-        <locationY>325</locationY>
+        <locationY>398</locationY>
         <flowName>Add_Cards_From_Another_Board</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>CloneBoardFromSwimLane_Subflow</name>
+        <label>CloneBoardFromSwimLane Subflow</label>
+        <locationX>1370</locationX>
+        <locationY>398</locationY>
+        <flowName>Clone_Board_from_Swimlane</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>
@@ -208,9 +269,22 @@
     <subflows>
         <name>MoveBoardToAnotherSwimLane_Flow</name>
         <label>MoveBoardToAnotherSwimLane Flow</label>
-        <locationX>688</locationX>
-        <locationY>323</locationY>
+        <locationX>578</locationX>
+        <locationY>398</locationY>
         <flowName>Move_Board_to_Another_Swim_Lane</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>NewBoard_Subflow</name>
+        <label>NewBoard Subflow</label>
+        <locationX>1634</locationX>
+        <locationY>398</locationY>
+        <flowName>New_Board_from_Swim_Lane</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>
@@ -221,8 +295,8 @@
     <subflows>
         <name>ReorderBoards_Subflow</name>
         <label>ReorderBoards Subflow</label>
-        <locationX>468</locationX>
-        <locationY>538</locationY>
+        <locationX>842</locationX>
+        <locationY>398</locationY>
         <flowName>Reorder_Boards</flowName>
         <inputAssignments>
             <name>recordId</name>
@@ -234,8 +308,8 @@
     <subflows>
         <name>UploadImage_Subflow</name>
         <label>UploadImage Subflow</label>
-        <locationX>334</locationX>
-        <locationY>533</locationY>
+        <locationX>1106</locationX>
+        <locationY>398</locationY>
         <flowName>Upload_Image</flowName>
         <inputAssignments>
             <name>recordId</name>

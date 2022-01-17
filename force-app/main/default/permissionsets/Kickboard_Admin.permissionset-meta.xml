@@ -27,6 +27,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Board__c.Board_Template__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Board__c.Description__c</field>
         <readable>true</readable>
     </fieldPermissions>

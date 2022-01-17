@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>52.0</apiVersion>
-    <isTemplate>true</isTemplate>
     <assignments>
         <name>CardNew_Assignment</name>
         <label>CardNew Assignment</label>
-        <locationX>1215</locationX>
-        <locationY>354</locationY>
+        <locationX>572</locationX>
+        <locationY>1358</locationY>
         <assignmentItems>
             <assignToReference>CardNewRecord.Board__c</assignToReference>
             <operator>Assign</operator>
@@ -49,8 +48,8 @@
     <assignments>
         <name>CardNewCollection_Assignment</name>
         <label>CardNewCollection Assignment</label>
-        <locationX>1339</locationX>
-        <locationY>422</locationY>
+        <locationX>572</locationX>
+        <locationY>1478</locationY>
         <assignmentItems>
             <assignToReference>CardNew_RecordCollection</assignToReference>
             <operator>Add</operator>
@@ -65,8 +64,8 @@
     <assignments>
         <name>CategoryNew_Assignment</name>
         <label>CategoryNew Assignment</label>
-        <locationX>1228</locationX>
-        <locationY>752</locationY>
+        <locationX>440</locationX>
+        <locationY>2054</locationY>
         <assignmentItems>
             <assignToReference>CategoryMappingNew_Record.Board__c</assignToReference>
             <operator>Assign</operator>
@@ -130,8 +129,8 @@
     <assignments>
         <name>CategoryNewCollection_Assignment</name>
         <label>CategoryNewCollection Assignment</label>
-        <locationX>1347</locationX>
-        <locationY>816</locationY>
+        <locationX>440</locationX>
+        <locationY>2174</locationY>
         <assignmentItems>
             <assignToReference>CategoryMappingNew_RecordCollection</assignToReference>
             <operator>Add</operator>
@@ -146,8 +145,8 @@
     <assignments>
         <name>ResetCollection_Assignment</name>
         <label>ResetCollection Assignment</label>
-        <locationX>911</locationX>
-        <locationY>426</locationY>
+        <locationX>484</locationX>
+        <locationY>1118</locationY>
         <assignmentItems>
             <assignToReference>CardNew_RecordCollection</assignToReference>
             <operator>RemoveAll</operator>
@@ -166,13 +165,39 @@
             <targetReference>Card_Loop</targetReference>
         </connector>
     </assignments>
+    <decisions>
+        <name>CategoryMappingClone_Decision</name>
+        <label>CategoryMappingClone Decision</label>
+        <locationX>484</locationX>
+        <locationY>1814</locationY>
+        <defaultConnector>
+            <targetReference>LaneBoards_Loop</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OutcomeIs_CloneMappings</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>CloneCategoryMappings_Toggle.value</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>CategoryMapping_Loop</targetReference>
+            </connector>
+            <label>OutcomeIs CloneMappings</label>
+        </rules>
+    </decisions>
     <interviewLabel>Clone Swim Lane {!$Flow.CurrentDateTime}</interviewLabel>
+    <isTemplate>true</isTemplate>
     <label>Clone Swim Lane</label>
     <loops>
         <name>Card_Loop</name>
         <label>Card Loop</label>
-        <locationX>1079</locationX>
-        <locationY>426</locationY>
+        <locationX>484</locationX>
+        <locationY>1238</locationY>
         <collectionReference>Card_GetRecords</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -185,8 +210,8 @@
     <loops>
         <name>CategoryMapping_Loop</name>
         <label>CategoryMapping Loop</label>
-        <locationX>1080</locationX>
-        <locationY>820</locationY>
+        <locationX>352</locationX>
+        <locationY>1934</locationY>
         <collectionReference>CategoryMapping_GetRecords</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -199,8 +224,8 @@
     <loops>
         <name>LaneBoards_Loop</name>
         <label>LaneBoards Loop</label>
-        <locationX>445</locationX>
-        <locationY>493</locationY>
+        <locationX>176</locationX>
+        <locationY>638</locationY>
         <collectionReference>LaneBoard_GetRecords</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -219,7 +244,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -232,8 +257,8 @@
     <recordCreates>
         <name>Board_CreateRecord</name>
         <label>Board CreateRecord</label>
-        <locationX>610</locationX>
-        <locationY>426</locationY>
+        <locationX>484</locationX>
+        <locationY>758</locationY>
         <connector>
             <targetReference>Card_GetRecords</targetReference>
         </connector>
@@ -241,6 +266,12 @@
             <field>Background_Image__c</field>
             <value>
                 <elementReference>LaneBoards_Loop.Background_Image__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Board_Template__c</field>
+            <value>
+                <elementReference>LaneBoards_Loop.Id</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -303,18 +334,18 @@
     <recordCreates>
         <name>CardNewCollection_CreateRecords</name>
         <label>CardNewCollection CreateRecords</label>
-        <locationX>1079</locationX>
-        <locationY>638</locationY>
+        <locationX>484</locationX>
+        <locationY>1694</locationY>
         <connector>
-            <targetReference>CategoryMapping_Loop</targetReference>
+            <targetReference>CategoryMappingClone_Decision</targetReference>
         </connector>
         <inputReference>CardNew_RecordCollection</inputReference>
     </recordCreates>
     <recordCreates>
         <name>CategoryMappingNewCollection_CreateRecords</name>
         <label>CategoryMappingNewCollection CreateRecords</label>
-        <locationX>1078</locationX>
-        <locationY>1016</locationY>
+        <locationX>352</locationX>
+        <locationY>2390</locationY>
         <connector>
             <targetReference>LaneBoards_Loop</targetReference>
         </connector>
@@ -323,8 +354,8 @@
     <recordCreates>
         <name>Lane_CreateRecord</name>
         <label>Lane CreateRecord</label>
-        <locationX>177</locationX>
-        <locationY>494</locationY>
+        <locationX>176</locationX>
+        <locationY>398</locationY>
         <connector>
             <targetReference>LaneBoard_GetRecords</targetReference>
         </connector>
@@ -364,8 +395,8 @@
     <recordLookups>
         <name>Card_GetRecords</name>
         <label>Card GetRecords</label>
-        <locationX>720</locationX>
-        <locationY>426</locationY>
+        <locationX>484</locationX>
+        <locationY>878</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>CategoryMapping_GetRecords</targetReference>
@@ -385,8 +416,8 @@
     <recordLookups>
         <name>CategoryMapping_GetRecords</name>
         <label>CategoryMapping GetRecords</label>
-        <locationX>809</locationX>
-        <locationY>426</locationY>
+        <locationX>484</locationX>
+        <locationY>998</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>ResetCollection_Assignment</targetReference>
@@ -407,7 +438,7 @@
         <name>Lane_GetRecord</name>
         <label>Lane GetRecord</label>
         <locationX>176</locationX>
-        <locationY>209</locationY>
+        <locationY>158</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>LaneName_Screen</targetReference>
@@ -427,8 +458,8 @@
     <recordLookups>
         <name>LaneBoard_GetRecords</name>
         <label>LaneBoard GetRecords</label>
-        <locationX>323</locationX>
-        <locationY>493</locationY>
+        <locationX>176</locationX>
+        <locationY>518</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>LaneBoards_Loop</targetReference>
@@ -448,8 +479,8 @@
     <screens>
         <name>GotoLane_Screen</name>
         <label>GotoLane Screen</label>
-        <locationX>443</locationX>
-        <locationY>652</locationY>
+        <locationX>176</locationX>
+        <locationY>2702</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -464,8 +495,8 @@
     <screens>
         <name>LaneName_Screen</name>
         <label>LaneName Screen</label>
-        <locationX>177</locationX>
-        <locationY>342</locationY>
+        <locationX>176</locationX>
+        <locationY>278</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -482,12 +513,76 @@
             <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
         </fields>
+        <fields>
+            <name>LaneName_Screen_Section1</name>
+            <fieldType>RegionContainer</fieldType>
+            <fields>
+                <name>LaneName_Screen_Section1_Column1</name>
+                <fieldType>Region</fieldType>
+                <fields>
+                    <name>CloneCategoryMappings_Toggle</name>
+                    <extensionName>flowruntime:toggle</extensionName>
+                    <fieldType>ComponentInstance</fieldType>
+                    <inputParameters>
+                        <name>label</name>
+                        <value>
+                            <stringValue>Clone Category Mappings?</stringValue>
+                        </value>
+                    </inputParameters>
+                    <inputParameters>
+                        <name>messageToggleActive</name>
+                        <value>
+                            <stringValue>Yup</stringValue>
+                        </value>
+                    </inputParameters>
+                    <inputParameters>
+                        <name>messageToggleInactive</name>
+                        <value>
+                            <stringValue>Nope</stringValue>
+                        </value>
+                    </inputParameters>
+                    <inputParameters>
+                        <name>value</name>
+                        <value>
+                            <booleanValue>false</booleanValue>
+                        </value>
+                    </inputParameters>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <isRequired>true</isRequired>
+                    <storeOutputAutomatically>true</storeOutputAutomatically>
+                </fields>
+                <inputParameters>
+                    <name>width</name>
+                    <value>
+                        <stringValue>4</stringValue>
+                    </value>
+                </inputParameters>
+                <isRequired>false</isRequired>
+            </fields>
+            <fields>
+                <name>LaneName_Screen_Section1_Column2</name>
+                <fieldType>Region</fieldType>
+                <fields>
+                    <name>CloneCategoryMappings_DisplayText</name>
+                    <fieldText>&lt;p&gt;Category Mappings let you easily categorize cards by color and position. Kickboard will use this template&apos;s mappings by default. As well, you can always manually categorize.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Clone &lt;i&gt;only&lt;/i&gt; if you need fine-tuned control.&lt;/p&gt;</fieldText>
+                    <fieldType>DisplayText</fieldType>
+                </fields>
+                <inputParameters>
+                    <name>width</name>
+                    <value>
+                        <stringValue>8</stringValue>
+                    </value>
+                </inputParameters>
+                <isRequired>false</isRequired>
+            </fields>
+            <isRequired>false</isRequired>
+        </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
     </screens>
     <start>
         <locationX>50</locationX>
-        <locationY>50</locationY>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Lane_GetRecord</targetReference>
         </connector>

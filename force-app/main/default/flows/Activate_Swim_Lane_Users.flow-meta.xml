@@ -11,10 +11,10 @@
             <name>OutcomeIs_ActivateAnotherUser</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>InactiveUsers_RecordChoiceSet</leftValueReference>
+                <leftValueReference>ActivateUser_Toggle.value</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <stringValue>abc</stringValue>
+                    <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
             <connector>

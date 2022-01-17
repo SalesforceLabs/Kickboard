@@ -4,7 +4,7 @@
         {
             "url" : "/services/data/v50.0/sobjects/__namespace__Lane__c/",
             "body" : {
-                "Name" : "Create a Vision for Success TEMPLATE v1.0",
+                "Name" : "Create a Vision for Success TEMPLATE v1.1",
                 "__namespace__Description__c" : "<p>Use this swim lane to create a vision and how to measure success for your digital transformation initiative. </p><p><br></p><p>Each board is roughly 25m and is ideal for a collaborative group of 6 to 8 people. Additionally, consider completing the stakeholders board to inform whom to invite to collaborate in following activities.</p>",
                 "__namespace__Is_Template__c" : true
             },
@@ -54,7 +54,7 @@
                 "__namespace__Background_Image__c" : "/resource/__namespace__Kickboard_Assets/stakeholder-map.png",
                 "__namespace__Instructions__c" : "<ol><li>For 15m, write down any folks that could potentially be stakeholders.</li><li>For 10m, sort each by interest and influence until the groups is in a agreement. Mark cards accepted in green, rejected in red, and ones that need revision in blue.</li></ol>",
                 "__namespace__Objective__c" : "<ul><li>Create a shared understanding of all the stakeholders that would potentially have an interest in the problem statement and solutions.</li><li>Understand the influence and interest of various stakeholders to invite in following collaborative boards.</li><li>Use the list of stakeholders to determine who to invite to collaborate on following boards.</li></ul>",
-                "__namespace__Prerequisites__c" : "<ul><li>A defined and agreed upon problem statement</li></ul>",
+                "__namespace__Prerequisites__c" : "<ul><li>A defined and agreed upon problem statement.</li></ul>",
                 "__namespace__Design_Stage__c" : "Empathize",
                 "__namespace__Time_to_Complete_in_minutes__c" : 25,
                 "__namespace__Lane__c" : "@{reference_id_laneid_1.id}"
@@ -65,9 +65,26 @@
         {
             "url" : "/services/data/v50.0/sobjects/__namespace__Board__c/",
             "body" : {
+                "Name" : "Persona Profile",
+                "__namespace__Description__c" : "<p>Use this board to create a persona to understand more deeply facts, demographics, obstacles, pain points, goals, motivations, behaviors, and beliefs.</p>",
+                "__namespace__Order__c" : 4,
+                "__namespace__Background_Image__c" : "/resource/__namespace__Kickboard_Assets/persona-profile.png",
+                "__namespace__Instructions__c" : "<ol><li>For 15m, write down any details about your persona.</li><li>For 10m, discuss the details that have been written. Mark cards accepted in green, rejected in red, and ones that need revision in blue.</li></ol>",
+                "__namespace__Objective__c" : "<ul><li>Create a shared understanding of a single persona for your initiative.</li><li>Visualize demographics, obstacles, goals, behaviors, and more.</li><li>Use your persona as a guide in developing solutions.</li></ul>",
+                "__namespace__Prerequisites__c" : "<ul><li>A defined and agreed upon problem statement.</li><li>A selected persona. Ideally, this persona is selected from the stakeholder map.</li></ul>",
+                "__namespace__Design_Stage__c" : "Empathize",
+                "__namespace__Time_to_Complete_in_minutes__c" : 25,
+                "__namespace__Lane__c" : "@{reference_id_laneid_1.id}"
+            },
+            "method" : "POST",
+            "referenceId" : "reference_id_board_persona"
+        },
+        {
+            "url" : "/services/data/v50.0/sobjects/__namespace__Board__c/",
+            "body" : {
                 "Name" : "Build an Empathy Map",
                 "__namespace__Description__c" : "<p>Use this board to build empathy and understanding of your target customer.</p>",
-                "__namespace__Order__c" : 4,
+                "__namespace__Order__c" : 5,
                 "__namespace__Background_Image__c" : "/resource/__namespace__Kickboard_Assets/empathy-map.png",
                 "__namespace__Instructions__c" : "<ul><li>For 15m, write down any thoughts for each of the areas of the empathy map.</li><li>For 10m, round robin, each person shares what they wrote and why and then selects the next person to share. Mark cards accepted in green, rejected in red, and ones that need revision in blue.</li></ul>",
                 "__namespace__Objective__c" : "<ul><li>Understand deeply from your customer&#39;s perspective how they think, feel, and what they hear, say and do.</li><li>Create a shared understanding of the pains and gains of a target customer.</li></ul>",
@@ -84,7 +101,7 @@
             "body" : {
                 "Name" : "Identify Jobs To Be Done",
                 "__namespace__Description__c" : "<p>Use this board to focus on the the real &#39;jobs&#39; a customer is trying to accomplish with your solution.</p>",
-                "__namespace__Order__c" : 5,
+                "__namespace__Order__c" : 6,
                 "__namespace__Background_Image__c" : "/resource/__namespace__Kickboard_Assets/jtbd.png",
                 "__namespace__Instructions__c" : "<ul><li>For 15m, write down thoughts in each area of the board.</li><li>For 10m, round robin, each person shares what they wrote and why and then calls on the next person to share. Mark cards accepted in green, rejected in red, and ones that need revision in blue.</li></ul>",
                 "__namespace__Objective__c" : "<ul><li>Capture tasks in a structured way.</li><li>Create a shared understanding of customer needs.</li></ul>",
@@ -101,7 +118,7 @@
             "body" : {
                 "Name" : "Discover Your Customer's Journey",
                 "__namespace__Description__c" : "<p>Use this board to understand in detail the touchpoints a customer has with your company and where the biggest gains or pains are happening.</p>",
-                "__namespace__Order__c" : 6,
+                "__namespace__Order__c" : 7,
                 "__namespace__Background_Image__c" : "/resource/__namespace__Kickboard_Assets/customer-journey.png",
                 "__namespace__Instructions__c" : "<ol><li>For 15m, write down any thoughts in each area of the customer&#39;s journey. Mark cards accepted in green, rejected in red, and ones that need revision in blue.</li><li>For 10m, round robin, each person shares what they wrote and why and then calls on the next person to share.</li></ol>",
                 "__namespace__Objective__c" : "<ul><li>Create a shared understanding of your customer&#39;s touchpoints or moments that matter.</li><li>Identify areas where you may not be delivering the best customer experience.</li></ul>",
@@ -118,7 +135,7 @@
             "body" : {
                 "Name" : "Identify Your Anchors & Tailwinds",
                 "__namespace__Description__c" : "<p>Use this board to discuss what obstacles (i.e. anchors) you are encountering in delivering an ideal customer experience. Additionally, use this board to reframe obstacles as opportunities (i.e. tailwinds).</p>",
-                "__namespace__Order__c" : 7,
+                "__namespace__Order__c" : 8,
                 "__namespace__Background_Image__c" : "/resource/__namespace__Kickboard_Assets/anchors-and-tailwinds.png",
                 "__namespace__Instructions__c" : "<ol><li>For 10m, first write down anchors at the bottom of the board.</li><li>For 10m, write down tailwinds at the top of the board.</li><li>For 5m, discuss as a group any themes that have emerged. Mark cards accepted in green, rejected in red, and ones that need revision in blue.</li></ol>",
                 "__namespace__Objective__c" : "<ul><li>Create a shared understanding of the various anchors or obstacles in delivering an ideal customer experience.</li><li>Discover a variety of possible opportunities or tailwinds that can be prioritize and pursued.</li></ul>",
@@ -135,7 +152,7 @@
             "body" : {
                 "Name" : "Prioritize",
                 "__namespace__Description__c" : "<p>Use this board to prioritize as a group what opportunities to pursue or not pursue.</p>",
-                "__namespace__Order__c" : 8,
+                "__namespace__Order__c" : 9,
                 "__namespace__Background_Image__c" : "/resource/__namespace__Kickboard_Assets/prioritize.png",
                 "__namespace__Instructions__c" : "<ol><li>For 20m, add one opportunity at a time, decide where in the matrix it should be placed.</li><li>For 5m, discuss and agree as a group which opportunities to pursue. Mark cards accepted in green, rejected in red, and ones that need revision in blue.</li></ol>",
                 "__namespace__Objective__c" : "<ul><li>Create a shared understanding of the opportunities based on value and effort.</li><li>Decide which opportunities are worth pursuing.</li></ul>",
@@ -152,7 +169,7 @@
             "body" : {
                 "Name" : "Create Your Vision Statement",
                 "__namespace__Description__c" : "<p>Use this board to define a clear statement of your vision and how to measure success.</p>",
-                "__namespace__Order__c" : 9,
+                "__namespace__Order__c" : 10,
                 "__namespace__Background_Image__c" : "/resource/__namespace__Kickboard_Assets/vision-statement.png",
                 "__namespace__Instructions__c" : "<ol><li>For 15m, write down any thoughts in the areas of the vision statement.</li><li>For 10m, discuss and agree as a group the final statements in each area. Mark cards accepted in green, rejected in red, and ones that need revision in blue.</li></ol>",
                 "__namespace__Objective__c" : "<ul><li>Create a shared vision statement and measures of success.</li></ul>",
@@ -169,7 +186,7 @@
             "body" : {
                 "Name" : "Define Who Does What When",
                 "__namespace__Description__c" : "<p>Use this board to keep momentum with your shared vision by defining who does what next.</p>",
-                "__namespace__Order__c" : 10,
+                "__namespace__Order__c" : 11,
                 "__namespace__Background_Image__c" : "/resource/__namespace__Kickboard_Assets/who-does-what-when.png",
                 "__namespace__Instructions__c" : "<ol><li>For 10m, write down each stakeholder in the who area and then each person will write down the next steps they will take and a date when it will be accomplished.</li><li>For 5m, discuss as a group if anything is missing or needs to be adjusted. Mark cards accepted in green, rejected in red, and ones that need revision in blue.</li></ol>",
                 "__namespace__Objective__c" : "<ul><li>Create a agreed upon list of folks who will take which next steps by what date.</li></ul>",
@@ -198,7 +215,7 @@
             "body" : {
                 "Name" : "Get Feedback",
                 "__namespace__Description__c" : "<p>Use this board to collect feedback on the whole process and iteratively improve.</p>",
-                "__namespace__Order__c" : 11,
+                "__namespace__Order__c" : 12,
                 "__namespace__Background_Image__c" : "/resource/__namespace__Kickboard_Assets/feedback-grid.png",
                 "__namespace__Instructions__c" : "<ol><li>For 15m, write down any thoughts in the areas provided in the board.</li></ol>",
                 "__namespace__Objective__c" : "<ul><li>Quickly get feedback from participants about what they liked, wish for, what questions they still have, and what could be improved. Mark cards accepted in green, rejected in red, and ones that need revision in blue.</li></ul>",
@@ -1484,6 +1501,171 @@
             },
             "method" : "POST",
             "referenceId" : "reference_id_cat_whodoeswhat7"
+        },
+        {
+            "url" : "/services/data/v50.0/sobjects/__namespace__Category_Mapping__c/",
+            "body" : {
+                "__namespace__Board__c" : "@{reference_id_board_persona.id}",
+                "__namespace__Type__c" : "Color",
+                "__namespace__Max_X_Position__c" : null,
+                "__namespace__Max_Y_Position__c" : null,
+                "__namespace__Min_X_Position__c" : null,
+                "__namespace__Min_Y_Position__c" : null,
+                "__namespace__Color__c" : "yellow",
+                "__namespace__Category__c" : "Draft"
+            },
+            "method" : "POST",
+            "referenceId" : "reference_id_cat_persona1"
+        },
+        {
+            "url" : "/services/data/v50.0/sobjects/__namespace__Category_Mapping__c/",
+            "body" : {
+                "__namespace__Board__c" : "@{reference_id_board_persona.id}",
+                "__namespace__Type__c" : "Color",
+                "__namespace__Max_X_Position__c" : null,
+                "__namespace__Max_Y_Position__c" : null,
+                "__namespace__Min_X_Position__c" : null,
+                "__namespace__Min_Y_Position__c" : null,
+                "__namespace__Color__c" : "green",
+                "__namespace__Category__c" : "Accepted"
+            },
+            "method" : "POST",
+            "referenceId" : "reference_id_cat_persona2"
+        },
+        {
+            "url" : "/services/data/v50.0/sobjects/__namespace__Category_Mapping__c/",
+            "body" : {
+                "__namespace__Board__c" : "@{reference_id_board_persona.id}",
+                "__namespace__Type__c" : "Color",
+                "__namespace__Max_X_Position__c" : null,
+                "__namespace__Max_Y_Position__c" : null,
+                "__namespace__Min_X_Position__c" : null,
+                "__namespace__Min_Y_Position__c" : null,
+                "__namespace__Color__c" : "blue",
+                "__namespace__Category__c" : "Revise"
+            },
+            "method" : "POST",
+            "referenceId" : "reference_id_cat_persona3"
+        },
+        {
+            "url" : "/services/data/v50.0/sobjects/__namespace__Category_Mapping__c/",
+            "body" : {
+                "__namespace__Board__c" : "@{reference_id_board_persona.id}",
+                "__namespace__Type__c" : "Color",
+                "__namespace__Max_X_Position__c" : null,
+                "__namespace__Max_Y_Position__c" : null,
+                "__namespace__Min_X_Position__c" : null,
+                "__namespace__Min_Y_Position__c" : null,
+                "__namespace__Color__c" : "red",
+                "__namespace__Category__c" : "Rejected"
+            },
+            "method" : "POST",
+            "referenceId" : "reference_id_cat_persona4"
+        },
+        {
+            "url" : "/services/data/v50.0/sobjects/__namespace__Category_Mapping__c/",
+            "body" : {
+                "__namespace__Board__c" : "@{reference_id_board_persona.id}",
+                "__namespace__Type__c" : "Bounding Box",
+                "__namespace__Max_X_Position__c" : 535,
+                "__namespace__Max_Y_Position__c" : 144,
+                "__namespace__Min_X_Position__c" : 170,
+                "__namespace__Min_Y_Position__c" : 0,
+                "__namespace__Color__c" : null,
+                "__namespace__Category__c" : "Persona Name"
+            },
+            "method" : "POST",
+            "referenceId" : "reference_id_cat_persona5"
+        },
+        {
+            "url" : "/services/data/v50.0/sobjects/__namespace__Category_Mapping__c/",
+            "body" : {
+                "__namespace__Board__c" : "@{reference_id_board_persona.id}",
+                "__namespace__Type__c" : "Bounding Box",
+                "__namespace__Max_X_Position__c" : 900,
+                "__namespace__Max_Y_Position__c" : 144,
+                "__namespace__Min_X_Position__c" : 536,
+                "__namespace__Min_Y_Position__c" : 0,
+                "__namespace__Color__c" : null,
+                "__namespace__Category__c" : "Persona Role"
+            },
+            "method" : "POST",
+            "referenceId" : "reference_id_cat_persona6"
+        },
+        {
+            "url" : "/services/data/v50.0/sobjects/__namespace__Category_Mapping__c/",
+            "body" : {
+                "__namespace__Board__c" : "@{reference_id_board_persona.id}",
+                "__namespace__Type__c" : "Bounding Box",
+                "__namespace__Max_X_Position__c" : 1280,
+                "__namespace__Max_Y_Position__c" : 144,
+                "__namespace__Min_X_Position__c" : 901,
+                "__namespace__Min_Y_Position__c" : 0,
+                "__namespace__Color__c" : null,
+                "__namespace__Category__c" : "Persona Experience Level"
+            },
+            "method" : "POST",
+            "referenceId" : "reference_id_cat_persona7"
+        },
+        {
+            "url" : "/services/data/v50.0/sobjects/__namespace__Category_Mapping__c/",
+            "body" : {
+                "__namespace__Board__c" : "@{reference_id_board_persona.id}",
+                "__namespace__Type__c" : "Bounding Box",
+                "__namespace__Max_X_Position__c" : 641,
+                "__namespace__Max_Y_Position__c" : 433,
+                "__namespace__Min_X_Position__c" : 0,
+                "__namespace__Min_Y_Position__c" : 145,
+                "__namespace__Color__c" : null,
+                "__namespace__Category__c" : "Facts & Demographics"
+            },
+            "method" : "POST",
+            "referenceId" : "reference_id_cat_persona8"
+        },
+        {
+            "url" : "/services/data/v50.0/sobjects/__namespace__Category_Mapping__c/",
+            "body" : {
+                "__namespace__Board__c" : "@{reference_id_board_persona.id}",
+                "__namespace__Type__c" : "Bounding Box",
+                "__namespace__Max_X_Position__c" : 1280,
+                "__namespace__Max_Y_Position__c" : 433,
+                "__namespace__Min_X_Position__c" : 641,
+                "__namespace__Min_Y_Position__c" : 145,
+                "__namespace__Color__c" : null,
+                "__namespace__Category__c" : "Obstacles & Pain Points"
+            },
+            "method" : "POST",
+            "referenceId" : "reference_id_cat_persona9"
+        },
+        {
+            "url" : "/services/data/v50.0/sobjects/__namespace__Category_Mapping__c/",
+            "body" : {
+                "__namespace__Board__c" : "@{reference_id_board_persona.id}",
+                "__namespace__Type__c" : "Bounding Box",
+                "__namespace__Max_X_Position__c" : 640,
+                "__namespace__Max_Y_Position__c" : 720,
+                "__namespace__Min_X_Position__c" : 0,
+                "__namespace__Min_Y_Position__c" : 434,
+                "__namespace__Color__c" : null,
+                "__namespace__Category__c" : "Goals & Motivations"
+            },
+            "method" : "POST",
+            "referenceId" : "reference_id_cat_persona10"
+        },
+        {
+            "url" : "/services/data/v50.0/sobjects/__namespace__Category_Mapping__c/",
+            "body" : {
+                "__namespace__Board__c" : "@{reference_id_board_persona.id}",
+                "__namespace__Type__c" : "Bounding Box",
+                "__namespace__Max_X_Position__c" : 1280,
+                "__namespace__Max_Y_Position__c" : 720,
+                "__namespace__Min_X_Position__c" : 641,
+                "__namespace__Min_Y_Position__c" : 434,
+                "__namespace__Color__c" : null,
+                "__namespace__Category__c" : "Behaviors & Beliefs"
+            },
+            "method" : "POST",
+            "referenceId" : "reference_id_cat_persona11"
         }
     ]
 }

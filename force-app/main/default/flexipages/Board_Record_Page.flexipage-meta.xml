@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
     <flexiPageRegions>
         <itemInstances>
@@ -7,10 +7,10 @@
                     <name>actionNames</name>
                     <valueList>
                         <valueListItems>
-                            <value>Board__c.Clone_Board</value>
+                            <value>kickboard__Board__c.Clone_Board</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>Board__c.Categorize</value>
+                            <value>kickboard__Board__c.Categorize</value>
                         </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
@@ -83,8 +83,7 @@
         <itemInstances>
             <fieldInstance>
                 <fieldItem>Record.Time_to_Complete_in_minutes__c</fieldItem>
-                <identifier
-                >RecordTime_to_Complete_in_minutes__cField</identifier>
+                <identifier>RecordTime_to_Complete_in_minutes__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-01a2790b-27c8-40bb-b395-eaa8f82fb5e3</name>
@@ -125,6 +124,12 @@
             <fieldInstance>
                 <fieldItem>Record.Design_Stage__c</fieldItem>
                 <identifier>RecordDesign_Stage__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Board_Template__c</fieldItem>
+                <identifier>Recordkickboard_Board_Template_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-d1ba2439-1d5e-402f-8734-420c998bd3ad</name>
@@ -219,6 +224,39 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
                 <identifier>flexipage_fieldSection</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>parentFieldApiName</name>
+                    <value>Board__c.Id</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListApiName</name>
+                    <value>Boards_from_Template__r</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListComponentOverride</name>
+                    <value>NONE</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>rowsToDisplay</name>
+                    <value>10</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showActionBar</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentName>force:relatedListSingleContainer</componentName>
+                <identifier>force_relatedListSingleContainer1</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Lane__r.Is_Template__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>true</rightValue>
+                    </criteria>
+                </visibilityRule>
             </componentInstance>
         </itemInstances>
         <itemInstances>

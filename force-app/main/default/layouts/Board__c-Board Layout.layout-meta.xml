@@ -46,6 +46,10 @@
                 <behavior>Edit</behavior>
                 <field>Time_to_Complete_in_minutes__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Board_Template__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns/>
         <style>TwoColumnsTopToBottom</style>
@@ -91,6 +95,10 @@
         <fields>Category__c</fields>
         <fields>Type__c</fields>
         <relatedList>Category_Mapping__c.Board__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <relatedList>Board__c.Board_Template__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>52.0</apiVersion>
-    <isTemplate>true</isTemplate>
     <assignments>
         <name>AddCardToCollection_Assignment</name>
         <label>AddCardToCollection Assignment</label>
-        <locationX>450</locationX>
-        <locationY>828</locationY>
+        <locationX>754</locationX>
+        <locationY>2438</locationY>
         <assignmentItems>
             <assignToReference>CardUpdate_RecordCollection</assignToReference>
             <operator>Add</operator>
@@ -21,8 +20,8 @@
     <assignments>
         <name>CardCategory_Assignment</name>
         <label>CardCategory Assignment</label>
-        <locationX>781</locationX>
-        <locationY>522</locationY>
+        <locationX>842</locationX>
+        <locationY>1454</locationY>
         <assignmentItems>
             <assignToReference>Card_Loop.Intent_Category__c</assignToReference>
             <operator>Assign</operator>
@@ -37,8 +36,8 @@
     <assignments>
         <name>CardConcensusCategory_Assignment</name>
         <label>CardConcensusCategory Assignment</label>
-        <locationX>781</locationX>
-        <locationY>283</locationY>
+        <locationX>1106</locationX>
+        <locationY>1574</locationY>
         <assignmentItems>
             <assignToReference>Card_Loop.Consensus_Category__c</assignToReference>
             <operator>Assign</operator>
@@ -51,10 +50,26 @@
         </connector>
     </assignments>
     <assignments>
+        <name>CategoryMapping_Assignment</name>
+        <label>CategoryMapping Assignment</label>
+        <locationX>314</locationX>
+        <locationY>758</locationY>
+        <assignmentItems>
+            <assignToReference>CategoryMapping_RecordCollection</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>CategoryMappings_GetRecords</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Card_Loop</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>ManualCategory_Assignment</name>
         <label>ManualCategory Assignment</label>
-        <locationX>787</locationX>
-        <locationY>828</locationY>
+        <locationX>842</locationX>
+        <locationY>2222</locationY>
         <assignmentItems>
             <assignToReference>Card_Loop.Intent_Category__c</assignToReference>
             <operator>Assign</operator>
@@ -73,11 +88,27 @@
             <targetReference>AddCardToCollection_Assignment</targetReference>
         </connector>
     </assignments>
+    <assignments>
+        <name>ParentCategoryMapping_Assignment</name>
+        <label>ParentCategoryMapping Assignment</label>
+        <locationX>50</locationX>
+        <locationY>878</locationY>
+        <assignmentItems>
+            <assignToReference>CategoryMapping_RecordCollection</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>ParentCategoryMapping_GetRecords</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Card_Loop</targetReference>
+        </connector>
+    </assignments>
     <decisions>
         <name>AutomaticallyCategorize_Decision</name>
         <label>AutomaticallyCategorize Decision</label>
-        <locationX>599</locationX>
-        <locationY>652</locationY>
+        <locationX>754</locationX>
+        <locationY>1982</locationY>
         <defaultConnector>
             <targetReference>CardCategory_Screen</targetReference>
         </defaultConnector>
@@ -101,8 +132,8 @@
     <decisions>
         <name>CardInBoundingBox_Decision</name>
         <label>CardInBoundingBox Decision</label>
-        <locationX>650</locationX>
-        <locationY>439</locationY>
+        <locationX>1040</locationX>
+        <locationY>1334</locationY>
         <defaultConnector>
             <targetReference>CardInColor_Decision</targetReference>
         </defaultConnector>
@@ -154,8 +185,8 @@
     <decisions>
         <name>CardInColor_Decision</name>
         <label>CardInColor Decision</label>
-        <locationX>551</locationX>
-        <locationY>280</locationY>
+        <locationX>1238</locationX>
+        <locationY>1454</locationY>
         <defaultConnector>
             <targetReference>CategoryMapping_Loop</targetReference>
         </defaultConnector>
@@ -183,13 +214,46 @@
             <label>OutcomeIs CategoryIsColor</label>
         </rules>
     </decisions>
+    <decisions>
+        <name>CategoryMappings_Decision</name>
+        <label>CategoryMappings Decision</label>
+        <locationX>182</locationX>
+        <locationY>638</locationY>
+        <defaultConnector>
+            <targetReference>CategoryMapping_Assignment</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>OutcomeIs_NoCategoriesAndHasTemplate</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>CategoryMappings_GetRecords</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Board_GetRecord.Board_Template__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>ParentCategoryMapping_GetRecords</targetReference>
+            </connector>
+            <label>OutcomeIs NoCategoriesAndHasTemplate</label>
+        </rules>
+    </decisions>
     <interviewLabel>Board Category Mapping {!$Flow.CurrentDateTime}</interviewLabel>
+    <isTemplate>true</isTemplate>
     <label>Board Category Mapping</label>
     <loops>
         <name>Card_Loop</name>
         <label>Card Loop</label>
-        <locationX>307</locationX>
-        <locationY>516</locationY>
+        <locationX>182</locationX>
+        <locationY>1094</locationY>
         <collectionReference>Card_GetRecords</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -202,9 +266,9 @@
     <loops>
         <name>CategoryMapping_Loop</name>
         <label>CategoryMapping Loop</label>
-        <locationX>445</locationX>
-        <locationY>517</locationY>
-        <collectionReference>CategoryMappings_GetRecords</collectionReference>
+        <locationX>754</locationX>
+        <locationY>1214</locationY>
+        <collectionReference>CategoryMapping_RecordCollection</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
             <targetReference>CardInBoundingBox_Decision</targetReference>
@@ -222,7 +286,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -235,8 +299,8 @@
     <recordLookups>
         <name>Board_GetRecord</name>
         <label>Board GetRecord</label>
-        <locationX>176</locationX>
-        <locationY>246</locationY>
+        <locationX>182</locationX>
+        <locationY>278</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Card_GetRecords</targetReference>
@@ -256,8 +320,8 @@
     <recordLookups>
         <name>Card_GetRecords</name>
         <label>Card GetRecords</label>
-        <locationX>176</locationX>
-        <locationY>371</locationY>
+        <locationX>182</locationX>
+        <locationY>398</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>CategoryMappings_GetRecords</targetReference>
@@ -277,11 +341,11 @@
     <recordLookups>
         <name>CategoryMappings_GetRecords</name>
         <label>CategoryMappings GetRecords</label>
-        <locationX>176</locationX>
-        <locationY>516</locationY>
+        <locationX>182</locationX>
+        <locationY>518</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Card_Loop</targetReference>
+            <targetReference>CategoryMappings_Decision</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -295,18 +359,39 @@
         <object>Category_Mapping__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <recordLookups>
+        <name>ParentCategoryMapping_GetRecords</name>
+        <label>ParentCategoryMapping GetRecords</label>
+        <locationX>50</locationX>
+        <locationY>758</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>ParentCategoryMapping_Assignment</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Board__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Board_GetRecord.Board_Template__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Category_Mapping__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <recordUpdates>
         <name>Cards_UpdateRecords</name>
         <label>Cards UpdateRecords</label>
-        <locationX>300</locationX>
-        <locationY>834</locationY>
+        <locationX>182</locationX>
+        <locationY>2654</locationY>
         <inputReference>CardUpdate_RecordCollection</inputReference>
     </recordUpdates>
     <screens>
         <name>CardCategory_Screen</name>
         <label>CardCategory Screen</label>
-        <locationX>787</locationX>
-        <locationY>679</locationY>
+        <locationX>842</locationX>
+        <locationY>2102</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -344,8 +429,8 @@
     <screens>
         <name>Introduction_Screen</name>
         <label>Introduction Screen</label>
-        <locationX>176</locationX>
-        <locationY>169</locationY>
+        <locationX>182</locationX>
+        <locationY>158</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -387,8 +472,8 @@
         <showHeader>false</showHeader>
     </screens>
     <start>
-        <locationX>50</locationX>
-        <locationY>50</locationY>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Introduction_Screen</targetReference>
         </connector>
@@ -401,6 +486,14 @@
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <objectType>Card__c</objectType>
+    </variables>
+    <variables>
+        <name>CategoryMapping_RecordCollection</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Category_Mapping__c</objectType>
     </variables>
     <variables>
         <name>recordId</name>
