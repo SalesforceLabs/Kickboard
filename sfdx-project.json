@@ -4,8 +4,8 @@
             "path": "force-app",
             "default": true,
             "package": "Kickboard",
-            "versionName": "Version 1.10.0",
-            "versionNumber": "1.10.0.NEXT",
+            "versionName": "Version 1.9.0",
+            "versionNumber": "1.9.0.NEXT",
             "ancestorVersion": "1.9.0.1"
         }
     ],
