@@ -5,12 +5,11 @@
             "default": true,
             "package": "Kickboard",
             "versionName": "Version 1.10.0",
-            "versionNumber": "1.10.0.NEXT",
-            "ancestorVersion": "1.9.0.1"
+            "versionNumber": "1.10.0.NEXT"
         }
     ],
     "name": "kickboard",
-    "namespace": "",
+    "namespace": "kickboard",
     "sfdcLoginUrl": "https://login.salesforce.com",
     "sourceApiVersion": "53.0",
     "packageAliases": {

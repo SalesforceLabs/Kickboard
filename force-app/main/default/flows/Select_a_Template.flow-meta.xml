@@ -36,7 +36,7 @@
             </value>
         </inputParameters>
     </actionCalls>
-    <apiVersion>52.0</apiVersion>
+    <apiVersion>53.0</apiVersion>
     <choices>
         <name>LoadTemplateV2MOM_Choice</name>
         <choiceText>Create a V2MOM</choiceText>
