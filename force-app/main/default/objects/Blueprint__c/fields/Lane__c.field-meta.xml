@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lane__c</fullName>
+    <externalId>false</externalId>
+    <label>Swim Lane</label>
+    <referenceTo>Lane__c</referenceTo>
+    <relationshipLabel>Blueprints</relationshipLabel>
+    <relationshipName>Blueprints</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

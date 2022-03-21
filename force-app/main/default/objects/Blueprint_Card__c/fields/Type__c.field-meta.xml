@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>Emotions</fullName>
+                <default>false</default>
+                <label>Emotions</label>
+            </value>
+            <value>
+                <fullName>Facts and Observations</fullName>
+                <default>false</default>
+                <label>Facts and Observations</label>
+            </value>
+            <value>
+                <fullName>Goals</fullName>
+                <default>false</default>
+                <label>Goals</label>
+            </value>
+            <value>
+                <fullName>Metrics</fullName>
+                <default>false</default>
+                <label>Metrics</label>
+            </value>
+            <value>
+                <fullName>Opportunities and Ideas</fullName>
+                <default>false</default>
+                <label>Opportunities and Ideas</label>
+            </value>
+            <value>
+                <fullName>Pain Points</fullName>
+                <default>false</default>
+                <label>Pain Points</label>
+            </value>
+            <value>
+                <fullName>Systems and Key Information</fullName>
+                <default>false</default>
+                <label>Systems and Key Information</label>
+            </value>
+            <value>
+                <fullName>Touchpoints</fullName>
+                <default>false</default>
+                <label>Touchpoints</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
