@@ -129,6 +129,9 @@ package.xml
 **/staticresources/SiteSamples
 **/staticresources/SiteSamples.resource-meta.xml
 
+# Unneeded objects
+**/objects/Asset
+
 # Communities Stuff
 **/sites/**
 **/networks/**

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
     <flexiPageRegions>
         <itemInstances>
@@ -23,10 +23,8 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem
-                >Record.Total_Time_to_Complete_in_minutes__c</fieldItem>
-                <identifier
-                >RecordTotal_Time_to_Complete_in_minutes__cField</identifier>
+                <fieldItem>Record.Total_Time_to_Complete_in_minutes__c</fieldItem>
+                <identifier>RecordTotal_Time_to_Complete_in_minutes__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -160,8 +158,7 @@
                             <value>Lane__c.Clone_Swim_Lane</value>
                             <visibilityRule>
                                 <criteria>
-                                    <leftValue
-                                    >{!Record.Is_Template__c}</leftValue>
+                                    <leftValue>{!Record.Is_Template__c}</leftValue>
                                     <operator>EQUAL</operator>
                                     <rightValue>true</rightValue>
                                 </criteria>
@@ -171,8 +168,7 @@
                             <value>Lane__c.Modify_Users</value>
                             <visibilityRule>
                                 <criteria>
-                                    <leftValue
-                                    >{!Record.Is_Template__c}</leftValue>
+                                    <leftValue>{!Record.Is_Template__c}</leftValue>
                                     <operator>EQUAL</operator>
                                     <rightValue>false</rightValue>
                                 </criteria>
@@ -182,8 +178,7 @@
                             <value>Lane__c.Modify_Boards</value>
                             <visibilityRule>
                                 <criteria>
-                                    <leftValue
-                                    >{!Record.Is_Template__c}</leftValue>
+                                    <leftValue>{!Record.Is_Template__c}</leftValue>
                                     <operator>EQUAL</operator>
                                     <rightValue>false</rightValue>
                                 </criteria>
@@ -196,8 +191,7 @@
                             <value>Lane__c.Make_Public</value>
                             <visibilityRule>
                                 <criteria>
-                                    <leftValue
-                                    >{!Record.Is_Template__c}</leftValue>
+                                    <leftValue>{!Record.Is_Template__c}</leftValue>
                                     <operator>EQUAL</operator>
                                     <rightValue>false</rightValue>
                                 </criteria>
@@ -207,8 +201,7 @@
                             <value>Lane__c.Export_Lane_for_Graph_API</value>
                             <visibilityRule>
                                 <criteria>
-                                    <leftValue
-                                    >{!$Permission.CustomPermission.Export_Lane_for_Graph_API}</leftValue>
+                                    <leftValue>{!$Permission.CustomPermission.Export_Lane_for_Graph_API}</leftValue>
                                     <operator>EQUAL</operator>
                                     <rightValue>true</rightValue>
                                 </criteria>
@@ -377,6 +370,36 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
+                    <name>parentFieldApiName</name>
+                    <value>Lane__c.Id</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListApiName</name>
+                    <value>Blueprints__r</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListComponentOverride</name>
+                    <value>NONE</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>rowsToDisplay</name>
+                    <value>10</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showActionBar</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentName>force:relatedListSingleContainer</componentName>
+                <identifier>force_relatedListSingleContainer1</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-508b70dc-f339-4220-ad5b-8540ce52008c</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
                     <name>body</name>
                     <value>Facet-9d5829f1-a07c-4d1f-a920-ccc9dc097761</value>
                 </componentInstanceProperties>
@@ -430,6 +453,20 @@
                 <identifier>customTab3</identifier>
             </componentInstance>
         </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-508b70dc-f339-4220-ad5b-8540ce52008c</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Blueprints</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab1</identifier>
+            </componentInstance>
+        </itemInstances>
         <name>Facet-f367596a-1345-47a5-9c39-e4034ce2d9fa</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -442,8 +479,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>richTextValue</name>
-                    <value
-                    >&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;color: rgb(0, 0, 0);&quot;&gt;This Swim Lane is Shared Externally&lt;/b&gt;&lt;/p&gt;</value>
+                    <value>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;color: rgb(0, 0, 0);&quot;&gt;This Swim Lane is Shared Externally&lt;/b&gt;&lt;/p&gt;</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:richText</componentName>
                 <identifier>flexipage_richText</identifier>
