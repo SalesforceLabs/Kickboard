@@ -11,7 +11,7 @@
     "name": "kickboard",
     "namespace": "kickboard",
     "sfdcLoginUrl": "https://login.salesforce.com",
-    "sourceApiVersion": "53.0",
+    "sourceApiVersion": "54.0",
     "packageAliases": {
         "Kickboard": "0Ho5e000000XZZLCA4",
         "Kickboard@1.10.0-1": "04t5e000000NmWZAA0"

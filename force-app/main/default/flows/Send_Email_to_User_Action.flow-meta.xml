@@ -99,7 +99,7 @@
             </value>
         </inputParameters>
     </actionCalls>
-    <apiVersion>53.0</apiVersion>
+    <apiVersion>54.0</apiVersion>
     <decisions>
         <name>CommunityIsSetupForCommunityUsers_Decision</name>
         <label>CommunityIsSetupForCommunityUsers Decision</label>
